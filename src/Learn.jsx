@@ -1,24 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { ExternalLink, Search } from 'lucide-react';
+import { SectionHeader } from './components/ui/SectionHeader';
+
+const CHEVRON_SVG =
+  '<svg class="kb-chevron-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
 
 function patchKbHtml(html) {
   return html
-    .replace(/onclick="tog\(this\)"/g, 'data-kb-toggle="true" role="button" tabindex="0"')
-    .replace(/class="w-4 h-4 ml-auto text-gh-400/g, 'class="kb-arr w-4 h-4 ml-auto text-muted');
+    .replace(/<button([^>]*)onclick="tog\(this\)"/g, '<button$1type="button" data-kb-toggle="true"')
+    .replace(/<div([^>]*)onclick="tog\(this\)"/g, '<div$1data-kb-toggle="true" role="button" tabindex="0"')
+    .replace(/class="hidden /g, 'class="kb-content ')
+    .replace(/class="hidden"/g, 'class="kb-content"');
 }
 
-function toggleKbCard(header) {
-  const content = header.nextElementSibling;
-  const arrow = header.querySelector('.kb-arr');
-  if (!content) return;
-  content.classList.toggle('hidden');
-  if (arrow) arrow.classList.toggle('rotate-180');
+function isChevronSvg(svg) {
+  const path = svg.querySelector('path')?.getAttribute('d') ?? '';
+  return /M19\s*9|m6\s*9/i.test(path) || svg.classList.contains('arr') || svg.classList.contains('kb-arr');
+}
+
+function attachChevron(toggle) {
+  toggle.querySelectorAll('svg').forEach((svg) => {
+    if (isChevronSvg(svg)) svg.remove();
+  });
+  if (toggle.querySelector('.kb-chevron')) return;
+  const wrap = document.createElement('span');
+  wrap.className = 'kb-chevron';
+  wrap.innerHTML = CHEVRON_SVG;
+  toggle.appendChild(wrap);
+}
+
+function normalizeKbRoot(root) {
+  root.querySelectorAll('.kcard').forEach((card) => {
+    card.classList.add('kb-card');
+    const toggle = card.querySelector('[data-kb-toggle]');
+    if (toggle) {
+      toggle.classList.add('kb-header');
+      attachChevron(toggle);
+      toggle.querySelectorAll('div').forEach((el) => {
+        if (el.querySelector(':scope > svg') && !el.closest('.kb-chevron')) el.classList.add('kb-module-icon');
+      });
+    }
+
+    const content =
+      card.querySelector('.kb-content') ??
+      [...card.children].find((el) => el !== toggle && !el.hasAttribute('data-kb-toggle'));
+    if (!content) return;
+
+    content.classList.remove('hidden');
+    content.classList.add('kb-content');
+    if (!content.querySelector(':scope > .kb-content-inner')) {
+      const inner = document.createElement('div');
+      inner.className = 'kb-content-inner';
+      while (content.firstChild) inner.appendChild(content.firstChild);
+      content.appendChild(inner);
+    }
+  });
+
+  root.querySelectorAll('div.text-xs.font-bold.uppercase').forEach((el) => {
+    if (/Part \d|Fundamentals|Enterprise/i.test(el.textContent)) el.classList.add('kb-section-label');
+  });
+}
+
+function toggleKbCard(trigger) {
+  const card = trigger.closest('.kcard');
+  if (!card) return;
+  const willOpen = !card.classList.contains('kb-open');
+  card.classList.toggle('kb-open', willOpen);
+  trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
 }
 
 export function Learn() {
   const [html, setHtml] = useState('');
   const [search, setSearch] = useState('');
   const [loadError, setLoadError] = useState('');
+  const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
     fetch('/knowledge-base.html')
@@ -32,69 +87,138 @@ export function Learn() {
 
   useEffect(() => {
     const root = document.getElementById('kb-learn');
-    if (!root) return undefined;
+    if (!root || !html) return undefined;
+    normalizeKbRoot(root);
+
     function onClick(event) {
-      const header = event.target.closest('[data-kb-toggle]');
-      if (header) toggleKbCard(header);
+      const trigger = event.target.closest('[data-kb-toggle]');
+      if (trigger) {
+        event.preventDefault();
+        toggleKbCard(trigger);
+      }
     }
+
+    function onKeyDown(event) {
+      const trigger = event.target.closest('[data-kb-toggle]');
+      if (!trigger) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleKbCard(trigger);
+      }
+    }
+
     root.addEventListener('click', onClick);
-    return () => root.removeEventListener('click', onClick);
+    root.addEventListener('keydown', onKeyDown);
+    return () => {
+      root.removeEventListener('click', onClick);
+      root.removeEventListener('keydown', onKeyDown);
+    };
   }, [html]);
 
   useEffect(() => {
     const root = document.getElementById('kb-learn');
     if (!root) return;
     const query = search.trim().toLowerCase();
+    let visible = 0;
     root.querySelectorAll('.kcard').forEach((card) => {
-      if (!query) {
-        card.style.display = '';
-        return;
+      const match = !query || card.textContent.toLowerCase().includes(query);
+      card.style.display = match ? '' : 'none';
+      if (match) {
+        visible += 1;
+        if (query) card.classList.add('kb-open');
+      } else {
+        card.classList.remove('kb-open');
       }
-      card.style.display = card.textContent.toLowerCase().includes(query) ? '' : 'none';
     });
+    setVisibleCount(visible);
   }, [search, html]);
+
+  const totalCards = useMemo(() => {
+    if (!html) return 0;
+    return (html.match(/class="kcard/g) ?? []).length;
+  }, [html]);
+
+  function expandAll() {
+    document.getElementById('kb-learn')?.querySelectorAll('.kcard:not([style*="none"])').forEach((card) => {
+      card.classList.add('kb-open');
+      card.querySelector('[data-kb-toggle]')?.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  function collapseAll() {
+    document.getElementById('kb-learn')?.querySelectorAll('.kcard').forEach((card) => {
+      card.classList.remove('kb-open');
+      card.querySelector('[data-kb-toggle]')?.setAttribute('aria-expanded', 'false');
+    });
+  }
 
   return (
     <section className="animate-slide-up space-y-6">
-      <div>
-        <p className="section-kicker">Study</p>
-        <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">Knowledge Base</h2>
-        <p className="mt-2 text-sm leading-7 text-muted dark:text-slate-400">
-          Nội dung học từ GH-300 Pro — Copilot fundamentals, prompt engineering, enterprise, và hướng dẫn thi.
-        </p>
-        <div className="mt-3 flex flex-wrap gap-3 text-sm">
-          <a
-            className="font-semibold text-accent-600 hover:underline dark:text-accent-300"
-            href="https://learn.microsoft.com/en-us/training/paths/copilot/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Part 1 (Microsoft Learn)
-          </a>
-          <a
-            className="font-semibold text-accent-600 hover:underline dark:text-accent-300"
-            href="https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Part 2 (Microsoft Learn)
-          </a>
-        </div>
+      <SectionHeader
+        kicker="Study"
+        title="Knowledge Base"
+        description="Nội dung học GH-300 — mở từng chủ đề để đọc. Layout một cột ổn định, không nhảy khi expand."
+      />
+
+      <div className="flex flex-wrap gap-3 text-sm">
+        <a
+          className="inline-flex items-center gap-1.5 font-semibold text-accent-600 hover:underline dark:text-accent-300"
+          href="https://learn.microsoft.com/en-us/training/paths/copilot/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Part 1 — Microsoft Learn
+          <ExternalLink size={14} />
+        </a>
+        <a
+          className="inline-flex items-center gap-1.5 font-semibold text-accent-600 hover:underline dark:text-accent-300"
+          href="https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Part 2 — Microsoft Learn
+          <ExternalLink size={14} />
+        </a>
       </div>
 
-      <div className="panel flex items-center gap-3 p-4">
-        <Search className="shrink-0 text-accent-500" size={18} />
-        <input
-          className="w-full bg-transparent text-sm outline-none placeholder:text-muted/70"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Search knowledge base..."
-        />
+      <div className="panel p-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
+            <Search className="shrink-0 text-accent-500" size={18} />
+            <input
+              className="w-full bg-transparent text-sm outline-none placeholder:text-muted/70"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Search topics, modules, exam domains..."
+            />
+          </div>
+          <div className="flex shrink-0 gap-2">
+            <button className="ghost-button !px-3 !py-1.5 text-xs" type="button" onClick={expandAll}>
+              Expand all
+            </button>
+            <button className="ghost-button !px-3 !py-1.5 text-xs" type="button" onClick={collapseAll}>
+              Collapse all
+            </button>
+          </div>
+        </div>
+        {html && (
+          <p className="mt-2 text-xs text-muted dark:text-slate-500">
+            {search.trim()
+              ? `${visibleCount} / ${totalCards} topics match`
+              : `${totalCards} topics · click a row to expand`}
+          </p>
+        )}
       </div>
 
       {loadError && <div className="empty-state">{loadError}</div>}
       {!loadError && !html && <div className="empty-state">Đang tải Knowledge Base…</div>}
-      {html && <div id="kb-learn" className="learn-kb space-y-4 lg:columns-2 lg:gap-4" dangerouslySetInnerHTML={{ __html: html }} />}
+      {html && (
+        <div
+          id="kb-learn"
+          className="learn-kb"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )}
     </section>
   );
 }

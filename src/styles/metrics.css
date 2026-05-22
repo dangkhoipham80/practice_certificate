@@ -1,0 +1,81 @@
+@layer components {
+  .metric-card {
+    @apply flex items-center gap-4 bg-white/95 p-5 transition-colors hover:bg-subtle/50 dark:bg-gh-panel dark:hover:bg-gh-subtle/40;
+  }
+
+  .metric-card-highlight {
+    @apply bg-gradient-to-br from-accent-50/80 to-white dark:from-accent-500/10 dark:to-gh-panel;
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-accent-600 dark:text-accent-300;
+  }
+
+  .section-kicker::before {
+    content: '';
+    @apply h-1.5 w-1.5 rounded-full bg-accent-500 dark:bg-accent-400;
+  }
+
+  .metric-icon {
+    @apply grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-accent-100 bg-gradient-to-br from-accent-50 to-white text-accent-600 shadow-sm dark:border-accent-500/25 dark:from-accent-500/15 dark:to-gh-panel dark:text-accent-300;
+  }
+
+  .metric-icon-success {
+    @apply border-success-200 bg-gradient-to-br from-success-50 to-white text-success-600 dark:border-success-500/25 dark:from-success-500/15 dark:text-success-300;
+  }
+
+  .metric-icon-warning {
+    @apply border-amber-200 bg-gradient-to-br from-amber-50 to-white text-amber-600 dark:border-amber-500/25 dark:from-amber-500/15 dark:text-amber-300;
+  }
+
+  .stat-tile {
+    @apply rounded-xl border p-3 text-center;
+  }
+
+  .stat-tile-accent {
+    @apply border-accent-200 bg-accent-50 text-accent-700 dark:border-accent-500/30 dark:bg-accent-500/10 dark:text-accent-300;
+  }
+
+  .stat-tile-success {
+    @apply border-success-200 bg-success-50 text-success-700 dark:border-success-500/30 dark:bg-success-500/10 dark:text-success-300;
+  }
+
+  .stat-tile-purple {
+    @apply border-purple-200 bg-purple-50 text-purple-700 dark:border-purple-500/30 dark:bg-purple-500/10 dark:text-purple-300;
+  }
+
+  .stat-tile-warning {
+    @apply border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300;
+  }
+
+  .score-ring {
+    @apply relative mx-auto grid h-40 w-40 place-items-center rounded-full;
+    background: conic-gradient(
+      theme('colors.accent.500') calc(var(--score) * 1%),
+      theme('colors.subtle') 0
+    );
+  }
+
+  .dark .score-ring {
+    background: conic-gradient(
+      theme('colors.accent.400') calc(var(--score) * 1%),
+      theme('colors.gh.subtle') 0
+    );
+  }
+
+  .score-ring-inner {
+    @apply grid h-[calc(100%-16px)] w-[calc(100%-16px)] place-items-center rounded-full bg-white dark:bg-gh-panel;
+  }
+
+  .score-pill {
+    @apply shrink-0 rounded-xl px-3 py-1.5 text-sm font-extrabold tabular-nums;
+  }
+
+  .score-pill-pass {
+    @apply bg-success-100 text-success-700 dark:bg-success-500/15 dark:text-success-300;
+  }
+
+  .score-pill-fail {
+    @apply bg-danger-100 text-danger-700 dark:bg-danger-500/15 dark:text-danger-300;
+  }
+}

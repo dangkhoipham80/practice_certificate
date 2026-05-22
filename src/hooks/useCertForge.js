@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useAppNavigation } from './useAppNavigation';
 import { gh300Questions } from '../data/gh300Questions';
 import { partSizes, partStarts, storageKeys } from '../config/gh300Exam';
 import { readJson, removeKey, writeJson } from '../lib/storage';
@@ -15,9 +16,10 @@ import {
   getWrongIndices,
   updatePartProgressFromSession
 } from '../lib/progressUtils';
+import { buildExportPayload, normalizeHistory, parseImportPayload } from '../lib/importExport';
 
 export function useCertForge() {
-  const [route, setRoute] = useState('dashboard');
+  const { route, navigateTo } = useAppNavigation();
   const [dark, setDark] = useState(() => localStorage.getItem('certforge-theme') === 'dark');
   const [history, setHistory] = useState(() => readJson(storageKeys.history, []));
   const [flagged, setFlagged] = useState(() => readJson(storageKeys.flagged, []));
@@ -27,7 +29,13 @@ export function useCertForge() {
   const [search, setSearch] = useState('');
   const [partProgress, setPartProgress] = useState(() => readJson(storageKeys.partProgress, {}));
   const [saveHint, setSaveHint] = useState('');
+  const [syncHint, setSyncHint] = useState(null);
   const [pendingStart, setPendingStart] = useState(null);
+
+  function showSyncHint(type, message) {
+    setSyncHint({ type, message });
+    window.setTimeout(() => setSyncHint(null), 4500);
+  }
   const hasSavedQuiz = useMemo(() => !!getInProgressQuiz(session), [session, saveHint]);
 
   const stats = useMemo(() => {
@@ -97,7 +105,7 @@ export function useCertForge() {
       finished: false,
       timerSec: 0
     });
-    setRoute('gh-300');
+    navigateTo('gh-300');
   }
 
   function requestStartQuiz(options) {
@@ -114,11 +122,11 @@ export function useCertForge() {
     setPendingStart(null);
     if (!inProgress) return;
     if (session && !session.finished) {
-      setRoute('gh-300');
+      navigateTo('gh-300');
       return;
     }
     setSession({ ...inProgress, finished: false, wrongSlots: undefined });
-    setRoute('gh-300');
+    navigateTo('gh-300');
   }
 
   function confirmStartFresh() {
@@ -329,7 +337,7 @@ export function useCertForge() {
       known: 0,
       review: 0
     });
-    setRoute('flashcards');
+    navigateTo('flashcards');
   }
 
   function startFlash(mode = 'all') {
@@ -364,22 +372,22 @@ export function useCertForge() {
   }
 
   function exportData() {
-    const payload = {
-      version: 1,
-      exportedAt: new Date().toISOString(),
+    const filename = `certforge-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    const payload = buildExportPayload({
       history,
       flagged,
       weak,
       partProgress,
       fcKnown: readJson(storageKeys.fcKnown, []),
       fcUnknown: readJson(storageKeys.fcUnknown, [])
-    };
+    });
     const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
     const link = document.createElement('a');
     link.href = url;
-    link.download = `certforge-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    link.download = filename;
     link.click();
     URL.revokeObjectURL(url);
+    showSyncHint('success', `Export thành công — file ${filename} đã được tải xuống.`);
   }
 
   function importData(event) {
@@ -387,16 +395,61 @@ export function useCertForge() {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      const payload = JSON.parse(reader.result);
-      saveHistory(payload.history ?? []);
-      saveFlagged(payload.flagged ?? []);
-      saveWeak(payload.weak ?? {});
-      if (payload.partProgress) savePartProgress(payload.partProgress);
-      if (payload.fcKnown) writeJson(storageKeys.fcKnown, payload.fcKnown);
-      if (payload.fcUnknown) writeJson(storageKeys.fcUnknown, payload.fcUnknown);
+      try {
+        const { format, data, count } = parseImportPayload(reader.result);
+        const imported = [];
+        if (data.history !== undefined) {
+          saveHistory(normalizeHistory(data.history));
+          imported.push('lịch sử quiz');
+        }
+        if (data.flagged !== undefined) {
+          saveFlagged(data.flagged);
+          imported.push('flagged');
+        }
+        if (data.weak !== undefined) {
+          saveWeak(data.weak);
+          imported.push('weak areas');
+        }
+        if (data.partProgress !== undefined) {
+          savePartProgress(data.partProgress);
+          imported.push('tiến độ từng part');
+        }
+        if (data.fcKnown !== undefined) {
+          writeJson(storageKeys.fcKnown, data.fcKnown);
+          imported.push('flashcard known');
+        }
+        if (data.fcUnknown !== undefined) {
+          writeJson(storageKeys.fcUnknown, data.fcUnknown);
+          imported.push('flashcard review');
+        }
+        if (data.theme) persistTheme(data.theme === 'dark');
+        if (!imported.length) throw new Error('No supported data found.');
+        const formatLabel = format === 'gh300-pro' ? 'GH-300 Pro' : 'CertForge';
+        showSyncHint('success', `Import thành công (${formatLabel}) — ${imported.join(', ')}. ${count} mục trong file.`);
+      } catch (error) {
+        showSyncHint('error', error?.message === 'Invalid file format.' || error?.message?.includes('JSON') ? 'File không hợp lệ — cần file .json export từ CertForge hoặc GH-300 Pro.' : `Import thất bại: ${error?.message ?? 'Unknown error'}`);
+      }
     };
+    reader.onerror = () => showSyncHint('error', 'Không đọc được file — thử chọn lại.');
     reader.readAsText(file);
     event.target.value = '';
+  }
+
+  function clearAllData() {
+    const confirmed = window.confirm(
+      'Xóa toàn bộ tiến độ GH-300?\n\nBao gồm: lịch sử quiz, tiến độ từng part, flagged, weak areas, flashcards và quiz đang lưu.\n\nHành động này không thể hoàn tác. Theme sáng/tối được giữ nguyên.'
+    );
+    if (!confirmed) return;
+    Object.values(storageKeys).forEach(removeKey);
+    setHistory([]);
+    setFlagged([]);
+    setWeak({});
+    setPartProgress({});
+    setSession(null);
+    setFlash(null);
+    setPendingStart(null);
+    setSaveHint('');
+    showSyncHint('success', 'Đã xóa toàn bộ dữ liệu tiến độ GH-300.');
   }
 
   useEffect(() => {
@@ -437,7 +490,7 @@ export function useCertForge() {
 
   return {
     route,
-    setRoute,
+    navigateTo,
     dark,
     persistTheme,
     history,
@@ -451,6 +504,7 @@ export function useCertForge() {
     setSearch,
     partProgress,
     saveHint,
+    syncHint,
     pendingStart,
     setPendingStart,
     hasSavedQuiz,
@@ -479,6 +533,7 @@ export function useCertForge() {
     markFlashKnown,
     markFlashUnknown,
     exportData,
-    importData
+    importData,
+    clearAllData
   };
 }

@@ -1,0 +1,45 @@
+@layer components {
+  .icon-button {
+    @apply grid h-10 w-10 place-items-center rounded-xl border border-line/80 bg-white text-ink shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-300 hover:bg-accent-50 hover:text-accent-600 hover:shadow-soft dark:border-gh-border dark:bg-gh-subtle dark:text-slate-100 dark:hover:border-accent-500/50 dark:hover:bg-accent-500/15 dark:hover:text-accent-300;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .danger-button,
+  .ghost-button {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 active:scale-[0.98];
+  }
+
+  .primary-button {
+    @apply border border-accent-600 bg-accent-600 text-white shadow-sm hover:-translate-y-0.5 hover:bg-accent-700 hover:shadow-glow dark:border-accent-500 dark:bg-accent-500 dark:hover:bg-accent-600;
+  }
+
+  .secondary-button {
+    @apply border border-line/80 bg-white text-ink shadow-sm hover:-translate-y-0.5 hover:border-accent-300 hover:bg-subtle dark:border-gh-border dark:bg-gh-subtle dark:text-slate-100 dark:hover:border-accent-500/50 dark:hover:bg-gh-elevated;
+  }
+
+  .danger-button {
+    @apply border border-danger-500 bg-danger-500 text-white shadow-sm hover:-translate-y-0.5 hover:bg-danger-600 dark:border-danger-500 dark:bg-danger-600;
+  }
+
+  .ghost-button {
+    @apply border-transparent bg-transparent text-muted hover:bg-subtle hover:text-ink dark:text-slate-400 dark:hover:bg-gh-subtle dark:hover:text-white;
+  }
+
+  .action-button {
+    @apply flex min-h-[88px] items-center gap-3.5 rounded-2xl border border-line/70 bg-white p-4 text-left shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-accent-200 hover:shadow-card-hover dark:border-gh-border/70 dark:bg-gh-panel dark:hover:border-accent-500/40 dark:hover:shadow-glow;
+  }
+
+  .start-card {
+    @apply relative flex min-h-[96px] items-center gap-4 overflow-hidden rounded-2xl border border-accent-200/80 bg-gradient-to-br from-accent-50 via-white to-accent-50/30 p-5 text-left shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-accent-300 hover:shadow-card-hover dark:border-accent-500/30 dark:from-accent-500/15 dark:via-gh-panel dark:to-accent-500/5 dark:hover:shadow-glow;
+  }
+
+  .start-card-icon {
+    @apply grid h-12 w-12 shrink-0 place-items-center rounded-xl text-white shadow-glow;
+    background-image: theme('backgroundImage.hero-gradient');
+  }
+
+  .dark .start-card-icon {
+    background-image: theme('backgroundImage.hero-gradient-dark');
+  }
+}

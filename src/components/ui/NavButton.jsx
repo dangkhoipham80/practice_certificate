@@ -1,8 +1,10 @@
-export function NavButton({ active, icon: Icon, label, onClick }) {
+import { NavLink } from 'react-router-dom';
+
+export function NavButton({ to, icon: Icon, label, end = false }) {
   return (
-    <button className={`nav-button ${active ? 'nav-button-active' : ''}`} onClick={onClick}>
+    <NavLink to={to} end={end} className={({ isActive }) => `nav-button ${isActive ? 'nav-button-active' : ''}`}>
       <Icon size={18} />
       <span>{label}</span>
-    </button>
+    </NavLink>
   );
 }

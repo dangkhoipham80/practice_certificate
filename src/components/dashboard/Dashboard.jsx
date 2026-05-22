@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ArrowRight,
   Award,
@@ -5,20 +6,25 @@ import {
   BookOpen,
   Brain,
   ClipboardList,
+  Download,
   Flag,
   Layers3,
   Play,
   RotateCcw,
   Search,
-  Sparkles
+  Sparkles,
+  Trash2,
+  Upload
 } from 'lucide-react';
 import { gh300Questions } from '../../data/gh300Questions';
+import { computeBankProgress } from '../../lib/statsUtils';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
 import { ActionButton } from '../ui/ActionButton';
 import { Metric } from '../ui/Metric';
 import { SectionHeader } from '../ui/SectionHeader';
-import { HistoryPanel } from '../shared/HistoryPanel';
 import { PartGrid } from '../shared/PartGrid';
+import { StatisticsDashboard } from './StatisticsDashboard';
+import { PartDetailPanel } from './PartDetailPanel';
 
 export function Dashboard({
   stats,
@@ -29,14 +35,31 @@ export function Dashboard({
   hasSavedQuiz,
   startQuiz,
   resumeQuiz,
-  onNavigate
+  onNavigate,
+  exportData,
+  importData,
+  clearAllData,
+  syncHint
 }) {
+  const [detailPart, setDetailPart] = useState(null);
   const weakCount = Object.keys(weak).length;
   const wrongCount = getWrongIndices(partProgress).length;
   const newCount = getUnansweredIndices(partProgress).length;
+  const bank = computeBankProgress(partProgress);
+
+  function handleClearData() {
+    clearAllData();
+    setDetailPart(null);
+  }
 
   return (
     <section className="animate-slide-up space-y-6">
+      {syncHint && (
+        <div className={`sync-toast ${syncHint.type === 'success' ? 'sync-toast-success' : 'sync-toast-error'}`} role="status">
+          {syncHint.message}
+        </div>
+      )}
+
       <div className="hero-card">
         <div className="hero-card-accent" />
         <div className="hero-card-accent-2" />
@@ -95,25 +118,63 @@ export function Dashboard({
         <ActionButton icon={BookOpen} label="Flashcards" meta={`Up to ${gh300Questions.length} cards`} onClick={() => onNavigate('flashcards')} />
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Metric label="Attempts" value={stats.attempts} icon={Award} highlight />
-        <Metric label="Average" value={`${stats.avg}%`} icon={BarChart3} />
-        <Metric label="Best score" value={`${stats.best}%`} icon={Sparkles} variant="success" />
-        <Metric label="Answered" value={stats.answered} icon={ClipboardList} variant="warning" />
+      <div className="panel p-5">
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+          <SectionHeader kicker="Question bank" title="Overall completion" description="Per-question progress across all 7 exam parts." />
+          <span className="text-2xl font-extrabold tabular-nums text-accent-600 dark:text-accent-300">{bank.masteryPct}%</span>
+        </div>
+        <div className="progress-bar h-2.5">
+          <div className="progress-bar-fill" style={{ width: `${bank.masteryPct}%` }} />
+        </div>
+        <div className="mt-3 flex flex-wrap gap-4 text-xs font-semibold text-muted dark:text-slate-400">
+          <span className="text-success-600 dark:text-success-400">{bank.correct} correct</span>
+          <span className="text-danger-600 dark:text-danger-400">{bank.wrong} wrong</span>
+          <span>{bank.unanswered} not attempted</span>
+          <span>{bank.attempted}/{bank.total} touched</span>
+        </div>
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
-        <div>
-          <div className="mb-4 flex items-end justify-between gap-3">
-            <SectionHeader kicker="Exam parts" title="Focused sets" description="Compact drills mapped to the GH-300 bank." />
-            <button className="secondary-button hidden sm:inline-flex" onClick={() => onNavigate('flashcards')}>
-              <BookOpen size={16} />
-              Flashcards
-            </button>
-          </div>
-          <PartGrid startQuiz={startQuiz} partProgress={partProgress} compact />
+      <StatisticsDashboard history={history} stats={stats} />
+
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <Metric label="Best score" value={`${stats.best}%`} icon={Sparkles} variant="success" />
+        <Metric label="Flagged" value={flagged.length} icon={Flag} />
+        <Metric label="Weak tracked" value={weakCount} icon={Brain} variant="warning" />
+        <Metric label="Wrong in parts" value={wrongCount} icon={Award} highlight />
+      </div>
+
+      <div>
+        <SectionHeader kicker="Exam parts" title="Practice by part" description="Progress bar per part — open details to see each question status." />
+        <div className="mt-4">
+          <PartGrid startQuiz={startQuiz} partProgress={partProgress} onShowDetail={setDetailPart} />
         </div>
-        <HistoryPanel history={history} />
+        {detailPart !== null && (
+          <div className="mt-4">
+            <PartDetailPanel partIndex={detailPart} partProgress={partProgress} onClose={() => setDetailPart(null)} />
+          </div>
+        )}
+      </div>
+
+      <div className="panel p-5 sm:p-6">
+        <SectionHeader kicker="Backup" title="Sync progress across devices" description="Export JSON from this app or import a file from GH-300 Pro (gh300-progress-*.json)." />
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button className="primary-button" onClick={exportData}>
+            <Download size={16} />
+            Export progress
+          </button>
+          <label className="secondary-button cursor-pointer">
+            <Upload size={16} />
+            Import progress
+            <input className="hidden" type="file" accept="application/json,.json" onChange={importData} />
+          </label>
+          <button className="danger-button" type="button" onClick={handleClearData}>
+            <Trash2 size={16} />
+            Clear data
+          </button>
+        </div>
+        <p className="mt-3 text-xs text-muted dark:text-slate-500">
+          Sau import/export/clear, thông báo xanh/đỏ hiện ở đầu trang Dashboard và dưới header.
+        </p>
       </div>
     </section>
   );

@@ -1,0 +1,54 @@
+@layer components {
+  .app-shell {
+    @apply min-h-screen bg-canvas text-ink transition-colors duration-300 dark:bg-gh-dark dark:text-slate-100;
+  }
+
+  .app-shell::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: theme('backgroundImage.mesh-light');
+  }
+
+  .dark .app-shell::before {
+    background-image: theme('backgroundImage.mesh-dark');
+  }
+
+  .sidebar {
+    @apply fixed inset-y-0 left-0 z-20 hidden w-[272px] flex-col border-r border-line/80 bg-white/80 px-4 py-5 backdrop-blur-xl dark:border-gh-border/60 dark:bg-gh-panel/85 lg:flex;
+  }
+
+  .sidebar-brand {
+    @apply mb-8 flex w-full items-center gap-3 rounded-2xl px-2 py-2 text-left transition hover:bg-subtle/80 dark:hover:bg-gh-subtle/60;
+  }
+
+  .sidebar-logo {
+    @apply relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl text-white shadow-glow;
+    background-image: theme('backgroundImage.hero-gradient');
+  }
+
+  .dark .sidebar-logo {
+    background-image: theme('backgroundImage.hero-gradient-dark');
+  }
+
+  .sidebar-logo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.2));
+  }
+
+  .sidebar-section {
+    @apply mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-muted/80 dark:text-slate-500;
+  }
+
+  .page-content {
+    @apply relative z-[1] mx-auto max-w-7xl animate-fade-in px-4 py-6 sm:px-6 sm:py-8;
+  }
+
+  .main-header {
+    @apply sticky top-0 z-10 border-b border-line/60 bg-white/75 px-4 py-3.5 backdrop-blur-xl dark:border-gh-border/50 dark:bg-gh-panel/75 sm:px-6;
+  }
+}
