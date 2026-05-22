@@ -7,8 +7,9 @@ const CHEVRON_SVG =
 
 function patchKbHtml(html) {
   return html
-    .replace(/<button([^>]*)onclick="tog\(this\)"/g, '<button$1type="button" data-kb-toggle="true"')
-    .replace(/<div([^>]*)onclick="tog\(this\)"/g, '<div$1data-kb-toggle="true" role="button" tabindex="0"')
+    .replace(/onclick="tog\(this\)"/g, 'data-kb-toggle="true"')
+    .replace(/<button([^>]*?)data-kb-toggle/g, '<button type="button"$1data-kb-toggle')
+    .replace(/<div([^>]*?)data-kb-toggle/g, '<div$1role="button" tabindex="0" data-kb-toggle')
     .replace(/class="hidden /g, 'class="kb-content ')
     .replace(/class="hidden"/g, 'class="kb-content"');
 }
@@ -48,6 +49,7 @@ function normalizeKbRoot(root) {
 
     content.classList.remove('hidden');
     content.classList.add('kb-content');
+    content.setAttribute('aria-hidden', card.classList.contains('kb-open') ? 'false' : 'true');
     if (!content.querySelector(':scope > .kb-content-inner')) {
       const inner = document.createElement('div');
       inner.className = 'kb-content-inner';
@@ -61,12 +63,18 @@ function normalizeKbRoot(root) {
   });
 }
 
+function setKbCardOpen(card, open) {
+  const trigger = card.querySelector('[data-kb-toggle]');
+  const content = card.querySelector('.kb-content');
+  card.classList.toggle('kb-open', open);
+  trigger?.setAttribute('aria-expanded', open ? 'true' : 'false');
+  content?.setAttribute('aria-hidden', open ? 'false' : 'true');
+}
+
 function toggleKbCard(trigger) {
   const card = trigger.closest('.kcard');
   if (!card) return;
-  const willOpen = !card.classList.contains('kb-open');
-  card.classList.toggle('kb-open', willOpen);
-  trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  setKbCardOpen(card, !card.classList.contains('kb-open'));
 }
 
 export function Learn() {
@@ -125,9 +133,9 @@ export function Learn() {
       card.style.display = match ? '' : 'none';
       if (match) {
         visible += 1;
-        if (query) card.classList.add('kb-open');
+        if (query) setKbCardOpen(card, true);
       } else {
-        card.classList.remove('kb-open');
+        setKbCardOpen(card, false);
       }
     });
     setVisibleCount(visible);
@@ -140,15 +148,13 @@ export function Learn() {
 
   function expandAll() {
     document.getElementById('kb-learn')?.querySelectorAll('.kcard:not([style*="none"])').forEach((card) => {
-      card.classList.add('kb-open');
-      card.querySelector('[data-kb-toggle]')?.setAttribute('aria-expanded', 'true');
+      setKbCardOpen(card, true);
     });
   }
 
   function collapseAll() {
     document.getElementById('kb-learn')?.querySelectorAll('.kcard').forEach((card) => {
-      card.classList.remove('kb-open');
-      card.querySelector('[data-kb-toggle]')?.setAttribute('aria-expanded', 'false');
+      setKbCardOpen(card, false);
     });
   }
 

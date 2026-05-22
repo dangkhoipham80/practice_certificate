@@ -1,0 +1,13 @@
+@layer components {
+  .modal-overlay {
+    @apply fixed inset-0 z-[100] flex items-center justify-center p-4;
+  }
+
+  .modal-backdrop {
+    @apply absolute inset-0 bg-ink/40 backdrop-blur-sm dark:bg-black/60;
+  }
+
+  .modal-card {
+    @apply relative z-[1] w-full shadow-card-hover;
+  }
+}
