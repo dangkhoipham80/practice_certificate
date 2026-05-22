@@ -1,0 +1,1021 @@
+﻿      <div class="space-y-4 lg:columns-2 lg:gap-4" id="kb">
+
+        <!-- Exam Study Guide -->
+        <div class="kcard bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl border border-indigo-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-indigo-100 text-indigo-700 border border-indigo-300">📋 Exam Guide</span>
+            <h3 class="text-sm font-bold">Study Guide for Exam GH-300</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-3">
+            <p class="font-semibold text-gh-700">Passing score: <span class="text-ok-500">700 / 1000</span> · Exam
+              updated: January 2026</p>
+
+            <div class="font-semibold text-gh-700 mt-2">Skills at a Glance:</div>
+            <table class="w-full text-xs border-collapse mt-1">
+              <tbody>
+                <tr class="border-b border-gh-100">
+                  <td class="py-1.5">Use GitHub Copilot responsibly</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">15–20%</td>
+                </tr>
+                <tr class="border-b border-gh-100">
+                  <td class="py-1.5">Use GitHub Copilot features</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">25–30%</td>
+                </tr>
+                <tr class="border-b border-gh-100">
+                  <td class="py-1.5">GitHub Copilot features</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">25–30%</td>
+                </tr>
+                <tr class="border-b border-gh-100">
+                  <td class="py-1.5">Understand GitHub Copilot data and architecture</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">10–15%</td>
+                </tr>
+                <tr class="border-b border-gh-100">
+                  <td class="py-1.5">Apply prompt engineering and context crafting</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">10–15%</td>
+                </tr>
+                <tr class="border-b border-gh-100">
+                  <td class="py-1.5">Improve developer productivity with GitHub Copilot</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">10–15%</td>
+                </tr>
+                <tr>
+                  <td class="py-1.5">Configure privacy, content exclusions, and safeguards</td>
+                  <td class="py-1.5 text-right font-mono text-gh-500">10–15%</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="font-semibold text-gh-700 mt-3">Domain 1: Use GitHub Copilot Responsibly (15–20%)</div>
+            <ul class="list-disc pl-4 space-y-0.5">
+              <li><strong>Responsible AI principles:</strong> Describe risks & limitations of GenAI, ethical/responsible
+                usage, potential harms & mitigation strategies</li>
+              <li><strong>Validate and operate:</strong> Explain need to validate AI output, operate Copilot responsibly
+              </li>
+            </ul>
+
+            <div class="font-semibold text-gh-700 mt-3">Domain 2: Use GitHub Copilot Features (25–30%)</div>
+            <ul class="list-disc pl-4 space-y-0.5">
+              <li><strong>IDE:</strong> Enable Copilot, trigger via inline suggestions/chat/CLI/Plan Mode, exclude
+                files/repos</li>
+              <li><strong>CLI:</strong> Install, features & commands, interactive sessions, generate scripts</li>
+              <li><strong>Features:</strong> Agent Mode, Edit Mode, MCP, Sub-Agents, code review, Spaces, Spark, PR
+                summaries, instructions files, Copilot Chat limits/options/commands, prompt file reuse</li>
+              <li><strong>Org settings:</strong> Policy management, Code Review policies, feature availability, audit
+                logs, REST API subscriptions</li>
+            </ul>
+
+            <div class="font-semibold text-gh-700 mt-3">Domain 3: Data & Architecture (10–15%)</div>
+            <ul class="list-disc pl-4 space-y-0.5">
+              <li><strong>Data handling:</strong> Data usage/flow/sharing, input processing, prompt building, proxy
+                filtering, post-processing</li>
+              <li><strong>Lifecycle:</strong> Code suggestion lifecycle, LLM limitations</li>
+            </ul>
+
+            <div class="font-semibold text-gh-700 mt-3">Domain 4: Prompt Engineering (10–15%)</div>
+            <ul class="list-disc pl-4 space-y-0.5">
+              <li><strong>Craft prompts:</strong> Prompt structure & context, how context is determined,
+                zero-shot/few-shot prompting, best practices</li>
+              <li><strong>Performance:</strong> Prompt engineering principles, process flow, chat history usage</li>
+            </ul>
+
+            <div class="font-semibold text-gh-700 mt-3">Domain 5: Developer Productivity (10–15%)</div>
+            <ul class="list-disc pl-4 space-y-0.5">
+              <li><strong>Productivity:</strong> Code generation, refactoring, documentation, reduce context switching,
+                sample data, modernize legacy code</li>
+              <li><strong>Testing & security:</strong> Unit/integration tests, edge cases, assertions, security
+                improvements, performance optimizations</li>
+            </ul>
+
+            <div class="font-semibold text-gh-700 mt-3">Domain 6: Privacy & Safeguards (10–15%)</div>
+            <ul class="list-disc pl-4 space-y-0.5">
+              <li><strong>Privacy:</strong> Content exclusions, editor settings, ownership & limitations of outputs</li>
+              <li><strong>Safeguards:</strong> Duplication detection, security warnings, troubleshoot suggestions &
+                exclusions</li>
+            </ul>
+
+            <div class="mt-3 pt-2 border-t border-gh-100">
+              <p class="font-semibold text-gh-700 mb-1">Study Resources:</p>
+              <ul class="space-y-0.5">
+                <li><a href="https://learn.microsoft.com/en-us/training/paths/copilot/" target="_blank" rel="noopener"
+                    class="text-accent-500 hover:underline">MS Learn: GitHub Copilot Fundamentals Part 1</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/" target="_blank"
+                    rel="noopener" class="text-accent-500 hover:underline">MS Learn: GitHub Copilot Fundamentals Part
+                    2</a></li>
+                <li><a href="https://learn.microsoft.com/en-gb/credentials/certifications/resources/study-guides/gh-300"
+                    target="_blank" rel="noopener" class="text-accent-500 hover:underline">Official Study Guide</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/exams/gh-300/" target="_blank"
+                    rel="noopener" class="text-accent-500 hover:underline">Exam Details & Scheduling</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Part 1 -->
+        <div class="text-xs font-bold text-gh-400 uppercase tracking-wider pb-1 border-b border-gh-100">⚠️ Answer Review
+          Notes</div>
+
+        <!-- Answer Review -->
+        <div class="kcard bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-amber-100 text-amber-700 border border-amber-300">⚠️ Review</span>
+            <h3 class="text-sm font-bold">Potentially Incorrect / Debatable Answers</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-3">
+
+            <p class="font-semibold text-amber-700">⚠️ 5 answers FIXED ✅ · 10 duplicates REMOVED ✅ · 6 outdated marked
+              ⚠️ · 327 questions total</p>
+
+            <div class="font-semibold text-gh-700 mt-3">✅ Fixed Answers (corrected in quiz data):</div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-red-100 mt-1.5">
+              <p class="font-semibold">Q48 (Part 1) -- Code Refactoring</p>
+              <p class="mt-1">Q: "How can GitHub Copilot assist with code refactoring tasks?"</p>
+              <p class="mt-1">Current answer: <span class="text-err-500">"GitHub Copilot can fix syntax errors without
+                  user input"</span></p>
+              <p class="mt-1">Better answer: <span class="text-ok-500">"GitHub Copilot can suggest refactoring
+                  improvements for better code quality"</span></p>
+              <p class="mt-1 text-gh-400">Reason: Implies autonomous action without developer. Contradicts responsible
+                AI principles.</p>
+            </div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-red-100 mt-1.5">
+              <p class="font-semibold">Q (Part 3) -- /define command ✅ FIXED</p>
+              <p class="mt-1">Q: "Which /commands can be used to ask for clarification about unfamiliar function?"</p>
+              <p class="mt-1">Was: <span class="text-err-500">"/define"</span> → Now: <span
+                  class="text-ok-500">"/explain"</span></p>
+              <p class="mt-1 text-gh-400">Duplicate in Part 5 removed. Answer corrected to /explain.</p>
+            </div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-red-100 mt-1.5">
+              <p class="font-semibold">Q (Part 3) -- Deprecated Functions</p>
+              <p class="mt-1">Q: "How does GitHub Copilot handle deprecated functions?"</p>
+              <p class="mt-1">Current answer: <span class="text-err-500">"avoids suggesting deprecated functions and
+                  offers alternatives"</span></p>
+              <p class="mt-1">Better answer: <span class="text-ok-500">"may suggest deprecated syntax if present in
+                  training data" (as stated in Q6)</span></p>
+              <p class="mt-1 text-gh-400">Reason: Contradicts Q6 in Part 1 which correctly says Copilot MAY suggest
+                deprecated syntax.</p>
+            </div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-red-100 mt-1.5">
+              <p class="font-semibold">Q (Part 5) -- Integration Test isAdult()</p>
+              <p class="mt-1">Q: "Best strategy to generate integration tests using GitHub Copilot?"</p>
+              <p class="mt-1">Current answer: <span class="text-err-500">"Ask Copilot to generate unit tests...
+                  sufficient without integration testing"</span></p>
+              <p class="mt-1">Better answer: <span class="text-ok-500">"Generate integration test verifying how
+                  isAdult() behaves in complete workflow"</span></p>
+              <p class="mt-1 text-gh-400">Reason: Question explicitly asks about integration tests; answer says unit
+                tests are sufficient.</p>
+            </div>
+
+            <div class="font-semibold text-gh-700 mt-3">🟡 Outdated / Debatable Answers:</div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-amber-100 mt-1.5">
+              <p class="font-semibold">Q (Part 3) -- Data Retention</p>
+              <p class="mt-1">Q: "How long does GitHub retain Copilot data for Business/Enterprise?"</p>
+              <p class="mt-1">Current: "28 days" + "engagement data 2 years"</p>
+              <p class="mt-1 text-gh-400">Note: Official docs say prompts/suggestions NOT retained for
+                Business/Enterprise by default. 28-day retention is for abuse detection only.</p>
+            </div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-amber-100 mt-1.5">
+              <p class="font-semibold">Q (Part 2) -- Individual Prompt Data Collection</p>
+              <p class="mt-1">Q: "How does Copilot Individual use prompt data?" Choose 2</p>
+              <p class="mt-1">Current: real-time suggestions + train ML models</p>
+              <p class="mt-1 text-gh-400">Note: Training is opt-in only. Default changed -- no longer used for training
+                unless user opts in.</p>
+            </div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-amber-100 mt-1.5">
+              <p class="font-semibold">Q (Part 3) -- "Code review is NOT a feature"</p>
+              <p class="mt-1">Current: B = "Code review" is NOT a feature</p>
+              <p class="mt-1 text-gh-400">Note: Was true pre-2024. As of 2024-2025, Copilot Enterprise DOES have code
+                review features. Outdated.</p>
+            </div>
+
+            <div class="p-2.5 bg-white rounded-lg border border-amber-100 mt-1.5">
+              <p class="font-semibold">Q (Part 5) -- Chat Data Flow</p>
+              <p class="mt-1">Current: "sent to GitHub -> forwarded to OpenAI -> some stored"</p>
+              <p class="mt-1 text-gh-400">Note: Now uses Azure OpenAI. Business/Enterprise data NOT stored for model
+                improvement.</p>
+            </div>
+
+            <div class="font-semibold text-gh-700 mt-3">✅ Duplicates Removed (9 questions):</div>
+            <ul class="list-disc pl-4 space-y-0.5 mt-1">
+              <li><s>"What is zero-shot prompting?"</s> -- Part 7 copy removed</li>
+              <li><s>"How is Copilot Individual billed?"</s> -- Part 3 copy removed</li>
+              <li><s>"Copilot aid in modernizing applications?"</s> -- Part 3 copy removed</li>
+              <li><s>"Key feature of Copilot's recent updates?"</s> -- Part 3 copy removed</li>
+              <li><s>"Configuration for IP infringement?"</s> -- Part 6 copy removed</li>
+              <li><s>"When can Copilot still use excluded content?"</s> -- Part 3 copy removed</li>
+              <li><s>"/define command"</s> -- Part 5 copy removed, Part 3 fixed to /explain</li>
+              <li><s>"GitHub Copilot pricing plan for knowledge bases?"</s> -- Part 6 copy removed</li>
+              <li><s>"Few-shot prompting PyTorch"</s> -- Part 7 copy removed</li>
+              <li>"Limitation of content exclusions" -- kept both (different formulations)</li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="text-xs font-bold text-gh-400 uppercase tracking-wider pb-1 border-b border-gh-100">📘 Part 1 --
+          Fundamentals</div>
+
+        <!-- Module 1: Responsible AI -->
+        <div class="kcard bg-white rounded-2xl border border-gh-200 overflow-hidden">
+          <button onclick="tog(this)"
+            class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gh-50/50"
+            aria-expanded="false">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0"><svg
+                  class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg></div>
+              <div>
+                <h3 class="font-semibold text-sm">Responsible AI with GitHub Copilot</h3>
+                <p class="text-[11px] text-gh-500 mt-0.5">6 principles of responsible AI, managing risks</p>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-gh-400 transition-transform shrink-0 ml-2 arr" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden px-5 pb-5 pt-2 border-t border-gh-100 animate-slide">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Six Principles of Responsible AI</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li><strong>Fairness</strong> -- Treat all people fairly; detect bias via diverse data, adversarial
+                    debiasing, monitoring across segments</li>
+                  <li><strong>Reliability & Safety</strong> -- Perform consistently, respond safely to unexpected
+                    conditions, resist manipulation</li>
+                  <li><strong>Privacy & Security</strong> -- Get user consent, collect only needed data, anonymize
+                    (pseudonymization/aggregation), encrypt with HSMs</li>
+                  <li><strong>Inclusiveness</strong> -- Accessible to all abilities, languages, geographies; support
+                    screen readers, voice control, offline use</li>
+                  <li><strong>Transparency</strong> -- Explain how systems operate, justify design choices, be honest
+                    about limitations, enable auditing</li>
+                  <li><strong>Accountability</strong> -- Humans responsible for AI operations; continuous monitoring,
+                    risk mitigation</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Managing AI Risks</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Always review AI-generated code before deploying</li>
+                  <li>• Minimize bias with diverse training data and fairness metrics</li>
+                  <li>• Validate security to prevent unauthorized access and data breaches</li>
+                  <li>• Provide clear explanations of what AI is doing (transparency)</li>
+                  <li>• Maintain human oversight for compliance requirements</li>
+                  <li>• GitHub Copilot may suggest deprecated features from training data</li>
+                  <li>• Pattern-based responses -- doesn't verify computation accuracy</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 2: Introduction to Copilot -->
+        <div class="kcard bg-white rounded-2xl border border-gh-200 overflow-hidden">
+          <button onclick="tog(this)"
+            class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gh-50/50"
+            aria-expanded="false">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-accent-50 rounded-xl flex items-center justify-center flex-shrink-0"><svg
+                  class="w-4 h-4 text-accent-500" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg></div>
+              <div>
+                <h3 class="font-semibold text-sm">Introduction to GitHub Copilot</h3>
+                <p class="text-[11px] text-gh-500 mt-0.5">Features, plans, how to interact, setup & troubleshooting</p>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-gh-400 transition-transform shrink-0 ml-2 arr" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden px-5 pb-5 pt-2 border-t border-gh-100 animate-slide">
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">What is GitHub Copilot?</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• AI pair programmer powered by OpenAI Codex/GPT models</li>
+                  <li>• 46% of new code written by AI, 55% faster productivity</li>
+                  <li>• Available in VS Code, Visual Studio, JetBrains, Neovim</li>
+                  <li>• Provides inline suggestions + chat + CLI assistance</li>
+                  <li>• Trained on public source code with broad language knowledge</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Key Features</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• <strong>Copilot Chat</strong> -- Ask questions, get explanations, generate tests</li>
+                  <li>• <strong>PR Summaries</strong> -- Auto-generate pull request descriptions</li>
+                  <li>• <strong>Code Review</strong> -- Suggest issues, describe changes, propose improvements</li>
+                  <li>• <strong>CLI</strong> -- Command suggestions, shell scripts, error understanding</li>
+                  <li>• <strong>Copilot Spaces</strong> -- Project-wide context for planning & design</li>
+                  <li>• <strong>Cloud Agent</strong> -- Autonomous multi-step coding tasks</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Subscription Plans</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• <strong>Free</strong> -- Limited completions & chat, AI model access</li>
+                  <li>• <strong>Pro</strong> -- Higher limits, priority models, advanced suggestions</li>
+                  <li>• <strong>Pro+</strong> -- Premium capacity, priority infrastructure</li>
+                  <li>• <strong>Business</strong> -- Centralized management, policies, IP indemnity, public code filter
+                  </li>
+                  <li>• <strong>Enterprise</strong> -- All Business + personalized suggestions, knowledge bases, custom
+                    models, codebase indexing</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Interacting with Copilot</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• <strong>Inline suggestions</strong>: Tab to accept, Esc to reject</li>
+                  <li>• <strong>Chat panel</strong>: Natural language questions about code</li>
+                  <li>• <strong>Inline chat</strong>: Ctrl+I for context-specific help</li>
+                  <li>• <strong>Comments->Code</strong>: Describe in comments, get implementation</li>
+                  <li>• <strong>Slash commands</strong>: /explain, /tests, /suggest, /comment</li>
+                  <li>• <strong>Multiple suggestions</strong>: Alt+] to cycle alternatives</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Setup & Configuration</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Install extension from VS Code Marketplace</li>
+                  <li>• Sign in with GitHub account that has Copilot access</li>
+                  <li>• Enable/disable via status bar icon</li>
+                  <li>• Configure per-language in Settings -> Extensions -> Copilot</li>
+                  <li>• Troubleshoot: Developer Tools, Command Palette -> Diagnostics</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Data & Privacy</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Business/Enterprise: data NOT used for model training</li>
+                  <li>• Individual: opt-out available for telemetry</li>
+                  <li>• Proxy service hosted on Microsoft Azure</li>
+                  <li>• Duplication detection (~150 char matching vs public code)</li>
+                  <li>• Content exclusion configured in Copilot settings UI</li>
+                  <li>• Status bar shows content exclusion status</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 3: Prompt Engineering -->
+        <div class="kcard bg-white rounded-2xl border border-gh-200 overflow-hidden">
+          <button onclick="tog(this)"
+            class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gh-50/50"
+            aria-expanded="false">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0"><svg
+                  class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg></div>
+              <div>
+                <h3 class="font-semibold text-sm">Prompt Engineering with GitHub Copilot</h3>
+                <p class="text-[11px] text-gh-500 mt-0.5">Crafting effective prompts, process flow, LLMs</p>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-gh-400 transition-transform shrink-0 ml-2 arr" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden px-5 pb-5 pt-2 border-t border-gh-100 animate-slide">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Prompt Engineering Foundations</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• <strong>Zero-shot</strong>: Give only a question/task, no examples</li>
+                  <li>• <strong>Few-shot</strong>: Provide examples of expected input/output</li>
+                  <li>• <strong>Role prompting</strong>: Assign a role for contextual responses</li>
+                  <li>• Be specific -- clearly define the problem or task</li>
+                  <li>• Use meaningful variable names for better context</li>
+                  <li>• Provide examples of desired output in prompts</li>
+                  <li>• Break complex tasks into smaller, focused prompts</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Context & Process Flow</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• <strong>@workspace</strong> -- Incorporate project-wide context</li>
+                  <li>• <strong>#file / #editor</strong> -- Anchor to specific files/editors</li>
+                  <li>• <strong>FIM (Fill-in-the-Middle)</strong> -- Uses prefix + suffix for better completions</li>
+                  <li>• Pre-processing enriches prompt with additional context</li>
+                  <li>• Post-processing: quality checks, content filtering, public code matching</li>
+                  <li>• Chat history provides personalized suggestions</li>
+                  <li>• Context from: open tabs, cursor location, neighboring files</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">LLMs & How Copilot Works</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Powered by Large Language Models (GPT-based)</li>
+                  <li>• Trained on public code -- reflects common patterns</li>
+                  <li>• Suggests code based on probability, not correctness</li>
+                  <li>• May suggest deprecated syntax from training data</li>
+                  <li>• Cannot verify mathematical computations</li>
+                  <li>• Tends toward homogeneous solutions from popular patterns</li>
+                  <li>• Quality depends on prompt clarity and context provided</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Best Practices</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Review and refactor suggestions regularly</li>
+                  <li>• Use /fix for syntax errors, /optimize for performance</li>
+                  <li>• Keep relevant files open for better context</li>
+                  <li>• Accept next word (partial accept) via shortcuts</li>
+                  <li>• Check alternative suggestions in new tabs</li>
+                  <li>• Validate security of all generated code</li>
+                  <li>• Use Chat for explain, test generation, refactoring</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 4: Copilot Across Environments -->
+        <div class="kcard bg-white rounded-2xl border border-gh-200 overflow-hidden">
+          <button onclick="tog(this)"
+            class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gh-50/50"
+            aria-expanded="false">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0"><svg
+                  class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg></div>
+              <div>
+                <h3 class="font-semibold text-sm">Copilot Across Environments</h3>
+                <p class="text-[11px] text-gh-500 mt-0.5">IDE, Chat, GitHub.com, CLI, management</p>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-gh-400 transition-transform shrink-0 ml-2 arr" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden px-5 pb-5 pt-2 border-t border-gh-100 animate-slide">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">IDE Features</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Inline code completions (single/multi-line)</li>
+                  <li>• Chat interface for explanations & test generation</li>
+                  <li>• Inline chat (Ctrl+I) for targeted modifications</li>
+                  <li>• Available in all commercially supported IDEs (Business+)</li>
+                  <li>• Keyboard shortcuts: Tab (accept), Alt+] (cycle), Esc (dismiss)</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">GitHub.com & Enterprise</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• PR summaries (Enterprise, github.com only)</li>
+                  <li>• Knowledge bases for org-specific content</li>
+                  <li>• Content: code snippets, design patterns, documentation</li>
+                  <li>• NOT: compiled binaries, screenshots</li>
+                  <li>• Custom models use patterns from your repositories</li>
+                  <li>• Codebase indexing for personalized suggestions</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Management & Policies</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Policies: Organization/Enterprise settings -> Copilot -> Policies</li>
+                  <li>• Content exclusion: Copilot settings UI (not .copilotignore)</li>
+                  <li>• Duplication detection configurable at org & enterprise level</li>
+                  <li>• Audit logs track admin activities and policy changes</li>
+                  <li>• REST API: seat assignments, usage summaries, acceptance rates</li>
+                  <li>• GitHub Copilot for Azure DevOps (no Enterprise license needed)</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Developer Use Cases & SDLC</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Design phase: suggests patterns & best practices</li>
+                  <li>• Coding: generation, completion, refactoring</li>
+                  <li>• Testing: unit test generation, edge case discovery</li>
+                  <li>• Review: PR summaries, code explanations</li>
+                  <li>• Improves readability, reduces complexity</li>
+                  <li>• Cannot autonomously refactor entire codebases</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 5: Unit Tests -->
+        <div class="kcard bg-white rounded-2xl border border-gh-200 overflow-hidden">
+          <button onclick="tog(this)"
+            class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gh-50/50"
+            aria-expanded="false">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-cyan-50 rounded-xl flex items-center justify-center flex-shrink-0"><svg
+                  class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg></div>
+              <div>
+                <h3 class="font-semibold text-sm">Unit Testing with GitHub Copilot</h3>
+                <p class="text-[11px] text-gh-500 mt-0.5">Generating tests, chat-based testing workflows</p>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-gh-400 transition-transform shrink-0 ml-2 arr" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="hidden px-5 pb-5 pt-2 border-t border-gh-100 animate-slide">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Test Generation</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Use /tests command or "Generate Unit Tests" from command palette</li>
+                  <li>• Select function/class -> Copilot generates test cases</li>
+                  <li>• Covers assertions, edge cases, boundary conditions</li>
+                  <li>• Chat can explain test patterns and testing best practices</li>
+                  <li>• Always review generated tests for correctness</li>
+                </ul>
+              </div>
+              <div class="p-4 bg-gh-50 rounded-xl">
+                <h4 class="font-semibold text-xs text-gh-800 mb-2">Testing Best Practices</h4>
+                <ul class="text-[11px] text-gh-600 space-y-1.5 leading-relaxed">
+                  <li>• Provide clear function signatures for better test generation</li>
+                  <li>• Use descriptive test names for maintainability</li>
+                  <li>• Include both happy path and error scenarios</li>
+                  <li>• Copilot learns from your testing patterns over time</li>
+                  <li>• Combine inline chat + test generation for comprehensive coverage</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 14: Copilot Spaces -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-blue-50 text-blue-600 border border-blue-200">Spaces</span>
+            <h3 class="text-sm font-bold">Copilot Spaces -- Curated Context</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>What is a Copilot Space?</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• A dedicated Copilot chat grounded in a curated set of context you choose</li>
+              <li>• Unlike general chat (broad), Spaces trade breadth for depth -> more predictable, grounded responses
+              </li>
+              <li>• You control: files, issues, PRs, and free-text instructions</li>
+              <li>• Linked files reflect the repo's default branch (auto-updates)</li>
+            </ul>
+            <div class="mt-2"><strong>Creating a Space:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Go to github.com/copilot/spaces -> Create space</li>
+              <li>• Owned by you OR by an organization (org-owned can be shared via GitHub permissions)</li>
+              <li>• Add context: Attach files/folders, link PRs/issues, upload files, add free text</li>
+              <li>• Add Instructions: goals, style preferences, canonical examples</li>
+            </ul>
+            <div class="mt-2"><strong>Best Practices:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Keep Spaces small and focused (model context limits apply)</li>
+              <li>• Lead with most important sources (ordering affects responses)</li>
+              <li>• Use for: runbooks, playbooks, specific services, known datasets</li>
+              <li>• Instructions: brief, focused, actionable; include examples</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 15: Advanced Features -- Slash Commands & Chat -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-purple-50 text-purple-600 border border-purple-200">IDE</span>
+            <h3 class="text-sm font-bold">Advanced Features -- Slash Commands & Chat</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>Ghost Text (Inline Suggestions):</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Suggestions appear as ghost text -> accept with Tab, ignore by typing</li>
+              <li>• Uses open files as context by default (no prompt required)</li>
+              <li>• Can provide prompts via comments, chat window, or inline chat</li>
+            </ul>
+            <div class="mt-2"><strong>Chat Interfaces:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>Chat Pane:</strong> Click chat icon in sidebar -> dedicated panel for questions</li>
+              <li>• <strong>Inline Chat:</strong> Ctrl+I (Win) / Cmd+I (Mac) -- interact without leaving code context
+              </li>
+              <li>• Inline chat benefit: suggestions happen closer to the code, no context switch</li>
+            </ul>
+            <div class="mt-2"><strong>Slash Commands:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>/fix</strong> -- Fix bugs in selected code</li>
+              <li>• <strong>/doc</strong> -- Add comments/documentation</li>
+              <li>• <strong>/explain</strong> -- Get explanations about code</li>
+              <li>• <strong>/generate</strong> -- Generate code for a question</li>
+              <li>• <strong>/optimize</strong> -- Improve runtime performance</li>
+              <li>• <strong>/tests</strong> -- Create unit tests for selected code</li>
+              <li>• <strong>/help</strong> -- Get help on using Copilot Chat</li>
+            </ul>
+            <div class="mt-2"><strong>Agents (Participants):</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>@terminal</strong> -- Help with terminal errors and commands</li>
+              <li>• <strong>@workspace</strong> -- Questions about the whole project/workspace</li>
+              <li>• Agents provide domain-specific context for better responses</li>
+            </ul>
+            <div class="mt-2"><strong>Language-Specific Tips (JS/Python):</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Copilot excels with Python and JavaScript due to large training corpus</li>
+              <li>• Use Copilot to: create Dockerfiles, set up virtual envs, write test suites</li>
+              <li>• Provide clear context: open related files, use descriptive variable names</li>
+              <li>• Combine slash commands with inline chat for best workflow</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 13: Management & Content Exclusions -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-orange-50 text-orange-600 border border-orange-200">Admin</span>
+            <h3 class="text-sm font-bold">Management, Customization & Content Exclusions</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>Content Exclusions:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Configure in Organization settings (NOT via .gitignore)</li>
+              <li>• Prevents Copilot from accessing/suggesting content from specified files/paths</li>
+              <li>• Available on Business and Enterprise plans only</li>
+              <li>• Applies to both completions and chat context</li>
+            </ul>
+            <div class="mt-2"><strong>Public Code Matching:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Detects and blocks suggestions that match public code verbatim</li>
+              <li>• Can be configured at org/enterprise level via policies</li>
+              <li>• Available on all plans (toggle in individual settings or org policy)</li>
+              <li>• GitHub provides contractual IP indemnification (Business/Enterprise)</li>
+            </ul>
+            <div class="mt-2"><strong>Common Troubleshooting:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• No suggestions? Check: extension enabled, authenticated, not excluded file, network/proxy issues
+              </li>
+              <li>• Poor suggestions? Provide more context, use meaningful names, add comments describing intent</li>
+              <li>• Chat not responding? Verify plan supports chat, check IDE compatibility</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section: Plans & Administration -->
+        <div class="text-xs font-bold text-gh-400 uppercase tracking-wider pb-1 border-b border-gh-100 mt-6">🏢 Plans &
+          Administration</div>
+
+        <!-- Module 6: Plans & Features -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-cyan-50 text-cyan-600 border border-cyan-200">Plans</span>
+            <h3 class="text-sm font-bold">Copilot Plans & Pricing</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>Plans Available:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>Copilot Free:</strong> Limited access, 2000 completions/month, 50 chat messages/month</li>
+              <li>• <strong>Copilot Pro ($10/mo):</strong> Unlimited completions, premium models, cloud agent, 300
+                premium requests/month</li>
+              <li>• <strong>Copilot Pro+ ($39/mo):</strong> Everything in Pro + 1500 premium requests, all advanced
+                models</li>
+              <li>• <strong>Copilot Business ($19/seat/mo):</strong> Centralized management, policy control, 300 premium
+                requests/user</li>
+              <li>• <strong>Copilot Enterprise ($39/seat/mo):</strong> All Business features + enterprise-grade
+                capabilities, 1000 premium requests/user</li>
+            </ul>
+            <div class="mt-2"><strong>Key Differences (Business vs Enterprise):</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Organization-wide policy management: Business ✓ Enterprise ✓</li>
+              <li>• Content/file exclusion: Enterprise only</li>
+              <li>• Audit logs: Business ✓ Enterprise ✓</li>
+              <li>• Organization custom instructions: Enterprise only</li>
+              <li>• Copilot pull request summaries: Both</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 7: Features & Administration -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-orange-50 text-orange-600 border border-orange-200">Enterprise</span>
+            <h3 class="text-sm font-bold">Enterprise Administration & Policies</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>Policy Management:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Enterprise owners define policies for the whole enterprise OR delegate to org owners</li>
+              <li>• Policies control: feature availability, model access, agent permissions, MCP server access</li>
+              <li>• Navigate: Enterprise -> AI Controls -> Copilot/Agents/MCP sidebar</li>
+              <li>• Policies configured via dropdown menus or toggles</li>
+            </ul>
+            <div class="mt-2"><strong>Access Management:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Enterprise owners specify which organizations can use Copilot</li>
+              <li>• Organization owners specify which members can use Copilot</li>
+              <li>• Enterprise can assign Copilot Enterprise or Business to individual organizations</li>
+            </ul>
+            <div class="mt-2"><strong>Monitoring & Compliance:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Usage data: Review Copilot usage within org/enterprise to manage access and drive adoption</li>
+              <li>• Audit logs: Track actions taken and by which users</li>
+              <li>• File exclusions: Configure Copilot to ignore certain files (via org settings, not .gitignore)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 8: Copilot Features -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-indigo-50 text-indigo-600 border border-indigo-200">Features</span>
+            <h3 class="text-sm font-bold">GitHub Copilot Features Overview</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>Assistive Features (synchronous):</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>Copilot Chat:</strong> Available on GitHub.com, Mobile, IDEs (VS Code, Visual Studio,
+                JetBrains, Eclipse, Xcode), Windows Terminal</li>
+              <li>• <strong>Inline Suggestions:</strong> Autocomplete-style code completions + Next Edit Suggestions (VS
+                Code, Xcode, Eclipse)</li>
+              <li>• <strong>Pull Request Summaries:</strong> AI-generated PR descriptions and review focus areas</li>
+              <li>• <strong>GitHub Desktop:</strong> Auto-generate commit messages based on changes</li>
+            </ul>
+            <div class="mt-2"><strong>Agentic Features (autonomous, need approval for sensitive actions):</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>Copilot CLI:</strong> Use Copilot in terminal to add features, fix bugs, create PRs</li>
+              <li>• <strong>Cloud Agent:</strong> Autonomous AI that researches repos, creates plans, makes code changes
+                on branches</li>
+              <li>• <strong>Code Review:</strong> AI-generated code review suggestions on PRs</li>
+              <li>• <strong>Agent Mode in IDEs:</strong> Copilot works autonomously -- determines files, offers changes,
+                runs terminal commands</li>
+            </ul>
+            <div class="mt-2"><strong>Customization Features:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>Custom Instructions:</strong> Repository-level or personal (all plans) vs Organization-level
+                (Enterprise only)</li>
+              <li>• <strong>Prompt Files:</strong> Markdown files stored in workspace for reusable prompts</li>
+              <li>• <strong>MCP Servers:</strong> Connect external tools/data via Model Context Protocol</li>
+              <li>• <strong>Copilot Spaces:</strong> Organize code, docs, specs into Spaces for grounded context</li>
+              <li>• <strong>Block Public Code:</strong> Available on all plans -- filters suggestions matching public
+                repos</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section: Part 2 -->
+        <div class="text-xs font-bold text-gh-400 uppercase tracking-wider pb-1 border-b border-gh-100 mt-6">📗 Part 2
+          -- Advanced & Agents</div>
+
+        <!-- Module 9: Agent Mode (Part 2) -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-violet-50 text-violet-600 border border-violet-200">Agent</span>
+            <h3 class="text-sm font-bold">Agent Mode -- Autonomous Development</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>What is Agent Mode?</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• An autonomous peer programmer -- goes beyond autocomplete to handle full tasks</li>
+              <li>• Analyzes entire codebase, determines relevant files and dependencies before making changes</li>
+              <li>• Works in iterative cycles: analyze -> suggest -> execute -> monitor -> refine</li>
+              <li>• Can create apps from scratch, refactor across files, write/run tests, migrate legacy code</li>
+            </ul>
+            <div class="mt-2"><strong>Copilot Interaction Modes:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• <strong>Inline Suggestions:</strong> Real-time autocomplete as you type</li>
+              <li>• <strong>Copilot Chat:</strong> Dedicated chat panel with project-aware responses</li>
+              <li>• <strong>Copilot Edits:</strong> Apply changes across multiple files for structured modifications
+              </li>
+              <li>• <strong>Agent Mode:</strong> Orchestrates dynamically, iterates to improve accuracy, handles complex
+                workflows</li>
+            </ul>
+            <div class="mt-2"><strong>Key Capabilities:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Autonomous: Creates routes, updates configs, installs deps, generates tests -- without step-by-step
+                instructions</li>
+              <li>• Multi-step orchestration: Draft -> Review -> Accept workflow</li>
+              <li>• Self-healing: Detects failures, applies fixes, re-runs until passing</li>
+              <li>• Context-aware: Recognizes project type via package.json, runs appropriate build scripts</li>
+              <li>• Developer retains full control: Review, adjust, or revert any proposed change</li>
+            </ul>
+            <div class="mt-2"><strong>Limitations:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• May struggle with specialized domain logic or nuanced business rules</li>
+              <li>• Missing project context = less accurate solutions</li>
+              <li>• Premium reasoning doubles PRU consumption (~4+ vs ~2 standard)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 10: Cloud Agent (Part 2) -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-violet-50 text-violet-600 border border-violet-200">Cloud</span>
+            <h3 class="text-sm font-bold">Copilot Cloud Agent</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>What is Cloud Agent?</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Autonomous AI agent that researches a repo, creates implementation plans, and makes code changes on
+                a branch</li>
+              <li>• You can assign a GitHub issue to Copilot or ask it to open a PR directly</li>
+              <li>• Works on GitHub.com (not IDE-based like Agent Mode)</li>
+              <li>• Requires: Copilot Pro, Pro+, Business, or Enterprise; repos hosted on GitHub</li>
+            </ul>
+            <div class="mt-2"><strong>Workflow:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Assign an issue to Copilot -> it creates a branch and PR</li>
+              <li>• Track sessions via PR comments and activity</li>
+              <li>• Iterate with @copilot comments on the PR</li>
+              <li>• Review diff, approve, and merge when ready</li>
+            </ul>
+            <div class="mt-2"><strong>Customization & Extension:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Preconfigure agent's environment for your project</li>
+              <li>• Extend capabilities with MCP (Model Context Protocol)</li>
+              <li>• Test and validate output before merging</li>
+              <li>• Apply responsible-use practices and scope tasks effectively</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 11: MCP Server (Part 2) -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-emerald-50 text-emerald-600 border border-emerald-200">MCP</span>
+            <h3 class="text-sm font-bold">MCP Server (Model Context Protocol)</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>What is MCP?</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Model Context Protocol -- a secure, scalable way to integrate GitHub features into AI tools</li>
+              <li>• Gives Copilot access to external tools and data sources</li>
+              <li>• Available on ALL Copilot plans</li>
+            </ul>
+            <div class="mt-2"><strong>Setup & Configuration:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Configure GitHub MCP Server in VS Code (or other MCP-compatible editors)</li>
+              <li>• Requires a GitHub Personal Access Token (PAT) for advanced setup</li>
+              <li>• Docker for local server setup (optional, for hands-on control)</li>
+              <li>• For orgs/enterprises: "MCP servers in Copilot" policy must be enabled</li>
+            </ul>
+            <div class="mt-2"><strong>Use Cases:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Use with Copilot Chat to automate development tasks</li>
+              <li>• Connect to databases, APIs, internal tools</li>
+              <li>• Extend Cloud Agent's capabilities</li>
+              <li>• Enterprise policy controls MCP access in Copilot (separate from third-party MCP hosts like
+                Cursor/Windsurf)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 12: Code Reviews & PRs (Part 2) -->
+        <div class="kcard bg-white rounded-xl border border-gh-200 p-4 sm:p-5">
+          <div class="flex items-center gap-2 mb-3 cursor-pointer" onclick="tog(this)">
+            <span class="badge bg-pink-50 text-pink-600 border border-pink-200">Review</span>
+            <h3 class="text-sm font-bold">Code Reviews & Pull Requests with Copilot</h3>
+            <svg class="w-4 h-4 ml-auto text-gh-400 transition-transform" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <div class="hidden mt-2 text-xs text-gh-600 leading-relaxed space-y-2">
+            <div><strong>Copilot Code Review Features:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Request Copilot as a reviewer on GitHub.com PRs</li>
+              <li>• "Review selection" in VS Code (available on all plans including Free)</li>
+              <li>• Full code review (Business/Enterprise): catches issues, enforces best practices</li>
+              <li>• Supports custom instructions for project-specific review criteria</li>
+            </ul>
+            <div class="mt-2"><strong>Capabilities:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Accelerates review cycles by pre-screening code</li>
+              <li>• Catches common bugs, security issues, and style violations</li>
+              <li>• Enforces team best practices automatically</li>
+              <li>• Copilot PR summaries: AI-generated PR descriptions showing what changed and review focus areas</li>
+            </ul>
+            <div class="mt-2"><strong>Automation:</strong></div>
+            <ul class="list-none space-y-1 ml-2">
+              <li>• Automate reviews across repositories with rulesets and status checks</li>
+              <li>• Premium Request Units (PRUs) for deeper, context-rich analysis</li>
+              <li>• Always combine with human judgment and testing (Copilot reviews are advisory)</li>
+            </ul>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- Exam tips -->
+      <div class="mt-6 bg-gradient-to-r from-accent-50 to-purple-50 rounded-2xl border border-accent-100 p-5 sm:p-6">
+        <h3 class="font-bold text-sm text-gh-900 mb-3 flex items-center gap-2"><svg class="w-4 h-4 text-accent-500"
+            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>Exam Tips & Key Reminders</h3>
+        <div class="grid gap-2 sm:grid-cols-2 text-[11px] text-gh-700">
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">1.</span>Read "Choose 2/3" carefully -- select
+            exactly that many answers</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">2.</span>Absolutes ("always", "never",
+            "guaranteed") are usually wrong</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">3.</span>Know plan differences: Individual vs
+            Business vs Enterprise</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">4.</span>Content exclusion ≠ .gitignore
+            (configured in Copilot settings UI)</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">5.</span>Copilot suggests, developer validates
+            -- never rely blindly</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">6.</span>Duplication detection: Org OR
+            Enterprise settings -> Policies</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">7.</span>Knowledge bases support: code,
+            patterns, docs (NOT binaries/screenshots)</div>
+          <div class="flex gap-2"><span class="text-accent-500 font-bold">8.</span>Custom models use YOUR repo patterns,
+            not a custom LLM engine</div>
+        </div>
+      </div>
+
+      <!-- Reference links -->
+      <div class="mt-4 bg-white rounded-xl border border-gh-200 p-4">
+        <h4 class="font-semibold text-xs text-gh-800 mb-2">Official Microsoft Learn Resources</h4>
+        <div class="grid sm:grid-cols-2 gap-1.5 text-[11px]">
+          <a href="https://learn.microsoft.com/en-us/training/paths/copilot/" target="_blank" rel="noopener"
+            class="text-accent-500 hover:underline">-> GitHub Copilot Fundamentals Part 1</a>
+          <a href="https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/" target="_blank" rel="noopener"
+            class="text-accent-500 hover:underline">-> GitHub Copilot Fundamentals Part 2</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/"
+            target="_blank" rel="noopener" class="text-accent-500 hover:underline">-> Responsible AI with GitHub
+            Copilot</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/introduction-to-github-copilot/" target="_blank"
+            rel="noopener" class="text-accent-500 hover:underline">-> Introduction to GitHub Copilot</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/"
+            target="_blank" rel="noopener" class="text-accent-500 hover:underline">-> Prompt Engineering with
+            Copilot</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/github-copilot-across-environments/"
+            target="_blank" rel="noopener" class="text-accent-500 hover:underline">-> Copilot Across Environments</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/" target="_blank"
+            rel="noopener" class="text-accent-500 hover:underline">-> Agent Mode</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/github-copilot-code-agent/" target="_blank"
+            rel="noopener" class="text-accent-500 hover:underline">-> Cloud Agent</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/mcp-server/" target="_blank" rel="noopener"
+            class="text-accent-500 hover:underline">-> MCP Server</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/code-reviews-pull-requests-github-copilot/"
+            target="_blank" rel="noopener" class="text-accent-500 hover:underline">-> Code Reviews & PRs</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/github-copilot-management-and-customizations/"
+            target="_blank" rel="noopener" class="text-accent-500 hover:underline">-> Management & Customization</a>
+          <a href="https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/"
+            target="_blank" rel="noopener" class="text-accent-500 hover:underline">-> Developer Use Cases</a>
+        </div>
+      </div>

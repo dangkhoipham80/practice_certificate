@@ -249,6 +249,16 @@
     @apply flex w-full items-start gap-4 rounded-2xl border border-line/80 bg-white p-4 text-left text-sm shadow-sm transition-all duration-200 hover:border-accent-300 hover:bg-subtle/50 hover:shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 dark:border-gh-border dark:bg-gh-dark/50 dark:hover:border-accent-500/50 dark:hover:bg-gh-subtle;
   }
 
+  .answer-locked {
+    pointer-events: none;
+    cursor: default;
+    opacity: 1;
+  }
+
+  .answer-locked:disabled {
+    opacity: 1;
+  }
+
   .answer-letter {
     @apply grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-line bg-subtle text-xs font-extrabold text-muted transition-colors dark:border-gh-border dark:bg-gh-subtle dark:text-slate-300;
   }
@@ -262,7 +272,7 @@
   }
 
   .answer-correct {
-    @apply border-success-300 bg-success-50 text-success-700 shadow-sm ring-2 ring-success-200/60 dark:border-success-500/50 dark:bg-success-500/10 dark:text-success-100 dark:ring-success-500/20;
+    @apply border-success-300 bg-success-50 text-success-800 shadow-sm ring-2 ring-success-200/80 dark:border-success-500/50 dark:bg-success-500/15 dark:text-success-100 dark:ring-success-500/30;
   }
 
   .answer-correct .answer-letter {
@@ -270,7 +280,7 @@
   }
 
   .answer-wrong {
-    @apply border-danger-300 bg-danger-50 text-danger-700 shadow-sm ring-2 ring-danger-200/60 dark:border-danger-500/50 dark:bg-danger-500/10 dark:text-danger-100 dark:ring-danger-500/20;
+    @apply border-danger-300 bg-danger-50 text-danger-800 shadow-sm ring-2 ring-danger-200/80 dark:border-danger-500/50 dark:bg-danger-500/15 dark:text-danger-100 dark:ring-danger-500/30;
   }
 
   .answer-wrong .answer-letter {
@@ -418,5 +428,73 @@
 
   .modal-card {
     @apply relative z-[1] w-full shadow-card-hover;
+  }
+
+  .learn-kb .kcard {
+    @apply mb-4 break-inside-avoid rounded-2xl border border-line/80 bg-white p-4 shadow-sm transition dark:border-gh-border dark:bg-gh-panel;
+  }
+
+  .learn-kb .kcard:hover {
+    @apply border-accent-300 shadow-soft dark:border-accent-500/40;
+  }
+
+  .learn-kb .kcard [data-kb-toggle] {
+    @apply flex cursor-pointer items-center gap-2;
+  }
+
+  .learn-kb .kcard .hidden {
+    display: none;
+  }
+
+  .learn-kb .badge {
+    @apply inline-flex rounded-full border px-2 py-0.5 text-[10px] font-bold;
+  }
+
+  .learn-kb table {
+    @apply w-full border-collapse text-xs;
+  }
+
+  .learn-kb td,
+  .learn-kb th {
+    @apply border-b border-line/60 py-1.5 dark:border-gh-border;
+  }
+
+  .learn-kb ul {
+    @apply list-disc space-y-0.5 pl-4 text-xs leading-relaxed text-muted dark:text-slate-400;
+  }
+
+  .learn-kb p {
+    @apply text-xs leading-relaxed text-muted dark:text-slate-400;
+  }
+
+  .learn-kb h3 {
+    @apply text-sm font-bold text-ink dark:text-slate-100;
+  }
+
+  .learn-kb .text-gh-600,
+  .learn-kb .text-gh-700,
+  .learn-kb .text-gh-800,
+  .learn-kb .text-gh-900 {
+    @apply text-ink dark:text-slate-200;
+  }
+
+  .learn-kb .text-gh-500,
+  .learn-kb .text-gh-400 {
+    @apply text-muted dark:text-slate-500;
+  }
+
+  .learn-kb .text-ok-500,
+  .learn-kb .text-ok-400 {
+    @apply text-success-600 dark:text-success-300;
+  }
+
+  .learn-kb .border-gh-100,
+  .learn-kb .border-gh-200 {
+    @apply border-line/70 dark:border-gh-border;
+  }
+
+  .learn-kb .bg-gh-50,
+  .learn-kb .bg-gh-100 {
+    @apply bg-subtle dark:bg-gh-subtle;
   }
 }

@@ -1,0 +1,484 @@
+import { useEffect, useMemo, useState } from 'react';
+import { gh300Questions } from '../data/gh300Questions';
+import { partSizes, partStarts, storageKeys } from '../config/gh300Exam';
+import { readJson, removeKey, writeJson } from '../lib/storage';
+import {
+  applyWeakDelta,
+  formatTimer,
+  getInProgressQuiz,
+  percent,
+  sameAnswer,
+  shuffle
+} from '../lib/quizUtils';
+import {
+  getUnansweredIndices,
+  getWrongIndices,
+  updatePartProgressFromSession
+} from '../lib/progressUtils';
+
+export function useCertForge() {
+  const [route, setRoute] = useState('dashboard');
+  const [dark, setDark] = useState(() => localStorage.getItem('certforge-theme') === 'dark');
+  const [history, setHistory] = useState(() => readJson(storageKeys.history, []));
+  const [flagged, setFlagged] = useState(() => readJson(storageKeys.flagged, []));
+  const [weak, setWeak] = useState(() => readJson(storageKeys.weak, {}));
+  const [session, setSession] = useState(null);
+  const [flash, setFlash] = useState(null);
+  const [search, setSearch] = useState('');
+  const [partProgress, setPartProgress] = useState(() => readJson(storageKeys.partProgress, {}));
+  const [saveHint, setSaveHint] = useState('');
+  const [pendingStart, setPendingStart] = useState(null);
+  const hasSavedQuiz = useMemo(() => !!getInProgressQuiz(session), [session, saveHint]);
+
+  const stats = useMemo(() => {
+    const attempts = history.length;
+    const avg = attempts ? Math.round(history.reduce((sum, row) => sum + row.score, 0) / attempts) : 0;
+    const answered = history.reduce((sum, row) => sum + row.total, 0);
+    const best = history.reduce((top, row) => Math.max(top, row.score), 0);
+    return { attempts, avg, answered, best };
+  }, [history]);
+
+  function persistTheme(nextDark) {
+    setDark(nextDark);
+    localStorage.setItem('certforge-theme', nextDark ? 'dark' : 'light');
+  }
+
+  function saveHistory(next) {
+    setHistory(next);
+    writeJson(storageKeys.history, next);
+  }
+
+  function saveFlagged(next) {
+    setFlagged(next);
+    writeJson(storageKeys.flagged, next);
+  }
+
+  function saveWeak(next) {
+    setWeak(next);
+    writeJson(storageKeys.weak, next);
+  }
+
+  function savePartProgress(next) {
+    setPartProgress(next);
+    writeJson(storageKeys.partProgress, next);
+  }
+
+  function createPool(mode, partIndex = null) {
+    if (partIndex !== null) {
+      const start = partStarts[partIndex];
+      return Array.from({ length: partSizes[partIndex] }, (_, index) => start + index);
+    }
+    if (mode === 'flagged') return flagged.filter((index) => index < gh300Questions.length);
+    if (mode === 'weak') return Object.keys(weak).map(Number);
+    if (mode === 'wrong') return getWrongIndices(partProgress);
+    if (mode === 'unanswered') return getUnansweredIndices(partProgress);
+    if (mode === 'multi') return gh300Questions.map((_, index) => index).filter((index) => gh300Questions[index].multiple);
+    return gh300Questions.map((_, index) => index);
+  }
+
+  function startQuiz({ mode = 'random', count = 20, partIndex = null, label, shufflePool = true, customIndices = null }) {
+    const base = customIndices ?? createPool(mode, partIndex);
+    if (!base.length) {
+      if (mode === 'wrong') window.alert('Chưa có câu sai nào! Hãy hoàn thành quiz trước.');
+      if (mode === 'unanswered') window.alert('Tất cả câu hỏi đã được trả lời!');
+      if (mode === 'flagged') window.alert('No flagged questions yet. Use the flag button during a quiz.');
+      return;
+    }
+    const ordered = customIndices ? [...customIndices] : shufflePool ? shuffle(base) : [...base];
+    const indices = ordered.slice(0, count === 'all' ? ordered.length : Math.min(count, ordered.length));
+    removeKey(storageKeys.savedQuiz);
+    setSaveHint('');
+    setSession({
+      label: label ?? `${mode === 'random' ? 'Random' : mode} - ${indices.length}`,
+      indices,
+      current: 0,
+      answers: indices.map(() => []),
+      checked: indices.map(() => false),
+      finished: false,
+      timerSec: 0
+    });
+    setRoute('gh-300');
+  }
+
+  function requestStartQuiz(options) {
+    const inProgress = getInProgressQuiz(session);
+    if (inProgress) {
+      setPendingStart({ options, inProgress });
+      return;
+    }
+    startQuiz(options);
+  }
+
+  function continueInProgressQuiz() {
+    const inProgress = pendingStart?.inProgress ?? getInProgressQuiz(session);
+    setPendingStart(null);
+    if (!inProgress) return;
+    if (session && !session.finished) {
+      setRoute('gh-300');
+      return;
+    }
+    setSession({ ...inProgress, finished: false, wrongSlots: undefined });
+    setRoute('gh-300');
+  }
+
+  function confirmStartFresh() {
+    if (!pendingStart) return;
+    const options = pendingStart.options;
+    setPendingStart(null);
+    startQuiz(options);
+  }
+
+  function resolveCurrentAttempt(current) {
+    const slot = current.current;
+    const questionIndex = current.indices[slot];
+    const ok = sameAnswer(current.answers[slot], gh300Questions[questionIndex].correct);
+    setWeak((prev) => {
+      const next = applyWeakDelta(prev, questionIndex, ok);
+      writeJson(storageKeys.weak, next);
+      return next;
+    });
+    return ok;
+  }
+
+  function toggleChoice(choiceIndex) {
+    setSession((current) => {
+      if (!current || current.checked[current.current]) return current;
+      const question = gh300Questions[current.indices[current.current]];
+      const answers = current.answers.map((answer) => [...answer]);
+      const selected = answers[current.current];
+      if (question.multiple) {
+        answers[current.current] = selected.includes(choiceIndex)
+          ? selected.filter((item) => item !== choiceIndex)
+          : [...selected, choiceIndex];
+      } else {
+        answers[current.current] = [choiceIndex];
+      }
+      return { ...current, answers };
+    });
+  }
+
+  function checkCurrent() {
+    setSession((current) => {
+      if (!current || current.checked[current.current] || !current.answers[current.current].length) return current;
+      resolveCurrentAttempt(current);
+      const checked = [...current.checked];
+      checked[current.current] = true;
+      return { ...current, checked };
+    });
+  }
+
+  function revealCurrent() {
+    setSession((current) => {
+      if (!current || current.checked[current.current]) return current;
+      resolveCurrentAttempt(current);
+      const checked = [...current.checked];
+      checked[current.current] = true;
+      return { ...current, checked };
+    });
+  }
+
+  function retryCurrent() {
+    setSession((current) => {
+      if (!current || !current.checked[current.current]) return current;
+      const answers = current.answers.map((answer) => [...answer]);
+      const checked = [...current.checked];
+      answers[current.current] = [];
+      checked[current.current] = false;
+      return { ...current, answers, checked };
+    });
+  }
+
+  function moveQuestion(delta) {
+    setSession((current) => {
+      if (!current) return current;
+      return { ...current, current: Math.max(0, Math.min(current.indices.length - 1, current.current + delta)) };
+    });
+  }
+
+  function submitQuiz() {
+    if (!session) return;
+    const wrongSlots = [];
+    let correct = 0;
+    session.indices.forEach((questionIndex, slot) => {
+      const ok = sameAnswer(session.answers[slot], gh300Questions[questionIndex].correct);
+      if (ok) correct += 1;
+      else wrongSlots.push(slot);
+    });
+    savePartProgress(updatePartProgressFromSession(partProgress, session));
+    saveHistory([
+      ...history,
+      {
+        id: crypto.randomUUID(),
+        label: session.label,
+        total: session.indices.length,
+        correct,
+        score: percent(correct, session.indices.length),
+        date: new Date().toISOString()
+      }
+    ].slice(-80));
+    removeKey(storageKeys.savedQuiz);
+    setSaveHint('');
+    setSession({ ...session, finished: true, wrongSlots });
+  }
+
+  function retakeQuiz() {
+    if (!session) return;
+    setSession({
+      ...session,
+      current: 0,
+      answers: session.indices.map(() => []),
+      checked: session.indices.map(() => false),
+      finished: false,
+      wrongSlots: undefined,
+      timerSec: 0
+    });
+  }
+
+  function retryWrongFromSummary() {
+    if (!session?.wrongSlots?.length) return;
+    const indices = session.wrongSlots.map((slot) => session.indices[slot]);
+    setSession({
+      label: `Retry Wrong · ${indices.length}`,
+      indices,
+      current: 0,
+      answers: indices.map(() => []),
+      checked: indices.map(() => false),
+      finished: false,
+      timerSec: 0
+    });
+  }
+
+  function saveQuizProgress() {
+    if (!session || session.finished) return;
+    writeJson(storageKeys.savedQuiz, session);
+    setSaveHint('saved');
+    window.setTimeout(() => setSaveHint(''), 1500);
+  }
+
+  function resumeQuiz() {
+    setPendingStart(null);
+    continueInProgressQuiz();
+  }
+
+  function exitQuiz() {
+    removeKey(storageKeys.savedQuiz);
+    setSaveHint('');
+    setSession(null);
+  }
+
+  function reviewFlaggedInSession() {
+    if (!session) return;
+    const slot = session.indices.findIndex((questionIndex) => flagged.includes(questionIndex));
+    if (slot < 0) {
+      window.alert('No flagged questions in this session.');
+      return;
+    }
+    setSession({ ...session, current: slot });
+  }
+
+  function copyQuizResults() {
+    if (!session?.finished) return;
+    const correct = session.indices.length - (session.wrongSlots?.length ?? 0);
+    const text = [
+      '📋 GH-300 Quiz Results',
+      '━━━━━━━━━━━━━━━━━━━━━',
+      `Quiz: ${session.label}`,
+      `Score: ${percent(correct, session.indices.length)}% (${correct}/${session.indices.length})`,
+      `Wrong: ${session.wrongSlots?.length ?? 0}`,
+      `Time: ${formatTimer(session.timerSec)}`,
+      `Date: ${new Date().toLocaleString()}`
+    ].join('\n');
+    navigator.clipboard.writeText(text);
+  }
+
+  function toggleFlag(questionIndex) {
+    const next = flagged.includes(questionIndex)
+      ? flagged.filter((item) => item !== questionIndex)
+      : [...flagged, questionIndex];
+    saveFlagged(next);
+  }
+
+  function launchFlash({ mode = 'all', count = 0, parts = partSizes.map((_, index) => index), source = 'all', order = 'random', label } = {}) {
+    const fcUnknown = readJson(storageKeys.fcUnknown, []);
+    let pool = [];
+    parts.forEach((partIndex) => {
+      const start = partStarts[partIndex];
+      for (let i = 0; i < partSizes[partIndex]; i += 1) pool.push(start + i);
+    });
+
+    if (mode === 'flagged') pool = pool.filter((index) => flagged.includes(index));
+    else if (mode === 'weak') pool = pool.filter((index) => weak[index]);
+    if (source === 'weak') pool = pool.filter((index) => weak[index]);
+    if (source === 'unknown') pool = pool.filter((index) => fcUnknown.includes(index));
+
+    if (!pool.length) {
+      if (mode === 'flagged' || source === 'unknown') window.alert('No cards match this filter.');
+      else window.alert('No cards in the selected parts.');
+      return;
+    }
+
+    const ordered = order === 'random' ? shuffle(pool) : [...pool];
+    const limit = count > 0 ? Math.min(count, ordered.length) : ordered.length;
+    const finalPool = ordered.slice(0, limit);
+
+    setFlash({
+      label: label ?? `Flashcards · ${finalPool.length}`,
+      pool: finalPool,
+      current: 0,
+      flipped: false,
+      known: 0,
+      review: 0
+    });
+    setRoute('flashcards');
+  }
+
+  function startFlash(mode = 'all') {
+    if (mode === 'weak') launchFlash({ mode: 'weak', count: 0, label: `Weak areas · ${Object.keys(weak).length}` });
+    else if (mode === 'flagged') launchFlash({ mode: 'flagged', count: 0, label: `Flagged · ${flagged.length}` });
+    else launchFlash({ count: 0, label: `All cards · ${gh300Questions.length}` });
+  }
+
+  function markFlashKnown(questionIndex) {
+    const known = readJson(storageKeys.fcKnown, []);
+    const unknown = readJson(storageKeys.fcUnknown, []);
+    if (!known.includes(questionIndex)) known.push(questionIndex);
+    const idx = unknown.indexOf(questionIndex);
+    if (idx > -1) unknown.splice(idx, 1);
+    writeJson(storageKeys.fcKnown, known);
+    writeJson(storageKeys.fcUnknown, unknown);
+  }
+
+  function markFlashUnknown(questionIndex) {
+    const known = readJson(storageKeys.fcKnown, []);
+    const unknown = readJson(storageKeys.fcUnknown, []);
+    if (!unknown.includes(questionIndex)) unknown.push(questionIndex);
+    const idx = known.indexOf(questionIndex);
+    if (idx > -1) known.splice(idx, 1);
+    writeJson(storageKeys.fcKnown, known);
+    writeJson(storageKeys.fcUnknown, unknown);
+    setWeak((prev) => {
+      const next = { ...prev, [questionIndex]: (prev[questionIndex] ?? 0) + 1 };
+      writeJson(storageKeys.weak, next);
+      return next;
+    });
+  }
+
+  function exportData() {
+    const payload = {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      history,
+      flagged,
+      weak,
+      partProgress,
+      fcKnown: readJson(storageKeys.fcKnown, []),
+      fcUnknown: readJson(storageKeys.fcUnknown, [])
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `certforge-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importData(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const payload = JSON.parse(reader.result);
+      saveHistory(payload.history ?? []);
+      saveFlagged(payload.flagged ?? []);
+      saveWeak(payload.weak ?? {});
+      if (payload.partProgress) savePartProgress(payload.partProgress);
+      if (payload.fcKnown) writeJson(storageKeys.fcKnown, payload.fcKnown);
+      if (payload.fcUnknown) writeJson(storageKeys.fcUnknown, payload.fcUnknown);
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
+  useEffect(() => {
+    if (!session || session.finished) return;
+    writeJson(storageKeys.savedQuiz, session);
+  }, [session]);
+
+  useEffect(() => {
+    if (!session || session.finished) return undefined;
+    const timer = window.setInterval(() => {
+      setSession((current) => (current && !current.finished ? { ...current, timerSec: (current.timerSec ?? 0) + 1 } : current));
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [session?.finished, session?.label]);
+
+  useEffect(() => {
+    function onKeyDown(event) {
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+      if (route !== 'gh-300' || !session || session.finished) return;
+      if (event.key === 'ArrowRight' || event.key === 'n') moveQuestion(1);
+      if (event.key === 'ArrowLeft' || event.key === 'p') moveQuestion(-1);
+      if ((event.key === 'Enter' || event.key === 'c') && !event.ctrlKey && !event.metaKey) checkCurrent();
+    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [route, session]);
+
+  const currentQuestion = session ? gh300Questions[session.indices[session.current]] : null;
+
+  const pageTitle = {
+    dashboard: 'GH-300 workspace',
+    catalog: 'Certification catalog',
+    'gh-300': session ? session.label : 'GH-300 practice',
+    flashcards: flash ? flash.label ?? 'Flashcard deck' : 'Flashcards',
+    learn: 'Knowledge base',
+    library: 'Question library'
+  }[route];
+
+  return {
+    route,
+    setRoute,
+    dark,
+    persistTheme,
+    history,
+    flagged,
+    weak,
+    session,
+    setSession,
+    flash,
+    setFlash,
+    search,
+    setSearch,
+    partProgress,
+    saveHint,
+    pendingStart,
+    setPendingStart,
+    hasSavedQuiz,
+    stats,
+    currentQuestion,
+    pageTitle,
+    requestStartQuiz,
+    continueInProgressQuiz,
+    confirmStartFresh,
+    checkCurrent,
+    revealCurrent,
+    retryCurrent,
+    toggleChoice,
+    moveQuestion,
+    submitQuiz,
+    retakeQuiz,
+    retryWrongFromSummary,
+    saveQuizProgress,
+    resumeQuiz,
+    exitQuiz,
+    reviewFlaggedInSession,
+    copyQuizResults,
+    toggleFlag,
+    launchFlash,
+    startFlash,
+    markFlashKnown,
+    markFlashUnknown,
+    exportData,
+    importData
+  };
+}
