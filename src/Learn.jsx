@@ -199,10 +199,10 @@ export function Learn() {
             />
           </div>
           <div className="flex shrink-0 gap-2">
-            <button className="ghost-button !px-3 !py-1.5 text-xs" type="button" onClick={expandAll}>
+            <button className="learn-toolbar-btn" type="button" onClick={expandAll}>
               Expand all
             </button>
-            <button className="ghost-button !px-3 !py-1.5 text-xs" type="button" onClick={collapseAll}>
+            <button className="learn-toolbar-btn" type="button" onClick={collapseAll}>
               Collapse all
             </button>
           </div>

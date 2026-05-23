@@ -1,4 +1,8 @@
 @layer components {
+  .learn-toolbar-btn {
+    @apply inline-flex items-center justify-center rounded-lg border border-line/80 bg-white px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:border-line hover:bg-subtle hover:text-ink dark:border-gh-border dark:bg-gh-subtle dark:text-slate-300 dark:hover:border-gh-border dark:hover:bg-gh-elevated dark:hover:text-slate-100;
+  }
+
   .learn-kb {
     @apply flex flex-col gap-3;
   }
@@ -13,11 +17,11 @@
   }
 
   .learn-kb .kcard:hover {
-    @apply border-accent-200 shadow-soft dark:border-accent-500/35;
+    @apply border-accent-200 shadow-soft dark:border-gh-border dark:shadow-none;
   }
 
   .learn-kb .kcard.kb-open {
-    @apply border-accent-300 shadow-card dark:border-accent-500/40;
+    @apply border-accent-300 shadow-card dark:border-accent-500/30 dark:shadow-none;
   }
 
   .learn-kb .kb-header {
@@ -38,9 +42,14 @@
   }
 
   .learn-kb .kb-module-icon {
-    @apply grid h-9 w-9 shrink-0 place-items-center rounded-xl;
+    @apply grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-line/60 bg-subtle/90 dark:border-gh-border dark:bg-gh-subtle/80;
     min-width: 2.25rem;
     max-width: 2.25rem;
+    background-image: none !important;
+  }
+
+  .learn-kb .kb-module-icon svg {
+    @apply text-accent-600 dark:text-accent-300;
   }
 
   .learn-kb svg {
@@ -93,7 +102,11 @@
   }
 
   .learn-kb .badge {
-    @apply inline-flex shrink-0 rounded-full border border-accent-200 bg-accent-50 px-2.5 py-0.5 text-[10px] font-bold text-accent-700 dark:border-accent-500/30 dark:bg-accent-500/10 dark:text-accent-300;
+    @apply inline-flex shrink-0 rounded-full border border-accent-200 bg-accent-50 px-2.5 py-0.5 text-[10px] font-bold text-accent-700;
+  }
+
+  .dark .learn-kb .badge {
+    @apply !border-accent-500/25 !bg-accent-500/10 !text-accent-300;
   }
 
   .learn-kb table {
@@ -165,6 +178,62 @@
   .learn-kb .to-purple-50,
   .learn-kb .to-orange-50 {
     @apply bg-subtle/80 dark:bg-gh-subtle/60;
+    background-image: none !important;
+  }
+
+  .dark .learn-kb .bg-gradient-to-br,
+  .dark .learn-kb .bg-gradient-to-r {
+    background-color: #111827;
+    background-image: none !important;
+  }
+
+  .dark .learn-kb [class~='bg-white'] {
+    background-color: rgb(30 41 59 / 0.55) !important;
+  }
+
+  .dark .learn-kb [class*='bg-red-'],
+  .dark .learn-kb [class*='bg-green-'],
+  .dark .learn-kb [class*='bg-blue-'],
+  .dark .learn-kb [class*='bg-purple-'],
+  .dark .learn-kb [class*='bg-cyan-'],
+  .dark .learn-kb [class*='bg-violet-'],
+  .dark .learn-kb [class*='bg-emerald-'],
+  .dark .learn-kb [class*='bg-pink-'],
+  .dark .learn-kb [class*='bg-indigo-'],
+  .dark .learn-kb [class*='bg-amber-'],
+  .dark .learn-kb [class*='bg-orange-'],
+  .dark .learn-kb [class*='bg-accent-'] {
+    background-color: rgb(30 41 59 / 0.55) !important;
+    background-image: none !important;
+  }
+
+  .dark .learn-kb .kb-module-icon[class*='bg-'] {
+    background-color: rgb(30 41 59 / 0.8) !important;
+  }
+
+  .learn-kb .border-red-100,
+  .learn-kb .border-amber-100,
+  .learn-kb .border-accent-100,
+  .learn-kb .border-indigo-300,
+  .learn-kb .border-amber-300 {
+    @apply dark:border-gh-border;
+  }
+
+  .learn-kb .text-red-500,
+  .learn-kb .text-green-500,
+  .learn-kb .text-purple-500,
+  .learn-kb .text-cyan-500,
+  .learn-kb .text-blue-600,
+  .learn-kb .text-purple-600,
+  .learn-kb .text-orange-600,
+  .learn-kb .text-cyan-600,
+  .learn-kb .text-indigo-600,
+  .learn-kb .text-indigo-700,
+  .learn-kb .text-amber-700,
+  .learn-kb .text-violet-600,
+  .learn-kb .text-emerald-600,
+  .learn-kb .text-pink-600 {
+    @apply dark:text-slate-300;
   }
 
   .learn-kb > div:not(.kcard):not(.kb-section-label) {
