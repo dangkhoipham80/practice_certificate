@@ -18,7 +18,7 @@ export function FlashcardSetup({ launchFlash, flagged, weak, fcKnown, fcUnknown 
       <SectionHeader
         kicker="Flashcards"
         title="Build your deck"
-        description="Chọn part, nguồn câu, số lượng và thứ tự — giống GH-300 Pro (không giới hạn 40 câu)."
+        description="Pick parts, card source, count, and order — like GH-300 Pro (no 40-card cap)."
       />
       <div className="panel space-y-5 p-5">
         <div>

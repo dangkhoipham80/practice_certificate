@@ -32,11 +32,11 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
     if (!pool.length) return window.alert('No questions match.');
     if (source === 'wrong') {
       pool = pool.filter((index) => getWrongIndices(partProgress).includes(index));
-      if (!pool.length) return window.alert('Không có câu sai nào trong phạm vi đã chọn!');
+      if (!pool.length) return window.alert('No wrong answers in the selected scope!');
     }
     if (source === 'unanswered') {
       pool = pool.filter((index) => getUnansweredIndices(partProgress).includes(index));
-      if (!pool.length) return window.alert('Tất cả câu trong phạm vi đã được trả lời!');
+      if (!pool.length) return window.alert('All questions in the selected scope have been answered!');
     }
     const ordered = order === 'random' ? shuffle(pool) : [...pool];
     const parsed = count.trim() ? Math.min(Number(count) || ordered.length, ordered.length) : ordered.length;

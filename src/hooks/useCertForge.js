@@ -87,8 +87,8 @@ export function useCertForge() {
   function startQuiz({ mode = 'random', count = 20, partIndex = null, label, shufflePool = true, customIndices = null }) {
     const base = customIndices ?? createPool(mode, partIndex);
     if (!base.length) {
-      if (mode === 'wrong') window.alert('Chưa có câu sai nào! Hãy hoàn thành quiz trước.');
-      if (mode === 'unanswered') window.alert('Tất cả câu hỏi đã được trả lời!');
+      if (mode === 'wrong') window.alert('No wrong answers yet! Complete a quiz first.');
+      if (mode === 'unanswered') window.alert('All questions have been answered!');
       if (mode === 'flagged') window.alert('No flagged questions yet. Use the flag button during a quiz.');
       return;
     }
@@ -387,7 +387,7 @@ export function useCertForge() {
     link.download = filename;
     link.click();
     URL.revokeObjectURL(url);
-    showSyncHint('success', `Export thành công — file ${filename} đã được tải xuống.`);
+    showSyncHint('success', `Export successful — ${filename} has been downloaded.`);
   }
 
   function importData(event) {
@@ -400,7 +400,7 @@ export function useCertForge() {
         const imported = [];
         if (data.history !== undefined) {
           saveHistory(normalizeHistory(data.history));
-          imported.push('lịch sử quiz');
+          imported.push('quiz history');
         }
         if (data.flagged !== undefined) {
           saveFlagged(data.flagged);
@@ -412,7 +412,7 @@ export function useCertForge() {
         }
         if (data.partProgress !== undefined) {
           savePartProgress(data.partProgress);
-          imported.push('tiến độ từng part');
+          imported.push('per-part progress');
         }
         if (data.fcKnown !== undefined) {
           writeJson(storageKeys.fcKnown, data.fcKnown);
@@ -425,19 +425,19 @@ export function useCertForge() {
         if (data.theme) persistTheme(data.theme === 'dark');
         if (!imported.length) throw new Error('No supported data found.');
         const formatLabel = format === 'gh300-pro' ? 'GH-300 Pro' : 'CertForge';
-        showSyncHint('success', `Import thành công (${formatLabel}) — ${imported.join(', ')}. ${count} mục trong file.`);
+        showSyncHint('success', `Import successful (${formatLabel}) — ${imported.join(', ')}. ${count} items in file.`);
       } catch (error) {
-        showSyncHint('error', error?.message === 'Invalid file format.' || error?.message?.includes('JSON') ? 'File không hợp lệ — cần file .json export từ CertForge hoặc GH-300 Pro.' : `Import thất bại: ${error?.message ?? 'Unknown error'}`);
+        showSyncHint('error', error?.message === 'Invalid file format.' || error?.message?.includes('JSON') ? 'Invalid file — use a .json file exported from CertForge or GH-300 Pro.' : `Import failed: ${error?.message ?? 'Unknown error'}`);
       }
     };
-    reader.onerror = () => showSyncHint('error', 'Không đọc được file — thử chọn lại.');
+    reader.onerror = () => showSyncHint('error', 'Could not read the file — try selecting it again.');
     reader.readAsText(file);
     event.target.value = '';
   }
 
   function clearAllData() {
     const confirmed = window.confirm(
-      'Xóa toàn bộ tiến độ GH-300?\n\nBao gồm: lịch sử quiz, tiến độ từng part, flagged, weak areas, flashcards và quiz đang lưu.\n\nHành động này không thể hoàn tác. Theme sáng/tối được giữ nguyên.'
+      'Clear all GH-300 progress?\n\nThis includes: quiz history, per-part progress, flagged, weak areas, flashcards, and saved in-progress quiz.\n\nThis cannot be undone. Light/dark theme is kept.'
     );
     if (!confirmed) return;
     Object.values(storageKeys).forEach(removeKey);
@@ -449,7 +449,7 @@ export function useCertForge() {
     setFlash(null);
     setPendingStart(null);
     setSaveHint('');
-    showSyncHint('success', 'Đã xóa toàn bộ dữ liệu tiến độ GH-300.');
+    showSyncHint('success', 'All GH-300 progress data has been cleared.');
   }
 
   useEffect(() => {

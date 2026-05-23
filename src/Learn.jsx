@@ -90,7 +90,7 @@ export function Learn() {
         return response.text();
       })
       .then((text) => setHtml(patchKbHtml(text)))
-      .catch(() => setLoadError('Không tải được Knowledge Base. Kiểm tra file public/knowledge-base.html.'));
+      .catch(() => setLoadError('Could not load Knowledge Base. Check public/knowledge-base.html.'));
   }, []);
 
   useEffect(() => {
@@ -163,7 +163,7 @@ export function Learn() {
       <SectionHeader
         kicker="Study"
         title="Knowledge Base"
-        description="Nội dung học GH-300 — mở từng chủ đề để đọc. Layout một cột ổn định, không nhảy khi expand."
+        description="GH-300 study material — open each topic to read. Stable single-column layout that does not jump when expanding."
       />
 
       <div className="flex flex-wrap gap-3 text-sm">
@@ -217,7 +217,7 @@ export function Learn() {
       </div>
 
       {loadError && <div className="empty-state">{loadError}</div>}
-      {!loadError && !html && <div className="empty-state">Đang tải Knowledge Base…</div>}
+      {!loadError && !html && <div className="empty-state">Loading Knowledge Base…</div>}
       {html && (
         <div
           id="kb-learn"

@@ -173,7 +173,7 @@ export function Dashboard({
           </button>
         </div>
         <p className="mt-3 text-xs text-muted dark:text-slate-500">
-          Sau import/export/clear, thông báo xanh/đỏ hiện ở đầu trang Dashboard và dưới header.
+          After import/export/clear, success and error messages appear at the top of the Dashboard and below the header.
         </p>
       </div>
     </section>

@@ -107,7 +107,7 @@ export function App() {
         {app.pendingStart && (
           <ResumeQuizDialog
             inProgress={app.pendingStart.inProgress}
-            nextLabel={app.pendingStart.options.label ?? 'Quiz mới'}
+            nextLabel={app.pendingStart.options.label ?? 'New quiz'}
             onContinue={app.continueInProgressQuiz}
             onStartFresh={app.confirmStartFresh}
             onCancel={() => app.setPendingStart(null)}
