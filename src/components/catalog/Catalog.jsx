@@ -12,7 +12,7 @@ export function Catalog({ startQuiz }) {
       <SectionHeader
         kicker="Certification catalog"
         title="Training paths"
-        description="GH-300, AI-102, and AI-200 — each with its own workspace, progress tracking, and question bank."
+        description="GH-300 and AI-102 — each with its own workspace, progress tracking, and question bank."
       />
       <div className="grid gap-5 md:grid-cols-3">
         {certifications.map((cert) => {

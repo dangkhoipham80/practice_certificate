@@ -14,14 +14,6 @@ const EXAMS = [
     output: 'src/data/ai102Questions.js',
     examCode: 'AI-102',
   },
-  {
-    folder: 'AI_200',
-    filePattern: /^exam_\d+_page_(\d+)\.json$/,
-    exportName: 'ai200Questions',
-    metaName: 'ai200ExamMeta',
-    output: 'src/data/ai200Questions.js',
-    examCode: 'AI-200',
-  },
 ];
 
 const CHOICE_ORDER = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];

@@ -1,6 +1,5 @@
 import { gh300Questions } from '../data/gh300Questions';
 import { ai102Questions, ai102ExamMeta } from '../data/ai102Questions';
-import { ai200Questions, ai200ExamMeta } from '../data/ai200Questions';
 import { partSizes, partStarts, partTitles, storageKeys as gh300StorageKeys, GRID_PAGE_SIZE } from './gh300Exam';
 import { buildExamParts, buildStorageKeys } from './examConfig';
 
@@ -47,24 +46,6 @@ export const CERT_REGISTRY = {
     features: {
       learn: true,
       labs: true,
-      legacyImport: false,
-      images: true,
-    },
-  },
-  'ai-200': {
-    id: 'ai-200',
-    name: 'Azure AI Fundamentals',
-    exam: 'AI-200',
-    provider: 'Microsoft',
-    level: 'Fundamentals',
-    description: 'AI-200 certification track — add exam JSON files to the AI_200 folder and run npm run build:questions.',
-    questions: ai200Questions,
-    storageKeys: buildStorageKeys('ai-200'),
-    ...withExamParts(ai200ExamMeta),
-    status: 'Coming soon',
-    features: {
-      learn: false,
-      labs: false,
       legacyImport: false,
       images: true,
     },

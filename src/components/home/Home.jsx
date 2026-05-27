@@ -19,7 +19,7 @@ export function Home() {
           <p className="section-kicker">CertForge</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Certification workspace</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-muted dark:text-slate-400">
-            Practice exams, flashcards, and progress tracking for multiple certifications — GH-300, AI-102, and AI-200.
+            Practice exams, flashcards, and progress tracking for multiple certifications — GH-300 and AI-102.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link className="primary-button" to="/catalog">
@@ -86,8 +86,8 @@ export function Home() {
       <div className="panel p-5 sm:p-6">
         <SectionHeader
           kicker="What's new"
-          title="AI-102 & AI-200 support"
-          description="AI-102 includes 330 questions from ExamTopics (178 MC for quiz). Add AI_200 JSON files and run npm run build:questions to enable AI-200."
+          title="AI-102 support"
+          description="AI-102 includes 330 questions from ExamTopics (178 MC for quiz)."
         />
         <div className="mt-4 flex items-center gap-2 text-sm text-muted dark:text-slate-400">
           <Sparkles size={16} className="text-accent-500" />
