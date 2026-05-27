@@ -54,7 +54,7 @@ export function Home() {
             return (
               <article
                 key={cert.id}
-                className={`panel p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover ${ready ? 'cert-card-ready' : 'opacity-90'}`}
+                className={`panel flex h-full flex-col p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover ${ready ? 'cert-card-ready' : 'opacity-90'}`}
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div>
@@ -62,20 +62,20 @@ export function Home() {
                     <h3 className="mt-2 text-2xl font-extrabold tracking-tight">{cert.exam}</h3>
                     <p className="mt-1 text-sm text-muted dark:text-slate-400">{cert.name}</p>
                   </div>
-                  <span className={`status-badge ${ready ? 'status-ready' : 'status-muted'}`}>{cert.status}</span>
+                  <span className={`status-badge shrink-0 ${ready ? 'status-ready' : 'status-muted'}`}>{cert.status}</span>
                 </div>
-                <p className="mb-4 text-sm leading-6 text-muted dark:text-slate-400">{cert.description}</p>
-                <div className="mb-4 grid grid-cols-2 gap-3 text-sm">
+                <p className="text-sm leading-6 text-muted dark:text-slate-400">{cert.description}</p>
+                <div className="mb-4 mt-auto grid grid-cols-2 gap-3 pt-4 text-sm">
                   <InfoTile label="Questions" value={cert.questions || '—'} />
                   <InfoTile label="Quiz pool" value={cert.quizEligible || '—'} />
                 </div>
                 <button
-                  className="primary-button w-full"
+                  className="primary-button cert-card-cta"
                   disabled={!ready}
                   onClick={() => openCertWorkspace(cert.id)}
                 >
                   <Award size={16} />
-                  {ready ? 'Open workspace' : 'Coming soon'}
+                  <span>{ready ? 'Open workspace' : 'Coming soon'}</span>
                 </button>
               </article>
             );

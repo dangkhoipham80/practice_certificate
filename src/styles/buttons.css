@@ -39,6 +39,18 @@
     background-image: theme('backgroundImage.hero-gradient');
   }
 
+  .cert-card-cta {
+    @apply flex w-full items-center justify-center gap-2 px-3 py-2.5 text-center leading-5 whitespace-normal;
+  }
+
+  .cert-card-cta span {
+    @apply break-words;
+  }
+
+  .cert-card-cta svg {
+    @apply shrink-0;
+  }
+
   .dark .start-card-icon {
     background-image: theme('backgroundImage.hero-gradient-dark');
   }
