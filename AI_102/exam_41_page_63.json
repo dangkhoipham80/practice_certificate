@@ -1,0 +1,747 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "vkTBwQoWUYS3E9Nq9gGj",
+        "answers_community": [
+          "BC (100%)"
+        ],
+        "topic": "7",
+        "exam_id": 41,
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "choices": {
+          "B": "Provide grounding content.",
+          "A": "Fine-tune the model.",
+          "C": "Add sample request/response pairs.",
+          "D": "Retrain the language model by using your own data.",
+          "E": "Train a custom large language model (LLM)."
+        },
+        "question_id": 311,
+        "unix_timestamp": 1709388360,
+        "question_text": "You build a chatbot that uses the Azure OpenAI GPT 3.5 model.\n\nYou need to improve the quality of the responses from the chatbot. The solution must minimize development effort.\n\nWhat are two ways to achieve the goal? Each correct answer presents a complete solution.\n\nNOTE: Each correct answer is worth one point.",
+        "answer": "BC",
+        "timestamp": "2024-03-02 15:06:00",
+        "answer_ET": "BC",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135054-exam-ai-102-topic-7-question-5-discussion/",
+        "answer_images": [],
+        "discussion": [
+          {
+            "comment_id": "1166189",
+            "content": "Here are two ways to improve the quality of the responses from the chatbot with minimal development effort:\n\n1. Provide grounding content: This involves feeding the chatbot with relevant domain-specific information and data. This can include documents, articles, FAQs, or any other content related to the chatbot's purpose. By providing this context, the chatbot can better understand the user's intent and respond in a more relevant and informative way.\n\n2. Add sample request/response pairs: This technique involves providing the chatbot with a set of pre-defined questions and their corresponding answers. This helps the chatbot learn the conversation patterns and phrasing related to its specific domain. By analyzing these examples, the chatbot can improve its ability to generate natural and consistent responses to user queries.\n\nBoth options (A. Provide grounding content and C. Add sample request/response pairs) achieve the goal of improving response quality with minimal development effort, as they do not require extensive retraining or model building.\n\nTherefore, the two correct answers are:\n\nB. Provide grounding content.\nC. Add sample request/response pairs.",
+            "timestamp": "1709608920.0",
+            "poster": "chandiochan",
+            "upvote_count": "16"
+          },
+          {
+            "content": "Selected Answer: BC\nRemember that while fine-tuning (A) and custom models (E) can yield high-quality results, they often require significant development effort and computational resources. In contrast, grounding content and sample pairs offer pragmatic improvements with minimal overhead",
+            "upvote_count": "8",
+            "poster": "Murtuza",
+            "timestamp": "1711217940.0",
+            "comment_id": "1181082"
+          },
+          {
+            "timestamp": "1739243100.0",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "content": "Selected Answer: BC\nProvide grounding content is CORRECT because grounding content helps to provide the model with specific context, facts, or knowledge it can use to generate more accurate and relevant responses. This can be done without modifying the model itself, thereby minimizing development effort.\n\nAdd sample request/response pairs is CORRECT because providing the model with examples of good interactions can help guide it towards generating higher-quality responses. This approach also does not require modifying or retraining the model, thus minimizing development effort.\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/fine-tuning-considerations\n\nBC is correct",
+            "comment_id": "1354806"
+          },
+          {
+            "comment_id": "1331400",
+            "poster": "pabsinaz",
+            "upvote_count": "2",
+            "timestamp": "1735109280.0",
+            "content": "Selected Answer: BC\nB and C because it is NOT talking about accuracy, instead is asking to improve the quality of the response"
+          },
+          {
+            "comment_id": "1273616",
+            "content": "Selected Answer: BC\nLeast development effort is key here",
+            "upvote_count": "3",
+            "poster": "JakeCallham",
+            "timestamp": "1724780160.0"
+          },
+          {
+            "comment_id": "1246781",
+            "content": "Selected Answer: BC\nSelected Answer: BC",
+            "upvote_count": "1",
+            "timestamp": "1720791060.0",
+            "poster": "krzkrzkra"
+          },
+          {
+            "content": "All 4 answers work, while Training a custom LLM is the highest effort, so that probably isn't it.",
+            "upvote_count": "1",
+            "timestamp": "1720545240.0",
+            "poster": "Toby86",
+            "comment_id": "1245006"
+          },
+          {
+            "comment_id": "1235222",
+            "upvote_count": "2",
+            "timestamp": "1719039420.0",
+            "poster": "HaraTadahisa",
+            "content": "Selected Answer: BC\nI say this answer is B and C."
+          },
+          {
+            "comment_id": "1230476",
+            "upvote_count": "2",
+            "timestamp": "1718367540.0",
+            "poster": "nanaw770",
+            "content": "Selected Answer: BC\nBC is correct answer."
+          },
+          {
+            "content": "Selected Answer: BC\nB and C for me too",
+            "timestamp": "1717077600.0",
+            "poster": "anto69",
+            "upvote_count": "3",
+            "comment_id": "1221638"
+          },
+          {
+            "comment_id": "1221039",
+            "content": "Selected Answer: BC\nB and C are right answer.",
+            "upvote_count": "2",
+            "timestamp": "1716993180.0",
+            "poster": "taiwan_is_not_china"
+          },
+          {
+            "comment_id": "1176214",
+            "content": "Selected Answer: BC\nMust be B & C",
+            "poster": "chandiochan",
+            "timestamp": "1710729240.0",
+            "upvote_count": "4"
+          },
+          {
+            "upvote_count": "4",
+            "timestamp": "1709388360.0",
+            "poster": "Delta64",
+            "content": "GPT 4 Answered:\n\nB. Provide grounding content.\nC. Add sample request/response pairs.",
+            "comment_id": "1164144"
+          }
+        ]
+      },
+      {
+        "id": "np912tgvswnpeHl9BqfZ",
+        "answer": "",
+        "question_text": "HOTSPOT -\n\nYou have an Azure subscription that contains an Azure OpenAI resource named AI1.\n\nYou build a chatbot that will use AI1 to provide generative answers to specific questions.\n\nYou need to ensure that the responses are more creative and less deterministic.\n\nHow should you complete the code? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "unix_timestamp": 1709609760,
+        "question_id": 312,
+        "discussion": [
+          {
+            "content": "The ChatRole that should be used is ChatRole.User. This role is assigned to the messages that come from the user, which the chatbot is responding to. The Temperature setting can be adjusted to increase creativity in the responses.",
+            "poster": "GHill1982",
+            "timestamp": "1710445860.0",
+            "upvote_count": "16",
+            "comments": [
+              {
+                "comment_id": "1323211",
+                "upvote_count": "4",
+                "timestamp": "1733590500.0",
+                "poster": "friendlyvlad",
+                "content": "The ChatRole.User specifies that the message is coming from the user in the conversation, while ChatRole.Assistant indicates that the message is coming from the AI assistant. The question clearly states that we need to modify output. In addition, the temperature parameter is primarily used to control the randomness of the model's generated response, which is associated with the ChatRole.Assistant\n1. ChatRole.Assistant\n2. Temperature"
+              },
+              {
+                "timestamp": "1749218700.0",
+                "poster": "vovap0vovap",
+                "upvote_count": "1",
+                "content": "In code example it is sending empty prompt. No reason to do that for user role.",
+                "comment_id": "1575338"
+              }
+            ],
+            "comment_id": "1173670"
+          },
+          {
+            "comment_id": "1230530",
+            "content": "1. user\n2. temperature",
+            "timestamp": "1718374920.0",
+            "upvote_count": "6",
+            "poster": "NagaoShingo"
+          },
+          {
+            "comment_id": "1575336",
+            "timestamp": "1749218580.0",
+            "upvote_count": "1",
+            "poster": "vovap0vovap",
+            "content": "1. System\n2. Temperature\nThere is no any reason to send >empty< user prompt to a model, neither assistant one.\nTo a sense, sending empty system prompt will randomize results, though that is not really useful thing."
+          },
+          {
+            "poster": "syupwsh",
+            "upvote_count": "2",
+            "timestamp": "1740893100.0",
+            "content": "\"user\" is CORRECT because because you are simulating a user's input to which the chatbot should respond. The API call to Open AI resource will use this context to generate a response as if it were the assistant. You only need to specify the role for the input messages in your API call, not the responses you're expecting to generate.\n\ntemperature is CORRECT because it controls the randomness of the responses generated by the model. A higher temperature value (closer to 1) makes the output more creative and diverse, while a lower temperature value (closer to 0) makes the output more deterministic and focused.",
+            "comment_id": "1363806"
+          },
+          {
+            "comment_id": "1312668",
+            "content": "An example given by Copilot :\n {\"role\": \"system\", \"content\": \"temperature\": 0.7}",
+            "timestamp": "1731681420.0",
+            "poster": "Alan_CA",
+            "upvote_count": "1"
+          },
+          {
+            "content": "ChatRole.User represents generating a response without being prompted by a speaker, making the AI more creative and less deterministic, allowing it more freedom to express itself.",
+            "poster": "csdodo",
+            "upvote_count": "1",
+            "timestamp": "1726125300.0",
+            "comment_id": "1282511"
+          },
+          {
+            "comment_id": "1273618",
+            "content": "You are not setting the temp for user, that doesn't make sense. People please think a bit and dont trust on stupid responses from obvious dumb chatbots.\n\nSystem is what you're trying to configure.",
+            "comments": [
+              {
+                "comment_id": "1279802",
+                "content": "Sir, you are not setting temperature to a role, but to the request itself.",
+                "timestamp": "1725655380.0",
+                "poster": "famco",
+                "upvote_count": "1",
+                "comments": [
+                  {
+                    "comment_id": "1286703",
+                    "content": "this is right, you are setting the temp for a response.\nTo test this do a restAPI call to azureOpen AI instance, even when posting a the user prompt, you get an option for temperture in the body.",
+                    "timestamp": "1726817220.0",
+                    "poster": "mrg998",
+                    "upvote_count": "1"
+                  }
+                ]
+              }
+            ],
+            "timestamp": "1724780460.0",
+            "poster": "JakeCallham",
+            "upvote_count": "2"
+          },
+          {
+            "timestamp": "1724545920.0",
+            "upvote_count": "1",
+            "poster": "Moneybing",
+            "content": "Copilot says ChatRole.User.\n\n\"To make the responses more creative and less deterministic, you should set the ChatRole.User in your coding. By doing so, you allow the chatbot to generate more imaginative and varied answers, as it will treat the user input as a prompt for creative responses. This approach encourages the chatbot to think beyond predefined patterns and produce more engaging content\"",
+            "comment_id": "1271950"
+          },
+          {
+            "comment_id": "1265120",
+            "poster": "anto69",
+            "timestamp": "1723547760.0",
+            "upvote_count": "2",
+            "content": "Should be System since we're modifying the behavior of the Bot. So we start again defining the System message that must be defined only one time"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1721469300.0",
+            "poster": "nithin_reddy",
+            "content": "Right answer is ChatRole.Assistant and Temparature, the settings are on responses from chatbot",
+            "comment_id": "1251674"
+          },
+          {
+            "comments": [
+              {
+                "comment_id": "1231371",
+                "content": "Mistake! I actually think it should be ChatRole.User as we are then awaiting for the answer from the LLM (assistant)",
+                "poster": "fba825b",
+                "timestamp": "1718542140.0",
+                "upvote_count": "2"
+              }
+            ],
+            "poster": "fba825b",
+            "timestamp": "1718541720.0",
+            "upvote_count": "2",
+            "content": "First would be ChatRole.System as it is the first chat in the ChatMessage object and the second answer is Temperature",
+            "comment_id": "1231369"
+          },
+          {
+            "content": "First Option should be ChatRole.System.\n\n\"Typical usage begins with a chat message for the System role that provides instructions for the behavior of the assistant followed by alternating messages between the User role and Assistant role.\"\n\n\nhttps://learn.microsoft.com/en-us/dotnet/api/azure.ai.openai.chatcompletionsoptions.messages?view=azure-dotnet-preview#remarks",
+            "timestamp": "1717503060.0",
+            "upvote_count": "2",
+            "poster": "formacionkiteris",
+            "comment_id": "1224114"
+          },
+          {
+            "poster": "vovap0vovap",
+            "timestamp": "1716650220.0",
+            "upvote_count": "3",
+            "content": "Well, I think that should be ChatRole.System \nChatRole.User naturally make no sense - that user request",
+            "comment_id": "1218405"
+          },
+          {
+            "content": "Selecting ChatRole.User as one of the options would imply that the responses should be generated based on the user's input or perspective. However, in this scenario, the goal is to ensure that the responses from the chatbot are more creative and less deterministic. Including ChatRole.User might limit the creativity of the responses because the model would primarily consider the user's input rather than generating novel content.\n\nBy primarily focusing on ChatRole.Assistant, the responses will be predominantly generated from the perspective of the AI assistant, allowing for more creative and varied outputs. This approach ensures that the chatbot's responses are not overly influenced by the user's input, leading to more diverse and imaginative answers.",
+            "upvote_count": "4",
+            "timestamp": "1715773140.0",
+            "poster": "Dhibi_111",
+            "comment_id": "1211910"
+          },
+          {
+            "comment_id": "1199112",
+            "timestamp": "1713610800.0",
+            "upvote_count": "3",
+            "poster": "shorymor",
+            "content": "ChatRole.User (Assuming the input is an actual message from user)\nTemperature\n\nDocumentation/Examples: https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/reproducible-output?tabs=pyton"
+          },
+          {
+            "comment_id": "1186338",
+            "timestamp": "1711827000.0",
+            "upvote_count": "1",
+            "poster": "f2c587e",
+            "content": "D,C. Con rol de user el chat es menos formal. con temperatura se ajusta la creatividad en las respuestas."
+          },
+          {
+            "comment_id": "1185169",
+            "content": "Yes, if the content you're inserting is the actual user message, then you should use ChatRole.User. This role signifies that the message is coming from the user, as opposed to the assistant, which would be generating the response.",
+            "upvote_count": "2",
+            "timestamp": "1711679040.0",
+            "poster": "chandiochan"
+          }
+        ],
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image233.png"
+        ],
+        "timestamp": "2024-03-05 04:36:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135215-exam-ai-102-topic-7-question-6-discussion/",
+        "answer_ET": "",
+        "topic": "7",
+        "answers_community": [],
+        "exam_id": 41,
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image111.png"
+        ],
+        "answer_description": "",
+        "isMC": false
+      },
+      {
+        "id": "ocNdM2XrOEXYNKgXQ4JY",
+        "answers_community": [],
+        "topic": "7",
+        "exam_id": 41,
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image113.png"
+        ],
+        "answer_description": "",
+        "isMC": false,
+        "question_id": 313,
+        "unix_timestamp": 1709890860,
+        "answer": "",
+        "question_text": "DRAG DROP\n-\n\nYou have an Azure subscription that contains an Azure OpenAI resource named AI1.\n\nYou plan to build an app named App1 that will write press releases by using AI1.\n\nYou need to deploy an Azure OpenAI model for App1. The solution must minimize development effort.\n\nWhich three actions should you perform in sequence in Azure OpenAI Studio? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.\n\n//IMG//",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image114.png"
+        ],
+        "answer_ET": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135487-exam-ai-102-topic-7-question-7-discussion/",
+        "timestamp": "2024-03-08 10:41:00",
+        "discussion": [
+          {
+            "content": "1. Create deployment using GPT-3.5-Turbo\n2. Apply Market Writing Assistant template\n3. Deploy solution to a new web app",
+            "upvote_count": "17",
+            "timestamp": "1718541900.0",
+            "poster": "fba825b",
+            "comments": [
+              {
+                "content": "very clear",
+                "poster": "exnaniantwort",
+                "upvote_count": "1",
+                "timestamp": "1718967300.0",
+                "comment_id": "1234351"
+              }
+            ],
+            "comment_id": "1231370"
+          },
+          {
+            "upvote_count": "5",
+            "timestamp": "1710092520.0",
+            "poster": "Murtuza",
+            "content": "In the Setup panel, under Use a system message template, select the Marketing Writing Assistant template and confirm that you want to update the system message.\nhttps://microsoftlearning.github.io/mslearn-openai/Instructions/Exercises/01-get-started-azure-openai.html",
+            "comment_id": "1170496"
+          },
+          {
+            "comment_id": "1355988",
+            "timestamp": "1739429940.0",
+            "upvote_count": "2",
+            "poster": "syupwsh",
+            "content": "1) Create a deployment that uses the GPT-3.5 Turbo model: Start by deploying the GPT-3.5 Turbo model, which is well-suited for generating high-quality text content such as press releases.\n\n2) Apply the Marketing Writing Assistant system message template: This template provides pre-configured settings optimized for marketing and writing tasks, helping to streamline the configuration process and reduce development effort.\n\n3) Deploy the solution to a new web app: Finally, deploy the configured model to a new web app to make it accessible and ready for use by App1."
+          },
+          {
+            "comment_id": "1284807",
+            "upvote_count": "1",
+            "poster": "famco",
+            "timestamp": "1726498740.0",
+            "content": "\"Deploy the solution to a new web app\" << That does not mean anything in this context. Pure nonsense. But I guess that is what I have to select considering this is MIcrosoft exam"
+          },
+          {
+            "content": "\"Deploy solution to a new web app\" << What does that mean??\nBut because nothing else can be selected I have to select this.",
+            "timestamp": "1725655860.0",
+            "poster": "famco",
+            "upvote_count": "1",
+            "comment_id": "1279803"
+          },
+          {
+            "content": "This question was in the test I took in August 2024",
+            "timestamp": "1723949880.0",
+            "upvote_count": "2",
+            "poster": "JuneRain",
+            "comment_id": "1267918"
+          },
+          {
+            "timestamp": "1723693380.0",
+            "poster": "anto69",
+            "upvote_count": "1",
+            "content": "1. Create deployment using GPT-3.5-Turbo\n2. Apply Market Writing Assistant template\n3. Deploy solution to a new web app",
+            "comment_id": "1266176"
+          },
+          {
+            "comment_id": "1168706",
+            "poster": "witkor",
+            "upvote_count": "5",
+            "timestamp": "1709890860.0",
+            "comments": [
+              {
+                "comments": [
+                  {
+                    "content": "https://microsoftlearning.github.io/mslearn-openai/Instructions/Exercises/01-get-started-azure-openai.html",
+                    "upvote_count": "1",
+                    "poster": "TJ001",
+                    "timestamp": "1716535860.0",
+                    "comment_id": "1217279"
+                  }
+                ],
+                "poster": "Mehe323",
+                "upvote_count": "12",
+                "timestamp": "1710393720.0",
+                "content": "Considering the fact that the question is about press releases, I would choose the marketing writing assistant template, like in the answer.",
+                "comment_id": "1173134"
+              }
+            ],
+            "content": "To deploy an Azure OpenAI model for the app \"Appl\" with minimized development effort, follow these steps in Azure OpenAI Studio:\n\n Create a deployment that uses the GPT-35 Turbo model.\n\n Drag \"Create a deployment that uses the GPT-35 Turbo model\" to the answer area.\n\n Apply the Default system message template.\n\n Drag \"Apply the Default system message template\" to the answer area.\n\n Deploy the solution to a new web app.\n\n Drag \"Deploy the solution to a new web app\" to the answer area."
+          }
+        ]
+      },
+      {
+        "id": "dFErvKWwqUx4tn9xsD5P",
+        "discussion": [
+          {
+            "comment_id": "1185175",
+            "content": "I think this must be user instead of system role. ChatRole.User identifies the text as coming from the user in the conversation. This is important because the AI model will use this information to understand the context of the prompt and tailor its response accordingly.",
+            "upvote_count": "12",
+            "poster": "chandiochan",
+            "timestamp": "1711679520.0"
+          },
+          {
+            "comment_id": "1230529",
+            "content": "1. user\n2. temperature",
+            "upvote_count": "9",
+            "timestamp": "1718374860.0",
+            "poster": "NagaoShingo"
+          },
+          {
+            "comment_id": "1410065",
+            "poster": "sooss",
+            "timestamp": "1742912760.0",
+            "upvote_count": "1",
+            "comments": [
+              {
+                "comment_id": "1410066",
+                "content": "I apologize. It is temperature. I confused equal to sign with -",
+                "timestamp": "1742912880.0",
+                "upvote_count": "1",
+                "poster": "sooss"
+              }
+            ],
+            "content": "it can not be temperature since it is set to -1. Temperature ranges are 0 to 2. It is frequency_penalty o rpresence_penalty"
+          },
+          {
+            "timestamp": "1740893940.0",
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "content": "repeat qn\n\n1. user\n2. temperature",
+            "comment_id": "1363813"
+          },
+          {
+            "comment_id": "1312671",
+            "content": "response = openai.ChatCompletion.create( \nmodel=\"gpt-4\", \nmessages=[ \n{\"role\": \"system\", \"content\": \"bla bla bla\"}, \n{\"role\": \"user\", \"content\": \"bla bla bla\"}, \n{\"role\": \"system\", \"content\": \"temperature\": 0.7} \n] )",
+            "poster": "Alan_CA",
+            "upvote_count": "1",
+            "timestamp": "1731681900.0"
+          },
+          {
+            "timestamp": "1726817700.0",
+            "upvote_count": "2",
+            "poster": "mrg998",
+            "content": "its user not system, you set the temp of the response you want to recieve when user prompt is sent",
+            "comment_id": "1286704"
+          },
+          {
+            "upvote_count": "4",
+            "timestamp": "1724817300.0",
+            "poster": "JakeCallham",
+            "content": "Usually you start with a system message and seeying that messages is still empty I would say system. But content being empty makes it hard to really determine. System is optional. So next would be user or assisant. If its a free chat than assistant wont be next, but User.\n\nThis is really a terrible question because we can have three options. You can set temp to any of them, it just doesn't make sense with system. Because messages is an array you can change the temp constantly. It makes the most sense with user i guess. But again, a terrible code example to be honest.",
+            "comment_id": "1273758"
+          },
+          {
+            "content": "Assistant and Temperature as per ChatGPT, I think that's right",
+            "poster": "nithin_reddy",
+            "upvote_count": "2",
+            "timestamp": "1721469540.0",
+            "comment_id": "1251677"
+          },
+          {
+            "timestamp": "1720583160.0",
+            "upvote_count": "1",
+            "poster": "34c89bf",
+            "content": "system message is optional and the model’s behavior without a system message is likely to be similar to using a generic message such as \"You are a helpful assistant.\" So, It should be system. \nsecond one is temprecture",
+            "comment_id": "1245256"
+          },
+          {
+            "upvote_count": "4",
+            "poster": "chandiochan",
+            "timestamp": "1714096080.0",
+            "comments": [
+              {
+                "comment_id": "1217285",
+                "content": "it is the user message for which response is generated by this API function. so i will go with user as well.. the deterministic and creativity is controller by temperature value low or high",
+                "comments": [
+                  {
+                    "comment_id": "1217290",
+                    "comments": [
+                      {
+                        "comment_id": "1245536",
+                        "poster": "34c89bf",
+                        "timestamp": "1720621920.0",
+                        "upvote_count": "1",
+                        "content": "system message is optional and the model’s behavior without a system message is likely to be similar to using a generic message such as \"You are a helpful assistant.\" So, It should be system.\nsecond one is temprecture"
+                      }
+                    ],
+                    "poster": "TJ001",
+                    "upvote_count": "2",
+                    "timestamp": "1716537120.0",
+                    "content": "the 'content ' is blank here adds to the confusion :( .. so how can it be blank being a user message.. so could be system as well just to prime with the temperature settings. please suggest if anyone has clarity"
+                  }
+                ],
+                "poster": "TJ001",
+                "timestamp": "1716536820.0",
+                "upvote_count": "1"
+              }
+            ],
+            "content": "In the role dropdown, you would select \"user\" because you are simulating a user's input to which the chatbot should respond. The API call will use this context to generate a response as if it were the assistant. You only need to specify the role for the input messages you're including in your API call, not the responses you're expecting to generate.",
+            "comment_id": "1202339"
+          },
+          {
+            "content": "Microsoft Copilot seems to be clear on this one. Based on that, answer is correct \n\nIt's response about this question (I did not ask about temperature because that one is obvious) \n\no ensure that your chatbot’s responses are more creative and less deterministic, you should use the Chat.Role.Assistant. This role represents the AI language model (such as GPT-3.5 Turbo) and allows for imaginative and varied answers. By assigning messages to the assistant role, you encourage the model to generate creative and less predictable content.",
+            "poster": "shorymor",
+            "upvote_count": "1",
+            "timestamp": "1713200760.0",
+            "comment_id": "1196139"
+          },
+          {
+            "comments": [
+              {
+                "content": "True, but if we expect the answer from the AI language model, we should send to the model user input",
+                "timestamp": "1718542320.0",
+                "upvote_count": "1",
+                "poster": "fba825b",
+                "comment_id": "1231372"
+              }
+            ],
+            "poster": "Murtuza",
+            "upvote_count": "3",
+            "timestamp": "1712086440.0",
+            "content": "This one is SYSTEM here and not user. Looking at the code \nTypically, a conversation is formatted with a system message first, followed by alternating user and assistant messages.\nhttps://platform.openai.com/docs/guides/text-generation/chat-completions-api",
+            "comment_id": "1188275"
+          },
+          {
+            "timestamp": "1709609640.0",
+            "upvote_count": "3",
+            "poster": "chandiochan",
+            "content": "n this context, when configuring the chatbot's behavior, you would use the \"system\" role to provide initial settings or instructions that affect the overall behavior of the chatbot. This is not an actual message that's part of the conversation with the user but rather a directive to the AI on how to conduct itself in the conversation. For example, you might use this to set the chatbot's personality, instruct it to prioritize certain types of information, or follow specific conversational guidelines.\n\nThe \"assistant\" role, on the other hand, is used for messages that simulate responses from the AI as part of the conversation with the user. It represents the chatbot's side of the dialogue.\n\nSince you want to ensure that the responses are more creative and less deterministic, and this is a setting affecting the AI's behavior, the \"system\" role is the correct choice. You might include instructions in the \"system\" message that tell the AI to be more creative or to use less strict adherence to certain conversational rules.",
+            "comment_id": "1166194"
+          },
+          {
+            "content": "Should be system / temp\nWithout a system prompt, the reponses are more creative",
+            "upvote_count": "3",
+            "timestamp": "1709458200.0",
+            "poster": "Harry300",
+            "comment_id": "1164648"
+          }
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135102-exam-ai-102-topic-7-question-8-discussion/",
+        "answer_ET": "",
+        "timestamp": "2024-03-03 10:30:00",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image141.png"
+        ],
+        "question_text": "HOTSPOT\n-\n\nYou have an Azure subscription that contains an Azure OpenAI resource named AI1.\n\nYou build a chatbot that will use AI1 to provide generative answers to specific questions.\n\nYou need to ensure that the responses are more creative and less deterministic.\n\nHow should you complete the code? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "answer": "",
+        "unix_timestamp": 1709458200,
+        "question_id": 314,
+        "exam_id": 41,
+        "topic": "7",
+        "answers_community": [],
+        "isMC": false,
+        "answer_description": "",
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image140.png"
+        ]
+      },
+      {
+        "id": "REs9RSnASwJVYxFUE2jE",
+        "discussion": [
+          {
+            "comment_id": "1234507",
+            "timestamp": "1718981580.0",
+            "poster": "HaraTadahisa",
+            "upvote_count": "15",
+            "content": "My answer is that\nNo\nNo\nNo"
+          },
+          {
+            "comment_id": "1230860",
+            "content": "No\nNo\nNo",
+            "poster": "takaimomoGcup",
+            "upvote_count": "10",
+            "timestamp": "1718441880.0"
+          },
+          {
+            "comment_id": "1355989",
+            "poster": "syupwsh",
+            "upvote_count": "5",
+            "timestamp": "1739430120.0",
+            "content": "All No\n\n1) subscription will be charged for the total number of tokens used in the session, which includes both the prompt tokens and the completion tokens. In the given response, the total tokens used are 123 (37 prompt tokens + 86 completion tokens).\n\n2) response contains a \"finish_reason\" of \"stop,\" which indicates that the completion ended naturally rather than being truncated due to reaching the Max response tokens limit. The value of Max response tokens is set to 100, but the actual completion used only 86 tokens, which is below the limit. If the prompt had been truncated, the finish_reason would be 'length'.\n\n3) prompt_tokens value is not included in the calculation of the Max response tokens value. The Max response tokens setting only limits the number of tokens in the generated response, not the total number of tokens in the prompt plus the response."
+          },
+          {
+            "content": "1. No: The total tokens used for the session include both the prompt tokens (37) and the completion tokens (86), totaling 123 tokens. Therefore, the subscription will be charged for 123 tokens, not just 86.\n2. Yes: The Max response tokens were set to 100, and the completion used 86 tokens. The text completion was not truncated because the response did not exceed the maximum allowed tokens.\n3. No: The prompt_tokens are not included in the Max response tokens value. The Max response tokens only refer to the tokens used in the model's response, not the tokens used in the input prompt.",
+            "poster": "testmaillo020",
+            "timestamp": "1725101880.0",
+            "upvote_count": "3",
+            "comments": [
+              {
+                "comment_id": "1286726",
+                "timestamp": "1726821660.0",
+                "upvote_count": "4",
+                "poster": "mrg998",
+                "content": "for Q2, should this not be NO, since you said \"The Max response tokens were set to 100, and the completion used 86 tokens. The text completion was not truncated because the response did not exceed the maximum allowed tokens.\""
+              }
+            ],
+            "comment_id": "1275554"
+          },
+          {
+            "timestamp": "1723688820.0",
+            "poster": "cloudrain",
+            "upvote_count": "1",
+            "comments": [
+              {
+                "comment_id": "1266138",
+                "poster": "cloudrain",
+                "timestamp": "1723688820.0",
+                "upvote_count": "2",
+                "content": "meant to say 3rd should be Yes"
+              }
+            ],
+            "content": "answer is correct.\n3rd should be no because \"Token costs are for both input and output. For example, suppose you have a 1,000 token JavaScript code sample that you ask an Azure OpenAI model to convert to Python. You would be charged approximately 1,000 tokens for the initial input request sent, and 1,000 more tokens for the output that is received in response for a total of 2,000 tokens.\" source below\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs#understand-the-azure-openai-full-billing-model",
+            "comment_id": "1266137"
+          },
+          {
+            "comment_id": "1233072",
+            "content": "copilot says \n\nThe subscription will be charged 86 tokens for the execution of the session: Yes\n\nThe text completion was truncated because the Max response tokens value was exceeded: No\n\nThe prompt_tokens value will be included in the calculation of the Max response tokens value: Yes",
+            "upvote_count": "2",
+            "timestamp": "1718823780.0",
+            "poster": "etellez"
+          },
+          {
+            "content": "N/N/N\nA - It takes into account the prompt tokes - hence as per the calculation -123 tokens should be charged\nB - Text completion was not truncated, because the response token is 86 < 100\nC - Prompt_tokens is not included in calculation max_response value.",
+            "poster": "rookiee1111",
+            "timestamp": "1718790180.0",
+            "upvote_count": "4",
+            "comment_id": "1232809"
+          },
+          {
+            "poster": "michaelmorar",
+            "upvote_count": "5",
+            "timestamp": "1714880940.0",
+            "content": "N - the subscription is NOT charged for 86 tokens - the response does not contain 86 tokens. For reference, each token is roughly four characters for typical English text.\nN - text completion is clearly under 86 and the sentence is not truncated. the finish_reason here is \"stop\". If the prompt had been cut off, the finish_reason would have been 'length'\nN - max tokens is the maximum number to generate in the COMPLETION. \nThe token count of your prompt plus max_tokens can't exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).",
+            "comment_id": "1206772"
+          },
+          {
+            "poster": "tk1828",
+            "timestamp": "1713342060.0",
+            "upvote_count": "4",
+            "content": "N/N/N\nSubscriptions are charged for both the prompt and completion tokens.\nCompletion tokens is less than max response tokens.\nIt refers to max response tokens only, not max tokens.\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs#understand-the-azure-openai-full-billing-model",
+            "comment_id": "1197088"
+          },
+          {
+            "comment_id": "1188283",
+            "content": "The subscription will be charged 86 tokens for the execution of the session. Yes, that’s correct. The completion_tokens value represents the number of tokens in the model’s response, and this is what you’re billed for.\nThe text completion was truncated because the Max response tokens value was exceeded. No, that’s not correct. The response in this case wasn’t truncated. The max_tokens parameter sets a limit on the length of the generated response. If the model’s response had exceeded this limit, it would have been cut off, but in this case, the response is only 86 tokens long, which is less than the max_tokens value of 100.\nThe prompt_tokens value will be included in the calculation of the max_tokens value. Yes, that’s correct. The max_tokens parameter includes both the prompt tokens and the completion tokens. So if your prompt is very long, it could limit the length of the model’s response.",
+            "poster": "Murtuza",
+            "timestamp": "1712087160.0",
+            "upvote_count": "1",
+            "comments": [
+              {
+                "poster": "AzureGeek79",
+                "upvote_count": "1",
+                "timestamp": "1726528740.0",
+                "content": "that's correct. The answer is N, Y, Y.",
+                "comment_id": "1284967"
+              }
+            ]
+          },
+          {
+            "comment_id": "1181178",
+            "timestamp": "1711231020.0",
+            "poster": "Murtuza",
+            "upvote_count": "3",
+            "content": "The session execution consumed 86 tokens is NO it should be total of 123 tokens which includes the prompt tokens\nThe text completion was truncated due to exceeding the Max response tokens value is Yes\nThe prompt_tokens value is included in the calculation of the Max response tokens value is YES"
+          },
+          {
+            "comment_id": "1173689",
+            "upvote_count": "3",
+            "timestamp": "1710448020.0",
+            "poster": "GHill1982",
+            "comments": [
+              {
+                "comment_id": "1195783",
+                "content": "Changing my mind to Y/N/N\n\nThe subscription will be charged 86 tokens for the execution of the session.\nYes, the subscription will be charged for the completion_tokens used during the execution, which in this case is 86 tokens.\nThe text completion was truncated because the Max response tokens value was exceeded.\nNo, the text completion was not truncated due to exceeding the Max response tokens value. The finish_reason is listed as “stop,” which indicates that the model stopped generating additional content because it reached a natural stopping point in the text, not because it hit the token limit.\nThe prompt_tokens value will be included in the calculation of the Max response tokens value.\nNo, the prompt_tokens value is not included in the calculation of the Max response tokens value. The Max response tokens setting only limits the length of the new content generated by the model in response to the prompt.",
+                "comments": [
+                  {
+                    "content": "You are wrong. First No. Azure OpenAI base series and Codex series models are charged per 1,000 tokens. https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs#understand-the-azure-openai-full-billing-model",
+                    "upvote_count": "3",
+                    "timestamp": "1713810840.0",
+                    "poster": "sergbs",
+                    "comment_id": "1200340"
+                  }
+                ],
+                "poster": "GHill1982",
+                "upvote_count": "2",
+                "timestamp": "1713152400.0"
+              }
+            ],
+            "content": "I think it should be N/N/N."
+          }
+        ],
+        "timestamp": "2024-03-02 19:05:00",
+        "answer_ET": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135064-exam-ai-102-topic-7-question-9-discussion/",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image234.png"
+        ],
+        "question_text": "HOTSPOT -\n\nYou have an Azure subscription that contains an Azure OpenAI resource.\n\nYou configure a model that has the following settings:\n\n• Temperature: 1\n• Top probabilities: 0.5\n• Max response tokens: 100\n\nYou ask the model a question and receive the following response.\n\n//IMG//\n\n\nFor each of the following statements, select Yes if the statement is true. Otherwise, select No.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "answer": "",
+        "unix_timestamp": 1709402700,
+        "question_id": 315,
+        "isMC": false,
+        "answer_description": "",
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image142.png",
+          "https://img.examtopics.com/ai-102/image143.png"
+        ],
+        "exam_id": 41,
+        "topic": "7",
+        "answers_community": []
+      }
+    ],
+    "exam": {
+      "isBeta": false,
+      "lastUpdated": "06 Aug 2025",
+      "id": 41,
+      "name": "AI-102",
+      "isMCOnly": false,
+      "isImplemented": true,
+      "provider": "Microsoft",
+      "numberOfQuestions": 330
+    },
+    "currentPage": 63
+  },
+  "__N_SSP": true
+}

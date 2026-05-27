@@ -1,0 +1,466 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "CgYswwLgeI7VE5HTTWYk",
+        "question_text": "You have an Azure subscription. The subscription contains an Azure OpenAI resource that hosts a GPT-4 model named Model1 and an app named App1. App1 uses Model1.\n\nYou need to ensure that App1 will NOT return answers that include hate speech.\n\nWhat should you configure for Model1?",
+        "answer": "C",
+        "unix_timestamp": 1709225280,
+        "question_id": 291,
+        "discussion": [
+          {
+            "comment_id": "1162811",
+            "content": "Selected Answer: C\nCorrect. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter?tabs=warning%2Cpython",
+            "upvote_count": "8",
+            "poster": "Harry300",
+            "timestamp": "1709225280.0"
+          },
+          {
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1739242740.0",
+            "content": "Selected Answer: C\nA content filter is designed to prevent the model from generating outputs that include inappropriate or harmful content, such as hate speech. Configuring a content filter for Model1 ensures that App1 does not return answers that violate content policies.\n\nAnswer is C",
+            "comment_id": "1354805"
+          },
+          {
+            "content": "Selected Answer: C\nC 100%",
+            "upvote_count": "2",
+            "poster": "mustafaalhnuty",
+            "timestamp": "1726405920.0",
+            "comment_id": "1284135"
+          },
+          {
+            "poster": "HaraTadahisa",
+            "upvote_count": "1",
+            "timestamp": "1719039480.0",
+            "content": "Selected Answer: C\nI say this answer is C.",
+            "comment_id": "1235226"
+          },
+          {
+            "comment_id": "1230480",
+            "content": "Selected Answer: C\nC is correct answer.",
+            "timestamp": "1718367600.0",
+            "upvote_count": "1",
+            "poster": "nanaw770"
+          },
+          {
+            "content": "Selected Answer: C\nC is right answer.",
+            "timestamp": "1716993240.0",
+            "upvote_count": "1",
+            "poster": "taiwan_is_not_china",
+            "comment_id": "1221041"
+          },
+          {
+            "comment_id": "1220319",
+            "content": "C is the correct answer",
+            "poster": "anto69",
+            "upvote_count": "2",
+            "timestamp": "1716905220.0"
+          },
+          {
+            "content": "Selected Answer: C\nC is correct",
+            "upvote_count": "3",
+            "poster": "Murtuza",
+            "timestamp": "1712672040.0",
+            "comment_id": "1192323"
+          },
+          {
+            "timestamp": "1711216920.0",
+            "upvote_count": "1",
+            "poster": "Murtuza",
+            "content": "To ensure that App1 does not return answers containing hate speech, you should configure Model1 with a content filter. The content filtering system in Azure OpenAI Service works alongside core models and aims to detect and prevent harmful content, including hate speech.",
+            "comment_id": "1181074"
+          },
+          {
+            "content": "The content filtering models for the hate",
+            "upvote_count": "1",
+            "timestamp": "1710084180.0",
+            "poster": "Murtuza",
+            "comment_id": "1170406"
+          }
+        ],
+        "timestamp": "2024-02-29 17:48:00",
+        "answer_ET": "C",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/134925-exam-ai-102-topic-7-question-1-discussion/",
+        "answer_images": [],
+        "choices": {
+          "A": "the Frequency penalty parameter",
+          "D": "the Temperature parameter",
+          "B": "abuse monitoring",
+          "C": "a content filter"
+        },
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "topic": "7",
+        "answers_community": [
+          "C (100%)"
+        ],
+        "exam_id": 41
+      },
+      {
+        "id": "0GKDafuTIeH2N2p1GLUm",
+        "choices": {
+          "D": "QnAMakerOptions.ScoreThreshold",
+          "C": "QnAMakerOptions.RankerType",
+          "B": "QnADialogResponseOptions.CardNoMatchText",
+          "A": "QnAMakerOptions.StrictFilters"
+        },
+        "discussion": [
+          {
+            "comment_id": "600530",
+            "timestamp": "1652343900.0",
+            "upvote_count": "25",
+            "poster": "ManAtWorkAtNight",
+            "content": "Answer should be D. QnAMakerOptions.ScoreThreshold\nTechnical Requirements says \"AI solution responses must have a confidence score that is equal to or greater than 70 percent\" and \"When the response confidence score is low, ensure that the chatbot can provide other response options to the customers\"\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/concepts/confidence-score#set-threshold"
+          },
+          {
+            "comment_id": "1356335",
+            "content": "Selected Answer: D\nQnAMakerOptions.ScoreThreshold is CORRECT because this property allows you to set the threshold for the confidence score. By adjusting the ScoreThreshold, you can control the confidence level at which the bot considers a QnA match valid. This helps in ensuring that the bot only responds with answers that meet a certain confidence level, thus improving the accuracy of the chatbot's responses.\n\nAnswer is D",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1739497620.0"
+          },
+          {
+            "upvote_count": "2",
+            "timestamp": "1726481280.0",
+            "poster": "mustafaalhnuty",
+            "content": "Selected Answer: D\nD 100%",
+            "comment_id": "1284585"
+          },
+          {
+            "comment_id": "1252197",
+            "content": "Selected Answer: D\nQnAMakerOptions.ScoreThreshold, others make no sense",
+            "poster": "anto69",
+            "upvote_count": "1",
+            "timestamp": "1721532480.0"
+          },
+          {
+            "comment_id": "1246794",
+            "upvote_count": "1",
+            "timestamp": "1720791840.0",
+            "poster": "krzkrzkra",
+            "content": "Selected Answer: D"
+          },
+          {
+            "content": "Selected Answer: D\nI say this answer is D.\nI assume this question is part of the lab type question.",
+            "poster": "HaraTadahisa",
+            "upvote_count": "1",
+            "timestamp": "1719039540.0",
+            "comment_id": "1235227"
+          },
+          {
+            "comment_id": "1230481",
+            "content": "Selected Answer: D\nD is the correct answer.",
+            "upvote_count": "1",
+            "poster": "nanaw770",
+            "timestamp": "1718367660.0"
+          },
+          {
+            "content": "Selected Answer: D\nD is correct",
+            "poster": "Murtuza",
+            "upvote_count": "1",
+            "timestamp": "1711308180.0",
+            "comment_id": "1181934"
+          },
+          {
+            "content": "Selected Answer: D\nD. QnAMakerOptions.ScoreThreshold\n\nThis property allows you to set a minimum confidence score for answers. If an answer's confidence score is below this threshold, you can trigger alternative actions, such as providing different response options or escalating to a human agent, directly addressing the specified chatbot requirements.",
+            "upvote_count": "2",
+            "timestamp": "1707548940.0",
+            "poster": "evangelist",
+            "comment_id": "1145964"
+          },
+          {
+            "comment_id": "1133353",
+            "timestamp": "1706360700.0",
+            "poster": "evangelist",
+            "upvote_count": "2",
+            "content": "Selected Answer: D\nQnAMakerOptions.ScoreThreshold is the property that controls the minimum confidence score required for a QnA Maker response to be considered valid. This directly addresses the requirement that AI responses must have a confidence score of at least 70%.\nBy setting QnAMakerOptions.ScoreThreshold to 0.7 (or 70%), you ensure that the chatbot only provides answers from QnA Maker that have a high level of confidence, meeting the specified requirement."
+          },
+          {
+            "comment_id": "1067530",
+            "upvote_count": "1",
+            "timestamp": "1699650900.0",
+            "poster": "rdemontis",
+            "content": "Selected Answer: D\nhttps://learn.microsoft.com/en-us/azure/ai-services/qnamaker/concepts/confidence-score"
+          },
+          {
+            "content": "Complete chatbot constraints from Case Study:\n\nContoso identifies the following requirements for the chatbot:\n* Provide customers with answers to the FAQs.\n* Ensure that the customers can chat to a customer service agent.\n* Ensure that the members of a group named Management-Accountants can approve the FAQs.\n* Ensure that the members of a group named Consultant-Accountants can create and amend the FAQs.\n* Ensure that the members of a group named the Agent-CustomerServices can browse the FAQs.\n* Ensure that access to the customer service agents is managed by using Omnichannel for Customer Service.\n* When the response confidence score is low. ensure that the chatbot can provide other response options to the customers.",
+            "timestamp": "1698600600.0",
+            "poster": "propanther",
+            "upvote_count": "1",
+            "comment_id": "1057032"
+          },
+          {
+            "comment_id": "984782",
+            "content": "Selected Answer: C\n\"AI solution responses must have a confidence score that is equal to or greater than 70 percent.\" --> So choose \"D. QnAMakerOptions.ScoreThreshold\" . See https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.builder.ai.qna.qnamakeroptions.scorethreshold?view=botbuilder-dotnet-stable",
+            "poster": "james2033",
+            "timestamp": "1692393060.0",
+            "upvote_count": "2"
+          },
+          {
+            "comment_id": "937924",
+            "content": "Selected Answer: D\nshould be D",
+            "poster": "Tin_Tin",
+            "timestamp": "1688036100.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "749191",
+            "content": "Selected Answer: D\nCorrect answer is D",
+            "poster": "SSJA",
+            "timestamp": "1671397680.0",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "2",
+            "poster": "Eltooth",
+            "timestamp": "1658652360.0",
+            "content": "Selected Answer: D\nI'm going for answer D based on\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/concepts/best-practices",
+            "comment_id": "635939"
+          },
+          {
+            "comment_id": "635805",
+            "poster": "RamonKaus",
+            "upvote_count": "1",
+            "timestamp": "1658620740.0",
+            "content": "Selected Answer: D\nhttps://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwilta3-tZD5AhXpGFkFHWGzAMAQFnoECAoQAw&url=https%3A%2F\nChoosing Ranker type\n\" By default, QnA Maker searches through questions and answers. If you want to search through questions only, to generate an answer, use the RankerType=QuestionOnly in the POST body of the GenerateAnswer request. \"\nfrom\n%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fcognitive-services%2Fqnamaker%2Fconcepts%2Fbest-practices&usg=AOvVaw3agfuSigl7RLnYFlhA-vb3\n\nI think it is D because \"Gets or sets the minimum score threshold, used to filter returned results.\"\n\n\n\n https://docs.microsoft.com/en-us/dotnet/api/microsoft.bot.builder.ai.qna.qnamakeroptions.scorethreshold?view=botbuilder-dotnet-stable"
+          }
+        ],
+        "answer_images": [],
+        "timestamp": "2022-05-12 10:25:00",
+        "answer_ET": "D",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/75514-exam-ai-102-topic-7-question-1-discussion/",
+        "answer": "D",
+        "question_text": "You are developing the chatbot.\nYou create the following components:\n✑ A QnA Maker resource\n✑ A chatbot by using the Azure Bot Framework SDK\nYou need to integrate the components to meet the chatbot requirements.\nWhich property should you use?",
+        "question_id": 292,
+        "unix_timestamp": 1652343900,
+        "exam_id": 41,
+        "topic": "7",
+        "answers_community": [
+          "D (90%)",
+          "10%"
+        ],
+        "answer_description": "",
+        "isMC": true,
+        "question_images": []
+      },
+      {
+        "id": "xh1Sx0H0jxAPs1ZHtTQ7",
+        "question_text": "HOTSPOT\n-\n\nYou have an Azure subscription that contains an Azure OpenAI resource named AI1.\n\nYou plan to develop a console app that will answer user questions.\n\nYou need to call AI1 and output the results to the console.\n\nHow should you complete the code? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "answer": "",
+        "unix_timestamp": 1710479100,
+        "question_id": 293,
+        "discussion": [
+          {
+            "comment_id": "1232810",
+            "content": "Given answer is correct \n1) chatcompletion.create - this is the API for creating chat completion\n2) response.choices[0].text - for picking the text with highest rated response choice",
+            "timestamp": "1718790360.0",
+            "upvote_count": "7",
+            "poster": "rookiee1111"
+          },
+          {
+            "comment_id": "1355991",
+            "timestamp": "1739430300.0",
+            "poster": "syupwsh",
+            "upvote_count": "2",
+            "content": "openai.ChatCompletion.create is CORRECT because this method is used to create a chat completion request with the OpenAI model, which is suitable for generating responses to user questions in a conversational format.\n\n(response.choices[0].text) is CORRECT because this accesses the text of the first choice in the response from the chat completion API call, which contains the answer generated by the model."
+          },
+          {
+            "comment_id": "1275555",
+            "content": "Answer is correct",
+            "timestamp": "1725102000.0",
+            "poster": "testmaillo020",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1189258",
+            "content": "Correct. Under Completions > Example response\n https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions",
+            "upvote_count": "4",
+            "poster": "carcasgon",
+            "timestamp": "1712229360.0"
+          },
+          {
+            "comment_id": "1181180",
+            "poster": "Murtuza",
+            "timestamp": "1711231620.0",
+            "upvote_count": "3",
+            "content": "# Output the response to the console\nprint(response.choices[0].message.content)\n\nresponse = client.chat.completions.create(\nThe given answers are CORRECT"
+          },
+          {
+            "comment_id": "1174051",
+            "poster": "GHill1982",
+            "upvote_count": "2",
+            "timestamp": "1710479100.0",
+            "content": "Answer is correct."
+          }
+        ],
+        "timestamp": "2024-03-15 06:05:00",
+        "answer_ET": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/136127-exam-ai-102-topic-7-question-10-discussion/",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image146.png"
+        ],
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image145.png"
+        ],
+        "isMC": false,
+        "answer_description": "",
+        "topic": "7",
+        "answers_community": [],
+        "exam_id": 41
+      },
+      {
+        "id": "HjC6JcWSzzXT5RxhB0hf",
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image147.png"
+        ],
+        "isMC": false,
+        "answer_description": "",
+        "answers_community": [],
+        "topic": "7",
+        "exam_id": 41,
+        "unix_timestamp": 1710479220,
+        "question_id": 294,
+        "question_text": "HOTSPOT\n-\n\nYou have an Azure subscription that contains an Azure OpenAI resource named AI1.\n\nYou plan to develop a console app that will answer user questions.\n\nYou need to call AI1 and output the results to the console.\n\nHow should you complete the code? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "answer": "",
+        "timestamp": "2024-03-15 06:07:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/136128-exam-ai-102-topic-7-question-11-discussion/",
+        "answer_ET": "",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image148.png"
+        ],
+        "discussion": [
+          {
+            "comment_id": "1355992",
+            "upvote_count": "1",
+            "timestamp": "1739430480.0",
+            "poster": "syupwsh",
+            "content": "GetCompletions is CORRECT because this method is used to get a completion response from the OpenAI model for a given prompt. In this case, the prompt is \"What is Microsoft Azure?\" and you want the model to generate a text response to this question.\n\n(response.Value.Choices[0].Text); is CORRECT because this property accesses the generated text response from the OpenAI model. This is what you need to print to the console to display the answer to the user's question."
+          },
+          {
+            "comment_id": "1232811",
+            "timestamp": "1718790480.0",
+            "poster": "rookiee1111",
+            "upvote_count": "4",
+            "content": "1. GetCompletions - this is the api for creating chat. \n2. (response.Value.Choises[0].Text) - this will output the text from top rated response object."
+          },
+          {
+            "upvote_count": "3",
+            "timestamp": "1716988680.0",
+            "poster": "taiwan_is_not_china",
+            "content": "1. GetCompletions\n2. (response.Value.Choises[0].Text);",
+            "comment_id": "1220972"
+          },
+          {
+            "content": "Agree answer is correct",
+            "timestamp": "1711285140.0",
+            "upvote_count": "4",
+            "poster": "Murtuza",
+            "comment_id": "1181544"
+          },
+          {
+            "content": "Answer is correct.",
+            "upvote_count": "2",
+            "timestamp": "1710479220.0",
+            "poster": "GHill1982",
+            "comment_id": "1174053"
+          }
+        ]
+      },
+      {
+        "id": "VAPbXW1iote62MYCuPqR",
+        "discussion": [
+          {
+            "comment_id": "1221030",
+            "comments": [
+              {
+                "content": "Agree with you",
+                "upvote_count": "1",
+                "poster": "anto69",
+                "timestamp": "1720357320.0",
+                "comment_id": "1243858"
+              }
+            ],
+            "upvote_count": "7",
+            "timestamp": "1716992460.0",
+            "poster": "taiwan_is_not_china",
+            "content": "1. OpenAI\n2. --encryption"
+          },
+          {
+            "content": "OpenAI is CORRECT because you need to create a resource that will generate fictional stories in response to user prompts, which aligns with the capabilities provided by the OpenAI service in Azure.\n\n--encryption is CORRECT because it is used to specify encryption settings for the Azure Cognitive Services account, allowing you to configure customer-managed keys for data protection, which meets the requirement to use a customer-managed key.",
+            "upvote_count": "3",
+            "timestamp": "1739430720.0",
+            "poster": "syupwsh",
+            "comment_id": "1355993"
+          },
+          {
+            "timestamp": "1712681100.0",
+            "poster": "ProfessorZ",
+            "upvote_count": "4",
+            "content": "--encryption is correct:\n\nhttps://learn.microsoft.com/en-us/cli/azure/cognitiveservices/account?view=azure-cli-latest\naz cognitiveservices account create -n myresource -g myResourceGroup --assign-identity --kind TextAnalytics --sku S -l WestEurope --yes\n --encryption '{\n \"keySource\": \"Microsoft.KeyVault\",\n \"keyVaultProperties\": {\n \"keyName\": \"KeyName\",\n \"keyVersion\": \"secretVersion\",\n \"keyVaultUri\": \"https://issue23056kv.vault.azure.net/\"\n }\n }'",
+            "comment_id": "1192419"
+          },
+          {
+            "comment_id": "1188293",
+            "content": "az cognitiveservices account create \\\n --name myresource \\\n --resource-group myResourceGroup \\\n --kind OpenAI \\\n --sku S1 \\\n --location WestEurope \\",
+            "timestamp": "1712089200.0",
+            "poster": "Murtuza",
+            "upvote_count": "3"
+          },
+          {
+            "comment_id": "1174054",
+            "poster": "GHill1982",
+            "upvote_count": "2",
+            "timestamp": "1710479400.0",
+            "content": "Answer is correct."
+          },
+          {
+            "comment_id": "1170519",
+            "content": "Azure OpenAI Service models can do everything from generating original stories to performing complex text an",
+            "upvote_count": "1",
+            "poster": "Murtuza",
+            "timestamp": "1710094020.0"
+          },
+          {
+            "timestamp": "1709613420.0",
+            "upvote_count": "2",
+            "poster": "chandiochan",
+            "content": "https://learn.microsoft.com/en-us/azure/ai-services/openai/encrypt-data-at-rest\nhttps://learn.microsoft.com/en-us/cli/azure/cognitiveservices/account?view=azure-cli-latest#az-cognitiveservices-account-create",
+            "comment_id": "1166222"
+          }
+        ],
+        "timestamp": "2024-03-05 05:37:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135219-exam-ai-102-topic-7-question-12-discussion/",
+        "answer_ET": "",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image150.png"
+        ],
+        "question_text": "HOTSPOT\n-\n\nYou have an Azure subscription.\n\nYou need to create a new resource that will generate fictional stories in response to user prompts. The solution must ensure that the resource uses a customer-managed key to protect data.\n\nHow should you complete the script? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "answer": "",
+        "unix_timestamp": 1709613420,
+        "question_id": 295,
+        "exam_id": 41,
+        "topic": "7",
+        "answers_community": [],
+        "isMC": false,
+        "answer_description": "",
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image149.png"
+        ]
+      }
+    ],
+    "exam": {
+      "name": "AI-102",
+      "id": 41,
+      "lastUpdated": "06 Aug 2025",
+      "isBeta": false,
+      "provider": "Microsoft",
+      "isImplemented": true,
+      "isMCOnly": false,
+      "numberOfQuestions": 330
+    },
+    "currentPage": 59
+  },
+  "__N_SSP": true
+}

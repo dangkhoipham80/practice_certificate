@@ -1,0 +1,721 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "ocJnL2iQJhdHeHdvIqXo",
+        "isMC": true,
+        "answer_description": "",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0010400001.png"
+        ],
+        "exam_id": 41,
+        "topic": "2",
+        "answers_community": [
+          "D (100%)"
+        ],
+        "discussion": [
+          {
+            "content": "Selected Answer: D\nD is correct answer : change the detection model.\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/how-to/specify-detection-model#evaluate-different-models",
+            "timestamp": "1658147400.0",
+            "poster": "Eltooth",
+            "upvote_count": "14",
+            "comment_id": "633017"
+          },
+          {
+            "poster": "syupwsh",
+            "upvote_count": "2",
+            "timestamp": "1739163480.0",
+            "content": "Selected Answer: D\nThe current detection model (detection_01) might not be the most suitable for detecting faces in challenging conditions such as blurred images or images with sideways faces. The Face API provides different detection models, such as detection_02 or detection_03, which may offer better accuracy for these scenarios.\n\nD is correct",
+            "comment_id": "1354236"
+          },
+          {
+            "poster": "Niko2345",
+            "timestamp": "1735060020.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: D\nThats the type of question one could answer without knwoing anything. For B and C its unnecessary to even provide code snippets\n. From code we can see API and model. model seems more reasonable than API version.",
+            "comment_id": "1331190"
+          },
+          {
+            "comment_id": "1235176",
+            "poster": "HaraTadahisa",
+            "timestamp": "1719036960.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: D\nI say this answer is D."
+          },
+          {
+            "content": "Selected Answer: D\nI use detection_02 or detection_03.",
+            "upvote_count": "1",
+            "poster": "takaimomoGcup",
+            "timestamp": "1716214440.0",
+            "comment_id": "1214391"
+          },
+          {
+            "content": "Selected Answer: D\nit contains sideway faces, so change face API detection model 03",
+            "poster": "evangelist",
+            "timestamp": "1708122960.0",
+            "upvote_count": "1",
+            "comment_id": "1152258"
+          },
+          {
+            "comment_id": "1061993",
+            "content": "Selected Answer: D\nanswer is correct",
+            "poster": "rdemontis",
+            "upvote_count": "2",
+            "timestamp": "1699091580.0"
+          },
+          {
+            "comment_id": "936578",
+            "timestamp": "1687952160.0",
+            "upvote_count": "4",
+            "poster": "zellck",
+            "content": "Selected Answer: D\nD is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/how-to/specify-detection-model#evaluate-different-models\nThe different face detection models are optimized for different tasks.\n- detection_02\nImproved accuracy on small, side-view, and blurry faces."
+          }
+        ],
+        "timestamp": "2022-07-18 14:30:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/77610-exam-ai-102-topic-2-question-16-discussion/",
+        "answer_ET": "D",
+        "answer_images": [],
+        "question_text": "Your company uses an Azure Cognitive Services solution to detect faces in uploaded images. The method to detect the faces uses the following code.\n//IMG//\n\nYou discover that the solution frequently fails to detect faces in blurred images and in images that contain sideways faces.\nYou need to increase the likelihood that the solution can detect faces in blurred images and images that contain sideways faces.\nWhat should you do?",
+        "answer": "D",
+        "question_id": 91,
+        "unix_timestamp": 1658147400,
+        "choices": {
+          "A": "Use a different version of the Face API.",
+          "D": "Change the detection model.",
+          "B": "Use the Computer Vision service instead of the Face service.",
+          "C": "Use the Identify method instead of the Detect method."
+        }
+      },
+      {
+        "id": "jkKpH6kap1LLm5kk4amc",
+        "answer_description": "",
+        "isMC": true,
+        "question_images": [],
+        "exam_id": 41,
+        "topic": "2",
+        "answers_community": [
+          "A (98%)",
+          "2%"
+        ],
+        "discussion": [
+          {
+            "comment_id": "712299",
+            "content": "Selected Answer: A\nComputer vision provide automatic vision solutions including captions. The key-phrase is \"automatic\". Therefore this answer should be obvious to everyone. I would expect more professionalism from people who request money for services like this one. Many questions here have incorrect and even contradictory answers... Shame!",
+            "comments": [
+              {
+                "upvote_count": "4",
+                "timestamp": "1683549720.0",
+                "poster": "ulloo",
+                "content": "I agree.\nTo me it looks like many answers are being deliberately set to incorrect answers. Not sure why, though.",
+                "comment_id": "892166"
+              }
+            ],
+            "poster": "ArchMelody",
+            "timestamp": "1667738460.0",
+            "upvote_count": "46"
+          },
+          {
+            "comment_id": "1561599",
+            "content": "Selected Answer: A\nThis is the best answer as per MS documentation.",
+            "poster": "Bhutani",
+            "timestamp": "1744959180.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1363386",
+            "content": "Selected Answer: A\nRepeat qn\n\nAnswer is A",
+            "poster": "syupwsh",
+            "timestamp": "1740804960.0",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Selected Answer: A\nComputerVision and F0.",
+            "poster": "nanaw770",
+            "timestamp": "1716641820.0",
+            "upvote_count": "3",
+            "comment_id": "1218332"
+          },
+          {
+            "comment_id": "1203320",
+            "timestamp": "1714260360.0",
+            "poster": "upliftinghut",
+            "upvote_count": "2",
+            "comments": [
+              {
+                "upvote_count": "2",
+                "timestamp": "1721736360.0",
+                "poster": "dirgiklis",
+                "content": "Set 1 question 9.",
+                "comment_id": "1253635"
+              }
+            ],
+            "content": "duplicate question"
+          },
+          {
+            "timestamp": "1700905320.0",
+            "poster": "sca88",
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nThe answer is A",
+            "comment_id": "1079883"
+          },
+          {
+            "comment_id": "1061995",
+            "timestamp": "1699091940.0",
+            "poster": "rdemontis",
+            "upvote_count": "3",
+            "content": "Selected Answer: A\nSeems to be duplicated question. Anyway to me the correct answer is A.\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-describing-images"
+          },
+          {
+            "upvote_count": "2",
+            "timestamp": "1698552480.0",
+            "poster": "trashbox",
+            "content": "Appeared on Oct/29/2023.",
+            "comment_id": "1056564"
+          },
+          {
+            "content": "Very confusion, Does Computer Vision provide captions in Free? I think Custom Vision Do:\nComputer Vision Free tire:\nInstance | Features | Price\nFree - Web/Container 20 transactions per minute | - |5,000 transactions free per month\n\nCustom Vision Free Tire:\nInstance | Transactions Per Second (TPS) | Features | Price\nFree | 2 TPS | Upload, training and prediction transactions, Up to 2 projects, Up to 1 hour training per month | 5,000 training images free per project, 10,000 predictions per month",
+            "upvote_count": "1",
+            "timestamp": "1696217100.0",
+            "poster": "bare",
+            "comment_id": "1022768"
+          },
+          {
+            "comment_id": "936573",
+            "content": "Same as Topic 1 Question 9.\nhttps://www.examtopics.com/discussions/microsoft/view/57153-exam-ai-102-topic-1-question-9-discussion",
+            "poster": "zellck",
+            "upvote_count": "4",
+            "timestamp": "1687951980.0"
+          },
+          {
+            "comment_id": "936571",
+            "comments": [
+              {
+                "comment_id": "946057",
+                "content": "Gotten this in Jul 2023 exam.",
+                "upvote_count": "2",
+                "poster": "zellck",
+                "timestamp": "1688774460.0"
+              }
+            ],
+            "poster": "zellck",
+            "upvote_count": "2",
+            "timestamp": "1687951920.0",
+            "content": "A is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account-client-library?pivots=programming-language-python#create-a-cognitive-services-resource-python\nTo create and subscribe to a new Cognitive Services resource, use the Create function. This function adds a new billable resource to the resource group you pass in. When you create your new resource, you'll need to know the \"kind\" of service you want to use, along with its pricing tier (or SKU) and an Azure location. The following function takes all of these arguments and creates a resource."
+          },
+          {
+            "comment_id": "936157",
+            "poster": "Pixelmate",
+            "upvote_count": "2",
+            "timestamp": "1687929780.0",
+            "content": "This was on exam 28/06"
+          },
+          {
+            "comment_id": "935872",
+            "content": "Asked in 28/06/2023 exam",
+            "upvote_count": "2",
+            "poster": "Pixelmate",
+            "timestamp": "1687904580.0"
+          },
+          {
+            "comment_id": "920673",
+            "upvote_count": "2",
+            "timestamp": "1686487440.0",
+            "poster": "ziggy1117",
+            "content": "Selected Answer: A\ncomputer vision can generate captions for images"
+          },
+          {
+            "content": "Selected Answer: A\nComputer Vision has generate captions feature",
+            "upvote_count": "2",
+            "timestamp": "1674058920.0",
+            "poster": "ap1234pa",
+            "comment_id": "780205"
+          },
+          {
+            "content": "Selected Answer: B\nThis question was asked for free azure service. Do we have the generate caption feature supports this with free tier? \nReference - https://azure.microsoft.com/en-us/pricing/details/cognitive-services/computer-vision/",
+            "upvote_count": "1",
+            "poster": "SSJA",
+            "timestamp": "1670775480.0",
+            "comment_id": "741881"
+          },
+          {
+            "comment_id": "675909",
+            "content": "Selected Answer: A\nShould be A.",
+            "upvote_count": "4",
+            "timestamp": "1663836360.0",
+            "poster": "[Removed]"
+          },
+          {
+            "comment_id": "675430",
+            "poster": "be_ml_team",
+            "timestamp": "1663785000.0",
+            "upvote_count": "2",
+            "content": "Selected Answer: A\nA because computer vision provides tags"
+          },
+          {
+            "comments": [
+              {
+                "comment_id": "666022",
+                "content": "one of the feature of Computer vision: The Image Analysis service extracts many visual features from images, such as objects, faces, adult content, and auto-generated text descriptions. Follow the Image Analysis quickstart to get started.\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview",
+                "upvote_count": "3",
+                "poster": "goo1994",
+                "timestamp": "1662892260.0"
+              }
+            ],
+            "poster": "goo1994",
+            "timestamp": "1662892200.0",
+            "upvote_count": "2",
+            "content": "Answer Should be A.",
+            "comment_id": "666021"
+          }
+        ],
+        "answer_images": [],
+        "timestamp": "2022-09-11 12:30:00",
+        "answer_ET": "A",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/81643-exam-ai-102-topic-2-question-17-discussion/",
+        "answer": "A",
+        "question_text": "You have the following Python function for creating Azure Cognitive Services resources programmatically. def create_resource (resource_name, kind, account_tier, location) : parameters = CognitiveServicesAccount(sku=Sku(name=account_tier), kind=kind, location=location, properties={}) result = client.accounts.create(resource_group_name, resource_name, parameters)\nYou need to call the function to create a free Azure resource in the West US Azure region. The resource will be used to generate captions of images automatically.\nWhich code should you use?",
+        "unix_timestamp": 1662892200,
+        "question_id": 92,
+        "choices": {
+          "D": "create_resource(\"res1\", \"CustomVision.Prediction\", \"S0\", \"westus\")",
+          "C": "create_resource(\"res1\", \"ComputerVision\", \"S0\", \"westus\")",
+          "B": "create_resource(\"res1\", \"CustomVision.Prediction\", \"F0\", \"westus\")",
+          "A": "create_resource(\"res1\", \"ComputerVision\", \"F0\", \"westus\")"
+        }
+      },
+      {
+        "id": "mvwcm8X1DIGypzCmag7J",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0010700001.png"
+        ],
+        "isMC": true,
+        "answer_description": "",
+        "answers_community": [
+          "BD (100%)"
+        ],
+        "topic": "2",
+        "exam_id": 41,
+        "question_id": 93,
+        "unix_timestamp": 1663004640,
+        "question_text": "You are developing a method that uses the Computer Vision client library. The method will perform optical character recognition (OCR) in images. The method has the following code.\n//IMG//\n\nDuring testing, you discover that the call to the GetReadResultAsync method occurs before the read operation is complete.\nYou need to prevent the GetReadResultAsync method from proceeding until the read operation is complete.\nWhich two actions should you perform? Each correct answer presents part of the solution.\nNOTE: Each correct selection is worth one point.",
+        "answer": "BD",
+        "timestamp": "2022-09-12 19:44:00",
+        "answer_ET": "BD",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/81861-exam-ai-102-topic-2-question-18-discussion/",
+        "answer_images": [],
+        "discussion": [
+          {
+            "content": "Selected Answer: BD\nB. Add code to verify the read_results.status value.\nD. Wrap the call to get_read_result within a loop that contains a delay.\n\nExplanation:\n\nIn order to prevent the GetReadResultAsync method from proceeding until the read operation is complete, we need to check the status of the read operation and wait until it's completed. To do this, we can add code to verify the status of the read_results.status value. If the status is not \"succeeded\", we can add a delay and then retry the operation until it's complete. This can be achieved by wrapping the call to get_read_result within a loop that contains a delay.\n\nRemoving the operation_id parameter or adding code to verify the status of the read_operation_location value will not solve the issue of waiting for the read operation to complete before proceeding with the GetReadResultAsync method.",
+            "upvote_count": "5",
+            "timestamp": "1694767140.0",
+            "poster": "RAN_L",
+            "comment_id": "839783"
+          },
+          {
+            "comment_id": "1354237",
+            "timestamp": "1739163780.0",
+            "upvote_count": "3",
+            "poster": "syupwsh",
+            "comments": [
+              {
+                "comment_id": "1354239",
+                "content": "Missed out stating which is the same qn\n\nTopic 2 Qn2",
+                "poster": "syupwsh",
+                "upvote_count": "1",
+                "timestamp": "1739163840.0"
+              }
+            ],
+            "content": "Selected Answer: BD\nThis is a repeat question just different code in Python\n\nAnswer is BD"
+          },
+          {
+            "comment_id": "1220236",
+            "poster": "hatanaoki",
+            "upvote_count": "1",
+            "timestamp": "1732804800.0",
+            "content": "Selected Answer: BD\nB and D are right answer."
+          },
+          {
+            "upvote_count": "2",
+            "poster": "takaimomoGcup",
+            "timestamp": "1732119060.0",
+            "content": "Selected Answer: BD\nmemorize \"read_results\" words. So B and D.",
+            "comment_id": "1214389"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1732119000.0",
+            "poster": "takaimomoGcup",
+            "content": "Selected Answer: BD\nB and D.",
+            "comment_id": "1214388"
+          },
+          {
+            "upvote_count": "4",
+            "timestamp": "1722315960.0",
+            "poster": "anto69",
+            "content": "where's GetReadResultAsync in the code? looks like C# method not python code",
+            "comment_id": "1135562"
+          },
+          {
+            "timestamp": "1714809960.0",
+            "poster": "rdemontis",
+            "upvote_count": "3",
+            "content": "Selected Answer: BD\nduplicated question",
+            "comment_id": "1061996"
+          },
+          {
+            "comment_id": "936593",
+            "content": "Same as Question 2.\nhttps://www.examtopics.com/discussions/microsoft/view/74739-exam-ai-102-topic-2-question-2-discussion",
+            "upvote_count": "2",
+            "poster": "zellck",
+            "timestamp": "1703771100.0"
+          },
+          {
+            "comment_id": "936158",
+            "timestamp": "1703748240.0",
+            "poster": "Pixelmate",
+            "upvote_count": "3",
+            "content": "This was on exam 28/06"
+          },
+          {
+            "comment_id": "717329",
+            "poster": "halfway",
+            "upvote_count": "1",
+            "timestamp": "1683977640.0",
+            "content": "Selected Answer: BD\nDuplicated with Topic 2, Question 2."
+          },
+          {
+            "content": "Selected Answer: BD\nCorrect",
+            "poster": "michasacuer",
+            "timestamp": "1678650240.0",
+            "upvote_count": "1",
+            "comment_id": "667294"
+          }
+        ],
+        "choices": {
+          "A": "Remove the operation_id parameter.",
+          "B": "Add code to verify the read_results.status value.",
+          "C": "Add code to verify the status of the read_operation_location value.",
+          "D": "Wrap the call to get_read_result within a loop that contains a delay."
+        }
+      },
+      {
+        "id": "GmxM8F7ZhXaTyxQrjscf",
+        "question_id": 94,
+        "unix_timestamp": 1663799040,
+        "question_text": "HOTSPOT -\nYou are building an app that will enable users to upload images. The solution must meet the following requirements:\n* Automatically suggest alt text for the images.\n* Detect inappropriate images and block them.\n* Minimize development effort.\nYou need to recommend a computer vision endpoint for each requirement.\nWhat should you recommend? To answer, select the appropriate options in the answer area.\nNOTE: Each correct selection is worth one point.\nHot Area:\n//IMG//",
+        "answer": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/83146-exam-ai-102-topic-2-question-19-discussion/",
+        "answer_ET": "",
+        "timestamp": "2022-09-22 00:24:00",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image212.png"
+        ],
+        "discussion": [
+          {
+            "comment_id": "727865",
+            "content": "I think it is vision/v3.2/analyze/?visualFeatures=Adult,Description for both",
+            "poster": "Tanmay1178",
+            "timestamp": "1685139060.0",
+            "upvote_count": "39"
+          },
+          {
+            "comment_id": "939659",
+            "content": "1. https://westus.api.cognitive.microsoft.com/vision/v3.2/analyze/?visualFeatures=Adult,Description\n2. https://westus.api.cognitive.microsoft.com/vision/v3.2/analyze/?visualFeatures=Adult,Description\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-describing-images\nComputer Vision can analyze an image and generate a human-readable phrase that describes its contents. The algorithm returns several descriptions based on different visual features, and each description is given a confidence score. The final output is a list of descriptions ordered from highest to lowest confidence.",
+            "comments": [
+              {
+                "timestamp": "1747673400.0",
+                "poster": "MeanJean",
+                "upvote_count": "1",
+                "content": "This is a little tricky because Image Analysis 4.0 doesn't have an Adult feature but 3.2 does. And since it says with least development effort, I would agree that is would be https://westus.api.cognitive.microsoft.com/vision/v3.2/analyze/?visualFeatures=Adult,Description for both",
+                "comment_id": "1570315"
+              },
+              {
+                "comment_id": "1062000",
+                "timestamp": "1714810380.0",
+                "poster": "rdemontis",
+                "upvote_count": "1",
+                "content": "thanks for explanation"
+              },
+              {
+                "comment_id": "995128",
+                "timestamp": "1709218740.0",
+                "poster": "M25",
+                "upvote_count": "1",
+                "content": "https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/use-case-alt-text?source=recommendations\nAlt text, or alternative text, is an HTML attribute added to the <img> tag that displays images on an application or web page.\nAlt text enables website owners to describe an image in plain text. These image descriptions improve accessibility by enabling screen readers such as Microsoft Narrator, JAWS, and NVDA to accurately communicate image content to their visually impaired and blind users.\nAlt text is also vital for image search engine optimization (SEO). It helps search engines understand the visual content in your images. The search engine is then better able to include and rank your website in search results when users search for the content in your website.\nAuto-generate alt text with Image Analysis: Image Analysis offers image captioning models that generate one-sentence descriptions of image visual content.\nThank you @zellck!"
+              },
+              {
+                "content": "https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-detecting-adult-content\nComputer Vision can detect adult material in images so that developers can restrict the display of these images in their software. Content flags are applied with a score between zero and one so developers can interpret the results according to their own preferences.\n\nYou can detect adult content with the Analyze Image 3.2 API. When you add the value of Adult to the visualFeatures query parameter, the API returns three boolean properties—isAdultContent, isRacyContent, and isGoryContent—in its JSON response. The method also returns corresponding properties—adultScore, racyScore, and goreScore—which represent confidence scores between zero and one for each respective category.",
+                "upvote_count": "3",
+                "poster": "zellck",
+                "timestamp": "1704098220.0",
+                "comment_id": "939660"
+              },
+              {
+                "comments": [
+                  {
+                    "comment_id": "986318",
+                    "poster": "zman_83",
+                    "timestamp": "1708510800.0",
+                    "upvote_count": "2",
+                    "content": "Thank you for confirming that it a active/valid question, and it might appare in the exam"
+                  },
+                  {
+                    "comment_id": "948320",
+                    "content": "zelleck, do you say this on every question?",
+                    "comments": [
+                      {
+                        "comment_id": "961084",
+                        "content": "He does not, he doesn't say that in the next question Topic 2 Q20",
+                        "poster": "EliteAllen",
+                        "upvote_count": "7",
+                        "timestamp": "1706073960.0"
+                      }
+                    ],
+                    "upvote_count": "3",
+                    "timestamp": "1704918540.0",
+                    "poster": "TheCloudGuruu"
+                  }
+                ],
+                "poster": "zellck",
+                "timestamp": "1704679260.0",
+                "upvote_count": "4",
+                "content": "Gotten this in Jul 2023 exam.",
+                "comment_id": "946058"
+              },
+              {
+                "comment_id": "1126135",
+                "content": "The first one says \"descnption\" , so I guess that's not the correct answer. \n\nDoes anybody know the correct one?",
+                "upvote_count": "3",
+                "timestamp": "1721323560.0",
+                "poster": "josebernabeo"
+              }
+            ],
+            "poster": "zellck",
+            "upvote_count": "16",
+            "timestamp": "1704098220.0"
+          },
+          {
+            "content": "Generate Alt Text:\nhttps://westus.api.cognitive.microsoft.com/vision/v3.2/analyze/?visualFeatures=Adult,Descnption: Despite the spelling error, this endpoint is intended to generate descriptions for images, which can be used as alt text.\n\nDetect Inappropriate Content:\nhttps://westus.api.cognitive.microsoft.com/contentmoderator/moderate/v1.0/ProcessImage/Evaluate: This endpoint is specifically designed to detect and block inappropriate images using the Content Moderator API.\n\nSummary:\nGenerate alt text: https://westus.api.cognitive.microsoft.com/vision/v3.2/analyze/?visualFeatures=Adult,Descnption\n\nDetect inappropriate content: https://westus.api.cognitive.microsoft.com/contentmoderator/moderate/v1.0/ProcessImage/Evaluate\n\nBy using these endpoints, you can achieve the specified requirements while minimizing development effort.",
+            "timestamp": "1740548160.0",
+            "upvote_count": "2",
+            "poster": "gyaansastra",
+            "comment_id": "1361754"
+          },
+          {
+            "comment_id": "1355482",
+            "timestamp": "1739340480.0",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "content": "Adult,Description is CORRECT because this endpoint belongs to the Computer Vision API and includes the Description visual feature, which is used to automatically generate alt text for images. This minimizes development effort as it leverages pre-built capabilities of the Computer Vision API.\n\nAdult,Description is CORRECT because the Computer Vision API can detect adult content and generate human-readable phrases to describe the contents of an image. This endpoint allows you to analyze images for inappropriate content (using the Adult visual feature) while also providing descriptive captions (using the Description visual feature), fulfilling both requirements of detecting inappropriate images and minimizing development effort."
+          },
+          {
+            "comment_id": "1225487",
+            "timestamp": "1733495700.0",
+            "upvote_count": "1",
+            "poster": "NagaoShingo",
+            "content": "Adult Video"
+          },
+          {
+            "comment_id": "1220337",
+            "content": "Both will contain Adult,Description.",
+            "poster": "taiwan_is_not_china",
+            "upvote_count": "2",
+            "timestamp": "1732810920.0"
+          },
+          {
+            "timestamp": "1732118940.0",
+            "poster": "takaimomoGcup",
+            "upvote_count": "2",
+            "content": "Generate alt text should be \"v3.2/analyze\". Detect inappropriate content should be \"v3.2/analyze\".",
+            "comment_id": "1214386"
+          },
+          {
+            "upvote_count": "2",
+            "poster": "evangelist",
+            "timestamp": "1723840620.0",
+            "content": "description ==>Alt text",
+            "comment_id": "1152259"
+          },
+          {
+            "content": "Both are https://westus.api.cognitive.microsoft.com/vision/v3.2/analyze/?visualFeatures=Adult,Description\n\nA string indicating what visual feature types to return. Multiple values should be comma-separated.\nValid visual feature types include:\n\nAdult - detects if the image is pornographic in nature (depicts nudity or a sex act), or is gory (depicts extreme violence or blood). Sexually suggestive content (aka racy content) is also detected.\nDescription - describes the image content with a complete sentence in supported languages.\n\nhttps://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/56f91f2e778daf14a499f21b",
+            "timestamp": "1713717180.0",
+            "poster": "propanther",
+            "upvote_count": "2",
+            "comment_id": "1049658"
+          },
+          {
+            "content": "I think it is two times /analyze/?visualFeatures=Adult,Description",
+            "comments": [
+              {
+                "comment_id": "686152",
+                "content": "Shouldn't it be option 2 in the first column ? \"iteratio\"",
+                "upvote_count": "1",
+                "poster": "Anulf",
+                "timestamp": "1680610980.0"
+              }
+            ],
+            "timestamp": "1680514740.0",
+            "poster": "Tickxit",
+            "upvote_count": "4",
+            "comment_id": "685352"
+          },
+          {
+            "comment_id": "675553",
+            "content": "Generate alt text can use either analyze or describe. From the given option, I think it should be the analyze url too.\nhttps://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/56f91f2e778daf14a499f21f",
+            "comments": [
+              {
+                "comment_id": "890425",
+                "content": "Agreed, analyze in both answers",
+                "poster": "Rob77",
+                "timestamp": "1699246740.0",
+                "upvote_count": "1"
+              }
+            ],
+            "timestamp": "1679444640.0",
+            "upvote_count": "2",
+            "poster": "firewind"
+          }
+        ],
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0010800001.png"
+        ],
+        "isMC": false,
+        "answer_description": "",
+        "answers_community": [],
+        "topic": "2",
+        "exam_id": 41
+      },
+      {
+        "id": "9eKUchwpGVaBUilS4bhm",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0008200001.jpg"
+        ],
+        "answer_description": "",
+        "isMC": true,
+        "answers_community": [
+          "BD (100%)"
+        ],
+        "topic": "2",
+        "exam_id": 41,
+        "question_id": 95,
+        "unix_timestamp": 1651131840,
+        "answer": "BD",
+        "question_text": "You are developing a method that uses the Computer Vision client library. The method will perform optical character recognition (OCR) in images. The method has the following code.\n//IMG//\n\nDuring testing, you discover that the call to the GetReadResultAsync method occurs before the read operation is complete.\nYou need to prevent the GetReadResultAsync method from proceeding until the read operation is complete.\nWhich two actions should you perform? Each correct answer presents part of the solution.\nNOTE: Each correct selection is worth one point.",
+        "answer_images": [],
+        "timestamp": "2022-04-28 09:44:00",
+        "answer_ET": "BD",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/74739-exam-ai-102-topic-2-question-2-discussion/",
+        "discussion": [
+          {
+            "comment_id": "620166",
+            "content": "Selected Answer: BD\nas per link in solution",
+            "upvote_count": "13",
+            "poster": "sdokmak",
+            "timestamp": "1655874180.0",
+            "comments": [
+              {
+                "comment_id": "620167",
+                "poster": "sdokmak",
+                "timestamp": "1655874540.0",
+                "upvote_count": "5",
+                "comments": [
+                  {
+                    "content": "getReadAsync doesn't have status method. Answer is B and D\nhttps://docs.microsoft.com/en-us/dotnet/api/system.io.stream.readasync?view=net-6.0",
+                    "timestamp": "1655874660.0",
+                    "upvote_count": "4",
+                    "poster": "sdokmak",
+                    "comment_id": "620168"
+                  }
+                ],
+                "content": "and looking at what getReadAsync and getReadResultAsync methods return. \ngetReadResultAsync returns Observable<ReadOperationResult> object which contains as status() method."
+              }
+            ]
+          },
+          {
+            "comment_id": "936143",
+            "upvote_count": "7",
+            "poster": "Pixelmate",
+            "timestamp": "1687929420.0",
+            "content": "this appeared in the exam 28/06"
+          },
+          {
+            "comment_id": "1581525",
+            "upvote_count": "1",
+            "poster": "azuri",
+            "timestamp": "1751164440.0",
+            "content": "Selected Answer: BD\nwhile (true)\n{\n var results = await client.GetReadResultAsync(operationId);\n\n if (results.Status == OperationStatusCodes.Succeeded)\n {\n // Process the results\n break;\n }\n else if (results.Status == OperationStatusCodes.Failed)\n {\n // Handle failure\n break;\n }\n\n // Delay to avoid hammering the service with requests\n await Task.Delay(1000);\n}"
+          },
+          {
+            "comment_id": "1354235",
+            "upvote_count": "1",
+            "timestamp": "1739163300.0",
+            "poster": "syupwsh",
+            "content": "Selected Answer: BD\nYou need to ensure that the read operation has completed successfully before proceeding. Checking the status value ensures the operation has finished.\n\nRepeatedly checking the status of the read operation until it is complete allows you to handle the asynchronous nature of the operation correctly\n\nBD are the answers"
+          },
+          {
+            "comment_id": "1321895",
+            "poster": "vp_2299",
+            "upvote_count": "1",
+            "timestamp": "1733318580.0",
+            "content": "Selected Answer: BD\nas per link in solution"
+          },
+          {
+            "content": "Selected Answer: BD\nresults.Status\nGetReadResultAsync",
+            "poster": "nanaw770",
+            "timestamp": "1716642900.0",
+            "upvote_count": "2",
+            "comment_id": "1218339"
+          },
+          {
+            "comment_id": "1060921",
+            "content": "Selected Answer: BD\nprovided answer seems correct. The attached documentation demonstrate it",
+            "timestamp": "1698960120.0",
+            "upvote_count": "3",
+            "poster": "rdemontis"
+          },
+          {
+            "timestamp": "1654601220.0",
+            "poster": "PHD_CHENG",
+            "upvote_count": "4",
+            "content": "was on exam 7 Jun 2022",
+            "comment_id": "612709"
+          },
+          {
+            "comment_id": "593647",
+            "content": "C and D are the correct answers.",
+            "comments": [
+              {
+                "comment_id": "628306",
+                "timestamp": "1657187400.0",
+                "upvote_count": "1",
+                "poster": "ppo12",
+                "content": "I don't think C is one of the answer based on https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/dotnet/ComputerVision/ComputerVisionQuickstart.cs.\n\nIt seems results.Status is part of the while condition, hence I agree with dokmak's B and D"
+              }
+            ],
+            "poster": "SamedKia",
+            "timestamp": "1651131840.0",
+            "upvote_count": "3"
+          }
+        ],
+        "choices": {
+          "D": "Wrap the call to GetReadResultAsync within a loop that contains a delay.",
+          "C": "Add code to verify the status of the txtHeaders.Status value.",
+          "B": "Add code to verify the results.Status value.",
+          "A": "Remove the Guid.Parse(operationId) parameter."
+        }
+      }
+    ],
+    "exam": {
+      "numberOfQuestions": 330,
+      "id": 41,
+      "lastUpdated": "06 Aug 2025",
+      "isBeta": false,
+      "name": "AI-102",
+      "isImplemented": true,
+      "isMCOnly": false,
+      "provider": "Microsoft"
+    },
+    "currentPage": 19
+  },
+  "__N_SSP": true
+}

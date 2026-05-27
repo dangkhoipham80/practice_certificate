@@ -1,0 +1,797 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "rjR74ebSO7zjgeWx4U9j",
+        "exam_id": 41,
+        "answers_community": [
+          "CDF (100%)"
+        ],
+        "topic": "3",
+        "answer_description": "",
+        "isMC": true,
+        "question_images": [],
+        "choices": {
+          "F": "toScript=Latn",
+          "A": "toScript=Cyrl",
+          "B": "from=el",
+          "E": "textType=plain",
+          "D": "to=el",
+          "C": "textType=html"
+        },
+        "answer_images": [],
+        "timestamp": "2022-07-19 06:59:00",
+        "answer_ET": "CDF",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/77617-exam-ai-102-topic-3-question-14-discussion/",
+        "discussion": [
+          {
+            "comment_id": "633352",
+            "content": "Selected Answer: CDF\nC, D and F are correct answers. \ntextType=html\nto=el\ntoScript=Latn\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/translator/reference/v3-0-translate#translate-with-transliteration",
+            "poster": "Eltooth",
+            "upvote_count": "8",
+            "timestamp": "1658206740.0"
+          },
+          {
+            "content": "THIS WAS ON EXAM 28/06",
+            "poster": "Pixelmate",
+            "timestamp": "1687930680.0",
+            "upvote_count": "6",
+            "comment_id": "936179"
+          },
+          {
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "timestamp": "1739176800.0",
+            "content": "Selected Answer: CDF\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/translator/reference/v3-0-translate\n\ntextType=html is CORRECT because the content of a webpage is typically in HTML format. Specifying textType=html ensures that the Translator API correctly interprets and processes the HTML content.\n\nto=el is CORRECT because you need to specify the target language for translation. to=el indicates that the content should be translated into Greek.\n\ntoScript=Latn is CORRECT because you want the transliteration to use the Roman alphabet. toScript=Latn specifies that the transliteration should be in the Latin script.\n\nCDF are correct",
+            "comment_id": "1354349"
+          },
+          {
+            "content": "wow, microsoft wants me to know webpage is html, roman=latn. \nAlthough I never understood why microsoft expects people to remember the .net class names or method names or api parameter names. But this knowledge is beyond anything. I'm guessing the people creating the questions are not from this area. They just look at the documentation and think what can I ask so that the people cannot remember what is the right answer.",
+            "poster": "famco",
+            "upvote_count": "5",
+            "timestamp": "1725632460.0",
+            "comment_id": "1279607"
+          },
+          {
+            "comment_id": "1229239",
+            "timestamp": "1718202120.0",
+            "upvote_count": "1",
+            "poster": "reigenchimpo",
+            "content": "Selected Answer: CDF\nI'll bump it up, so CDF is the answer."
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1716559260.0",
+            "poster": "nanaw770",
+            "content": "Selected Answer: CDF\ntextType=html\nto=el\ntoScript=Latn",
+            "comment_id": "1217544"
+          },
+          {
+            "content": "Selected Answer: CDF\ncorrect answer",
+            "timestamp": "1716543540.0",
+            "upvote_count": "1",
+            "poster": "funny_penguin",
+            "comment_id": "1217356"
+          },
+          {
+            "comment_id": "1132994",
+            "content": "Selected Answer: CDF\nhttps://api.cognitive.microsofttranslator.com/translate?api-version=3.0&textType=html&to=el&toScript=Latn",
+            "poster": "evangelist",
+            "upvote_count": "4",
+            "timestamp": "1706323860.0"
+          },
+          {
+            "timestamp": "1699111560.0",
+            "poster": "rdemontis",
+            "upvote_count": "3",
+            "content": "Selected Answer: CDF\ncorrect answer and explanation",
+            "comment_id": "1062214"
+          },
+          {
+            "comment_id": "937838",
+            "content": "Same as Question 3.\nhttps://www.examtopics.com/discussions/microsoft/view/56391-exam-ai-102-topic-3-question-3-discussion",
+            "timestamp": "1688030160.0",
+            "poster": "zellck",
+            "upvote_count": "2"
+          },
+          {
+            "content": "Selected Answer: CDF\nCDF is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/translator/reference/v3-0-translate\n- to\nSpecifies the language of the output text. The target language must be one of the supported languages included in the translation scope. For example, use to=de to translate to German.\nIt's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. For example, use to=de&to=it to translate to German and Italian.\n- textType\nDefines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, complete element. Possible values are: plain (default) or html.",
+            "timestamp": "1688013480.0",
+            "poster": "zellck",
+            "upvote_count": "2",
+            "comment_id": "937509"
+          },
+          {
+            "comment_id": "726496",
+            "content": "Selected Answer: CDF\nCorrect!",
+            "upvote_count": "1",
+            "poster": "Aztek0403",
+            "timestamp": "1669364280.0"
+          },
+          {
+            "comment_id": "636068",
+            "poster": "RamonKaus",
+            "timestamp": "1658670900.0",
+            "upvote_count": "2",
+            "content": "Selected Answer: CDF\nAgreed"
+          }
+        ],
+        "question_id": 131,
+        "unix_timestamp": 1658206740,
+        "answer": "CDF",
+        "question_text": "You are developing a method for an application that uses the Translator API.\nThe method will receive the content of a webpage, and then translate the content into Greek (el). The result will also contain a transliteration that uses the Roman alphabet.\nYou need to create the URI for the call to the Translator API.\nYou have the following URI.\nhttps://api.cognitive.microsofttranslator.com/translate?api-version=3.0\nWhich three additional query parameters should you include in the URI? Each correct answer presents part of the solution.\nNOTE: Each correct selection is worth one point."
+      },
+      {
+        "id": "kQEPXvGc3XkxD5i3XBXp",
+        "discussion": [
+          {
+            "comment_id": "1132996",
+            "content": "Selected Answer: CE\nC. Bot Framework Emulator: This is an essential tool for debugging Microsoft Bot Framework bots. It allows you to test and debug your bots on your local machine by emulating the Bot Framework's channels and activities. It can be very helpful in a local development environment but is less suited for remote debugging.\nE. ngrok: ngrok is a tool that creates a secure tunnel to your localhost. This is very useful for remote debugging because it allows you to expose your local development server to the internet, which is necessary for testing and debugging interactions with services like the Microsoft Bot Framework.",
+            "upvote_count": "9",
+            "poster": "evangelist",
+            "timestamp": "1706323980.0"
+          },
+          {
+            "content": "Selected Answer: CE\nBot Framework Emulator is CORRECT because it allows you to test and debug your bot locally, providing insights into how your bot is handling messages.\n\nngrok is CORRECT because it creates a secure tunnel to your localhost, making your local bot endpoint accessible remotely for testing and debugging.\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0&tabs=csharp\n\nAnswer CE",
+            "poster": "syupwsh",
+            "timestamp": "1739586900.0",
+            "upvote_count": "1",
+            "comment_id": "1356695"
+          },
+          {
+            "comment_id": "1261839",
+            "content": "Bot framework is no longer part of the exam",
+            "timestamp": "1722981480.0",
+            "poster": "moonlightc",
+            "upvote_count": "3"
+          },
+          {
+            "comment_id": "1229238",
+            "content": "Selected Answer: CE\nCE is answer.",
+            "timestamp": "1718202120.0",
+            "upvote_count": "1",
+            "poster": "reigenchimpo"
+          },
+          {
+            "content": "Selected Answer: CE\nC. Bot Framework Emulator\nE. ngrok",
+            "poster": "omankoman",
+            "timestamp": "1716986760.0",
+            "upvote_count": "1",
+            "comment_id": "1220944"
+          },
+          {
+            "comment_id": "1217559",
+            "content": "Selected Answer: CE\nBot Framework Emulator takedajuku ngrok are right answer.",
+            "timestamp": "1716559680.0",
+            "poster": "nanaw770",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "2",
+            "poster": "rdemontis",
+            "timestamp": "1699112040.0",
+            "content": "Selected Answer: CE\ncorrect answers\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-service-debug-channel-ngrok?view=azure-bot-service-4.0",
+            "comment_id": "1062218"
+          },
+          {
+            "comment_id": "937833",
+            "timestamp": "1688029980.0",
+            "upvote_count": "3",
+            "poster": "zellck",
+            "content": "Same as Question 4.\nhttps://www.examtopics.com/discussions/microsoft/view/56390-exam-ai-102-topic-3-question-4-discussion"
+          },
+          {
+            "content": "Selected Answer: CE\nCE is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0&tabs=csharp\nBot Framework Emulator is a desktop application that allows bot developers to test and debug bots, either locally or remotely. Using the Emulator, you can chat with your bot and inspect the messages that your bot sends and receives. The Emulator displays messages as they would appear in a web chat UI and logs JSON requests and responses as you exchange messages with your bot. Before you deploy your bot to the cloud, run it locally and test it using the Emulator. You can test your bot using the Emulator even if you haven't yet created it with Azure Bot Service or configured it to run on any channels.",
+            "timestamp": "1688013000.0",
+            "poster": "zellck",
+            "upvote_count": "1",
+            "comments": [
+              {
+                "content": "https://learn.microsoft.com/en-us/azure/bot-service/bot-service-debug-channel-ngrok?view=azure-bot-service-4.0\nWhile your bot is in development, you can use an IDE and the Bot Framework Emulator to chat with your bot locally and inspect the messages your bot sends and receives. If your bot is in production, you can debug your bot from any channel using ngrok. The seamless connection of your bot to multiple channels is a key feature available in the Bot Framework.",
+                "poster": "zellck",
+                "upvote_count": "1",
+                "timestamp": "1688013000.0",
+                "comment_id": "937503"
+              }
+            ],
+            "comment_id": "937502"
+          },
+          {
+            "content": "Selected Answer: CE\nC and E are correct answers.",
+            "upvote_count": "2",
+            "timestamp": "1658206800.0",
+            "poster": "Eltooth",
+            "comment_id": "633354"
+          },
+          {
+            "timestamp": "1651845840.0",
+            "poster": "PHD_CHENG",
+            "upvote_count": "2",
+            "content": "Selected Answer: CE\nAnswer is correct.\nhttps://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0&tabs=csharp",
+            "comment_id": "597756"
+          }
+        ],
+        "timestamp": "2022-05-06 16:04:00",
+        "answer_ET": "CE",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/75236-exam-ai-102-topic-3-question-15-discussion/",
+        "answer_images": [],
+        "question_text": "You have a chatbot that was built by using the Microsoft Bot Framework.\nYou need to debug the chatbot endpoint remotely.\nWhich two tools should you install on a local computer? Each correct answer presents part of the solution.\nNOTE: Each correct selection is worth one point.",
+        "answer": "CE",
+        "question_id": 132,
+        "unix_timestamp": 1651845840,
+        "choices": {
+          "C": "Bot Framework Emulator",
+          "D": "Bot Framework CLI",
+          "E": "ngrok",
+          "B": "Bot Framework Composer",
+          "A": "Fiddler",
+          "F": "nginx"
+        },
+        "isMC": true,
+        "answer_description": "",
+        "question_images": [],
+        "exam_id": 41,
+        "topic": "3",
+        "answers_community": [
+          "CE (100%)"
+        ]
+      },
+      {
+        "id": "nTFN3wW6HqcmbWBfYoCz",
+        "answer": "",
+        "question_text": "DRAG DROP -\nYou are building a retail chatbot that will use a QnA Maker service.\nYou upload an internal support document to train the model. The document contains the following question: \"What is your warranty period?\"\nUsers report that the chatbot returns the default QnA Maker answer when they ask the following question: \"How long is the warranty coverage?\"\nThe chatbot returns the correct answer when the users ask the following question: 'What is your warranty period?\"\nBoth questions should return the same answer.\nYou need to increase the accuracy of the chatbot responses.\nWhich three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.\nSelect and Place:\n//IMG//",
+        "unix_timestamp": 1658207400,
+        "question_id": 133,
+        "discussion": [
+          {
+            "comment_id": "940127",
+            "poster": "zellck",
+            "upvote_count": "26",
+            "timestamp": "1688226120.0",
+            "content": "1. Add alternative phrasing to the QnA pair.\n2. Retrain model.\n3. Republish model.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/edit-knowledge-base#question-and-answer-pairs\nThe optional settings for a pair include:\n- Alternate forms of the question\nthis helps QnA Maker return the correct answer for a wider variety of question phrasings"
+          },
+          {
+            "comment_id": "1133004",
+            "content": "1: Add alternate phrasings as follow-up prompts or as additional questions in the QnA pair:\n2: Train the QnA Maker model: \n3: Publish the updated QnA Maker model:",
+            "upvote_count": "5",
+            "poster": "evangelist",
+            "timestamp": "1706324340.0"
+          },
+          {
+            "content": "1) Add alternative phrasing to the question and answer (QnA) pair is CORRECT because by adding variations of the question, you can help the QnA Maker service understand that different phrasings of the same question should return the same answer. In this case, adding \"How long is the warranty coverage?\" as an alternative phrasing to \"What is your warranty period?\" will help the model recognize these questions as equivalent.\n\n2) Retrain the model is CORRECT because after adding alternative phrasing, you need to retrain the model to incorporate the new data. This ensures that the model updates its understanding based on the new question variations.\n\n3) Republish the model is CORRECT because once the model is retrained, it needs to be republished so that the updated version is available for the chatbot to use. This step is necessary to deploy the changes to the live environment",
+            "timestamp": "1739922900.0",
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "comment_id": "1358506"
+          },
+          {
+            "comment_id": "1248503",
+            "content": "1. Add alternative phrasing to the QnA pair.\n2. Retrain model.\n3. Republish model.",
+            "upvote_count": "2",
+            "timestamp": "1721066580.0",
+            "poster": "krzkrzkra"
+          },
+          {
+            "content": "Add alternative QnA\nRetrain\nRepublish",
+            "poster": "nanaw770",
+            "timestamp": "1716559140.0",
+            "upvote_count": "2",
+            "comment_id": "1217542"
+          },
+          {
+            "timestamp": "1708667340.0",
+            "upvote_count": "1",
+            "poster": "anto69",
+            "content": "correct answer",
+            "comment_id": "1156932"
+          },
+          {
+            "timestamp": "1703114940.0",
+            "upvote_count": "4",
+            "poster": "Gvalli",
+            "content": "A modified version of this was in the exam today.",
+            "comment_id": "1102032"
+          },
+          {
+            "content": "correct answer and explanation",
+            "upvote_count": "2",
+            "timestamp": "1699112340.0",
+            "poster": "rdemontis",
+            "comment_id": "1062219"
+          },
+          {
+            "poster": "zellck",
+            "timestamp": "1688226840.0",
+            "upvote_count": "2",
+            "content": "Same as Question 5.\nhttps://www.examtopics.com/discussions/microsoft/view/55309-exam-ai-102-topic-3-question-5-discussion",
+            "comment_id": "940137"
+          },
+          {
+            "content": "Correct",
+            "poster": "RamonKaus",
+            "upvote_count": "4",
+            "timestamp": "1658614080.0",
+            "comment_id": "635757"
+          },
+          {
+            "comment_id": "633359",
+            "content": "Answer looks correct. \n\nAdd alternative phrasing\nRetrain\nRepublish",
+            "timestamp": "1658207400.0",
+            "upvote_count": "4",
+            "poster": "Eltooth"
+          }
+        ],
+        "answer_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0014700002.png"
+        ],
+        "timestamp": "2022-07-19 07:10:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/77618-exam-ai-102-topic-3-question-16-discussion/",
+        "answer_ET": "",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0014700001.png"
+        ],
+        "answer_description": "Step 1: Add alternative phrasing to the question and answer (QnA) pair.\nAdd alternate questions to an existing QnA pair to improve the likelihood of a match to a user query.\nStep 2: Retrain the model.\nPeriodically select Save and train after making edits to avoid losing changes.\n\nStep 3: Republish the model -\nNote: A knowledge base consists of question and answer (QnA) pairs. Each pair has one answer and a pair contains all the information associated with that answer.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/edit-knowledge-base",
+        "isMC": false,
+        "topic": "3",
+        "answers_community": [],
+        "exam_id": 41
+      },
+      {
+        "id": "GE1BH3i7H8RkiXH6bce4",
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "topic": "3",
+        "answers_community": [
+          "B (100%)"
+        ],
+        "exam_id": 41,
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\nYou build a language model by using a Language Understanding service. The language model is used to search for information on a contact list by using an intent named FindContact.\nA conversational expert provides you with the following list of phrases to use for training.\n✑ Find contacts in London.\n✑ Who do I know in Seattle?\n✑ Search for contacts in Ukraine.\nYou need to implement the phrase list in Language Understanding.\nSolution: You create a new intent for location.\nDoes this meet the goal?",
+        "answer": "B",
+        "unix_timestamp": 1622804040,
+        "question_id": 134,
+        "discussion": [
+          {
+            "comment_id": "374271",
+            "timestamp": "1622804040.0",
+            "poster": "hiabcd",
+            "upvote_count": "34",
+            "comments": [
+              {
+                "comment_id": "398460",
+                "content": "I think the answer should be 'No' too. The intent is for FindContact, not location really.",
+                "timestamp": "1625411220.0",
+                "upvote_count": "8",
+                "poster": "iyiola_daniel"
+              }
+            ],
+            "content": "This should be \"No\""
+          },
+          {
+            "comment_id": "445805",
+            "content": "The answer should be NO.\nAn utterance having wo intents? This is illogical.\nThe model should have an Entity \"Location\" that will help in finding the contacts.\n\nReference: https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-intent",
+            "upvote_count": "12",
+            "timestamp": "1631785200.0",
+            "poster": "zubfaruq"
+          },
+          {
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1740807480.0",
+            "content": "Selected Answer: B\nLooking for a person not a place\n\n Answer is No",
+            "comment_id": "1363407"
+          },
+          {
+            "comment_id": "1361901",
+            "content": "Selected Answer: B\nCreating a new intent for location does not meet the goal. Instead, you should add these phrases as utterances under the existing FindContact intent. This allows the model to learn and recognize these specific phrases and similar variations when users are searching for contacts.",
+            "upvote_count": "2",
+            "poster": "gyaansastra",
+            "timestamp": "1740572880.0"
+          },
+          {
+            "comment_id": "1279646",
+            "poster": "famco",
+            "upvote_count": "1",
+            "timestamp": "1725634440.0",
+            "content": "And for the other question about whether patterns are enough: \nDo not expect to see improved entity prediction if you collapse multiple utterances into a single pattern. For simple entities to be utilized by your app, you need to add utterances or use list entities."
+          },
+          {
+            "content": "Selected Answer: B\nSimply 'location' is an entity not an intent",
+            "poster": "moonlightc",
+            "upvote_count": "1",
+            "timestamp": "1722981960.0",
+            "comment_id": "1261844"
+          },
+          {
+            "comment_id": "1234477",
+            "content": "Selected Answer: B\nI say B is correct! HipHop!",
+            "poster": "HaraTadahisa",
+            "upvote_count": "1",
+            "timestamp": "1718980620.0"
+          },
+          {
+            "timestamp": "1718460120.0",
+            "upvote_count": "1",
+            "poster": "fuck_india",
+            "content": "This issue is not working because everyone's opinion is 50-50. I don't know the correct answer, so I will be staring at MS Learn when this question comes up on the real exam.Examtopic should scrutinize and post the correct answer.",
+            "comment_id": "1230990"
+          },
+          {
+            "comment_id": "1133036",
+            "upvote_count": "2",
+            "poster": "evangelist",
+            "timestamp": "1706327220.0",
+            "content": "The ANSWER is NO ！\nInstead of creating a new intent for location, you should:\nAdd these phrases to the \"FindContact\" intent: This helps the model understand that these are different ways a user might express the intent to find contacts.\n\nUse Entities for Locations: In addition to training the intent with these phrases, you should use entities to capture the location information within the phrases. In LUIS, you can define an entity (like \"Location\") and then annotate locations in your training phrases. This way, the model learns to recognize and extract location details from user inputs.\n\nBy combining a well-trained \"FindContact\" intent with a location entity, your language model will be better equipped to understand and process user queries about finding contacts in specific locations."
+          },
+          {
+            "poster": "rdemontis",
+            "upvote_count": "3",
+            "timestamp": "1699112580.0",
+            "content": "Selected Answer: B\nIMHO is NO, you don't need to create an intent for each location. The intent is always the same: FindContact",
+            "comment_id": "1062221"
+          },
+          {
+            "comment_id": "932382",
+            "poster": "Hisayuki",
+            "upvote_count": "1",
+            "timestamp": "1687597200.0",
+            "content": "Selected Answer: B\nLocation should be for entity not for Intent"
+          },
+          {
+            "comment_id": "915749",
+            "content": "Should be NO. An intent represents a task or action the user wants to perform. It is a purpose or goal expressed in a user's utterance. In this case, the Intent is to find the Contact. And it is already created.\n\nThe utterances specified have the same Intent which is to find/search for contacts. Hence they should be added to the list and an Entity should be created to capture location.",
+            "poster": "ziggy1117",
+            "timestamp": "1686003300.0",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Think its Yes, creating a new intent for location would meet the goal of implementing the phrase list in Language Understanding. You can add the phrases to the new intent and label the location entity in each phrase. This will help the language model understand the user's intent to search for contacts in a specific location.",
+            "upvote_count": "3",
+            "timestamp": "1677057900.0",
+            "poster": "Marilena96",
+            "comment_id": "817659"
+          },
+          {
+            "comment_id": "779287",
+            "upvote_count": "1",
+            "timestamp": "1673985060.0",
+            "poster": "ap1234pa",
+            "content": "Selected Answer: B\nThis is \"NO\""
+          },
+          {
+            "comment_id": "635178",
+            "content": "Selected Answer: B\nB is correct answer. \n\nNeeds Entity/type for location instead.",
+            "timestamp": "1658488020.0",
+            "poster": "Eltooth",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "1",
+            "poster": "zb99",
+            "timestamp": "1651774500.0",
+            "content": "Selected Answer: B\nDefinitely no.",
+            "comment_id": "597427"
+          },
+          {
+            "comment_id": "517834",
+            "upvote_count": "2",
+            "timestamp": "1641420600.0",
+            "poster": "sumanshu",
+            "content": "intent (means what task we need to perform) - So here task is same i.e. Find Contacts. So No need to add an new intent.\n\nBut need to add type/entity : location"
+          },
+          {
+            "comment_id": "485824",
+            "content": "Selected Answer: B\nThis should be NO",
+            "poster": "TanujitRoy",
+            "upvote_count": "2",
+            "timestamp": "1637746260.0"
+          },
+          {
+            "comment_id": "484324",
+            "timestamp": "1637594820.0",
+            "poster": "durak",
+            "upvote_count": "5",
+            "content": "Remember trick\nE n (england) --> entity - noun\nU s (USA) --> utterances - statement\nI v (Ivory Coast) - Intent- Verb\n\nSo answer is B"
+          },
+          {
+            "comment_id": "443649",
+            "content": "Location should be an entity. So \"no\" is correct",
+            "poster": "GMKanon",
+            "upvote_count": "2",
+            "timestamp": "1631487960.0"
+          },
+          {
+            "comment_id": "414448",
+            "content": "CheckWeather \n\n\"What's the weather like in Boston?\"\n\"Show me the forecast for this weekend\"",
+            "upvote_count": "1",
+            "timestamp": "1627280820.0",
+            "poster": "YipingRuan"
+          },
+          {
+            "comment_id": "403286",
+            "timestamp": "1625915340.0",
+            "upvote_count": "3",
+            "poster": "vaskar",
+            "content": "Answer should be no. Create one entity for location should be the correct approach."
+          },
+          {
+            "content": "Yes is correct.",
+            "upvote_count": "2",
+            "poster": "Duch003",
+            "timestamp": "1625080980.0",
+            "comment_id": "395150"
+          },
+          {
+            "comment_id": "384185",
+            "content": "The answer is correct.",
+            "upvote_count": "3",
+            "timestamp": "1623933180.0",
+            "poster": "Jenny1"
+          }
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/54520-exam-ai-102-topic-3-question-18-discussion/",
+        "answer_ET": "B",
+        "timestamp": "2021-06-04 12:54:00",
+        "answer_images": [],
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        }
+      },
+      {
+        "id": "djZc1TUjqfH33qY9Wlnt",
+        "isMC": true,
+        "answer_description": "",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0015000006.png"
+        ],
+        "exam_id": 41,
+        "topic": "3",
+        "answers_community": [
+          "B (53%)",
+          "A (48%)"
+        ],
+        "discussion": [
+          {
+            "comment_id": "593671",
+            "timestamp": "1651133940.0",
+            "poster": "SamedKia",
+            "upvote_count": "19",
+            "content": "Wrong! We create a new location entity for domain to keep the location of FindContact intent."
+          },
+          {
+            "comment_id": "1092274",
+            "content": "B. No\n\nCreating a new entity for the domain does not directly address the goal of implementing the provided phrase list for the \"FindContact\" intent. Entities are typically used to extract specific pieces of information from user input, like names, locations, etc. In this case, the goal is to improve the understanding of the intent \"FindContact\" by providing training phrases related to searching for contacts in specific locations. Instead of creating a new entity, you should focus on training the language model within the existing \"FindContact\" intent and include the provided phrases to enhance its ability to recognize and understand user queries related to finding contacts in different locations.",
+            "upvote_count": "10",
+            "timestamp": "1702180860.0",
+            "poster": "abbey127"
+          },
+          {
+            "comment_id": "1363408",
+            "content": "Selected Answer: A\nhttps://learn.microsoft.com/en-us/azure/ai-services/luis/how-to/entities\n\nAnswer is Yes",
+            "poster": "syupwsh",
+            "timestamp": "1740807600.0",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Selected Answer: B\nCreating a new entity for the domain does not meet the goal. Instead, you should add these phrases as utterances under the existing FindContact intent. This allows the model to learn and recognize these specific phrases and similar variations when users are searching for contacts.",
+            "comments": [
+              {
+                "comment_id": "1570963",
+                "content": "Utterances with a pattern for the location entity which can be a pre-built entity Geography.Location should be the full solution for this. This answer must be 'No'.",
+                "poster": "8d82b67",
+                "timestamp": "1747833900.0",
+                "upvote_count": "1"
+              }
+            ],
+            "timestamp": "1740573600.0",
+            "poster": "gyaansastra",
+            "upvote_count": "1",
+            "comment_id": "1361913"
+          },
+          {
+            "comment_id": "1333356",
+            "content": "Selected Answer: B\nNo, this solution does not meet the goal. Creating a new entity for the domain alone is not sufficient for implementing the given phrase list effectively. Entities are used to identify specific data points within a query, such as locations or names.\n\nTo properly train the language model with these phrases, you should add them as example utterances within the FindContact intent. This helps the Language Understanding (LUIS) service learn from the specific examples and improve its ability to recognize similar queries.\n\nSo, you should:\n\nAdd the given phrases as example utterances in the FindContact intent.\n\nOptionally, create entities to capture specific details like locations (e.g., London, Seattle, Ukraine).",
+            "upvote_count": "1",
+            "timestamp": "1735451700.0",
+            "poster": "pabsinaz"
+          },
+          {
+            "comment_id": "1329836",
+            "timestamp": "1734760200.0",
+            "upvote_count": "1",
+            "poster": "pabsinaz",
+            "content": "Selected Answer: B\nRight answer is no"
+          },
+          {
+            "comment_id": "1295063",
+            "upvote_count": "2",
+            "poster": "4371883",
+            "timestamp": "1728465720.0",
+            "content": "Selected Answer: B\nB. it should be phrase list. https://learn.microsoft.com/en-us/azure/ai-services/luis/concepts/patterns-features"
+          },
+          {
+            "poster": "mrg998",
+            "upvote_count": "5",
+            "timestamp": "1727100240.0",
+            "content": "Selected Answer: B\nNO - you need a pattern",
+            "comment_id": "1288155"
+          },
+          {
+            "comment_id": "1283430",
+            "timestamp": "1726275360.0",
+            "poster": "AzureGeek79",
+            "upvote_count": "1",
+            "content": "ChatGPT answer is B. No, here is the explanation:\nCreating a new entity for the domain does not meet the goal. To implement the phrase list in Language Understanding, you should add these phrases as example utterances for the FindContact intent. This helps the model recognize the intent based on similar phrases."
+          },
+          {
+            "comment_id": "1281504",
+            "timestamp": "1725968760.0",
+            "upvote_count": "2",
+            "poster": "mrg998",
+            "content": "Selected Answer: B\nthe answer is a pattern"
+          },
+          {
+            "content": "Selected Answer: A\nSelected Answer: A",
+            "upvote_count": "1",
+            "timestamp": "1720794600.0",
+            "poster": "krzkrzkra",
+            "comment_id": "1246821"
+          },
+          {
+            "timestamp": "1718980560.0",
+            "poster": "HaraTadahisa",
+            "upvote_count": "2",
+            "content": "Selected Answer: B\n\"create a new entity for the domain.\" is not \"to implement the phrase list\".\nI say B is correct! HipHop!",
+            "comment_id": "1234476"
+          },
+          {
+            "content": "This issue is not working because everyone's opinion is 50-50. I don't know the correct answer, so I will be staring at MS Learn when this question comes up on the real exam.Examtopic should scrutinize and post the correct answer.",
+            "timestamp": "1718460120.0",
+            "upvote_count": "1",
+            "poster": "fuck_india",
+            "comment_id": "1230989"
+          },
+          {
+            "comment_id": "1220927",
+            "upvote_count": "1",
+            "timestamp": "1716985680.0",
+            "poster": "omankoman",
+            "content": "ET should not rely on discussion, but should scrutinize and place the correct responses."
+          },
+          {
+            "comments": [
+              {
+                "comment_id": "1203081",
+                "timestamp": "1714217100.0",
+                "poster": "lesiris",
+                "upvote_count": "1",
+                "content": "Indeed !!"
+              }
+            ],
+            "poster": "f2c587e",
+            "upvote_count": "3",
+            "timestamp": "1711669020.0",
+            "content": "This same question (topic 3, question 1) seems to be indicated by the community that this question has two affirmative answers. I'm not sure if this is correct, normally in this type of question there is only one affirmative answer and the rest are negative. Is anyone clear on the real answer to this question?",
+            "comment_id": "1185097"
+          },
+          {
+            "comment_id": "1173041",
+            "poster": "chandiochan",
+            "upvote_count": "1",
+            "timestamp": "1710381540.0",
+            "content": "Selected Answer: B\nmust be B"
+          },
+          {
+            "content": "Selected Answer: B\nThe question says\n\"You need to implement the phrase list in Language Understanding.\nSolution: You create a new entity for the domain.\nDoes this meet the goal?\"\n\nCreating an entity is not implementing a phrase list, so I vote NO.",
+            "poster": "Mehe323",
+            "upvote_count": "2",
+            "timestamp": "1709881560.0",
+            "comment_id": "1168609"
+          },
+          {
+            "content": "The ANSWER is NO ！\nInstead of creating a new intent for location, you should:\nAdd these phrases to the \"FindContact\" intent: This helps the model understand that these are different ways a user might express the intent to find contacts.\n\nUse Entities for Locations: In addition to training the intent with these phrases, you should use entities to capture the location information within the phrases. In LUIS, you can define an entity (like \"Location\") and then annotate locations in your training phrases. This way, the model learns to recognize and extract location details from user inputs.\n\nBy combining a well-trained \"FindContact\" intent with a location entity, your language model will be better equipped to understand and process user queries about finding contacts in specific locations.",
+            "timestamp": "1706327280.0",
+            "poster": "evangelist",
+            "upvote_count": "4",
+            "comment_id": "1133037"
+          },
+          {
+            "content": "Selected Answer: A\nhttps://learn.microsoft.com/en-us/azure/ai-services/luis/concepts/entities",
+            "poster": "rdemontis",
+            "upvote_count": "2",
+            "timestamp": "1699113060.0",
+            "comment_id": "1062228"
+          },
+          {
+            "comment_id": "937391",
+            "content": "Same as Question 8.\nhttps://www.examtopics.com/discussions/microsoft/view/60466-exam-ai-102-topic-3-question-8-discussion",
+            "upvote_count": "1",
+            "poster": "zellck",
+            "timestamp": "1688005500.0"
+          },
+          {
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/luis/how-to/entities\nCreate entities to extract key data from user utterances in Language Understanding (LUIS) apps. Extracted entity data is used by your client application to fulfill customer requests.\n\nThe entity represents a word or phrase inside the utterance that you want extracted. Entities describe information relevant to the intent, and sometimes they are essential for your app to perform its task.",
+            "timestamp": "1688004900.0",
+            "poster": "zellck",
+            "upvote_count": "2",
+            "comment_id": "937381"
+          },
+          {
+            "content": "Should be YES. An intent represents a task or action the user wants to perform. It is a purpose or goal expressed in a user's utterance. In this case, the Intent is to find the Contact. And it is already created.\n\nThe utterances specified have the same Intent which is to find/search for contacts. Hence they should be added to the list and an Entity should be created to capture location.",
+            "timestamp": "1686003360.0",
+            "upvote_count": "2",
+            "poster": "ziggy1117",
+            "comment_id": "915750"
+          },
+          {
+            "comment_id": "911250",
+            "content": "NO, By defining the appropriate utterances within the FindContact intent, the language model will be trained to understand and recognize similar phrases, allowing it to effectively search for information on a contact list based on the given inputs.",
+            "upvote_count": "1",
+            "timestamp": "1685536680.0",
+            "poster": "mmaguero"
+          },
+          {
+            "timestamp": "1685015220.0",
+            "poster": "EliteAllen",
+            "upvote_count": "4",
+            "content": "Selected Answer: B\nB. No\n\nThe solution does not meet the goal. In Language Understanding, entities are used to identify and categorize key data points in user utterances, such as names, places, or dates. While creating a new entity for the domain (e.g., city or country) could be part of the solution, it's not enough on its own.\n\nThe phrases provided are intended for training an intent, specifically the \"FindContact\" intent. Therefore, the solution should involve adding these phrases as example utterances under the \"FindContact\" intent in the Language Understanding service. This helps the model understand the kind of language users might use when they want to find a contact.\n\nAdditionally, an entity for locations (cities, countries) could be created and used in these utterances to help the model identify and extract the location information from user inputs. But merely creating an entity without associating it with the intent and utterances does not meet the goal.",
+            "comment_id": "906616"
+          },
+          {
+            "poster": "marti_tremblay000",
+            "timestamp": "1679051400.0",
+            "upvote_count": "3",
+            "content": "Selected Answer: A\nChatGPT answer : \nTo implement the phrase list in Language Understanding, you need to create a new intent called \"FindContact\" and add the following phrases as utterances:\n\nFind contacts in London\nWho do I know in Seattle?\nSearch for contacts in Ukraine\nYou also need to create a new entity for the domain, which could be something like \"Location\" or \"City\".\n\nSo, yes, creating a new entity for the domain and adding the given phrases to a new intent called \"FindContact\" would meet the goal of building a language model to search for information on a contact list.",
+            "comment_id": "841913"
+          },
+          {
+            "upvote_count": "3",
+            "timestamp": "1673985060.0",
+            "poster": "ap1234pa",
+            "content": "Selected Answer: A\nA is correct",
+            "comment_id": "779288"
+          },
+          {
+            "comment_id": "749173",
+            "timestamp": "1671396180.0",
+            "upvote_count": "2",
+            "poster": "SSJA",
+            "content": "Selected Answer: A\nCorrect answer is A"
+          },
+          {
+            "upvote_count": "5",
+            "poster": "Nebary",
+            "timestamp": "1661618940.0",
+            "content": "Selected Answer: A\nAgreed with SamedKia. Should be YES\nThe model should have an Entity \"Location\" that will help in finding the contacts. Reference: https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-intent",
+            "comment_id": "652630"
+          }
+        ],
+        "timestamp": "2022-04-28 10:19:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/74742-exam-ai-102-topic-3-question-19-discussion/",
+        "answer_ET": "B",
+        "answer_images": [],
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\nYou build a language model by using a Language Understanding service. The language model is used to search for information on a contact list by using an intent named FindContact.\nA conversational expert provides you with the following list of phrases to use for training.\n✑ Find contacts in London.\n✑ Who do I know in Seattle?\nSearch for contacts in Ukraine.\n//IMG//\n\nYou need to implement the phrase list in Language Understanding.\nSolution: You create a new entity for the domain.\nDoes this meet the goal?",
+        "answer": "B",
+        "question_id": 135,
+        "unix_timestamp": 1651133940,
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        }
+      }
+    ],
+    "exam": {
+      "provider": "Microsoft",
+      "isImplemented": true,
+      "isMCOnly": false,
+      "name": "AI-102",
+      "isBeta": false,
+      "lastUpdated": "06 Aug 2025",
+      "id": 41,
+      "numberOfQuestions": 330
+    },
+    "currentPage": 27
+  },
+  "__N_SSP": true
+}

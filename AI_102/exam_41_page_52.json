@@ -1,0 +1,491 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "K4ItLivG2oIA1dp1OXvp",
+        "answer_images": [],
+        "timestamp": "2023-03-17 12:42:00",
+        "answer_ET": "B",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/102921-exam-ai-102-topic-5-question-27-discussion/",
+        "discussion": [
+          {
+            "timestamp": "1687784340.0",
+            "poster": "EliteAllen",
+            "upvote_count": "8",
+            "content": "Selected Answer: B\nNo, this solution does not meet the goal.\n\nThe formality of responses to spurious questions is not controlled by modifying the question and answer pairs for the custom intents in Language Studio. These pairs are used to train the model to understand and respond to specific intents, not to control the tone or formality of the responses.\n\nTo ensure that the chatbot provides formal responses to spurious questions, you would need to adjust the chatbot's response templates or scripts, not the question and answer pairs for the custom intents. This might involve programming the chatbot to use more formal language in its responses, or to respond to unrecognized or spurious inputs with a standard, formal message.",
+            "comment_id": "934472"
+          },
+          {
+            "content": "Selected Answer: B\nNo is CORRECT because modifying the question and answer pairs for custom intents and retraining the model addresses specific intents but does not directly address the formality of responses to spurious questions.",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1739236320.0",
+            "comment_id": "1354747"
+          },
+          {
+            "content": "Selected Answer: A\ncopilot says YES.\n\n\"By modifying the question and answer pairs for the custom intents in Language Studio, you can improve the chatbot’s responses to spurious questions. Retraining and republishing the model with the updated data will ensure that the chatbot provides more formal and accurate answers.\"",
+            "timestamp": "1724475060.0",
+            "poster": "Moneybing",
+            "upvote_count": "1",
+            "comment_id": "1271526"
+          },
+          {
+            "poster": "evangelist",
+            "timestamp": "1707050280.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nThe qna_chitchat_professional.tsv is specifically designed to provide responses with a formal tone compared to other chitchat sources. It contains a curated set of question-and-answer pairs that are structured to reflect a professional and formal manner of communication. This makes it more suitable for environments or user interactions where formal responses are preferred, ensuring that the chatbot's replies to spurious or off-topic questions maintain the desired level of professionalism.",
+            "comment_id": "1140083"
+          },
+          {
+            "upvote_count": "2",
+            "timestamp": "1699421880.0",
+            "poster": "rdemontis",
+            "content": "Selected Answer: B\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/how-to/chit-chat",
+            "comment_id": "1065334"
+          },
+          {
+            "comment_id": "938203",
+            "content": "Selected Answer: B\nB is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/how-to/chit-chat",
+            "comments": [
+              {
+                "content": "Gotten this in Jul 2023 exam.",
+                "upvote_count": "4",
+                "timestamp": "1688859540.0",
+                "poster": "zellck",
+                "comment_id": "946789"
+              }
+            ],
+            "poster": "zellck",
+            "upvote_count": "3",
+            "timestamp": "1688046840.0"
+          },
+          {
+            "poster": "Drummer",
+            "upvote_count": "3",
+            "timestamp": "1687557960.0",
+            "content": "No, this solution does not meet the goal. Modifying the question and answer pairs for custom intents in Language Studio and retraining and republishing the model would only affect the responses of the chatbot to specific intents. B NO",
+            "comment_id": "931978"
+          },
+          {
+            "comment_id": "920395",
+            "timestamp": "1686455940.0",
+            "poster": "ziggy1117",
+            "upvote_count": "4",
+            "content": "Selected Answer: B\nSpurious questions are questions that are not relevant to the conversation or are not meant to be answered. In other words, these are chit-chat. So to make it professional, choose a professional chitchat"
+          },
+          {
+            "content": "Selected Answer: B\nyou should use the Azure Cognitive Service for Language's Language Understanding (LUIS) feature to identify the intent of the user's input and filter out spurious questions or provide formal fallback responses. You can achieve this by training your LUIS model to recognize spurious questions as a separate intent and handle them accordingly in your chatbot's logic.",
+            "poster": "kail85",
+            "upvote_count": "2",
+            "timestamp": "1685695980.0",
+            "comment_id": "912657"
+          },
+          {
+            "comment_id": "841939",
+            "content": "Selected Answer: A\nChatGPT answer : \nYes, modifying the question and answer pairs for the custom intents in Language Studio, and then retraining and republishing the model can meet the goal of ensuring that the chatbot provides formal responses to spurious questions.\n\nThe question and answer pairs in Language Studio are used to train the machine learning model for the chatbot. By modifying these pairs to provide more formal responses to spurious questions, and then retraining and republishing the model, the chatbot will have a better understanding of the user's input and will be able to provide more formal responses.",
+            "poster": "marti_tremblay000",
+            "timestamp": "1679053320.0",
+            "upvote_count": "3"
+          }
+        ],
+        "question_id": 256,
+        "unix_timestamp": 1679053320,
+        "answer": "B",
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\n\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\n\nYou have a chatbot that uses question answering in Azure Cognitive Service for Language.\n\nUsers report that the responses of the chatbot lack formality when answering spurious questions.\n\nYou need to ensure that the chatbot provides formal responses to spurious questions.\n\nSolution: From Language Studio, you modify the question and answer pairs for the custom intents, and then retrain and republish the model.\n\nDoes this meet the goal?",
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        },
+        "answer_description": "",
+        "isMC": true,
+        "question_images": [],
+        "exam_id": 41,
+        "answers_community": [
+          "B (84%)",
+          "A (16%)"
+        ],
+        "topic": "5"
+      },
+      {
+        "id": "tmb3y5aizcTCPry5bjeX",
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        },
+        "discussion": [
+          {
+            "poster": "syupwsh",
+            "upvote_count": "2",
+            "timestamp": "1739752320.0",
+            "content": "Selected Answer: A\nYes is CORRECT because changing the chitchat source to qna_chitchat_professional.tsv and then retraining and republishing the model ensures that the chatbot provides more formal responses to spurious questions. The qna_chitchat_professional.tsv file is designed to give professional and formal responses, which meets the requirement.",
+            "comment_id": "1357505"
+          },
+          {
+            "comment_id": "1234482",
+            "upvote_count": "1",
+            "timestamp": "1718980860.0",
+            "poster": "HaraTadahisa",
+            "content": "Selected Answer: A\nFocus on \"qna_chitchat_professional.tsv\". HipHop!"
+          },
+          {
+            "comment_id": "1140082",
+            "content": "Selected Answer: A\nThe qna_chitchat_professional.tsv is specifically designed to provide responses with a formal tone compared to other chitchat sources. It contains a curated set of question-and-answer pairs that are structured to reflect a professional and formal manner of communication. This makes it more suitable for environments or user interactions where formal responses are preferred, ensuring that the chatbot's replies to spurious or off-topic questions maintain the desired level of professionalism.",
+            "poster": "evangelist",
+            "upvote_count": "2",
+            "timestamp": "1707050220.0"
+          },
+          {
+            "comment_id": "1065336",
+            "content": "Selected Answer: A\nCorrect\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/how-to/chit-chat",
+            "upvote_count": "2",
+            "timestamp": "1699421880.0",
+            "poster": "rdemontis"
+          },
+          {
+            "comment_id": "984776",
+            "upvote_count": "4",
+            "timestamp": "1692391620.0",
+            "poster": "james2033",
+            "content": "Selected Answer: A\nFormal response, it is Personality = Professional, it is file qna_chitchat_professional.tsv . https://learn.microsoft.com/en-us/azure/ai-services/language-service/question-answering/concepts/best-practices#choosing-a-personality"
+          },
+          {
+            "timestamp": "1688046840.0",
+            "upvote_count": "4",
+            "poster": "zellck",
+            "comments": [
+              {
+                "comment_id": "946779",
+                "poster": "zellck",
+                "timestamp": "1688859120.0",
+                "upvote_count": "4",
+                "content": "Gotten this in Jul 2023 exam."
+              }
+            ],
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/how-to/chit-chat",
+            "comment_id": "938201"
+          },
+          {
+            "comment_id": "841941",
+            "content": "Selected Answer: A\nChatGPT answer :\nYes, changing the chitchat source to \"qna_chitchat_professional.tsv\" and retraining and republishing the model can meet the goal of ensuring that the chatbot provides formal responses to spurious questions.\n\nThe \"qna_chitchat_professional.tsv\" file is a source file for professional chitchat, which includes conversational responses for formal topics, such as business and finance. This file is designed to provide more formal responses to chitchat questions, so changing the source file to this file and retraining the model can improve the formality of responses to spurious questions.",
+            "timestamp": "1679053380.0",
+            "upvote_count": "2",
+            "poster": "marti_tremblay000"
+          }
+        ],
+        "timestamp": "2023-03-17 12:43:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/102922-exam-ai-102-topic-5-question-28-discussion/",
+        "answer_ET": "A",
+        "answer_images": [],
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\n\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\n\nYou have a chatbot that uses question answering in Azure Cognitive Service for Language.\n\nUsers report that the responses of the chatbot lack formality when answering spurious questions.\n\nYou need to ensure that the chatbot provides formal responses to spurious questions.\n\nSolution: From Language Studio, you change the chitchat source to qna_chitchat_professional.tsv, and then retrain and republish the model.\n\nDoes this meet the goal?",
+        "answer": "A",
+        "unix_timestamp": 1679053380,
+        "question_id": 257,
+        "exam_id": 41,
+        "topic": "5",
+        "answers_community": [
+          "A (100%)"
+        ],
+        "isMC": true,
+        "answer_description": "",
+        "question_images": []
+      },
+      {
+        "id": "wl9CICtuy94ailkRQfmh",
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "topic": "5",
+        "answers_community": [
+          "BCF (95%)",
+          "5%"
+        ],
+        "exam_id": 41,
+        "question_text": "You create five bots by using Microsoft Bot Framework Composer.\n\nYou need to make a single bot available to users that combines the bots. The solution must support dynamic routing to the bots based on user input.\n\nWhich three actions should you perform? Each correct answer presents part of the solution.\n\nNOTE: Each correct selection is worth one point.",
+        "answer": "BCF",
+        "unix_timestamp": 1678965000,
+        "question_id": 258,
+        "discussion": [
+          {
+            "content": "Selected Answer: BCF\nB. Change the Recognizer/Dispatch type: Adjusting the recognizer type to one that supports dispatching allows the bot to understand and route user input to the appropriate sub-bot.\n================================================\nC. Create an Orchestrator model: The Orchestrator is an AI-based component that helps in making decisions on routing the conversation to the most appropriate bot based on the user's intent.\n================================================\nF. Install the Orchestrator package: This is necessary to use the Orchestrator model within your bot, enabling it to dynamically route conversations to the correct bot based on the context and content of the user input.",
+            "poster": "evangelist",
+            "upvote_count": "6",
+            "timestamp": "1707049920.0",
+            "comment_id": "1140081"
+          },
+          {
+            "content": "Selected Answer: BCF\nChange the Recognizer/Dispatch type is CORRECT because you need to set the recognizer type to dispatch or orchestrator to enable routing based on user input.\n\nCreate an Orchestrator model is CORRECT because the Orchestrator model is designed to handle dynamic routing and intent recognition across multiple bots.\n\nInstall the Orchestrator package is CORRECT because the Orchestrator package provides the necessary tools and libraries to use the Orchestrator model within the Bot Framework Composer.\n\nBCF it is",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1739236680.0",
+            "comments": [
+              {
+                "comment_id": "1568587",
+                "content": "I'm not sure whether the topic of bot is still included in the 2025 exam.",
+                "poster": "Puay",
+                "timestamp": "1747119780.0",
+                "upvote_count": "1"
+              }
+            ],
+            "comment_id": "1354750"
+          },
+          {
+            "comment_id": "1235332",
+            "timestamp": "1719053100.0",
+            "upvote_count": "2",
+            "poster": "reiwanotora",
+            "content": "Selected Answer: BCF\nRecognizer/Dispatch type\ndouble Orchestrator"
+          },
+          {
+            "comment_id": "1235220",
+            "timestamp": "1719039180.0",
+            "upvote_count": "2",
+            "poster": "HaraTadahisa",
+            "content": "Selected Answer: BCF\nI say this answer is BCF."
+          },
+          {
+            "comment_id": "1222672",
+            "content": "Selected Answer: BCE\nMemorize dispatch and Orchestrator.",
+            "poster": "nanaw770",
+            "timestamp": "1717249800.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1065385",
+            "content": "Selected Answer: BCF\nThe answer is correct",
+            "upvote_count": "2",
+            "timestamp": "1699429560.0",
+            "poster": "rdemontis"
+          },
+          {
+            "comment_id": "938217",
+            "content": "Selected Answer: BCF\nBCF is the answer.\n\nhttps://learn.microsoft.com/en-us/composer/how-to-create-orchestrator-bot",
+            "poster": "zellck",
+            "timestamp": "1688047500.0",
+            "upvote_count": "3",
+            "comments": [
+              {
+                "upvote_count": "6",
+                "timestamp": "1688047500.0",
+                "poster": "zellck",
+                "content": "https://learn.microsoft.com/en-us/composer/how-to-create-orchestrator-bot#add-orchestrator-in-package-manager\nOrchestrator isn't a default feature in Composer. To use Orchestrator, first add the Orchestrator package to your bot. Composer will download the latest Orchestrator model and make it available to your bot.\n\nOn the Choose a recognizer type page, select Orchestrator (Intents only) and select Done to change the recognizer.",
+                "comment_id": "938220"
+              }
+            ]
+          },
+          {
+            "content": "Selected Answer: BCF\nChatGPT answers : \nTo make a single bot available to users that combines the bots and supports dynamic routing to the bots based on user input, the following three actions should be performed:\n\nB. Change the Recognizer/Dispatch type: The Recognizer/Dispatch type should be changed to enable the bot to recognize user input and dispatch it to the appropriate bot.\n\nC. Create an Orchestrator model: An Orchestrator model should be created to handle the routing of user input to the appropriate bot.\n\nF. Install the Orchestrator package: The Orchestrator package should be installed to provide the bot with the necessary functionality to route user input to the appropriate bot.\n\nTherefore, options B, C, and F are the correct answers.",
+            "timestamp": "1678965000.0",
+            "upvote_count": "3",
+            "poster": "marti_tremblay000",
+            "comment_id": "840864"
+          }
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/102800-exam-ai-102-topic-5-question-29-discussion/",
+        "answer_ET": "BCF",
+        "timestamp": "2023-03-16 12:10:00",
+        "answer_images": [],
+        "choices": {
+          "D": "Enable WebSockets.",
+          "C": "Create an Orchestrator model.",
+          "E": "Create a custom recognizer JSON file.",
+          "B": "Change the Recognizer/Dispatch type.",
+          "F": "Install the Orchestrator package.",
+          "A": "Create a composer extension."
+        }
+      },
+      {
+        "id": "8coTauK0g0JS8VSenIfY",
+        "answers_community": [
+          "BD (100%)"
+        ],
+        "topic": "5",
+        "exam_id": 41,
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "choices": {
+          "A": "Linked entities from a well-known knowledge base",
+          "B": "Sentiment Analysis",
+          "E": "Named Entity Recognition",
+          "C": "Key Phrases",
+          "D": "Detect Language"
+        },
+        "question_id": 259,
+        "unix_timestamp": 1671349320,
+        "question_text": "You are building a multilingual chatbot.\nYou need to send a different answer for positive and negative messages.\nWhich two Language service APIs should you use? Each correct answer presents part of the solution.\nNOTE: Each correct selection is worth one point.",
+        "answer": "BD",
+        "timestamp": "2022-12-18 08:42:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/91978-exam-ai-102-topic-5-question-3-discussion/",
+        "answer_ET": "BD",
+        "answer_images": [],
+        "discussion": [
+          {
+            "content": "Selected Answer: BD\nB. Sentiment Analysis <-- different answer for positive and negative messages\nD. Detect Language <-- multilingual chatbot",
+            "timestamp": "1698607140.0",
+            "upvote_count": "5",
+            "poster": "Lion007",
+            "comment_id": "1057097"
+          },
+          {
+            "poster": "syupwsh",
+            "timestamp": "1739234400.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: BD\nSentiment Analysis is CORRECT because it allows you to determine whether a message is positive, neutral, or negative. This is essential for sending different responses based on the sentiment of the message.\n\nDetect Language is CORRECT because it helps identify the language of the incoming message, which is crucial for ensuring that the chatbot can respond in the appropriate language.\n\nBD for sure",
+            "comment_id": "1354728"
+          },
+          {
+            "comment_id": "1262553",
+            "timestamp": "1723129140.0",
+            "upvote_count": "1",
+            "poster": "anto69",
+            "content": "Selected Answer: BD\nBD is the correct answer without any doubt"
+          },
+          {
+            "comment_id": "1229904",
+            "content": "Selected Answer: BD\nBD is answer.",
+            "upvote_count": "1",
+            "poster": "reigenchimpo",
+            "timestamp": "1718291040.0"
+          },
+          {
+            "content": "Selected Answer: BD\nB and D are correct answer.",
+            "upvote_count": "1",
+            "timestamp": "1717250460.0",
+            "poster": "nanaw770",
+            "comment_id": "1222676"
+          },
+          {
+            "content": "Selected Answer: BD\ncorrect answer",
+            "upvote_count": "2",
+            "poster": "rdemontis",
+            "timestamp": "1699334520.0",
+            "comment_id": "1064511"
+          },
+          {
+            "comment_id": "771019",
+            "comments": [
+              {
+                "comment_id": "813703",
+                "upvote_count": "6",
+                "timestamp": "1676778000.0",
+                "poster": "AzureJobsTillRetire",
+                "content": "You are building a \"multilingual\" chatbot, and that is why D (Detect Language) is correct"
+              }
+            ],
+            "upvote_count": "1",
+            "poster": "am20",
+            "timestamp": "1673320200.0",
+            "content": "for sure B but not sure why D? although other options are not useful either!"
+          },
+          {
+            "comment_id": "748670",
+            "timestamp": "1671349320.0",
+            "upvote_count": "2",
+            "poster": "slcheng",
+            "content": "Selected Answer: BD\nAgreed with B & D"
+          }
+        ]
+      },
+      {
+        "id": "jdiYfVQWrLBIm4Sl77Sl",
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        },
+        "unix_timestamp": 1686460620,
+        "question_id": 260,
+        "answer": "A",
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\n\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\n\nYou are building a chatbot that will use question answering in Azure Cognitive Service for Language.\n\nYou have a PDF named Doc1.pdf that contains a product catalogue and a price list.\n\nYou upload Doc1.pdf and train the model.\n\nDuring testing, users report that the chatbot responds correctly to the following question: What is the price of ?\n\nThe chatbot fails to respond to the following question: How much does cost?\n\nYou need to ensure that the chatbot responds correctly to both questions.\n\nSolution: From Language Studio, you add alternative phrasing to the question and answer pair, and then retrain and republish the model.\n\nDoes this meet the goal?",
+        "answer_images": [],
+        "answer_ET": "A",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/111868-exam-ai-102-topic-5-question-30-discussion/",
+        "timestamp": "2023-06-11 07:17:00",
+        "discussion": [
+          {
+            "comment_id": "1354751",
+            "content": "Selected Answer: A\nYes is CORRECT because adding alternative phrasing to the question and answer pair in Language Studio can help the model recognize different ways users might ask the same question. By providing alternative phrasings, you are effectively training the model to understand and respond to variations of the question, ensuring that it can handle both \"What is the price of?\" and \"How much does cost?\".",
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "timestamp": "1739236800.0"
+          },
+          {
+            "comment_id": "1234481",
+            "poster": "HaraTadahisa",
+            "timestamp": "1718980740.0",
+            "upvote_count": "2",
+            "content": "Selected Answer: A\n\"From Language Studio, you add alternative phrasing to the question and answer pair, and then retrain and republish the model.\" is correct solution. HipHop!"
+          },
+          {
+            "timestamp": "1717078680.0",
+            "poster": "fuck_india",
+            "upvote_count": "2",
+            "content": "Selected Answer: A\nA is right answer.",
+            "comment_id": "1221650"
+          },
+          {
+            "comment_id": "1140112",
+            "poster": "evangelist",
+            "upvote_count": "2",
+            "timestamp": "1707051780.0",
+            "content": "Selected Answer: A\nYes\n adding alternative phrasing to the question and answer pair in Azure Cognitive Service for Language, then retraining and republishing the model, meets the goal. This approach allows the model to understand and respond to variations in how questions are asked, improving its ability to correctly answer questions with similar meanings but different wordings."
+          },
+          {
+            "content": "A modified version of this was in the exam today.",
+            "timestamp": "1703114760.0",
+            "poster": "Gvalli",
+            "upvote_count": "2",
+            "comment_id": "1102029"
+          },
+          {
+            "comment_id": "1065393",
+            "upvote_count": "2",
+            "timestamp": "1699429800.0",
+            "poster": "rdemontis",
+            "content": "Selected Answer: A\ncorrect\nhttps://learn.microsoft.com/en-us/azure/ai-services/language-service/question-answering/concepts/best-practices#when-should-you-add-alternate-questions-to-question-and-answer-pairs"
+          },
+          {
+            "content": "Selected Answer: A\n\"Question: What is the price of Microsoft Stock?\"\n\n\"How much does a Microsoft share cost?\"\n\nat https://learn.microsoft.com/en-us/azure/ai-services/language-service/question-answering/concepts/best-practices#when-should-you-add-alternate-questions-to-question-and-answer-pairs",
+            "upvote_count": "3",
+            "timestamp": "1691849040.0",
+            "poster": "james2033",
+            "comment_id": "979396"
+          },
+          {
+            "comment_id": "938194",
+            "timestamp": "1688046360.0",
+            "upvote_count": "4",
+            "poster": "zellck",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/question-answering/concepts/best-practices#when-should-you-add-alternate-questions-to-question-and-answer-pairs"
+          },
+          {
+            "timestamp": "1686460620.0",
+            "poster": "973b658",
+            "upvote_count": "4",
+            "content": "Selected Answer: A\nA from ChatGPT 3.5.",
+            "comment_id": "920428"
+          }
+        ],
+        "answers_community": [
+          "A (100%)"
+        ],
+        "topic": "5",
+        "exam_id": 41,
+        "question_images": [],
+        "answer_description": "",
+        "isMC": true
+      }
+    ],
+    "exam": {
+      "numberOfQuestions": 330,
+      "isBeta": false,
+      "lastUpdated": "06 Aug 2025",
+      "id": 41,
+      "name": "AI-102",
+      "isImplemented": true,
+      "isMCOnly": false,
+      "provider": "Microsoft"
+    },
+    "currentPage": 52
+  },
+  "__N_SSP": true
+}

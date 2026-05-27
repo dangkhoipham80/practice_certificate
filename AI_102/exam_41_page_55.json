@@ -1,0 +1,493 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "FvsttW4HA2JiPeic7DbA",
+        "answer_images": [],
+        "discussion": [
+          {
+            "upvote_count": "8",
+            "timestamp": "1688044200.0",
+            "comments": [
+              {
+                "upvote_count": "5",
+                "timestamp": "1688859180.0",
+                "comment_id": "946781",
+                "content": "Gotten this in Jul 2023 exam.",
+                "poster": "zellck"
+              }
+            ],
+            "comment_id": "938145",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0#dialog-types\nThe dialogs library provides a few types of dialogs to make your bot's conversations easier to manage.\n- prompt dialogs\nAsk the user for input and return the result. A prompt will repeat until it gets valid input or it's canceled. They're designed to work with waterfall dialogs.",
+            "poster": "zellck"
+          },
+          {
+            "content": "Selected Answer: A\nPrompts are designed to ask users for specific pieces of information and can include validation logic to ensure the response meets certain criteria. In this case, you can use a TextPrompt to repeatedly ask for the destination until a valid input is provided or the user closes the conversation.\n\nA is correct",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "comment_id": "1354764",
+            "timestamp": "1739237700.0"
+          },
+          {
+            "content": "Selected Answer: A\nA is answer.",
+            "poster": "reigenchimpo",
+            "upvote_count": "1",
+            "timestamp": "1718286780.0",
+            "comment_id": "1229864"
+          },
+          {
+            "comment_id": "1221642",
+            "timestamp": "1717078260.0",
+            "upvote_count": "1",
+            "poster": "reiwanotora",
+            "content": "Selected Answer: A\nA is right answer."
+          },
+          {
+            "poster": "PCRamirez",
+            "content": "According to Windows Copilot:\nI understand your reasoning, but option A is not the best choice for this scenario. A prompt dialog can validate the user’s input, but it cannot handle complex conversational flows, such as interruptions, validations, and conditional logic. For example, if the user wants to change their destination, or ask for more information, or cancel the conversation, a prompt dialog cannot adapt to these situations. A prompt dialog can only ask the user for a single piece of information and return it to the parent dialog.\n\nAn adaptive dialog, on the other hand, can dynamically adjust to the user’s input and context. It can handle multiple inputs, interruptions, validations, and conditional logic. It can also use language generation templates to create natural and varied responses. An adaptive dialog can provide a better user experience and a more robust chatbot for a travel agent.\n\nI hope this clarifies why option C is the correct answer.",
+            "comment_id": "1143929",
+            "timestamp": "1707353700.0",
+            "upvote_count": "2"
+          },
+          {
+            "poster": "evangelist",
+            "content": "Selected Answer: A\nIn this scenario, where a chatbot needs to ask users for a destination and must repeat the question until a valid input is received, the most appropriate type of dialog to use is a \"prompt\" dialog. Here's why:\n\nPrompt Dialog: The prompt dialog is specifically designed to obtain user input and can be configured to validate this input and reprompt the user if necessary. In the Microsoft Bot Framework, prompts are used to handle various types of user input such as text, numbers, dates, and confirmations. For your requirement, you can use a text prompt that keeps asking the user for a destination until a valid one is provided or the user exits the conversation.",
+            "comment_id": "1133230",
+            "timestamp": "1706351220.0",
+            "upvote_count": "3"
+          },
+          {
+            "poster": "rdemontis",
+            "content": "Selected Answer: A\ncorrect\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0#dialog-types",
+            "comment_id": "1065933",
+            "timestamp": "1699475880.0",
+            "upvote_count": "2"
+          },
+          {
+            "content": "answer seems correct.\nhttps://learn.microsoft.com/en-us/training/modules/create-bot-with-bot-framework-composer/4-dialogs",
+            "poster": "Tin_Tin",
+            "upvote_count": "3",
+            "timestamp": "1687328880.0",
+            "comment_id": "929116"
+          },
+          {
+            "poster": "973b658",
+            "content": "Selected Answer: A\nA. prompt",
+            "comment_id": "920448",
+            "timestamp": "1686463140.0",
+            "upvote_count": "3"
+          }
+        ],
+        "question_text": "You are building a chatbot for a travel agent. The bot will ask users for a destination and must repeat the question until a valid input is received, or the user closes the conversation.\n\nWhich type of dialog should you use?",
+        "answer": "A",
+        "topic": "5",
+        "answer_description": "",
+        "question_images": [],
+        "answer_ET": "A",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/111874-exam-ai-102-topic-5-question-40-discussion/",
+        "choices": {
+          "C": "adaptive",
+          "B": "input",
+          "D": "QnA Maker",
+          "A": "prompt"
+        },
+        "question_id": 271,
+        "answers_community": [
+          "A (100%)"
+        ],
+        "exam_id": 41,
+        "isMC": true,
+        "unix_timestamp": 1686463140,
+        "timestamp": "2023-06-11 07:59:00"
+      },
+      {
+        "id": "vuHnLKGOdgl8iDboG0aB",
+        "unix_timestamp": 1686463260,
+        "timestamp": "2023-06-11 08:01:00",
+        "answer_description": "",
+        "topic": "5",
+        "answer": "A",
+        "question_text": "You are building a chatbot.\n\nYou need to configure the chatbot to query a knowledge base.\n\nWhich dialog class should you use?",
+        "discussion": [
+          {
+            "upvote_count": "8",
+            "timestamp": "1688044200.0",
+            "comments": [
+              {
+                "upvote_count": "6",
+                "comment_id": "946782",
+                "timestamp": "1688859180.0",
+                "content": "Gotten this in Jul 2023 exam.",
+                "poster": "zellck"
+              }
+            ],
+            "comment_id": "938144",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0#dialog-types\nThe dialogs library provides a few types of dialogs to make your bot's conversations easier to manage. \n- QnA Maker dialog\nAutomates access to a QnA Maker knowledge base. This dialog is designed to also work as an action within Composer.",
+            "poster": "zellck"
+          },
+          {
+            "content": "Selected Answer: A\nQnAMakerDialog is specifically designed to integrate with the QnA Maker service, which is used to create and query knowledge bases. This dialog class provides the necessary functionality to query a knowledge base and return answers based on the user's questions.\n\nA it is",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "comment_id": "1354765",
+            "timestamp": "1739237760.0"
+          },
+          {
+            "poster": "reigenchimpo",
+            "content": "Selected Answer: A\nA is answer.",
+            "comment_id": "1229863",
+            "timestamp": "1718286780.0",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "reiwanotora",
+            "content": "Selected Answer: A\nA is correct answer.",
+            "comment_id": "1221643",
+            "timestamp": "1717078260.0",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1706352780.0",
+            "comment_id": "1133252",
+            "content": "Selected Answer: A\nHere's why:\n\nQnAMakerDialog: This class is specifically designed for integration with QnA Maker, a cloud-based API service offered by Microsoft Azure that creates a question and answer layer over your data. QnAMakerDialog simplifies the process of querying a QnA Maker knowledge base and handling the responses within your chatbot. It manages the interaction pattern with the QnA Maker service, sending user queries and receiving answers that are then presented to the user.",
+            "poster": "evangelist"
+          },
+          {
+            "content": "Selected Answer: A\nCorrect\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0#dialog-types",
+            "poster": "rdemontis",
+            "upvote_count": "1",
+            "timestamp": "1699475940.0",
+            "comment_id": "1065935"
+          },
+          {
+            "poster": "973b658",
+            "content": "Selected Answer: A\nA. QnAMakerDialog",
+            "timestamp": "1686463260.0",
+            "comment_id": "920451",
+            "upvote_count": "2"
+          }
+        ],
+        "answer_images": [],
+        "isMC": true,
+        "exam_id": 41,
+        "answers_community": [
+          "A (100%)"
+        ],
+        "question_id": 272,
+        "choices": {
+          "D": "ComponentDialog",
+          "B": "AdaptiveDialog",
+          "C": "SkillDialog",
+          "A": "QnAMakerDialog"
+        },
+        "answer_ET": "A",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/111875-exam-ai-102-topic-5-question-41-discussion/",
+        "question_images": []
+      },
+      {
+        "id": "KUnGYTXko8PN2nA6etjC",
+        "timestamp": "2023-06-14 09:51:00",
+        "unix_timestamp": 1686729060,
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image63.png"
+        ],
+        "isMC": false,
+        "exam_id": 41,
+        "answers_community": [],
+        "question_id": 273,
+        "answer_ET": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/112146-exam-ai-102-topic-5-question-42-discussion/",
+        "discussion": [
+          {
+            "poster": "zellck",
+            "content": "1. send_activity\n2. clear_state\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-builder-howto-expire-conversation?view=azure-bot-service-4.0&tabs=python#user-interaction-expiration\n# Notify the user that the conversation is being restarted.\n- await turn_context.send_activity(\n# Clear state.\n- await self.conversation_state.clear_state(turn_context)",
+            "timestamp": "1704175200.0",
+            "comments": [
+              {
+                "poster": "rdemontis",
+                "content": "thanks again for your contribution",
+                "comment_id": "1065941",
+                "timestamp": "1715193960.0",
+                "upvote_count": "8"
+              }
+            ],
+            "comment_id": "940515",
+            "upvote_count": "23"
+          },
+          {
+            "upvote_count": "2",
+            "timestamp": "1739428920.0",
+            "comment_id": "1355981",
+            "content": "send_activity is CORRECT because it is the method used to send a message to the user in the Bot Framework. In this context, it will be used to send the message \"Welcome back! Let's start over from the beginning.\"\n\nclear_state is CORRECT because it is used to reset the state associated with the current conversation, effectively clearing any stored data and allowing the conversation to start over from the beginning.",
+            "poster": "syupwsh"
+          },
+          {
+            "upvote_count": "4",
+            "timestamp": "1722070740.0",
+            "comment_id": "1133258",
+            "content": "In summary, send_activities is the standard method for sending messages to users. on_send_activities is not typically used for sending messages directly. send_trace_activity is for debugging, and update_activity is for modifying existing messages.",
+            "poster": "evangelist"
+          },
+          {
+            "content": "The answer seems correct.\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-builder-howto-expire-conversation?view=azure-bot-service-4.0&tabs=python",
+            "poster": "Tin_Tin",
+            "upvote_count": "2",
+            "timestamp": "1703148600.0",
+            "comment_id": "929134"
+          },
+          {
+            "content": "It is true.",
+            "poster": "973b658",
+            "upvote_count": "2",
+            "comment_id": "922865",
+            "timestamp": "1702547460.0"
+          }
+        ],
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image64.png"
+        ],
+        "answer_description": "",
+        "topic": "5",
+        "answer": "",
+        "question_text": "HOTSPOT\n-\n\nYou have a chatbot.\n\nYou need to ensure that the bot conversation resets if a user fails to respond for 10 minutes.\n\nHow should you complete the code? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//"
+      },
+      {
+        "id": "ebl6KC1me52JQZKJCvfa",
+        "question_images": [],
+        "answers_community": [
+          "C (100%)"
+        ],
+        "question_id": 274,
+        "choices": {
+          "A": "Enable active learning.",
+          "C": "Add examples to the None intent.",
+          "B": "Add entities.",
+          "D": "Add examples to the custom intents."
+        },
+        "answer_ET": "C",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/112147-exam-ai-102-topic-5-question-43-discussion/",
+        "isMC": true,
+        "exam_id": 41,
+        "discussion": [
+          {
+            "poster": "zellck",
+            "content": "Selected Answer: C\nC is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/conversational-language-understanding/concepts/none-intent#adding-examples-to-the-none-intent\nThe None intent is also treated like any other intent in your project. If there are utterances that you want predicted as None, consider adding similar examples to them in your training data. For example, if you would like to categorize utterances that are not important to your project as None, such as greetings, yes and no answers, responses to questions such as providing a number, then add those utterances to your intent.\n\nYou should also consider adding false positive examples to the None intent. For example, in a flight booking project it is likely that the utterance \"I want to buy a book\" could be confused with a Book Flight intent. Adding \"I want to buy a book\" or \"I love reading books\" as None training utterances helps alter the predictions of those types of utterances towards the None intent instead of Book Flight.",
+            "comment_id": "938143",
+            "comments": [
+              {
+                "poster": "dd11121996",
+                "content": "are you sure? active learning will not be the answer?",
+                "comment_id": "956965",
+                "timestamp": "1689806580.0",
+                "upvote_count": "2"
+              }
+            ],
+            "timestamp": "1688044080.0",
+            "upvote_count": "10"
+          },
+          {
+            "content": "Selected Answer: C\nNone intent is used to handle spurious or irrelevant requests that do not relate to the capabilities of the model. By adding examples of irrelevant requests to the None intent, you train the model to recognize and correctly categorize these types of queries, thereby improving the model's ability to identify spurious requests.\n\nAnswer is C",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "comment_id": "1354766",
+            "timestamp": "1739237880.0"
+          },
+          {
+            "content": "Selected Answer: C\nC is answer.",
+            "poster": "reigenchimpo",
+            "upvote_count": "1",
+            "timestamp": "1718286720.0",
+            "comment_id": "1229862"
+          },
+          {
+            "content": "ChatGPT says C but I've doubt on A",
+            "poster": "anto69",
+            "upvote_count": "1",
+            "timestamp": "1717847400.0",
+            "comment_id": "1226717"
+          },
+          {
+            "comment_id": "1133260",
+            "timestamp": "1706353260.0",
+            "upvote_count": "3",
+            "poster": "evangelist",
+            "content": "Selected Answer: C\nIn a Conversational Language Understanding model, especially when using a tool like Language Studio, the \"None\" intent plays a crucial role in handling queries or requests that do not pertain to the defined capabilities of the model. Here's why adding examples to the None intent is the right approach:\n\nNone Intent: The None intent is designed to capture user inputs that fall outside of the other specified intents in your model. By training the None intent with examples of irrelevant or unrelated requests, you teach the model to recognize and appropriately handle spurious queries that do not align with its capabilities. This helps in reducing incorrect responses by ensuring that the model does not force these out-of-scope queries into one of the custom intents."
+          },
+          {
+            "poster": "Gvalli",
+            "content": "Selected Answer: C\nC - None intent.\nBecause of 'NOT' related utterances, and 'NOT' related utterances do not add value, hence 'Not active learning'. \nKeyword - 'NOT' related.\nDuring testing, users receive incorrect responses to requests that do NOT relate to the capabilities of the model.",
+            "comment_id": "1091252",
+            "timestamp": "1702059240.0",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1699476540.0",
+            "comment_id": "1065944",
+            "content": "Selected Answer: C\nNone intent is where you place utterances not related to the model capabilities",
+            "poster": "rdemontis"
+          },
+          {
+            "content": "Selected Answer: C\nC.\n#22 topic3",
+            "poster": "973b658",
+            "upvote_count": "3",
+            "timestamp": "1686729120.0",
+            "comments": [
+              {
+                "content": "Now #19 topic 3",
+                "poster": "M25",
+                "upvote_count": "1",
+                "comment_id": "998630",
+                "timestamp": "1693840020.0"
+              }
+            ],
+            "comment_id": "922867"
+          }
+        ],
+        "answer_images": [],
+        "answer": "C",
+        "question_text": "You develop a Conversational Language Understanding model by using Language Studio.\n\nDuring testing, users receive incorrect responses to requests that do NOT relate to the capabilities of the model.\n\nYou need to ensure that the model identifies spurious requests.\n\nWhat should you do?",
+        "answer_description": "",
+        "topic": "5",
+        "timestamp": "2023-06-14 09:52:00",
+        "unix_timestamp": 1686729120
+      },
+      {
+        "id": "l1yU8xJ6pPvFXlJZwncv",
+        "exam_id": 41,
+        "isMC": true,
+        "choices": {
+          "E": "Add Speech to the bot responses.",
+          "A": "Configure the language and voice settings for the Speech resource.",
+          "C": "Add language understanding to dialogs.",
+          "F": "Remove the setSpeak configuration.",
+          "B": "Add the endpoint and key of the Speech resource to the bot.",
+          "D": "Add Orchestrator to the bot."
+        },
+        "question_id": 275,
+        "answers_community": [
+          "ABE (95%)",
+          "5%"
+        ],
+        "answer_ET": "ABE",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/112148-exam-ai-102-topic-5-question-44-discussion/",
+        "question_images": [],
+        "answer_description": "",
+        "topic": "5",
+        "answer": "ABE",
+        "question_text": "You have a Speech resource and a bot that was built by using the Microsoft Bot Framework Composer.\n\nYou need to add support for speech-based channels to the bot.\n\nWhich three actions should you perform? Each correct answer presents part of the solution.\n\nNOTE: Each correct selection is worth one point.",
+        "discussion": [
+          {
+            "upvote_count": "10",
+            "comment_id": "946783",
+            "timestamp": "1688859180.0",
+            "content": "Gotten this in Jul 2023 exam.",
+            "poster": "zellck"
+          },
+          {
+            "poster": "rdemontis",
+            "content": "Selected Answer: ABE\nTo add support for speech-based channels to a bot built with the Microsoft Bot Framework Composer, you should perform the following actions:\n\n Add the endpoint and key of the Speech resource to the bot (B): You need to configure the bot to connect to the Speech resource, which will enable the bot to convert text into speech and vice versa.\n\n Add Speech to the bot responses (E): You should update your bot's responses to include speech output. This is important for speech-based channels, as the bot will need to generate spoken responses for users.\n\n Configure the language and voice settings for the Speech resource (A): Configuring the language and voice settings in your Speech resource is important to ensure that the speech output is generated in the desired language and with the appropriate voice.\n\nThe other options (C, D, and F) are not directly related to adding support for speech-based channels and can be considered unrelated to this specific task. (ChatGPT)",
+            "comment_id": "1071143",
+            "timestamp": "1700030520.0",
+            "upvote_count": "7"
+          },
+          {
+            "content": "Selected Answer: ABE\nConfigure the language and voice settings for the Speech resource is CORRECT. The language and voice settings determine how the Speech resource will interpret and generate speech. Configuring these settings ensures that the bot can understand the user's spoken input and provide appropriate spoken responses.\n\nAdd the endpoint and key of the Speech resource to the bot is CORRECT. The bot needs to connect to the Speech resource to use speech-to-text and text-to-speech capabilities. Adding the endpoint and key allows the bot to authenticate and communicate with the Speech service.\n\nAdd Speech to the bot responses is CORRECT. To enable the bot to respond with speech, you need to configure the bot to use speech in its responses. This involves setting up the bot to output spoken responses in addition to or instead of text responses.\n\nAnswer ABE",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "comment_id": "1354767",
+            "timestamp": "1739238120.0"
+          },
+          {
+            "timestamp": "1723603440.0",
+            "comment_id": "1265482",
+            "upvote_count": "1",
+            "poster": "Shariq",
+            "content": "Selected Answer: ABE\nF is incorrect. Removing setSpeak configuration would not help in adding speech capabilities; in fact, it could hinder the bot's ability to produce speech responses effectively."
+          },
+          {
+            "content": "Selected Answer: ABE\nWe need to add support for speech-based channels to the bot.\nSo, Configure the language and voice settings, Add the endpoint and key of the Speech resource to the bot, Add Speech to the bot responses.\nSimple. ABE is answer.",
+            "poster": "reigenchimpo",
+            "upvote_count": "1",
+            "timestamp": "1718286660.0",
+            "comment_id": "1229861"
+          },
+          {
+            "poster": "JamesKJoker",
+            "content": "A. Configure the language and voice settings for the Speech resource. You need to configure the Speech resource to match the language and voice settings of the bot.\nB. Add the endpoint and key of the Speech resource to the bot. The bot needs to know where to connect to the Speech resource to process speech.\nC. Add language understanding to dialogs. Language understanding allows the bot to understand the user's intent from spoken language.\nHere's why the other options are incorrect:\nD. Add Orchestrator to the bot. Orchestrator is a component of Azure Logic Apps and is not directly related to speech-based channels in a bot.\nE. Add Speech to the bot responses. While the bot will respond with speech, you don't need to explicitly add speech to the bot responses. It's handled by the Speech resource.\nF. Remove the setSpeak configuration. The setSpeak configuration is likely related to speech functionality and should not be removed.\n\nGemini Pro 1.5",
+            "comment_id": "1214224",
+            "timestamp": "1716194760.0",
+            "upvote_count": "2"
+          },
+          {
+            "content": "A. Configure the language and voice settings for the Speech resource.\nThis step is crucial for ensuring that the Speech service can accurately recognize and synthesize speech in the desired language and voice. \n\nB. Add the endpoint and key of the Speech resource to the bot.\nTo use the Azure Speech service with your bot, you need to authenticate your requests. \n\nE. Add Speech to the bot responses.\nTo enhance the bot’s interactions over speech-based channels, you should include speech-specific responses.",
+            "poster": "evangelist",
+            "upvote_count": "3",
+            "comment_id": "1145888",
+            "timestamp": "1707529500.0"
+          },
+          {
+            "poster": "evangelist",
+            "content": "Selected Answer: ABE\nA. Configure the language and voice settings for the Speech resource.\nThis step is important for ensuring that the Speech resource is set up to handle the specific languages and voice types that your bot will use.\n\nB. Add the endpoint and key of the Speech resource to the bot.\nThis involves adding the endpoint URL and the key for your Speech resource to the bot's configuration.\n\nE. Add Speech to the bot responses.\n In the Bot Framework Composer, this typically involves specifying the speech output for each dialog or message.",
+            "timestamp": "1706355720.0",
+            "comment_id": "1133299",
+            "upvote_count": "1"
+          },
+          {
+            "timestamp": "1697945460.0",
+            "comment_id": "1050177",
+            "comments": [
+              {
+                "upvote_count": "1",
+                "timestamp": "1697945580.0",
+                "comment_id": "1050178",
+                "content": "Also learn how to connect a bot to a channel : https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-directlinespeech?view=azure-bot-service-4.0",
+                "poster": "sl_mslconsulting"
+              }
+            ],
+            "upvote_count": "1",
+            "poster": "sl_mslconsulting",
+            "content": "Selected Answer: AEF\nCheck when you need to remove setSpeak https://learn.microsoft.com/en-us/composer/concept-speech?tabs=v2x#add-speech-components-to-your-bot-responses"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1687834800.0",
+            "comment_id": "934984",
+            "content": "Selected Answer: ABE\nshould be ABE",
+            "poster": "Tin_Tin"
+          },
+          {
+            "content": "Selected Answer: ABE\nA. Configure the language and voice settings for the Speech resource.\nThis is necessary to ensure that the speech services can correctly interpret and generate speech in the desired language and voice.\n\nB. Add the endpoint and key of the Speech resource to the bot.\nThis allows the bot to use the Speech resource for speech-to-text and text-to-speech capabilities.\n\nE. Add Speech to the bot responses.\nThis is necessary to enable the bot to generate spoken responses to user input.",
+            "poster": "EliteAllen",
+            "upvote_count": "3",
+            "comment_id": "934488",
+            "timestamp": "1687785060.0"
+          },
+          {
+            "content": "Selected Answer: ABE\nABE is.",
+            "poster": "973b658",
+            "upvote_count": "3",
+            "comment_id": "922870",
+            "timestamp": "1686729480.0"
+          }
+        ],
+        "answer_images": [],
+        "timestamp": "2023-06-14 09:58:00",
+        "unix_timestamp": 1686729480
+      }
+    ],
+    "exam": {
+      "isBeta": false,
+      "numberOfQuestions": 330,
+      "name": "AI-102",
+      "isImplemented": true,
+      "id": 41,
+      "provider": "Microsoft",
+      "isMCOnly": false,
+      "lastUpdated": "06 Aug 2025"
+    },
+    "currentPage": 55
+  },
+  "__N_SSP": true
+}

@@ -1,0 +1,1113 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "09QFTX11Zgu510qvVk6F",
+        "timestamp": "2021-06-17 15:23:00",
+        "unix_timestamp": 1623936180,
+        "exam_id": 41,
+        "isMC": true,
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        },
+        "question_id": 126,
+        "answers_community": [
+          "B (52%)",
+          "A (48%)"
+        ],
+        "answer_ET": "B",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/55511-exam-ai-102-topic-3-question-1-discussion/",
+        "question_images": [],
+        "answer_description": "",
+        "topic": "3",
+        "answer": "B",
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\nYou build a language model by using a Language Understanding service. The language model is used to search for information on a contact list by using an intent named FindContact.\nA conversational expert provides you with the following list of phrases to use for training.\n✑ Find contacts in London.\n✑ Who do I know in Seattle?\n✑ Search for contacts in Ukraine.\nYou need to implement the phrase list in Language Understanding.\nSolution: You create a new pattern in the FindContact intent.\nDoes this meet the goal?",
+        "discussion": [
+          {
+            "timestamp": "1625072400.0",
+            "comment_id": "394978",
+            "comments": [
+              {
+                "content": "https://learn.microsoft.com/en-us/training/modules/build-language-understanding-model/4-use-patterns-differentiate-similar-utterances",
+                "poster": "jiantao_john_pan",
+                "upvote_count": "2",
+                "comment_id": "1329539",
+                "timestamp": "1734708720.0"
+              },
+              {
+                "timestamp": "1627373400.0",
+                "comment_id": "415285",
+                "upvote_count": "2",
+                "poster": "YipingRuan",
+                "content": "Agree, but Entity is also good https://docs.microsoft.com/bs-cyrl-ba/azure/cognitive-services/luis/luis-concept-intent#intent-compared-to-entity"
+              },
+              {
+                "content": "I agree. The intent here is \"search for contact\", for example. The location is an entity type \"location\", as you can see in the example What's the weather like in Seattle tomorrow? on the link given by @YipingRuan",
+                "poster": "praticewizards",
+                "upvote_count": "1",
+                "comment_id": "672158",
+                "timestamp": "1663492560.0"
+              }
+            ],
+            "upvote_count": "37",
+            "poster": "azurelearner666",
+            "content": "Using a pattern could be a good solution IMHO... \n✑ Find contacts in London.\n✑ Who do I know in Seattle?\n✑ Search for contacts in Ukraine.\n\nLike\nWhere is {FormName}[?]\nWho authored {FormName}[?]\n{FormName} is published in French[?]\n(taken from https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-patterns)\n\nwe could do:\n✑ Find contacts in {CityOrCountry}.\n✑ Who do I know in {CityOrCountry}[?]\n✑ Search for contacts in {CityOrCountry}[?].\n\nSo, to me a pattern is a Solution (A)"
+          },
+          {
+            "upvote_count": "12",
+            "comment_id": "673895",
+            "timestamp": "1663658460.0",
+            "content": "Selected Answer: A\nAccording to MS learn, answer should be yes (A)\n\nhttps://learn.microsoft.com/en-us/training/modules/create-language-understanding-app/5-use-patterns-to-differentiate-similar-utterances\n\nThis is a FindContact intent with a location entity pattern",
+            "poster": "STH"
+          },
+          {
+            "poster": "098ca78",
+            "content": "Selected Answer: B\nExplanation:\nCreating a pattern in the FindContact intent is not the correct way to incorporate multiple diverse user phrases for training.\n\nPatterns are used to define a specific sentence structure with parameterized parts (e.g., \"Find contacts in {Location}\"). They are more rigid and less flexible for general training of varied user utterances.\n\nTo properly train the Language Understanding (LUIS) model, you should add the provided phrases as example utterances to the FindContact intent. This helps the model learn how users might express that intent in natural language.\n\nCorrect Action:\nYou should add the phrases like:\n\n\"Find contacts in London\"\n\n\"Who do I know in Seattle?\"\n\n\"Search for contacts in Ukraine\"\n\nas example utterances, not as a single pattern.",
+            "comment_id": "1578717",
+            "timestamp": "1750271340.0",
+            "upvote_count": "2"
+          },
+          {
+            "content": "Selected Answer: B\nit is \"No\" 100%",
+            "poster": "qqaws",
+            "upvote_count": "1",
+            "timestamp": "1749752340.0",
+            "comment_id": "1576993"
+          },
+          {
+            "comment_id": "1576691",
+            "timestamp": "1749684720.0",
+            "upvote_count": "1",
+            "poster": "azuretrainer1",
+            "content": "Selected Answer: B\n❌ No, this does not meet the goal.\n\nCreating a pattern in the FindContact intent is not the most appropriate way to implement the provided phrases for training a Language Understanding (LUIS) model.\n\nHere's why:\nThe provided sentences are training utterances, not patterns.\n\nTraining utterances help the model learn the variety of ways users may express an intent (in this case, FindContact).\n\nPatterns in LUIS are used when you need to define a specific structure with pattern.any entities or placeholders (e.g., \"Find contacts in {location}\").\n\n✅ Correct Approach:\nYou should add the provided phrases as training utterances under the FindContact intent. This will help the model recognize the intent when users ask similar questions in different ways."
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "1399801",
+            "timestamp": "1742239740.0",
+            "content": "Selected Answer: B\nThis should be utterances and not pattern",
+            "poster": "SunilB"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "1363399",
+            "timestamp": "1740806700.0",
+            "content": "Selected Answer: A\nhttps://learn.microsoft.com/en-us/training/modules/create-language-understanding-app/5-use-patterns-to-differentiate-similar-utterances\n\nAnswer is Yes",
+            "poster": "syupwsh"
+          },
+          {
+            "content": "Selected Answer: B\nCreating a new pattern in the FindContact intent alone does not fully meet the goal of implementing the phrase list in Language Understanding (LUIS). Instead, you should add these phrases as utterances under the FindContact intent. By adding them as utterances, the model will learn to recognize these specific phrases and similar variations when users are searching for contacts.",
+            "poster": "gyaansastra",
+            "upvote_count": "1",
+            "timestamp": "1740564660.0",
+            "comment_id": "1361858"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1736819820.0",
+            "comment_id": "1340119",
+            "content": "Selected Answer: B\nIn my opinion, example utterances are missing. The stated steps should provide a complete solution, which A does not. So it is B.",
+            "poster": "BenALGuhl"
+          },
+          {
+            "poster": "pabsinaz",
+            "content": "Selected Answer: B\nNo, this solution does not fully meet the goal. Creating a new pattern in the FindContact intent is helpful, but it's not sufficient on its own for implementing the given phrase list effectively.\n\nTo properly implement these phrases, you should add them as example utterances within the FindContact intent. This allows the Language Understanding (LUIS) service to learn from these specific examples and better understand the variations in the queries.\n\nIn summary, you should:\n\nAdd the given phrases as example utterances in the FindContact intent.\n\nOptionally, create patterns to handle similar phrases or variations more effectively.",
+            "comment_id": "1333354",
+            "timestamp": "1735451700.0",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "Alan_CA",
+            "content": "Selected Answer: B\nCopilot says :\nThe solution of creating a new pattern in the FindContact intent is not the most appropriate way to implement these training phrases. Instead, you should use these phrases as examples directly within the FindContact intent\nSo I would say NO",
+            "timestamp": "1732912620.0",
+            "comment_id": "1319910",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "2",
+            "timestamp": "1730925900.0",
+            "comment_id": "1308153",
+            "content": "Selected Answer: A\nA is the right answer",
+            "poster": "jolimon"
+          },
+          {
+            "upvote_count": "2",
+            "comment_id": "1291544",
+            "timestamp": "1727697960.0",
+            "content": "Selected Answer: B\nTh answer would be to add example utterances that trains the model to recognize similar phrases",
+            "poster": "RajuTS"
+          },
+          {
+            "poster": "famco",
+            "content": "Phrases are like synonyms. Here it is about entities (location to be specific) that is required along with the intent to do the action. Unless of course there are some hidden tricks to make people who know how it is used fail. This (certification) department in the dysfunctional microsoft is about making more money in that department (and missing the bigger picture). Intra company fights is microsoft",
+            "timestamp": "1725550440.0",
+            "comments": [
+              {
+                "poster": "famco",
+                "content": "Wait a minute, of course there is a catch. It is a trap. They do not talk about entities, which will come to mind. The question is formulated in a complex way I can't make out what breakfast the creator of this marvellous question ate. \n\nI have to say no because it is just creating the pattern, and not creating the phrase and in the phrase the pattern. But god knows what is the intent of this question. Microsoft !!",
+                "comment_id": "1279029",
+                "timestamp": "1725550980.0",
+                "upvote_count": "1"
+              }
+            ],
+            "comment_id": "1279023",
+            "upvote_count": "1"
+          },
+          {
+            "timestamp": "1724992740.0",
+            "comment_id": "1274907",
+            "upvote_count": "2",
+            "poster": "testmaillo020",
+            "content": "Selected Answer: B\n**Answer: B. No**\n\nCreating a new pattern in the FindContact intent is not the correct approach. Patterns in Language Understanding services are used to match specific sentence structures rather than training the model with example phrases. To properly implement the phrase list for training, you should add these phrases as example utterances within the FindContact intent. This way, the model learns to recognize different ways users might ask to find contacts.\n\nSo, the correct approach would be to add these phrases as example utterances, not just creating a new pattern."
+          },
+          {
+            "timestamp": "1719127560.0",
+            "comment_id": "1235716",
+            "upvote_count": "1",
+            "poster": "HVardhini",
+            "content": "Selected Answer: B\nNo. Find contacts in {Location} where location is an entity"
+          },
+          {
+            "content": "Selected Answer: A\nI say A is correct! HipHop!",
+            "poster": "HaraTadahisa",
+            "upvote_count": "2",
+            "comment_id": "1234478",
+            "timestamp": "1718980620.0"
+          },
+          {
+            "poster": "fuck_india",
+            "content": "This issue is not working because everyone's opinion is 50-50. I don't know the correct answer, so I will be staring at MS Learn when this question comes up on the real exam.Examtopic should scrutinize and post the correct answer.",
+            "timestamp": "1718460180.0",
+            "comment_id": "1230991",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "1230986",
+            "timestamp": "1718460120.0",
+            "content": "This issue is not working because everyone's opinion is 50-50. I don't know the correct answer, so I will be staring at MS Learn when this question comes up on the real exam.Examtopic should scrutinize and post the correct answer.",
+            "poster": "fuck_india"
+          },
+          {
+            "timestamp": "1718269380.0",
+            "comment_id": "1229712",
+            "upvote_count": "3",
+            "poster": "ARM360",
+            "content": "Selected Answer: B\nWhile creating a pattern might seem like a solution, it's not the most suitable approach for this scenario.\n\nHere's why:\n\nPatterns: Patterns in Language Understanding (LUIS) are designed to capture specific structures in utterances and often involve labeling entities within those structures. They wouldn't be ideal for capturing synonyms or similar phrasings like \"Find\", \"Who do I know\", and \"Search for\".\n\nPhrase Lists: A better approach for this situation is to utilize Phrase Lists in LUIS. Phrase lists allow you to define a set of synonyms or related phrases that the LUIS model can recognize as equivalent when encountering them in user queries.\n\nTherefore, to implement the provided phrases effectively, you should create a Phrase List containing synonyms like \"Find\", \"Who do I know\", and \"Search for\" and associate it with the FindContact intent."
+          },
+          {
+            "comment_id": "1226715",
+            "comments": [
+              {
+                "poster": "Mattt",
+                "content": "ChatGPT 4.5 says no\n\nWhy the proposed solution does NOT meet the requirement:\nThe question specifically mentions using a phrase list, which is different from creating a pattern.\nA phrase list helps improve recognition of particular words or phrases, while a pattern defines structured ways a user might express an intent.",
+                "timestamp": "1741695000.0",
+                "comment_id": "1387389",
+                "upvote_count": "1"
+              },
+              {
+                "upvote_count": "1",
+                "timestamp": "1724031420.0",
+                "comment_id": "1268300",
+                "content": "copied entire question to Copilot, and Copilot says YES.",
+                "poster": "Moneybing"
+              }
+            ],
+            "timestamp": "1717847100.0",
+            "upvote_count": "3",
+            "poster": "anto69",
+            "content": "Selected Answer: A\nChatGPT says not enough, Copilot says yes. I stay with Copilot"
+          },
+          {
+            "content": "Selected Answer: A\nIt MUST be A.",
+            "poster": "nanaw770",
+            "upvote_count": "2",
+            "timestamp": "1716560460.0",
+            "comment_id": "1217578"
+          },
+          {
+            "comment_id": "1217574",
+            "timestamp": "1716560340.0",
+            "upvote_count": "1",
+            "poster": "nanaw770",
+            "content": "After all, would you choose Yes or No to be correct?"
+          },
+          {
+            "poster": "Murtuza",
+            "content": "Selected Answer: A\nA is correct",
+            "timestamp": "1712502900.0",
+            "comment_id": "1191027",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1711804980.0",
+            "comment_id": "1186111",
+            "content": "Yes, creating a new pattern in the FindContact intent with the provided phrases can help train the Language Understanding model to better recognize when the user is trying to find contacts in a specific location. This would meet the goal of implementing the phrase list in Language Understanding.",
+            "poster": "Murtuza"
+          },
+          {
+            "content": "This same question (topic 3, question 18) seems to be indicated by the community that this question has two affirmative answers. I'm not sure if this is correct, normally in this type of question there is only one affirmative answer and the rest are negative. Is anyone clear on the real answer to this question?",
+            "poster": "f2c587e",
+            "upvote_count": "2",
+            "timestamp": "1711669260.0",
+            "comment_id": "1185098"
+          },
+          {
+            "upvote_count": "4",
+            "timestamp": "1705840140.0",
+            "comment_id": "1127794",
+            "content": "Selected Answer: B\nB. No\n\nThe proposed solution of creating a new pattern in the FindContact intent does not fully meet the goal of implementing a phrase list in Language Understanding (often referred to as LUIS - Language Understanding Intelligent Service in Azure).\n\nIn Azure LUIS, patterns are used to identify specific sentence structures that indicate intents, and they are indeed a valuable part of intent recognition. However, patterns alone are not the same as a phrase list. A phrase list in LUIS is a feature that allows you to define a list of related words or phrases which can be used across various intents and utterances. It's more about providing synonyms or variations of words that help the model understand different ways a user might express the same concept.",
+            "poster": "trysec"
+          },
+          {
+            "poster": "dimsok",
+            "content": "Selected Answer: B\nIts a NO, utterances are not similar",
+            "timestamp": "1704882720.0",
+            "comment_id": "1118453",
+            "upvote_count": "1"
+          },
+          {
+            "timestamp": "1699569420.0",
+            "comments": [
+              {
+                "poster": "sl_mslconsulting",
+                "content": "We only have one intent here. You need to add entity to provide context specific information location to your app to take proper action.",
+                "timestamp": "1699569720.0",
+                "comment_id": "1066806",
+                "upvote_count": "2"
+              }
+            ],
+            "comment_id": "1066804",
+            "upvote_count": "5",
+            "poster": "sl_mslconsulting",
+            "content": "Selected Answer: B\nI am speaking for the newer CLU. The very purpose of using patterns is to differentiate similar utterances but with different intents."
+          },
+          {
+            "poster": "rdemontis",
+            "content": "Selected Answer: A\nIMHO we are in a case where the utterances are very similar. You are asking questions in a slightly different way to obtain the same result: a list of contact. So i think a pattern could be very useful because the phrase list here is also quite short. And this is a typical scenario where patterns fit the bill\nhttps://learn.microsoft.com/en-us/azure/ai-services/luis/concepts/patterns-features",
+            "timestamp": "1699107600.0",
+            "comment_id": "1062150",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1040037",
+            "timestamp": "1696987920.0",
+            "upvote_count": "1",
+            "poster": "sl_mslconsulting",
+            "content": "Selected Answer: B\nFirst off you can’t even create a LUIS resource to experiment it. I doubt if this question will ever appear on the exam again. Also these phases are not similar at all so using pattern is of out the question. You need entity to be extracted from the utterance to decide what to do next in your app. What do you need? The location so you can retrieve the contacts properly."
+          },
+          {
+            "content": "Selected Answer: A\nIntent https://learn.microsoft.com/en-us/azure/ai-services/luis/concepts/intents",
+            "poster": "james2033",
+            "upvote_count": "1",
+            "timestamp": "1692367020.0",
+            "comment_id": "984553"
+          },
+          {
+            "upvote_count": "2",
+            "comment_id": "937386",
+            "comments": [
+              {
+                "comment_id": "937387",
+                "timestamp": "1688005380.0",
+                "upvote_count": "1",
+                "poster": "zellck",
+                "content": "https://learn.microsoft.com/en-us/training/modules/build-language-understanding-model/4-use-patterns-differentiate-similar-utterances\nIn some cases, a model might contain multiple intents for which utterances are likely to be similar. You can use the pattern of utterances to disambiguate the intents while minimizing the number of sample utterances."
+              }
+            ],
+            "timestamp": "1688005380.0",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/luis/concepts/patterns-features\nPatterns are designed to improve accuracy when multiple utterances are very similar. A pattern allows you to gain more accuracy for an intent without providing several more utterances.",
+            "poster": "zellck"
+          },
+          {
+            "poster": "Pixelmate",
+            "content": "This usecase was asked in 28/06/2023 exam",
+            "timestamp": "1687904760.0",
+            "comment_id": "935877",
+            "upvote_count": "5"
+          },
+          {
+            "upvote_count": "2",
+            "comment_id": "898078",
+            "timestamp": "1684131720.0",
+            "content": "chat gpt \"B. No.\n\nCreating a new pattern in the FindContact intent is not the correct approach to implementing a phrase list in Language Understanding. Instead, you should use the Phrase List feature in Language Understanding. The Phrase List feature allows you to define a list of phrases that are relevant to a particular intent. These phrases can then be used to improve the accuracy of the language model for that intent.\"",
+            "poster": "hens"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "841908",
+            "timestamp": "1679050800.0",
+            "content": "Selected Answer: B\nChatGPT answer : \nNo, simply creating a new pattern in the FindContact intent is not enough to implement the phrase list in Language Understanding. You need to add the phrases to the intent as training examples so that the language model can learn to recognize them and correctly identify the FindContact intent when a user enters a similar phrase.\n\nTo implement the phrase list in Language Understanding, you should add the provided phrases as training examples to the FindContact intent. This will enable the language model to learn the different ways that users may express the intent to find contacts in different locations. You can do this by going to the Language Understanding service and adding the phrases to the FindContact intent's training data.",
+            "poster": "marti_tremblay000"
+          },
+          {
+            "content": "Selected Answer: B\nNo, creating a new pattern in the FindContact intent does not meet the goal of implementing the phrase list in Language Understanding.\n\nExplanation:\n\nTo implement the given list of phrases in Language Understanding, you need to add them as sample utterances to the FindContact intent. Sample utterances are example phrases that a user might say to trigger an intent.\n\nAdding the given phrases as sample utterances will enable the language model to recognize them as valid inputs for the FindContact intent and provide the appropriate response.\n\nTherefore, the correct solution is to add the given phrases as sample utterances to the FindContact intent.",
+            "poster": "RAN_L",
+            "upvote_count": "1",
+            "comment_id": "839814",
+            "timestamp": "1678878840.0"
+          },
+          {
+            "poster": "ap1234pa",
+            "content": "Selected Answer: A\nAdding a new pattern to existing findContact() intent will help",
+            "timestamp": "1674059160.0",
+            "comment_id": "780211",
+            "upvote_count": "3"
+          },
+          {
+            "upvote_count": "3",
+            "comment_id": "759965",
+            "timestamp": "1672238820.0",
+            "content": "Selected Answer: B\nBelow is taken from the MS Learn : \n\n\"In some cases, a model might contain MULTIPLE INTENTS for which utterances are likely to be similar. \nYou can use the pattern of utterances to disambiguate the intents while minimizing the number of sample utterances.\n\nFor example, consider the following utterances:\n\n\"Turn on the kitchen light\"\n\"Is the kitchen light on?\"\n\"Turn off the kitchen light\"\nThese utterances are syntactically similar, with only a few differences in words or punctuation. \nHowever, they represent THREE different INTENTS (which could be named TurnOnDevice, GetDeviceStatus, and TurnOffDevice) \".......\n\n\nIn this question we have ONLY ONE and one intent and it is \"FindContact\". Nothing to do Patterns here.\nSource : https://learn.microsoft.com/en-us/training/modules/build-language-understanding-model/4-use-patterns-differentiate-similar-utterances",
+            "poster": "Pyguy"
+          },
+          {
+            "timestamp": "1662811020.0",
+            "comment_id": "665372",
+            "upvote_count": "1",
+            "poster": "saurabh1314",
+            "content": "Since Questions ask for Intent. So from my point of view answer is A"
+          },
+          {
+            "timestamp": "1658320260.0",
+            "comment_id": "634036",
+            "upvote_count": "2",
+            "poster": "AiEngineerS",
+            "content": "Selected Answer: A\nwhat else?"
+          },
+          {
+            "content": "Selected Answer: B\nB is correct answer. \n(Also Entity is incorrect). \n\nInstead, use a new intent for location. Note: An intent represents a task or action the user wants to perform. It is a purpose or goal expressed in a user's utterance. Define a set of intents that corresponds to actions users want to take in your application. (Answer taken from Udemy course).\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/concepts/patterns-features#patterns-do-not-improve-machine-learning-entity-detection",
+            "poster": "Eltooth",
+            "upvote_count": "3",
+            "comment_id": "633027",
+            "timestamp": "1658148420.0"
+          },
+          {
+            "content": "The answer is B, since they're not closely related, there won't be any need for creating a pattern or new intent.",
+            "poster": "Jenny1",
+            "upvote_count": "3",
+            "comments": [
+              {
+                "content": "I think this is wrong.",
+                "poster": "azurelearner666",
+                "upvote_count": "1",
+                "timestamp": "1625072220.0",
+                "comment_id": "394974"
+              }
+            ],
+            "comment_id": "384213",
+            "timestamp": "1623936180.0"
+          }
+        ],
+        "answer_images": []
+      },
+      {
+        "id": "Z6htomgtmaotJ57n2dWA",
+        "unix_timestamp": 1653124920,
+        "timestamp": "2022-05-21 11:22:00",
+        "topic": "3",
+        "answer_description": "",
+        "question_text": "You are building a conversational language understanding model.\nYou need to enable active learning.\nWhat should you do?",
+        "answer": "C",
+        "answer_images": [],
+        "discussion": [
+          {
+            "comment_id": "633092",
+            "timestamp": "1658162460.0",
+            "upvote_count": "13",
+            "poster": "Eltooth",
+            "content": "Selected Answer: C\nC is the correct answer.\n\n\"To enable active learning, you must log user queries. This is accomplished by calling the endpoint query with the log=true query string parameter and value.\"\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/how-to/improve-application#log-user-queries-to-enable-active-learning"
+          },
+          {
+            "poster": "syupwsh",
+            "content": "Selected Answer: C\nEnabling logging by adding log=true to the prediction endpoint query is necessary to collect data on user interactions. This logged data is used for active learning to improve the model's accuracy by identifying utterances that are not well understood and need further training.\n\nC is the answer",
+            "timestamp": "1739176380.0",
+            "comment_id": "1354343",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "famco",
+            "content": "Really?!! log=true is that how active learning is enabled? That's a very bad choice and asking that in a certification exam shows courage LOL",
+            "comment_id": "1279594",
+            "timestamp": "1725631560.0",
+            "upvote_count": "2"
+          },
+          {
+            "timestamp": "1718202240.0",
+            "comment_id": "1229243",
+            "upvote_count": "1",
+            "poster": "reigenchimpo",
+            "content": "Selected Answer: C\nC is answer."
+          },
+          {
+            "poster": "omankoman",
+            "content": "Selected Answer: C\nC is right answer. log=true",
+            "comment_id": "1220940",
+            "timestamp": "1716986700.0",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "nanaw770",
+            "content": "Selected Answer: C\nAdd log=true",
+            "timestamp": "1716559440.0",
+            "comment_id": "1217554",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "1156141",
+            "timestamp": "1708579140.0",
+            "content": "Selected Answer: C\nC is correct",
+            "poster": "anto69"
+          },
+          {
+            "content": "Selected Answer: C\ncorrect answer and reference\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-how-to-review-endpoint-utterances#log-user-queries-to-enable-active-learning",
+            "poster": "rdemontis",
+            "upvote_count": "1",
+            "comment_id": "1062191",
+            "timestamp": "1699110360.0"
+          },
+          {
+            "comment_id": "937824",
+            "comments": [
+              {
+                "poster": "zellck",
+                "content": "Gotten this in Jul 2023 exam.",
+                "timestamp": "1688821440.0",
+                "comment_id": "946491",
+                "upvote_count": "4"
+              }
+            ],
+            "timestamp": "1688029740.0",
+            "upvote_count": "4",
+            "poster": "zellck",
+            "content": "Selected Answer: C\nC is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/LUIS/how-to/improve-application#log-user-queries-to-enable-active-learning\nTo enable active learning, you must log user queries. This is accomplished by calling the endpoint query with the log=true query string parameter and value."
+          },
+          {
+            "content": "Log user queries to enable active learning\nTo enable active learning, you must log user queries. This is accomplished by calling the endpoint query with the log=true query string parameter and value.\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/LUIS/how-to/improve-application",
+            "poster": "marti_tremblay000",
+            "upvote_count": "1",
+            "timestamp": "1678707540.0",
+            "comment_id": "837888"
+          },
+          {
+            "timestamp": "1676975460.0",
+            "comment_id": "816448",
+            "upvote_count": "1",
+            "poster": "Marilena96",
+            "content": "To enable active learning in a conversational language understanding model, you should add show-all-intents=true to the prediction endpoint query. This will allow you to see all the intents that the model is predicting, including the None intent.[0] This information can be used to improve the model by adding more training data for the None intent or other intents that are not being predicted accurately."
+          },
+          {
+            "comment_id": "604779",
+            "timestamp": "1653124920.0",
+            "upvote_count": "1",
+            "poster": "jekko",
+            "content": "Correct.\n\nReference: https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/how-to/improve-application"
+          }
+        ],
+        "isMC": true,
+        "exam_id": 41,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/75998-exam-ai-102-topic-3-question-10-discussion/",
+        "answer_ET": "C",
+        "answers_community": [
+          "C (100%)"
+        ],
+        "question_id": 127,
+        "choices": {
+          "D": "Enable sentiment analysis.",
+          "C": "Add log=true to the prediction endpoint query.",
+          "B": "Enable speech priming.",
+          "A": "Add show-all-intents=true to the prediction endpoint query."
+        },
+        "question_images": []
+      },
+      {
+        "id": "RIOgAJhntCGchFDBQczK",
+        "unix_timestamp": 1662347700,
+        "timestamp": "2022-09-05 05:15:00",
+        "discussion": [
+          {
+            "comment_id": "659694",
+            "comments": [
+              {
+                "upvote_count": "1",
+                "timestamp": "1734118920.0",
+                "comment_id": "1326235",
+                "content": "Correct\nLogging is not enabled. See :\nhttps://learn.microsoft.com/en-us/azure/ai-services/language-service/text-analytics-for-health/how-to/configure-containers#logging-settings",
+                "poster": "Alan_CA"
+              }
+            ],
+            "timestamp": "1662347700.0",
+            "upvote_count": "36",
+            "poster": "Internal_Koala",
+            "content": "Yes\nNo\nYes\n\nLog location is not mounted. The ET answer relates to an example provided on the given website which DOES mount a log location."
+          },
+          {
+            "upvote_count": "12",
+            "timestamp": "1688226480.0",
+            "comment_id": "940130",
+            "comments": [
+              {
+                "poster": "friendlyvlad",
+                "content": "I do not see the right results yet.\n\n1. No: Should be No because per documentation http://localhost:5000/status validates API Key without causing an endpoint query, but the question says \"will query the Azure endpoint \"\n\n2. Yes: There is a difference between writing and saving the logs. In the former case, the logs will not persist and will live as long as the container runs. Since the question asks about writing the answer is Yes.\n\n3. Yes: Many folks here explained this question well.",
+                "comment_id": "1321624",
+                "timestamp": "1733277540.0",
+                "upvote_count": "2"
+              }
+            ],
+            "content": "YNY is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/text-analytics-for-health/how-to/use-containers?tabs=language#validate-that-a-container-is-running\n- http://localhost:5000/status\nAlso requested with GET, this URL verifies if the api-key used to start the container is valid without causing an endpoint query. This request can be used for Kubernetes liveness and readiness probes.\n- http://localhost:5000/swagger\nThe container provides a full set of documentation for the endpoints and a Try it out feature. With this feature, you can enter your settings into a web-based HTML form and make the query without having to write any code. After the query returns, an example CURL command is provided to demonstrate the HTTP headers and body format that's required.",
+            "poster": "zellck"
+          },
+          {
+            "poster": "syupwsh",
+            "content": "https://learn.microsoft.com/en-us/azure/ai-services/language-service/text-analytics-for-health/how-to/configure-containers#logging-settings\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/language-service/text-analytics-for-health/how-to/use-containers?tabs=language#validate-that-a-container-is-running\n\nYes\nNo\nYes",
+            "timestamp": "1739922600.0",
+            "comment_id": "1358505",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "krzkrzkra",
+            "content": "YNY is the answer.",
+            "comment_id": "1248501",
+            "timestamp": "1721066520.0",
+            "upvote_count": "2"
+          },
+          {
+            "timestamp": "1716558900.0",
+            "comment_id": "1217535",
+            "upvote_count": "1",
+            "poster": "nanaw770",
+            "content": "Yes No Yes"
+          },
+          {
+            "comment_id": "1217354",
+            "timestamp": "1716543420.0",
+            "upvote_count": "2",
+            "poster": "funny_penguin",
+            "content": "on exam, YNY"
+          },
+          {
+            "content": "Fintal Answer:\nYes\nNo \nYes",
+            "poster": "varinder82",
+            "upvote_count": "2",
+            "comment_id": "1183278",
+            "timestamp": "1711454460.0"
+          },
+          {
+            "upvote_count": "4",
+            "timestamp": "1706318880.0",
+            "comment_id": "1132972",
+            "content": "Going to http://localhost:5000/status will query the Azure endpoint to verify whether the API key used to start the container is valid.\n\nYes. Typically, Azure Cognitive Services containers provide a /status endpoint that can be used to check the status of the service, including the validity of the API key. Since the service is mapped to localhost:5000, accessing this URL should provide the status of the containerized service, including the API key's validity.\n\nThe container logging provider will write log data.\n\nNo (Assuming). This statement is somewhat ambiguous and depends on the configuration of the Docker container and the Azure Cognitive Services container. \n\nGoing to http://localhost:5000/swagger will provide the details to access the documentation for the available endpoints.\n\nYes. It is a common practice for web services and APIs, including those provided by Azure Cognitive Services, to offer a Swagger UI at a /swagger endpoint.",
+            "poster": "evangelist"
+          },
+          {
+            "comment_id": "1102030",
+            "timestamp": "1703114820.0",
+            "upvote_count": "5",
+            "poster": "Gvalli",
+            "content": "A modified version of this was in the exam today."
+          },
+          {
+            "upvote_count": "4",
+            "comments": [
+              {
+                "upvote_count": "2",
+                "timestamp": "1699850880.0",
+                "comment_id": "1069029",
+                "content": "sorry the last yes is a typo",
+                "poster": "rdemontis"
+              }
+            ],
+            "comment_id": "1062202",
+            "timestamp": "1699110960.0",
+            "content": "No --> Also requested with GET, this URL verifies if the api-key used to start the container is valid without causing an endpoint query. https://learn.microsoft.com/en-us/azure/ai-services/language-service/text-analytics-for-health/how-to/use-containers?tabs=language#validate-that-a-container-is-running\n\nNo -- there isn't any Log location mounted (same link as above)\n\nYes --> correct, swagger show a full set of documentation for the endpoints\n\nYes.",
+            "poster": "rdemontis"
+          },
+          {
+            "poster": "M25",
+            "content": "No (\"without causing an endpoint query\"), No, Yes",
+            "timestamp": "1693568160.0",
+            "comments": [
+              {
+                "poster": "chrillelundmark",
+                "content": "Can't see the logger setting being specified in the command, which is mandatory according to this:\nhttps://learn.microsoft.com/es-es/azure/ai-services/language-service/concepts/configure-containers#logging-settings",
+                "timestamp": "1733383740.0",
+                "comment_id": "1322260",
+                "upvote_count": "1"
+              }
+            ],
+            "comment_id": "996005",
+            "upvote_count": "4"
+          },
+          {
+            "poster": "mmaguero",
+            "content": "1 and 3, is true: https://learn.microsoft.com/es-es/azure/cognitive-services/language-service/sentiment-opinion-mining/how-to/use-containers#validate-that-a-container-is-running\n\n2, i think, is yes... (by docker settings)",
+            "comment_id": "911215",
+            "timestamp": "1685534880.0",
+            "upvote_count": "4"
+          },
+          {
+            "poster": "odisor",
+            "content": "I think the first one is YES\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/text-analytics-for-health/how-to/use-containers?tabs=language#validate-that-a-container-is-running",
+            "timestamp": "1681949760.0",
+            "comment_id": "875175",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "863989",
+            "timestamp": "1680878160.0",
+            "upvote_count": "7",
+            "poster": "MDawson",
+            "content": "Documentation says it will NOT cause an endpoint query, so I think the first one should be NO"
+          }
+        ],
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image217.png"
+        ],
+        "answer_description": "",
+        "topic": "3",
+        "answer": "",
+        "question_text": "HOTSPOT -\nYou run the following command.\n//IMG//\n\nFor each of the following statements, select Yes if the statement is true. Otherwise, select No.\nNOTE: Each correct selection is worth one point.\nHot Area:\n//IMG//",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0013900001.png",
+          "https://www.examtopics.com/assets/media/exam-media/04271/0014000001.jpg"
+        ],
+        "isMC": false,
+        "exam_id": 41,
+        "answers_community": [],
+        "question_id": 128,
+        "answer_ET": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/80189-exam-ai-102-topic-3-question-11-discussion/"
+      },
+      {
+        "id": "UNrNuaHO2kjziheVswiO",
+        "question_images": [],
+        "exam_id": 41,
+        "isMC": true,
+        "answers_community": [
+          "A (81%)",
+          "Other"
+        ],
+        "choices": {
+          "D": "Pattern.any",
+          "B": "Regex",
+          "C": "geographyV2",
+          "A": "machine learned",
+          "E": "list"
+        },
+        "question_id": 129,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/54402-exam-ai-102-topic-3-question-12-discussion/",
+        "answer_ET": "A",
+        "discussion": [
+          {
+            "timestamp": "1623153840.0",
+            "comment_id": "377496",
+            "comments": [
+              {
+                "poster": "MarceloManhaes",
+                "content": "I agree it is clear that is ML entity, the sample above is on the URL\nhttps://learn.microsoft.com/en-us/azure/ai-services/LUIS/concepts/entities",
+                "comment_id": "1242295",
+                "timestamp": "1720127820.0",
+                "upvote_count": "1"
+              }
+            ],
+            "upvote_count": "39",
+            "poster": "ExamPrep2021",
+            "content": "My guess is A.\n\nAn ML entity can be composed of smaller sub-entities, each of which can have its own properties. For example, Address could have the following structure:\n\nAddress: 4567 Main Street, NY, 98052, USA\nBuilding Number: 4567\nStreet Name: Main Street\nState: NY\nZip Code: 98052\nCountry: USA"
+          },
+          {
+            "poster": "LKLK10",
+            "content": "ML. Answer is A",
+            "timestamp": "1623601500.0",
+            "comment_id": "381209",
+            "comments": [
+              {
+                "timestamp": "1625063520.0",
+                "comment_id": "394833",
+                "upvote_count": "10",
+                "poster": "azurelearner666",
+                "content": "Right! (the correct response is A, Machine Learned)\nSee \nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-entity-types\nIt is a Machine Learned Entity (check ML Entity with Structure in the link, as it is an Address example… )"
+              }
+            ],
+            "upvote_count": "10"
+          },
+          {
+            "timestamp": "1740807360.0",
+            "comment_id": "1363406",
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "content": "Selected Answer: A\nRepeat qn\n\nAnswer is A"
+          },
+          {
+            "poster": "AzureGeek79",
+            "content": "Correct answer is D as per ChatGPT. Here is the response, \"For capturing billing addresses in a Language Understanding model, the best choice would be Pattern.any (Option D). This is because billing addresses can vary greatly in format and content, and using Pattern.any allows for the flexibility needed to capture this variability effectively.\"",
+            "comment_id": "1283375",
+            "timestamp": "1726259400.0",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "krzkrzkra",
+            "content": "Selected Answer: A\nSelected Answer: A",
+            "comment_id": "1247875",
+            "timestamp": "1720978560.0",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Selected Answer: A\nI say this answer is A.",
+            "poster": "HaraTadahisa",
+            "upvote_count": "1",
+            "comment_id": "1235202",
+            "timestamp": "1719037680.0"
+          },
+          {
+            "content": "Copilot says Pattern.any\n\nThe Pattern.any entity type is designed to capture free-form text, which makes it suitable for capturing billing addresses that can come in various formats. It uses pattern matching to predict and extract data.",
+            "poster": "etellez",
+            "upvote_count": "1",
+            "comment_id": "1230350",
+            "timestamp": "1718356560.0"
+          },
+          {
+            "poster": "reigenchimpo",
+            "content": "Selected Answer: A\nI know you don't know what I'm talking about, but if you think as Crossroads leads you, the answer is A.",
+            "comment_id": "1229242",
+            "timestamp": "1718202240.0",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "omankoman",
+            "content": "ML Entity with Structure\nAn ML entity can be composed of smaller sub-entities, each of which can have its own properties. For example, an Address entity could have the following structure:\n\nAddress: 4567 Main Street, NY, 98052, USA\nBuilding Number: 4567\nStreet Name: Main Street\nState: NY\nZip Code: 98052\nCountry: USA",
+            "timestamp": "1716987600.0",
+            "comment_id": "1220950",
+            "upvote_count": "2"
+          },
+          {
+            "content": "Selected Answer: A\nA is right answer.",
+            "poster": "nanaw770",
+            "upvote_count": "1",
+            "timestamp": "1716560580.0",
+            "comment_id": "1217581"
+          },
+          {
+            "timestamp": "1706323380.0",
+            "comment_id": "1132988",
+            "upvote_count": "1",
+            "poster": "evangelist",
+            "content": "Given these options, A. Machine Learned is the most appropriate choice for capturing billing addresses. Billing addresses are complex entities with a lot of variability in their format and structure. A machine-learned entity is capable of understanding and extracting such complex information from natural language inputs, which makes it suitable for this purpose. It can learn from examples and capture the billing address as an entity based on the context in which it appears, which is essential for handling the wide range of ways in which addresses can be presented."
+          },
+          {
+            "poster": "rdemontis",
+            "content": "Selected Answer: A\nduplicated question\nhttps://learn.microsoft.com/en-us/azure/ai-services/LUIS/concepts/entities",
+            "comment_id": "1062206",
+            "timestamp": "1699111080.0",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "1025737",
+            "timestamp": "1696514580.0",
+            "content": "Selected Answer: A\nML Entity with Structure\nAn ML entity can be composed of smaller sub-entities, each of which can have its own properties. For example, an Address entity could have the following structure:\n\nAddress: 4567 Main Street, NY, 98052, USA\nBuilding Number: 4567\nStreet Name: Main Street\nState: NY\nZip Code: 98052\nCountry: USA",
+            "poster": "jakespeed"
+          },
+          {
+            "poster": "zellck",
+            "content": "Same as Question 7.\nhttps://www.examtopics.com/discussions/microsoft/view/60239-exam-ai-102-topic-3-question-7-discussion",
+            "comment_id": "937828",
+            "timestamp": "1688029860.0",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "937822",
+            "timestamp": "1688029620.0",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/LUIS/concepts/entities#machine-learned-ml-entity\nMachine learned entity uses context to extract entities based on labeled examples. It is the preferred entity for building LUIS applications. It relies on machine-learning algorithms and requires labeling to be tailored to your application successfully. Use an ML entity to identify data that isn’t always well formatted but have the same meaning.\n\nAn ML entity can be composed of smaller sub-entities, each of which can have its own properties. For example, an Address entity could have the following structure:\n\nAddress: 4567 Main Street, NY, 98052, USA\nBuilding Number: 4567\nStreet Name: Main Street\nState: NY\nZip Code: 98052\nCountry: USA",
+            "poster": "zellck"
+          },
+          {
+            "poster": "EliteAllen",
+            "content": "Selected Answer: C\nC. geographyV2\nThe geographyV2 prebuilt entity in Language Understanding (LUIS) is designed to recognize and label entities that are geographical locations, such as city, state, or country. This would be suitable for capturing billing addresses in an e-commerce platform.",
+            "timestamp": "1686750780.0",
+            "comments": [
+              {
+                "content": "https://learn.microsoft.com/en-us/azure/ai-services/luis/luis-reference-prebuilt-geographyv2?tabs=V3\n\nThe prebuilt geographyV2 entity detects places. \nThe geographical locations have subtypes:\npoi point of interest\ncity name of city\ncountryRegion name of country or region\ncontinent name of continent\nstate name of state or province\n\nI guess you could charge a bill for the Statue of Liberty on Ellis Island as a (fixed) “poi”, but a more generalized rule would rather look for an Address entity with sub-entities (variable) as an ML Entity with Structure type",
+                "poster": "M25",
+                "upvote_count": "2",
+                "comment_id": "996018",
+                "timestamp": "1693569240.0"
+              }
+            ],
+            "comment_id": "923265",
+            "upvote_count": "2"
+          },
+          {
+            "poster": "ap1234pa",
+            "content": "Selected Answer: A\nWherever it is address it is ML",
+            "timestamp": "1673984100.0",
+            "comment_id": "779274",
+            "upvote_count": "4"
+          },
+          {
+            "content": "Selected Answer: A\nA is correct",
+            "poster": "David_ml",
+            "upvote_count": "3",
+            "comment_id": "698645",
+            "timestamp": "1666150620.0"
+          },
+          {
+            "upvote_count": "3",
+            "comment_id": "652386",
+            "timestamp": "1661558880.0",
+            "content": "Selected Answer: A\nIt is 100% A",
+            "poster": "Nebary"
+          },
+          {
+            "timestamp": "1659901560.0",
+            "comment_id": "643832",
+            "upvote_count": "2",
+            "poster": "ExamGuruBhai",
+            "content": "Selected Answer: A\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/concepts/entities"
+          },
+          {
+            "upvote_count": "5",
+            "comment_id": "634867",
+            "timestamp": "1658443800.0",
+            "content": "Selected Answer: B\nIts regex. Udemy agrees.",
+            "poster": "RamonKaus"
+          },
+          {
+            "comment_id": "633100",
+            "timestamp": "1658163780.0",
+            "upvote_count": "2",
+            "poster": "Eltooth",
+            "content": "Selected Answer: A\nA is correct answer."
+          },
+          {
+            "content": "ML Entity with Structure\nAn ML entity can be composed of smaller sub-entities, each of which can have its own properties. For example, an Address entity could have the following structure:\n\nAddress: 4567 Main Street, NY, 98052, USA\nBuilding Number: 4567\nStreet Name: Main Street\nState: NY\nZip Code: 98052\nCountry: USA\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/concepts/entities#ml-entity-with-structure",
+            "poster": "Saby2184",
+            "upvote_count": "2",
+            "comment_id": "587153",
+            "timestamp": "1650189660.0"
+          },
+          {
+            "poster": "arsalanramin",
+            "content": "A is Correct,",
+            "timestamp": "1649942220.0",
+            "comment_id": "585778",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "4",
+            "comment_id": "573472",
+            "timestamp": "1648024380.0",
+            "content": "Selected Answer: A\nA is correct",
+            "poster": "arpitexam"
+          },
+          {
+            "comment_id": "545686",
+            "timestamp": "1644648600.0",
+            "upvote_count": "4",
+            "poster": "Deepusuraj",
+            "content": "Selected Answer: A\nML Entity with Structure\nAn ML entity can be composed of smaller sub-entities, each of which can have its own properties. For example, an Address entity could have the following structure:\n\nAddress: 4567 Main Street, NY, 98052, USA\nBuilding Number: 4567\nStreet Name: Main Street\nState: NY\nZip Code: 98052\nCountry: USA"
+          },
+          {
+            "comment_id": "516822",
+            "timestamp": "1641314400.0",
+            "upvote_count": "1",
+            "poster": "Contactfornitish",
+            "content": "Was on exam 02/01/2022"
+          },
+          {
+            "content": "Regex is the correct one \n\nRefer:-\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-entity-types",
+            "poster": "16914521",
+            "upvote_count": "1",
+            "timestamp": "1641274560.0",
+            "comment_id": "516241"
+          },
+          {
+            "content": "B option reference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-entity-types",
+            "poster": "yozora",
+            "upvote_count": "1",
+            "comment_id": "507672",
+            "timestamp": "1640246700.0"
+          },
+          {
+            "content": "The Correct answer is A",
+            "poster": "Abrar001",
+            "upvote_count": "3",
+            "timestamp": "1633683780.0",
+            "comment_id": "459129"
+          },
+          {
+            "upvote_count": "3",
+            "comment_id": "459128",
+            "timestamp": "1633683720.0",
+            "content": "Answer is A",
+            "poster": "Abrar001"
+          },
+          {
+            "poster": "LPreethi",
+            "content": "We cannot say it's the prebuilt geographyV2 entity because it is used to detect places. Good example for flight booking. https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-geographyv2?tabs=V3. So, correct answer is A as per this link https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-entity-types (refer ML entity with structure section)",
+            "timestamp": "1626770760.0",
+            "comment_id": "410111",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "7",
+            "timestamp": "1622720700.0",
+            "comment_id": "373521",
+            "content": "I think the answer is geographyv2 because it searches specifically for places.",
+            "poster": "Omobonike"
+          }
+        ],
+        "answer_images": [],
+        "answer_description": "",
+        "topic": "3",
+        "answer": "A",
+        "question_text": "You are building a Language Understanding model for an e-commerce platform.\nYou need to construct an entity to capture billing addresses.\nWhich entity type should you use for the billing address?",
+        "timestamp": "2021-06-03 13:45:00",
+        "unix_timestamp": 1622720700
+      },
+      {
+        "id": "zXkB8FzghF759RLqjYHB",
+        "timestamp": "2022-07-18 19:10:00",
+        "unix_timestamp": 1658164200,
+        "question_images": [],
+        "answer_ET": "B",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/77612-exam-ai-102-topic-3-question-13-discussion/",
+        "answers_community": [
+          "B (100%)"
+        ],
+        "question_id": 130,
+        "choices": {
+          "A": "Combine the speech samples into a single audio file in the .wma format and upload the file.",
+          "D": "Upload individual audio files in the .wma format.",
+          "B": "Upload a .zip file that contains a collection of audio files in the .wav format and a corresponding text transcript file.",
+          "C": "Upload individual audio files in the FLAC format and manually upload a corresponding transcript in Microsoft Word format."
+        },
+        "isMC": true,
+        "exam_id": 41,
+        "answer_images": [],
+        "discussion": [
+          {
+            "comment_id": "1132989",
+            "timestamp": "1706323560.0",
+            "upvote_count": "8",
+            "poster": "evangelist",
+            "content": "Selected Answer: B\n, the best option is B. Upload a .zip file that contains a collection of audio files in the .wav format and a corresponding text transcript file. This method provides a balance of audio quality (with .wav files) and organization (having audio and transcripts together), which is essential for efficient and accurate training of speech recognition models."
+          },
+          {
+            "poster": "Gvalli",
+            "content": "A modified version of this was in the exam today.",
+            "comment_id": "1102031",
+            "timestamp": "1703114880.0",
+            "upvote_count": "6"
+          },
+          {
+            "upvote_count": "1",
+            "comment_id": "1354347",
+            "timestamp": "1739176680.0",
+            "content": "Selected Answer: B\nhttps://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-custom-voice-training-data#types-of-training-data\n\nUploading a zip file s the standard method for uploading training data to Speech Studio. The .wav format is commonly used for high-quality audio, and pairing the audio files with a text transcript allows the Speech Studio to use the data for training models effectively.\n\nB is correct",
+            "poster": "syupwsh"
+          },
+          {
+            "timestamp": "1718202180.0",
+            "comment_id": "1229241",
+            "upvote_count": "1",
+            "poster": "reigenchimpo",
+            "content": "Selected Answer: B\nB is answer."
+          },
+          {
+            "content": "Selected Answer: B\nFor me and ChatGPT: B",
+            "poster": "anto69",
+            "upvote_count": "1",
+            "timestamp": "1717556940.0",
+            "comment_id": "1224484"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1716559260.0",
+            "comment_id": "1217546",
+            "content": "Selected Answer: B\nwav zip",
+            "poster": "nanaw770"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1716543480.0",
+            "comment_id": "1217355",
+            "content": "Selected Answer: B\nB is correct",
+            "poster": "funny_penguin"
+          },
+          {
+            "upvote_count": "2",
+            "comment_id": "1094133",
+            "timestamp": "1702357980.0",
+            "content": "Selected Answer: B\nAnswer is correct",
+            "poster": "orionduo"
+          },
+          {
+            "timestamp": "1699111320.0",
+            "comment_id": "1062210",
+            "upvote_count": "2",
+            "poster": "rdemontis",
+            "content": "Selected Answer: B\nAnswer is correct:\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-custom-voice-training-data#types-of-training-data"
+          },
+          {
+            "upvote_count": "3",
+            "comment_id": "1024595",
+            "comments": [
+              {
+                "poster": "JDKJDKJDK",
+                "content": "just want to confirm, theres no labs included right?",
+                "comment_id": "1026285",
+                "timestamp": "1696571580.0",
+                "upvote_count": "3"
+              }
+            ],
+            "timestamp": "1696410060.0",
+            "content": "B is the Answer. Got this in Oct2023 exam",
+            "poster": "ManvaIT"
+          },
+          {
+            "timestamp": "1688030040.0",
+            "comment_id": "937836",
+            "upvote_count": "1",
+            "poster": "zellck",
+            "content": "Same as Question 2.\nhttps://www.examtopics.com/discussions/microsoft/view/55251-exam-ai-102-topic-3-question-2-discussion"
+          },
+          {
+            "upvote_count": "3",
+            "comments": [],
+            "comment_id": "937821",
+            "timestamp": "1688029260.0",
+            "content": "Selected Answer: B\nB is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-custom-voice-training-data#types-of-training-data\nA voice training dataset includes audio recordings, and a text file with the associated transcriptions. Each audio file should contain a single utterance (a single sentence or a single turn for a dialog system), and be less than 15 seconds long.\n\n- Individual utterances + matching transcript\nA collection (.zip) of audio files (.wav) as individual utterances. Each audio file should be 15 seconds or less in length, paired with a formatted transcript (.txt).",
+            "poster": "zellck"
+          },
+          {
+            "content": "Selected Answer: B\nB is correct answer.\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-custom-speech-test-and-train",
+            "poster": "Eltooth",
+            "upvote_count": "1",
+            "timestamp": "1658164200.0",
+            "comment_id": "633102"
+          }
+        ],
+        "question_text": "You need to upload speech samples to a Speech Studio project for use in training.\nHow should you upload the samples?",
+        "answer": "B",
+        "topic": "3",
+        "answer_description": ""
+      }
+    ],
+    "exam": {
+      "provider": "Microsoft",
+      "isMCOnly": false,
+      "lastUpdated": "06 Aug 2025",
+      "isBeta": false,
+      "numberOfQuestions": 330,
+      "isImplemented": true,
+      "id": 41,
+      "name": "AI-102"
+    },
+    "currentPage": 26
+  },
+  "__N_SSP": true
+}

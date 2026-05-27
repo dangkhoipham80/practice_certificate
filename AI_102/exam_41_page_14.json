@@ -1,0 +1,644 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "QM8fWERv6JWy8xwzu1v1",
+        "question_images": [],
+        "timestamp": "2024-03-02 18:47:00",
+        "exam_id": 41,
+        "isMC": true,
+        "answers_community": [
+          "A (100%)"
+        ],
+        "question_text": "You are building an internet-based training solution. The solution requires that a user's camera and microphone remain enabled.\n\nYou need to monitor a video stream of the user and detect when the user asks an instructor a question. The solution must minimize development effort.\n\nWhat should you include in the solution?",
+        "discussion": [
+          {
+            "content": "Selected Answer: A\nspeech-to-text in the Azure AI Speech service is designed to convert spoken language into text, which is essential for detecting when a user asks a question during a video stream. This service can process the audio captured by the user's microphone, transcribe the spoken words in real-time, and allow the system to recognize when a question is being asked with minimal development effort.\n\nA for answer",
+            "upvote_count": "2",
+            "timestamp": "1739162580.0",
+            "poster": "syupwsh",
+            "comment_id": "1354227"
+          },
+          {
+            "upvote_count": "3",
+            "content": "A. Speech-to-text in the Azure AI Speech service\nExplanation:\nSpeech-to-Text in the Azure AI Speech service can transcribe spoken language into text in real time, enabling the detection of questions when users speak. This approach minimizes development effort by directly converting speech to text, allowing easy identification of questions.",
+            "comment_id": "1276143",
+            "poster": "MostafaAbdellahAhmed",
+            "timestamp": "1725204000.0"
+          },
+          {
+            "comment_id": "1246436",
+            "timestamp": "1720753140.0",
+            "poster": "SAMBIT",
+            "upvote_count": "1",
+            "content": "Definitely its not A. That's a bunker"
+          },
+          {
+            "content": "Selected Answer: A\nA is correct answer.",
+            "upvote_count": "1",
+            "timestamp": "1719034380.0",
+            "poster": "HaraTadahisa",
+            "comment_id": "1235138"
+          },
+          {
+            "content": "Go with D\nFrom Copilot:\nTo monitor a video stream of the user and detect when the user asks an instructor a question while minimizing development effort, consider using object detection. Specifically, you can leverage existing models or frameworks (such as YOLOv3) to detect people in real-time from the video stream1. Once you identify a person asking a question, you can trigger further actions or alerts. This approach avoids the complexity of speech-to-text or language detection and focuses on the specific task at hand. Therefore, go with D. object detection in Azure AI Custom Vision!",
+            "upvote_count": "4",
+            "poster": "Belicova",
+            "timestamp": "1717596120.0",
+            "comment_id": "1224763"
+          },
+          {
+            "comment_id": "1224483",
+            "poster": "anto69",
+            "timestamp": "1717556460.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nTo minimize effort: A is enough"
+          },
+          {
+            "comment_id": "1213778",
+            "timestamp": "1716122760.0",
+            "poster": "reiwanotora",
+            "upvote_count": "2",
+            "content": "Selected Answer: A\nuser's camera and microphone remain enabled, so A is right."
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nBecause user's camera and microphone remain enabled. Azure AI Speech service is recommend for using",
+            "comment_id": "1205026",
+            "timestamp": "1714561320.0",
+            "poster": "anntv252"
+          },
+          {
+            "timestamp": "1713381360.0",
+            "poster": "Barry123456",
+            "comment_id": "1197410",
+            "content": "It says video stream. It doesn't say the video stream has audio. I deal with video only streams all day. Don't assume.",
+            "upvote_count": "2"
+          },
+          {
+            "poster": "sivapolam90",
+            "timestamp": "1712991540.0",
+            "comment_id": "1194713",
+            "content": "Selected Answer: A\nA. speech-to-text in the Azure AI Speech service",
+            "upvote_count": "1"
+          },
+          {
+            "timestamp": "1712485560.0",
+            "poster": "Murtuza",
+            "comment_id": "1190896",
+            "content": "Selected Answer: A\nThe best option for this scenario would be A. speech-to-text in the Azure AI Speech service.\n\nThis service can transcribe the user’s spoken words into written text, which can then be analyzed to detect when a question is being asked. This would be more efficient and direct for detecting questions in a video stream, compared to the other options which focus on language detection, face recognition, and object detection. These other services might not be as effective for this specific use-case.",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nA. speech-to-text in the Azure AI Speech service\n\nThis service can transcribe the spoken words into text in real-time, which can then be analyzed to detect questions. It’s an efficient way to monitor for specific verbal cues or keywords that indicate a question is being asked, without the need for extensive programming or manual review. This approach minimizes development effort while providing a robust solution for the requirement.",
+            "comment_id": "1187883",
+            "poster": "NullVoider_0",
+            "timestamp": "1712039280.0"
+          },
+          {
+            "poster": "Murtuza",
+            "timestamp": "1710599820.0",
+            "comment_id": "1175024",
+            "content": "The correct CHOICE is C. I made a silly typo but my explanations are right on point.",
+            "upvote_count": "3"
+          },
+          {
+            "content": "The other options are not directly relevant to detecting user questions in a video stream:\n\nSpeech-to-text (Option A): Converts spoken language into text. While useful for transcribing audio, it doesn’t directly address identifying user questions.\nLanguage detection (Option B): Determines the language of text. It’s not specifically designed for monitoring video streams or detecting questions.\nObject detection (Option D): Identifies objects within images, but it’s not suitable for detecting user interactions or questions.\nTherefore, Option C (the Face service in Azure AI Vision) is the most appropriate choice for your scenario.",
+            "upvote_count": "3",
+            "poster": "Murtuza",
+            "timestamp": "1710599580.0",
+            "comment_id": "1175020"
+          },
+          {
+            "upvote_count": "4",
+            "content": "The user can talk, but it doesn't have to be a question. I think the focus should be on detecting whether something is a question or not and for that, you need speech to text first. Face doesn't make sense as identifying questions is not the purpose of that service: 'The Azure AI Face service provides AI algorithms that detect, recognize, and analyze human faces in images. Facial recognition software is important in many different scenarios, such as identification, touchless access control, and face blurring for privacy.'\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-identity",
+            "comment_id": "1183738",
+            "poster": "Mehe323",
+            "timestamp": "1711498740.0"
+          },
+          {
+            "content": "Selected Answer: A\nspeech-to-text in the Azure AI Speech service/\n\nThis service can transcribe spoken words into written text in real-time, allowing you to monitor the audio for specific triggers, like questions, which can then be further processed or flagged for response. This solution is efficient and requires minimal development effort for integrating audio streaming and speech recognition capabilities.",
+            "upvote_count": "2",
+            "timestamp": "1710175080.0",
+            "comments": [
+              {
+                "poster": "AlviraTony",
+                "timestamp": "1711230540.0",
+                "comment_id": "1181173",
+                "content": "[ChatGPT]\nA. Speech-to-text in the Azure AI Speech service.\n\nExplanation:\n\nSpeech-to-text functionality can convert spoken words into text, allowing you to analyze the content of the speech.\nBy using speech-to-text, you can transcribe the user's spoken questions and then analyze the text to detect if a question is being asked to the instructor.\nThis option aligns with the requirement to monitor the user's speech in real-time without significant development effort.",
+                "upvote_count": "1"
+              }
+            ],
+            "poster": "chandiochan",
+            "comment_id": "1171142"
+          }
+        ],
+        "question_id": 66,
+        "answer_ET": "A",
+        "answer_images": [],
+        "unix_timestamp": 1709401620,
+        "topic": "1",
+        "answer_description": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135061-exam-ai-102-topic-1-question-69-discussion/",
+        "answer": "A",
+        "choices": {
+          "D": "object detection in Azure AI Custom Vision",
+          "B": "language detection in Azure AI Language Service",
+          "C": "the Face service in Azure AI Vision",
+          "A": "speech-to-text in the Azure AI Speech service"
+        }
+      },
+      {
+        "id": "tcnMvcMSZZuR627bHapn",
+        "timestamp": "2022-04-29 09:24:00",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0001200003.png"
+        ],
+        "exam_id": 41,
+        "isMC": false,
+        "answers_community": [],
+        "question_text": "DRAG DROP -\nYou plan to use containerized versions of the Anomaly Detector API on local devices for testing and in on-premises datacenters.\nYou need to ensure that the containerized deployments meet the following requirements:\n✑ Prevent billing and API information from being stored in the command-line histories of the devices that run the container.\n✑ Control access to the container images by using Azure role-based access control (Azure RBAC).\nWhich four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.\nNOTE: More than one order of answer choices is correct. You will receive credit for any of the correct orders you select.\nSelect and Place:\n//IMG//",
+        "discussion": [
+          {
+            "comment_id": "597103",
+            "poster": "dinhhungitsoft",
+            "timestamp": "1651720920.0",
+            "comments": [
+              {
+                "timestamp": "1720953540.0",
+                "poster": "Aouatef",
+                "comment_id": "1247736",
+                "content": "1 - the custom dockerfile prevents the billing information from being stored in commandline histories\n2 - pull and build are necessary to take into account the requirements defined in the dockerfile\n3 - Push to acr where we can define RBAC access rules to the new image",
+                "upvote_count": "2"
+              },
+              {
+                "upvote_count": "4",
+                "content": "This makes more sense, In the custom docker file you can define : FROM azure_image...",
+                "comment_id": "917779",
+                "poster": "sheldon73",
+                "timestamp": "1686196680.0"
+              }
+            ],
+            "upvote_count": "67",
+            "content": "I think the it should be:\n1. Create a custom docker file\n2. Pull the container image (in the dockerfile)\n3. Build the image\n4 Push to ACR"
+          },
+          {
+            "content": "ChatGPT: To meet the requirements, perform the following actions in sequence:\n\n1. Create a custom Dockerfile: This allows you to define the specific configuration and dependencies for your containerized deployment.\n\n2. Build the image: Use the Dockerfile to build the container image with the necessary components and configurations.\n\n3. Push the image to an Azure container registry: Store the container image in an Azure container registry to control access and ensure secure storage.\n\n4. Distribute a docker run script: Provide a docker run script that can be used to run the containerized deployment on local devices or in on-premises datacenters. This script should include any necessary environment variables or configuration settings.\n\nNote: The actions of pulling the Anomaly Detector container image and pushing the image to Docker Hub are not mentioned in the requirements. Therefore, they are not necessary for meeting the given requirements.",
+            "upvote_count": "28",
+            "poster": "mmaguero",
+            "comments": [
+              {
+                "comment_id": "1246555",
+                "timestamp": "1720767660.0",
+                "poster": "serj",
+                "upvote_count": "2",
+                "content": "Does the step \"Distribute a docker run script\" contradict the requirement \"Prevent billing and API information from being stored in the command-line histories of the devices that run the container.\"?"
+              },
+              {
+                "upvote_count": "7",
+                "content": "I agree with you except for the explanation in the endnote: for me your answer is correct, but the reason why the pull of the anomaly detector image is irrelevant is because you put it in the dockerfile. So it is not necessary to specify this instruction separately otherwise we would have to do the same for all commands in the dockerfile.",
+                "comment_id": "1059581",
+                "poster": "rdemontis",
+                "timestamp": "1698834660.0"
+              },
+              {
+                "upvote_count": "1",
+                "content": "agree with u",
+                "comment_id": "1116454",
+                "timestamp": "1704696060.0",
+                "poster": "anto69"
+              }
+            ],
+            "timestamp": "1727065080.0",
+            "comment_id": "906654"
+          },
+          {
+            "content": "Need Azure RBAC so pushing to Docker Hub is wrong for sure\nPrevent billing and API information of container run so distribute run script is wrong\n\nIn order\n\n1) Create custom Dockerfile\n2) Pull Anomaly Detector Container Image\n3) Build the image\n4) Publish to Azure ACR",
+            "upvote_count": "5",
+            "poster": "syupwsh",
+            "timestamp": "1739779080.0",
+            "comment_id": "1357647"
+          },
+          {
+            "timestamp": "1733878740.0",
+            "poster": "MASANASA",
+            "comment_id": "1324788",
+            "content": "it should be like this steps?\n\nCreate a custom Dockerfile\nPull the Anomaly Detector Container Image\nBuild the Image\nPush the image to an Azure Container registry",
+            "upvote_count": "2"
+          },
+          {
+            "comment_id": "1305691",
+            "timestamp": "1730448180.0",
+            "poster": "angelrishi",
+            "upvote_count": "6",
+            "content": "Incorrect. Correct answer is:\n1. Create custom docker file (as it includes instructions to pull the latest image of anomaly detector)\n2. Build the image \n3. Push to ACR\n4. Distribute Docker Run"
+          },
+          {
+            "poster": "SAMBIT",
+            "timestamp": "1727065080.0",
+            "comment_id": "1247079",
+            "content": "Pull the Anomaly Detector container image (b):\nStart by retrieving the official Anomaly Detector container image from a registry. You can use the docker pull command to download it.\n\nCreate a custom Dockerfile (a):\nNext, create a custom Dockerfile that defines the instructions for building your specific image. Customize it to include your requirements, such as preventing sensitive information from being stored in command-line histories.\n\nBuild the image (e):\nUse the Dockerfile to build your custom image. This step compiles the necessary components and configurations.\n\nPush the image to an Azure container registry (d):\nFinally, store your custom image in an Azure container registry. This ensures controlled access and secure storage.",
+            "upvote_count": "3"
+          },
+          {
+            "comment_id": "1261088",
+            "timestamp": "1727065080.0",
+            "poster": "RahulShahane",
+            "upvote_count": "1",
+            "content": "1. Create a custom docker file\n2. Pull the container image (in the dockerfile)\n3. Build the image\n4 Push to ACR\nThis is highly voted answer. Is it correct?....pls help"
+          },
+          {
+            "content": "the give answer is correct according to ChatGPT.",
+            "upvote_count": "1",
+            "poster": "AzureGeek79",
+            "timestamp": "1726532880.0",
+            "comment_id": "1284984"
+          },
+          {
+            "timestamp": "1724386500.0",
+            "poster": "testmaillo020",
+            "comment_id": "1271055",
+            "content": "This is the right one:\n\n1. Pull the Anomaly Detector container image.\n2. Create a custom Dockerfile.\n3. Build the image.\n4. Push the image to an Azure container registry.",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "1",
+            "content": "what is correct sequence. All discussion are very confusing. pls help",
+            "comment_id": "1270129",
+            "timestamp": "1724245200.0",
+            "poster": "RahulShahane"
+          },
+          {
+            "comment_id": "1235714",
+            "timestamp": "1719127260.0",
+            "poster": "rookiee1111",
+            "upvote_count": "3",
+            "content": "1. Pull the anomaly detector\n2. build docker file\n3. build image\n4. publish to ACR\nthis now will become source for all devices to pull the image and run from ACR."
+          },
+          {
+            "content": "1.Create a custom Dockerfile\n2.Build the image\n3.Push the image to an Azure container registry\n4.Distribute a docker run script\n\nFrom Takedajuku perspective, if you study for 4 days and spend 2 days reviewing, you will have a better chance of passing the exam.",
+            "upvote_count": "2",
+            "poster": "nanaw770",
+            "timestamp": "1716562920.0",
+            "comment_id": "1217632"
+          },
+          {
+            "timestamp": "1715324340.0",
+            "comments": [
+              {
+                "upvote_count": "1",
+                "content": "you rock, this shows that we have to read carefully the question",
+                "comment_id": "1353897",
+                "timestamp": "1739105460.0",
+                "poster": "miai74uu"
+              }
+            ],
+            "poster": "TJ001",
+            "comment_id": "1209246",
+            "content": "it is important to note NOTE: More than one order of answer choices is correct.",
+            "upvote_count": "2"
+          },
+          {
+            "comment_id": "1209245",
+            "timestamp": "1715324160.0",
+            "comments": [
+              {
+                "timestamp": "1717124340.0",
+                "poster": "TJ001",
+                "comment_id": "1221907",
+                "content": "while this order is fine technically, after reading the question again i think it is important to push the image to ACR to manage RBAC..So skipping the docker pull and instead pull directly from MCR in the dockerfile is better so my 4 choices are below\n1. Create dockerfile\n2. Build\n3. Push to ACR if required\n4. Run",
+                "upvote_count": "2"
+              }
+            ],
+            "poster": "TJ001",
+            "upvote_count": "2",
+            "content": "1. Pull the image\n2. Create dockerfile\n3. Build\n4. Run \n5. Push to ACR if required"
+          },
+          {
+            "poster": "tolliik",
+            "comments": [
+              {
+                "content": "Yeah, but instructions say \"datacenters\" - plural. That means basically that step \"Distribute a docker run script\" is there for a reason.",
+                "upvote_count": "1",
+                "poster": "vovap0vovap",
+                "timestamp": "1716892020.0",
+                "comment_id": "1220140"
+              }
+            ],
+            "timestamp": "1714560060.0",
+            "comment_id": "1205012",
+            "content": "1. Create.\n2. Build.\n3. Push\n4. Run\nInstruction example hello-world image\nhttps://learn.microsoft.com/en-us/azure/container-registry/container-registry-quickstart-task-cli",
+            "upvote_count": "6"
+          },
+          {
+            "content": "Final Answer:\n1.Create a custom Dockerfile\n2.Build the image\n3.Push the image to an Azure container registry\n4.Distribute a docker run script:",
+            "upvote_count": "4",
+            "timestamp": "1711348500.0",
+            "poster": "varinder82",
+            "comment_id": "1182255"
+          },
+          {
+            "content": "I think the it should be:\n1. Pull the container image (in the dockerfile)\n2. Create a custom docker file\n3. Build the image\n4 Push to ACR",
+            "upvote_count": "4",
+            "timestamp": "1710344520.0",
+            "poster": "Murtuza",
+            "comment_id": "1172688"
+          },
+          {
+            "poster": "evangelist",
+            "timestamp": "1707632340.0",
+            "comment_id": "1147009",
+            "content": "check Azure official on youtube: https://www.youtube.com/watch?v=XLQLNazid4I\nThe steps should be\n1. Pull the container image (in the dockerfile) \n2. Create a custom docker file\n3. Build the image\n4 Push to ACR",
+            "upvote_count": "11"
+          },
+          {
+            "comment_id": "1079161",
+            "timestamp": "1700819340.0",
+            "poster": "Rsp_",
+            "upvote_count": "3",
+            "content": "Its totally confusing, what should be exact answer"
+          },
+          {
+            "comment_id": "875287",
+            "timestamp": "1681967160.0",
+            "poster": "mgafar",
+            "upvote_count": "7",
+            "content": "1) Create a custom Docker file\n2) Build the image\n3) Push the image to an Azure container registry\n4) Distribute a docker run script"
+          },
+          {
+            "content": "Pulling container has to be first step. Otherwise the given options doesn't have enough steps to complete the task.",
+            "upvote_count": "1",
+            "timestamp": "1674052500.0",
+            "poster": "dev2dev",
+            "comment_id": "780095"
+          },
+          {
+            "comment_id": "727546",
+            "poster": "Canyu",
+            "timestamp": "1669469940.0",
+            "upvote_count": "1",
+            "content": "It is more effective to refer to these two documents：\nhttps://learn.microsoft.com/en-us/azure/container-registry/container-registry-quickstart-task-cli\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/anomaly-detector/anomaly-detector-container-howto\nGetting the container image is essential."
+          },
+          {
+            "comment_id": "711200",
+            "poster": "halfway",
+            "comments": [
+              {
+                "comment_id": "1158924",
+                "timestamp": "1708875780.0",
+                "poster": "kenchin123",
+                "upvote_count": "1",
+                "content": "This makes sense. Building will also pull the base image"
+              }
+            ],
+            "timestamp": "1667571000.0",
+            "upvote_count": "4",
+            "content": "1. Create a customer Dockerfile\n2. Build the image\n3. Push the image to ACR\n4. Distribute a custom docker run script"
+          },
+          {
+            "upvote_count": "6",
+            "content": "1. create dockerfile\n2. build the image\n3. push image to acr\n4. pull image",
+            "comment_id": "626500",
+            "timestamp": "1656841680.0",
+            "poster": "ggww"
+          },
+          {
+            "upvote_count": "7",
+            "content": "The answer is correct. Pull the base image from ACR, then configure Dockerfile and rebuild image.\nhttps://docs.microsoft.com/en-us/azure/app-service/quickstart-custom-container?tabs=python&pivots=container-linux#create-and-build-image",
+            "comment_id": "606944",
+            "timestamp": "1653434280.0",
+            "poster": "JTWang"
+          },
+          {
+            "timestamp": "1651217040.0",
+            "poster": "SamedKia",
+            "comment_id": "594286",
+            "content": "I think it's Wrong!\n1- Pull container image\n2- Create a dockerfile\n3- Build the image\n4- Push to container registry",
+            "upvote_count": "9"
+          }
+        ],
+        "question_id": 67,
+        "answer_ET": "",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image200.png"
+        ],
+        "unix_timestamp": 1651217040,
+        "answer_description": "",
+        "topic": "1",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/74867-exam-ai-102-topic-1-question-7-discussion/",
+        "answer": ""
+      },
+      {
+        "id": "1pGZrVb9L2PmjIKqwvUi",
+        "question_text": "You have an Azure DevOps pipeline named Pipeline1 that is used to deploy an app. Pipeline1 includes a step that will create an Azure AI services account.\n\nYou need to add a step to Pipeline1 that will identify the created Azure AI services account. The solution must minimize development effort.\n\nWhich Azure Command-Line Interface (CLI) command should you run?",
+        "discussion": [
+          {
+            "timestamp": "1740742980.0",
+            "poster": "syupwsh",
+            "comment_id": "1362974",
+            "content": "Selected Answer: C\naz cognitiveservices account show is CORRECT because it retrieves detailed information about an Azure Cognitive Services account, including its name, resource group, and configuration. This command identifies the created Azure AI services account in the pipeline efficiently, minimizing development effort by providing a direct solution to fetch the required details.\n\nC is correct",
+            "upvote_count": "2"
+          },
+          {
+            "content": "Selected Answer: C\nPretty simple",
+            "upvote_count": "1",
+            "poster": "9cc71b6",
+            "timestamp": "1731802200.0",
+            "comment_id": "1313308"
+          },
+          {
+            "upvote_count": "2",
+            "content": "Selected Answer: C\nCorrect, answer is C, here the chatGPT explanation ->\n\nThe correct answer is C. az cognitiveservices account show.\n\nExplanation:\n\nThe az cognitiveservices account show command retrieves details about a specified Azure Cognitive Services account, including its properties and settings. By using this command in the Azure DevOps pipeline, you can identify and confirm the details of the Azure AI services account that was created in a previous step.",
+            "comment_id": "1306644",
+            "poster": "a8da4af",
+            "timestamp": "1730667780.0"
+          }
+        ],
+        "answers_community": [
+          "C (100%)"
+        ],
+        "isMC": true,
+        "exam_id": 41,
+        "question_images": [],
+        "timestamp": "2024-11-03 22:03:00",
+        "choices": {
+          "B": "az cognitiveservices account network-rule",
+          "D": "az account list",
+          "A": "az resource link",
+          "C": "az cognitiveservices account show"
+        },
+        "answer": "C",
+        "unix_timestamp": 1730667780,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/150682-exam-ai-102-topic-1-question-70-discussion/",
+        "topic": "1",
+        "answer_description": "",
+        "answer_ET": "C",
+        "question_id": 68,
+        "answer_images": []
+      },
+      {
+        "id": "Fd3IreJ90XZPBlj42BqW",
+        "unix_timestamp": 1730668140,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/150683-exam-ai-102-topic-1-question-71-discussion/",
+        "answer_description": "",
+        "topic": "1",
+        "answer_ET": "",
+        "question_id": 69,
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image168.png"
+        ],
+        "answer": "",
+        "exam_id": 41,
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image167.png"
+        ],
+        "timestamp": "2024-11-03 22:09:00",
+        "question_text": "HOTSPOT\n-\n\nYou have 1,000 scanned images of hand-written survey responses. The surveys do NOT have a consistent layout.\n\nYou have an Azure subscription that contains an Azure AI Document Intelligence resource named AIdoc1.\n\nYou open Document Intelligence Studio and create a new project.\n\nYou need to extract data from the survey responses. The solution must minimize development effort.\n\nTo where should you upload the images, and which type of model should you use? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "discussion": [
+          {
+            "poster": "a8da4af",
+            "timestamp": "1730668140.0",
+            "comments": [
+              {
+                "upvote_count": "2",
+                "content": "Why Not Custom Template:\nConsistency Requirement: Custom Template is better suited for documents with more consistent structures and layouts. Since your surveys do not have a consistent layout, Custom Template would be less effective and might require more effort to implement correctly.",
+                "comment_id": "1332796",
+                "poster": "pabsinaz",
+                "comments": [
+                  {
+                    "content": "Custom Template is suitable to extract fields from highly structured documents with defined visual templates.",
+                    "upvote_count": "1",
+                    "poster": "coolDude_2K",
+                    "timestamp": "1736863740.0",
+                    "comment_id": "1340376"
+                  }
+                ],
+                "timestamp": "1735363440.0"
+              }
+            ],
+            "comment_id": "1306646",
+            "content": "Explanation:\n\nUpload To - Azure Storage Account: Azure Document Intelligence (formerly known as Form Recognizer) works well with images and documents stored in an Azure Storage account, which provides direct integration for processing files. This is the most compatible and streamlined choice for handling scanned images in this scenario.\n\nModel Type - Custom Neural: Since the surveys are handwritten and lack a consistent layout, the Custom neural model is the best choice. This model type is designed for flexibility and works effectively with unstructured or semi-structured documents. It can process handwritten text and extract information even when the layout varies across documents, which minimizes the need for custom development and complex template creation.",
+            "upvote_count": "10"
+          },
+          {
+            "content": "An Azure Storage account is CORRECT because Azure AI Document Intelligence requires documents to be uploaded to an Azure Storage account to process and analyze them. This ensures seamless integration with the Document Intelligence Studio, enabling you to extract data from scanned images efficiently while minimizing development effort.\n\nCustom neural is CORRECT because this model type is designed to handle documents without a consistent layout. It uses machine learning to identify and extract relevant data from diverse and unstructured formats, such as hand-written survey responses. This minimizes development effort as you can train the model on a sample set of your survey responses, and it generalizes well across varying layouts.",
+            "upvote_count": "2",
+            "poster": "syupwsh",
+            "timestamp": "1739332800.0",
+            "comment_id": "1355446"
+          },
+          {
+            "upvote_count": "1",
+            "content": "from the link - \nhttps://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/train/custom-neural?view=doc-intel-4.0.0\nCustom Neural supports these document types -\nStructured surveys, questionnaires\nSemi-structured invoices, purchase orders",
+            "comment_id": "1349466",
+            "poster": "lbansal",
+            "timestamp": "1738318500.0"
+          }
+        ],
+        "answers_community": [],
+        "isMC": false
+      },
+      {
+        "id": "Fo5LG38oVZBYd9rcRCfW",
+        "question_text": "HOTSPOT -\nYou plan to deploy a containerized version of an Azure Cognitive Services service that will be used for text analysis.\nYou configure https://contoso.cognitiveservices.azure.com as the endpoint URI for the service, and you pull the latest version of the Text Analytics\nSentiment Analysis container.\nYou need to run the container on an Azure virtual machine by using Docker.\nHow should you complete the command? To answer, select the appropriate options in the answer area.\nNOTE: Each correct selection is worth one point.\nHot Area:\n//IMG//",
+        "discussion": [
+          {
+            "comment_id": "389695",
+            "timestamp": "1656081720.0",
+            "poster": "kolakone",
+            "upvote_count": "34",
+            "content": "Seems correct.\nFor first answer, you \"pull the latest version of the Text Analytics\nSentiment Analysis container\", hence the \"sentiment\" in the endpoint.\nFor billing, other options are other services, hence the provided answer."
+          },
+          {
+            "upvote_count": "17",
+            "content": "1. mcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment\n2. https://contoso.cognitiveservices.azure.com\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/sentiment-opinion-mining/how-to/use-containers#run-the-container-with-docker-run\n\ndocker run --rm -it -p 5000:5000 --memory 8g --cpus 1 \\\nmcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment:{IMAGE_TAG} \\\nEula=accept \\\nBilling={ENDPOINT_URI} \\\nApiKey={API_KEY}\n\n- {ENDPOINT_URI}\nThe endpoint for accessing the API. You can find it on your resource's Key and endpoint page, on the Azure portal.\nhttps://<your-custom-subdomain>.cognitiveservices.azure.com",
+            "comment_id": "939231",
+            "timestamp": "1719764460.0",
+            "comments": [
+              {
+                "timestamp": "1731335040.0",
+                "poster": "rdemontis",
+                "comment_id": "1067892",
+                "content": "agree with you, thanks for references",
+                "upvote_count": "2"
+              }
+            ],
+            "poster": "zellck"
+          },
+          {
+            "content": "mcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment is CORRECT because it specifies the correct container image for deploying the sentiment analysis service. This is the appropriate image to use for performing sentiment analysis using Azure Cognitive Services in a containerized environment.\n\nhttps://contoso.cognitiveservices.azure.com is CORRECT because this is the endpoint URI for the Azure Cognitive Services resource, which is needed to authenticate and interact with the service for sentiment analysis.\n\nAnswer is correct",
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "timestamp": "1739260980.0",
+            "comment_id": "1354892"
+          },
+          {
+            "comment_id": "979132",
+            "timestamp": "1723439580.0",
+            "poster": "james2033",
+            "upvote_count": "4",
+            "content": "docker run --rm -it -p 5000:5000 --memory 8g --cpus 1 \\\nmcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment \\\nEula=accept \\\nBilling=http://contoso.cognitiveservices.azure.com \\\nApiKey=xxxxxxxxxxxxxxxxx\n\nSee https://learn.microsoft.com/en-us/azure/ai-services/language-service/sentiment-opinion-mining/how-to/use-containers#run-the-container-with-docker-run"
+          },
+          {
+            "comment_id": "632413",
+            "poster": "AusAv",
+            "timestamp": "1689552660.0",
+            "upvote_count": "1",
+            "content": "Example here: https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/sentiment-opinion-mining/how-to/use-containers#run-the-container-with-docker-run"
+          },
+          {
+            "upvote_count": "1",
+            "content": "mcr/.../sentiment\ncontoso.cognitiveservices",
+            "comment_id": "631336",
+            "timestamp": "1689335580.0",
+            "poster": "Eltooth"
+          },
+          {
+            "comment_id": "516117",
+            "poster": "sumanshu",
+            "timestamp": "1672786380.0",
+            "upvote_count": "2",
+            "content": "As per question, we have to do the sentiment analysis, So URL should be appended with /sentiment and in Billing we have to mention the provided URL , So given answer is correct"
+          },
+          {
+            "content": "https://docs.microsoft.com/en-us/azure/cognitive-services/anomaly-detector/anomaly-detector-container-howto",
+            "upvote_count": "1",
+            "poster": "motu",
+            "timestamp": "1654598280.0",
+            "comment_id": "376697"
+          }
+        ],
+        "answers_community": [],
+        "isMC": false,
+        "exam_id": 41,
+        "timestamp": "2021-06-07 12:38:00",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0001400001.png"
+        ],
+        "answer": "",
+        "unix_timestamp": 1623062280,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/54790-exam-ai-102-topic-1-question-8-discussion/",
+        "answer_description": "Box 1: mcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment\nTo run the Sentiment Analysis v3 container, execute the following docker run command. docker run --rm -it -p 5000:5000 --memory 8g --cpus 1 \\ mcr.microsoft.com/azure-cognitive-services/textanalytics/sentiment \\\nEula=accept \\\nBilling={ENDPOINT_URI} \\\nApiKey={API_KEY} is the endpoint for accessing the Text Analytics API. https://<your-custom-subdomain>.cognitiveservices.azure.com\nBox 2: https://contoso.cognitiveservices.azure.com\n{ENDPOINT_URI} is the endpoint for accessing the Text Analytics API: https://<your-custom-subdomain>.cognitiveservices.a The endpoint for accessing the Text\n\nAnalytics API. zure.com -\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-install-containers?tabs=sentiment",
+        "topic": "1",
+        "answer_ET": "",
+        "question_id": 70,
+        "answer_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0001400002.png"
+        ]
+      }
+    ],
+    "exam": {
+      "isImplemented": true,
+      "isMCOnly": false,
+      "isBeta": false,
+      "provider": "Microsoft",
+      "numberOfQuestions": 330,
+      "lastUpdated": "06 Aug 2025",
+      "name": "AI-102",
+      "id": 41
+    },
+    "currentPage": 14
+  },
+  "__N_SSP": true
+}

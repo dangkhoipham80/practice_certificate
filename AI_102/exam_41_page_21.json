@@ -1,0 +1,618 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "K0mV405PBRIVNtR3uIIb",
+        "discussion": [
+          {
+            "comment_id": "936544",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/search/search-howto-large-index#run-indexers-in-parallel\nIf you partition your data, you can create multiple indexer-data-source combinations that pull from each data source and write to the same search index. Because each indexer is distinct, you can run them at the same time, populating a search index more quickly than if you ran them sequentially.",
+            "timestamp": "1703769480.0",
+            "upvote_count": "11",
+            "poster": "zellck",
+            "comments": [
+              {
+                "comment_id": "1062011",
+                "timestamp": "1714812180.0",
+                "poster": "rdemontis",
+                "upvote_count": "1",
+                "content": "thanks for explanation"
+              }
+            ]
+          },
+          {
+            "comment_id": "1354253",
+            "timestamp": "1739164680.0",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nParallel indexing allows you to process multiple documents simultaneously, thereby minimizing the time it takes to build the index. This approach is suitable for handling large volumes of documents and images efficiently. \n\nA is correct"
+          },
+          {
+            "upvote_count": "2",
+            "poster": "fuck_india",
+            "timestamp": "1732899120.0",
+            "content": "Selected Answer: A\nA is correct.",
+            "comment_id": "1221060"
+          },
+          {
+            "comment_id": "1220330",
+            "content": "Selected Answer: A\nThe answer to this question is A.",
+            "timestamp": "1732810560.0",
+            "upvote_count": "2",
+            "poster": "taiwan_is_not_china"
+          },
+          {
+            "content": "Selected Answer: A\nA is right answer.",
+            "timestamp": "1732118040.0",
+            "poster": "takaimomoGcup",
+            "upvote_count": "1",
+            "comment_id": "1214370"
+          },
+          {
+            "content": "Selected Answer: A\nTo minimize the time it takes to build the index for the documents and images in the Azure Storage account, the best approach would be to use parallel indexing.\nTherefore, the correct option is:\nA. From the Azure portal, configure parallel indexing.\n\nConfiguring parallel indexing allows you to process multiple documents or images simultaneously",
+            "poster": "nitz14",
+            "timestamp": "1702738500.0",
+            "upvote_count": "2",
+            "comment_id": "925179"
+          },
+          {
+            "comment_id": "892223",
+            "timestamp": "1699458780.0",
+            "poster": "ulloo",
+            "upvote_count": "1",
+            "content": "https://learn.microsoft.com/en-us/azure/search/search-howto-large-index"
+          },
+          {
+            "timestamp": "1698942540.0",
+            "upvote_count": "1",
+            "poster": "Mike19D",
+            "content": "seems logical",
+            "comment_id": "887518"
+          }
+        ],
+        "answer_images": [],
+        "timestamp": "2023-05-02 16:29:00",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/108276-exam-ai-102-topic-2-question-25-discussion/",
+        "answer_ET": "A",
+        "answer": "A",
+        "question_text": "You have an Azure subscription that contains an AI enrichment pipeline in Azure Cognitive Search and an Azure Storage account that has 10 GB of scanned documents and images.\n\nYou need to index the documents and images in the storage account. The solution must minimize how long it takes to build the index.\n\nWhat should you do?",
+        "question_id": 101,
+        "unix_timestamp": 1683037740,
+        "choices": {
+          "D": "Create a text-based indexer by using the REST API.",
+          "C": "Configure field mappings by using the REST API.",
+          "B": "From the Azure portal, configure scheduled indexing.",
+          "A": "From the Azure portal, configure parallel indexing."
+        },
+        "answer_description": "",
+        "isMC": true,
+        "question_images": [],
+        "exam_id": 41,
+        "topic": "2",
+        "answers_community": [
+          "A (100%)"
+        ]
+      },
+      {
+        "id": "vUdwv4rBcY7KO2C6p4Uv",
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image26.png"
+        ],
+        "isMC": false,
+        "answer_description": "",
+        "answers_community": [],
+        "topic": "2",
+        "exam_id": 41,
+        "unix_timestamp": 1685519520,
+        "question_id": 102,
+        "question_text": "DRAG DROP\n-\n\nYou need to analyze video content to identify any mentions of specific company names.\n\nWhich three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.\n\n//IMG//",
+        "answer": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/110625-exam-ai-102-topic-2-question-26-discussion/",
+        "answer_ET": "",
+        "timestamp": "2023-05-31 09:52:00",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image27.png"
+        ],
+        "discussion": [
+          {
+            "comment_id": "939640",
+            "poster": "zellck",
+            "upvote_count": "34",
+            "timestamp": "1688191860.0",
+            "comments": [
+              {
+                "content": "Gotten this in Jul 2023 exam.",
+                "timestamp": "1688774580.0",
+                "upvote_count": "9",
+                "poster": "zellck",
+                "comment_id": "946060"
+              }
+            ],
+            "content": "1. Sign in to Azure Video Analyzer for Media website\n2. From Content model customization, select Brands\n3. Add specific company names to include list\n\nhttps://learn.microsoft.com/en-us/azure/azure-video-indexer/customize-brands-model-with-website"
+          },
+          {
+            "comment_id": "1363387",
+            "content": "1) Sign in to the Azure Video Indexer web portal is CORRECT because Azure Video Indexer is the primary service used for analyzing video content, including speech-to-text, brand detection, and entity recognition. Before configuring any settings, you must access the Video Indexer portal.\n\n2) From Content model customization, select Brands is CORRECT because brand detection in Video Indexer allows customization to recognize specific company names. This feature helps detect brand mentions in spoken words, text, and visual content.\n\n3) Add the specific company names to the include list is CORRECT because to ensure that specific company names are recognized and included in the analysis, they must be explicitly added to the include list under the Brands customization settings.",
+            "poster": "syupwsh",
+            "upvote_count": "2",
+            "timestamp": "1740805200.0"
+          },
+          {
+            "comment_id": "1248790",
+            "content": "1. Sign in to Azure Video Analyzer for Media website\n2. From Content model customization, select Brands\n3. Add specific company names to include list",
+            "poster": "krzkrzkra",
+            "upvote_count": "1",
+            "timestamp": "1721121000.0"
+          },
+          {
+            "comment_id": "1220318",
+            "upvote_count": "3",
+            "timestamp": "1716905220.0",
+            "poster": "hatanaoki",
+            "content": "1. Sign in website ,analyzer\n2. From Brands\n3. Add include list"
+          },
+          {
+            "timestamp": "1716212820.0",
+            "upvote_count": "2",
+            "poster": "takaimomoGcup",
+            "content": "Sign in website, From Brands, Add include list.\nI memorized this line.",
+            "comment_id": "1214363"
+          },
+          {
+            "timestamp": "1708123380.0",
+            "upvote_count": "3",
+            "poster": "evangelist",
+            "content": "login to azure video analyzer==>select brands tab to customize the analyzer==>add specific company names to the \"include\" list",
+            "comment_id": "1152264"
+          },
+          {
+            "content": "Now it's call \"Azure AI Video Indexer website \"",
+            "upvote_count": "1",
+            "timestamp": "1705662600.0",
+            "poster": "josebernabeo",
+            "comment_id": "1126626"
+          },
+          {
+            "comment_id": "1062014",
+            "content": "correct answer",
+            "timestamp": "1699094820.0",
+            "upvote_count": "2",
+            "poster": "rdemontis"
+          },
+          {
+            "comment_id": "910975",
+            "content": "ChatGPT agree: \nAnswer Area:\n\n Sign in to the Azure Video Analyzer for Media website.\n From Content model customization, select Brands.\n Add the specific company names to the include list.",
+            "timestamp": "1685519520.0",
+            "upvote_count": "3",
+            "poster": "mmaguero"
+          }
+        ]
+      },
+      {
+        "id": "4VcrPAu7LvOTE2fL5ES2",
+        "discussion": [
+          {
+            "comment_id": "1062023",
+            "content": "Selected Answer: A\nTo send images to the Form Recognizer API endpoint without storing them in the cloud, you should send the images in the following format:\n\nA. raw image binary\n\nSending the images as raw image binary data allows you to transmit the image directly to the Form Recognizer API without the need to store them in the cloud or convert them into other formats. This format ensures compliance with your requirements. (ChatGPT)",
+            "upvote_count": "11",
+            "timestamp": "1714813140.0",
+            "poster": "rdemontis"
+          },
+          {
+            "comment_id": "1056561",
+            "poster": "trashbox",
+            "upvote_count": "5",
+            "timestamp": "1714356240.0",
+            "content": "Appeared on Oct/29/2023"
+          },
+          {
+            "content": "Selected Answer: A\nhttps://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/faq?view=doc-intel-4.0.0#does-document-intelligence-store-my-data-\n\nAnswer is A",
+            "upvote_count": "2",
+            "poster": "syupwsh",
+            "timestamp": "1739164860.0",
+            "comment_id": "1354254"
+          },
+          {
+            "upvote_count": "1",
+            "poster": "taiwan_is_not_china",
+            "timestamp": "1732810500.0",
+            "content": "Selected Answer: A\nThe answer to this question is A.",
+            "comment_id": "1220328"
+          },
+          {
+            "comment_id": "1218285",
+            "content": "Selected Answer: A\nA is right.",
+            "upvote_count": "1",
+            "timestamp": "1732542840.0",
+            "poster": "nanaw770"
+          },
+          {
+            "comment_id": "1214368",
+            "content": "Selected Answer: A\nA is right answer.",
+            "poster": "takaimomoGcup",
+            "timestamp": "1732117980.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1108960",
+            "content": "Selected Answer: A\nits correct",
+            "poster": "ankitdhir",
+            "upvote_count": "2",
+            "timestamp": "1719676020.0"
+          },
+          {
+            "comment_id": "995288",
+            "upvote_count": "3",
+            "timestamp": "1709231760.0",
+            "poster": "M25",
+            "content": "Selected Answer: A\nA. raw image binary\nhttps://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1/operations/AnalyzeReceiptAsync\nRequest body: Document containing the receipt image(s) to be analyzed. The POST body should be the raw image binary, or the image URL in JSON.\n\nhttps://ittichaicham.com/2020/03/call-azure-form-recognizer-api-on-sharepoint-document-image-url-in-power-automate/\nPower Automate (formerly Microsoft Flow) can call Azure Form Recognizer via the connector. Since Power Automate is a cloud solution, the natural choice is to use the image URL. This should work fine if the URL is accessible to the public or requires no authentication. Unfortunately, the company’s SharePoint URL, most of the time, is not.\nTo solve this, we can add another flow step to move the SharePoint file to where it is accessible, or, better, instead of using file URL, we can pass binary content in the Form Recognizer API."
+          },
+          {
+            "comments": [],
+            "poster": "zellck",
+            "upvote_count": "3",
+            "timestamp": "1703769180.0",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/faq?view=form-recog-3.0.0#does-form-recognizer-store-my-data-\nFor all features, Form Recognizer temporarily stores data and results in Azure storage in the same region as the request. Your data is then deleted within 24 hours from the time an analyze request was submitted.",
+            "comment_id": "936540"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1701770940.0",
+            "poster": "ziggy1117",
+            "content": "Should be A. When you send images to the endpoint, the images don't get stored anywhere.",
+            "comment_id": "915207"
+          },
+          {
+            "timestamp": "1700035560.0",
+            "poster": "hens",
+            "upvote_count": "3",
+            "content": "chat gpt \"To send images directly to Forms Recognizer and extract relevant information without storing the image files in the cloud, you should use the raw image binary format.\"",
+            "comment_id": "898069"
+          },
+          {
+            "comment_id": "890448",
+            "content": "Looks like URL (not sure about the \"encoded\" part though!)\nhttps://learn.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/v3-migration-guide?view=form-recog-3.0.0#analyze-request-body",
+            "poster": "Rob77",
+            "upvote_count": "1",
+            "timestamp": "1699248540.0"
+          }
+        ],
+        "timestamp": "2023-05-06 05:29:00",
+        "answer_ET": "A",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/108600-exam-ai-102-topic-2-question-27-discussion/",
+        "answer_images": [],
+        "question_text": "You have a mobile app that manages printed forms.\n\nYou need the app to send images of the forms directly to Forms Recognizer to extract relevant information. For compliance reasons, the image files must not be stored in the cloud.\n\nIn which format should you send the images to the Form Recognizer API endpoint?",
+        "answer": "A",
+        "question_id": 103,
+        "unix_timestamp": 1683343740,
+        "choices": {
+          "C": "JSON",
+          "B": "form URL encoded",
+          "A": "raw image binary"
+        },
+        "isMC": true,
+        "answer_description": "",
+        "question_images": [],
+        "exam_id": 41,
+        "topic": "2",
+        "answers_community": [
+          "A (100%)"
+        ]
+      },
+      {
+        "id": "bn2NoN0AHbRJgDVy2Iyl",
+        "discussion": [
+          {
+            "comment_id": "879223",
+            "content": "Selected Answer: C\nI think the answer should be C, because of the minimized developement effort. Since the prebuilt model of C also fits the other two requirements, so there is no need to train a custom model.\n\nsource: https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/how-to/call-analyze-image?tabs=rest",
+            "timestamp": "1682331600.0",
+            "poster": "MaliSanFuu",
+            "upvote_count": "20",
+            "comments": [
+              {
+                "comment_id": "1062026",
+                "poster": "rdemontis",
+                "timestamp": "1699095720.0",
+                "upvote_count": "2",
+                "content": "agree with you"
+              }
+            ]
+          },
+          {
+            "comment_id": "1132968",
+            "poster": "evangelist",
+            "upvote_count": "8",
+            "timestamp": "1706317380.0",
+            "content": "Selected Answer: C\nHere's why:\n\nMultilingual Tag Generation: Azure's Computer Vision Image Analysis service can analyze images and provide a list of tags describing the content of the images. It also has the capability to return these tags in various languages, including English, French, and Spanish, which aligns with your requirement.\n\nMinimizing Development Effort: This service offers a pre-built model, which means there is no need for you to collect data and train your own model. This significantly reduces the development effort and time. You simply need to call the API with your images, and it will return the tags."
+          },
+          {
+            "comment_id": "1572607",
+            "content": "Selected Answer: B\nB is the correct answer. As per documentation, Computer Vision Image Analysis currently support only English. \n \nSource: https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0 \nSearch for text - \"Currently, English is the only supported language for tagging and categorizing images.\"\n\nSo, for multi-language support, we will have to use custom vision image classification.",
+            "upvote_count": "1",
+            "poster": "saravananponnaiah",
+            "timestamp": "1748330100.0"
+          },
+          {
+            "content": "Selected Answer: C\nComputer Vision Image Analysis provides a comprehensive set of features for analyzing images, including generating tags. It supports multiple languages, including English, French, and Spanish, which meets the requirement of generating tags in a user's preferred language. Additionally, it minimizes development effort by offering a ready-to-use endpoint for image analysis and tagging.\n\nC is correct",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1739164980.0",
+            "comment_id": "1354256"
+          },
+          {
+            "comment_id": "1235336",
+            "content": "Selected Answer: C\nC is the answer.",
+            "poster": "reiwanotora",
+            "timestamp": "1719053460.0",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Why C?",
+            "poster": "HaraTadahisa",
+            "upvote_count": "1",
+            "timestamp": "1719036780.0",
+            "comment_id": "1235169"
+          },
+          {
+            "timestamp": "1716994320.0",
+            "poster": "fuck_india",
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nC is correct.",
+            "comment_id": "1221061"
+          },
+          {
+            "content": "Selected Answer: C\nC is right.",
+            "timestamp": "1716638220.0",
+            "upvote_count": "1",
+            "poster": "nanaw770",
+            "comment_id": "1218287"
+          },
+          {
+            "upvote_count": "1",
+            "poster": "takaimomoGcup",
+            "timestamp": "1716213480.0",
+            "content": "Selected Answer: C\nC. Computer Vision Image Analysis",
+            "comment_id": "1214372"
+          },
+          {
+            "content": "generate tags as per image is an Image Analysis operation rather than an image classification operation",
+            "poster": "evangelist",
+            "upvote_count": "3",
+            "timestamp": "1708123500.0",
+            "comment_id": "1152266"
+          },
+          {
+            "comments": [
+              {
+                "poster": "anto69",
+                "upvote_count": "1",
+                "timestamp": "1707026280.0",
+                "content": "C, verified with Copilot too",
+                "comment_id": "1139829"
+              }
+            ],
+            "poster": "ankitdhir",
+            "upvote_count": "2",
+            "timestamp": "1703872140.0",
+            "content": "Selected Answer: C\nVerified with google bard",
+            "comment_id": "1108962"
+          },
+          {
+            "content": "Selected Answer: B \nFrench is not supported by computer vision",
+            "comments": [
+              {
+                "comment_id": "1322139",
+                "timestamp": "1733354460.0",
+                "upvote_count": "1",
+                "poster": "3fbc31b",
+                "content": "Yes it is. URL below. \nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/language-support#image-analysis"
+              },
+              {
+                "comment_id": "1167717",
+                "content": "French is supported, I just tested it in Azure. See also this link (the table 'Analyze image':\nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/language-support#image-analysis",
+                "timestamp": "1709791800.0",
+                "upvote_count": "1",
+                "poster": "Mehe323"
+              },
+              {
+                "comment_id": "1126627",
+                "timestamp": "1705663080.0",
+                "poster": "josebernabeo",
+                "upvote_count": "1",
+                "content": "True.\n\nURL parameter Value Description\nlanguage en English\nlanguage es Spanish\nlanguage ja Japanese\nlanguage pt Portuguese\nlanguage zh Simplified Chinese\n\nSource: https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-analyze-image?tabs=rest"
+              }
+            ],
+            "upvote_count": "2",
+            "poster": "TRUESON",
+            "timestamp": "1703496660.0",
+            "comment_id": "1105133"
+          },
+          {
+            "comment_id": "936528",
+            "content": "Selected Answer: C\nC is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-tagging-images\nImage Analysis can return content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in images. Tags are not organized as a taxonomy and do not have inheritance hierarchies. A collection of content tags forms the foundation for an image description displayed as human readable language formatted in complete sentences. When tags are ambiguous or not common knowledge, the API response provides hints to clarify the meaning of the tag in context of a known setting.",
+            "comments": [
+              {
+                "timestamp": "1687950420.0",
+                "poster": "zellck",
+                "upvote_count": "4",
+                "comments": [
+                  {
+                    "comment_id": "1068528",
+                    "timestamp": "1699794000.0",
+                    "upvote_count": "1",
+                    "poster": "rdemontis",
+                    "content": "thanks for explanation"
+                  }
+                ],
+                "content": "https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/language-support#image-analysis\nSome features of the Analyze - Image API can return results in other languages, specified with the language query parameter. Other actions return results in English regardless of what language is specified, and others throw an exception for unsupported languages. Actions are specified with the visualFeatures and details query parameters; see the Overview for a list of all the actions you can do with image analysis. Languages for tagging are only available in API version 3.2 or later.",
+                "comment_id": "936532"
+              }
+            ],
+            "upvote_count": "3",
+            "timestamp": "1687950300.0",
+            "poster": "zellck"
+          },
+          {
+            "comment_id": "935873",
+            "upvote_count": "4",
+            "timestamp": "1687904640.0",
+            "poster": "Pixelmate",
+            "content": "Asked in 28/06/2023 exam"
+          },
+          {
+            "poster": "ziggy1117",
+            "timestamp": "1686266340.0",
+            "upvote_count": "1",
+            "content": "C: https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/concept-tagging-images",
+            "comment_id": "918740"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1684130880.0",
+            "poster": "hens",
+            "content": "chat gpt \"To generate a list of tags for uploaded images in multiple languages, you should use the Computer Vision Image Analysis service endpoint in Azure.\n\nComputer Vision provides a pre-built model that can generate image tags based on a given image. It also supports multiple languages, including English, French, and Spanish, which meets the requirements of the app. Additionally, the service provides a REST API, which can be easily integrated into your app without requiring significant development effort.\"",
+            "comment_id": "898073"
+          }
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/107293-exam-ai-102-topic-2-question-28-discussion/",
+        "answer_ET": "C",
+        "timestamp": "2023-04-24 12:20:00",
+        "answer_images": [],
+        "question_text": "You plan to build an app that will generate a list of tags for uploaded images. The app must meet the following requirements:\n\n• Generate tags in a user's preferred language.\n• Support English, French, and Spanish.\n• Minimize development effort.\n\nYou need to build a function that will generate the tags for the app.\n\nWhich Azure service endpoint should you use?",
+        "answer": "C",
+        "question_id": 104,
+        "unix_timestamp": 1682331600,
+        "choices": {
+          "A": "Content Moderator Image Moderation",
+          "B": "Custom Vision image classification",
+          "C": "Computer Vision Image Analysis",
+          "D": "Custom Translator"
+        },
+        "isMC": true,
+        "answer_description": "",
+        "question_images": [],
+        "exam_id": 41,
+        "topic": "2",
+        "answers_community": [
+          "C (98%)",
+          "3%"
+        ]
+      },
+      {
+        "id": "DzfrIn1lo07eMWk96oGN",
+        "answer_description": "",
+        "isMC": false,
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image28.png",
+          "https://img.examtopics.com/ai-102/image29.png"
+        ],
+        "exam_id": 41,
+        "answers_community": [],
+        "topic": "2",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image30.png"
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/108601-exam-ai-102-topic-2-question-29-discussion/",
+        "answer_ET": "",
+        "timestamp": "2023-05-06 05:51:00",
+        "discussion": [
+          {
+            "poster": "zellck",
+            "upvote_count": "12",
+            "timestamp": "1688191500.0",
+            "content": "YYN is the answer.\n\nhttps://learn.microsoft.com/en-us/rest/api/computervision/3.1/detect-objects/detect-objects?tabs=HTTP#boundingrect\nA bounding box for an area inside an image.\n- x\nX-coordinate of the top left point of the area, in pixels.\n- y\nY-coordinate of the top left point of the area, in pixels.\n- h\nHeight measured from the top-left point of the area, in pixels.\n- w\nWidth measured from the top-left point of the area, in pixels.",
+            "comment_id": "939637"
+          },
+          {
+            "timestamp": "1688193780.0",
+            "poster": "zellck",
+            "upvote_count": "5",
+            "content": "Same as Question 14.\nhttps://www.examtopics.com/discussions/microsoft/view/55050-exam-ai-102-topic-2-question-14-discussion",
+            "comment_id": "939666"
+          },
+          {
+            "content": "Yes is CORRECT because the code will display the name of each detected brand with a confidence equal to or higher than 75 percent. The if condition checks if brand.Confidence is greater than or equal to 0.75, and if so, it prints the brand name along with its coordinates.\nYes is CORRECT. The properties brand.Rectangle.X and brand.Rectangle.Y represent the X and Y coordinates of the top-left point of the area, respectively.\nNo is CORRECT because the code does not directly display the coordinates for the bottom-right corner of the rectangle. It displays the coordinates for the top-left corner (brand.Rectangle.X, brand.Rectangle.Y) and the width (brand.Rectangle.W) and height (brand.Rectangle.H). The bottom-right corner coordinates are not explicitly calculated or displayed.",
+            "poster": "syupwsh",
+            "timestamp": "1739341140.0",
+            "upvote_count": "1",
+            "comment_id": "1355488"
+          },
+          {
+            "upvote_count": "1",
+            "poster": "krzkrzkra",
+            "timestamp": "1721064420.0",
+            "content": "YYN is the answer.",
+            "comment_id": "1248477"
+          },
+          {
+            "comment_id": "1220327",
+            "timestamp": "1716905700.0",
+            "upvote_count": "1",
+            "poster": "taiwan_is_not_china",
+            "content": "The answer is YYN."
+          },
+          {
+            "comment_id": "1214367",
+            "timestamp": "1716213120.0",
+            "poster": "takaimomoGcup",
+            "upvote_count": "1",
+            "content": "Yes Yes No"
+          },
+          {
+            "content": "answer is correct: Y Y N\nresponse only display the top left corner and width and height from this origin",
+            "upvote_count": "2",
+            "poster": "evangelist",
+            "timestamp": "1706317500.0",
+            "comment_id": "1132969"
+          },
+          {
+            "upvote_count": "3",
+            "poster": "rdemontis",
+            "timestamp": "1699095900.0",
+            "content": "YYN: correct answer and duplicated question",
+            "comment_id": "1062031"
+          },
+          {
+            "comment_id": "1006049",
+            "comments": [
+              {
+                "comment_id": "1012872",
+                "upvote_count": "3",
+                "poster": "AnonymousJhb",
+                "timestamp": "1695279720.0",
+                "content": "YYN. not the bottom right"
+              }
+            ],
+            "upvote_count": "1",
+            "timestamp": "1694554560.0",
+            "poster": "jangotango",
+            "content": "YYY - the last one is Y because all coordinates together give you top left and bottom right."
+          },
+          {
+            "poster": "Rob77",
+            "timestamp": "1683345060.0",
+            "upvote_count": "1",
+            "content": "Correct YYN. The last one is width and height.",
+            "comment_id": "890453"
+          }
+        ],
+        "unix_timestamp": 1683345060,
+        "question_id": 105,
+        "answer": "",
+        "question_text": "HOTSPOT\n-\n\nYou develop a test method to verify the results retrieved from a call to the Computer Vision API. The call is used to analyze the existence of company logos in images. The call returns a collection of brands named brands.\n\nYou have the following code segment.\n\n//IMG//\n\n\nFor each of the following statements, select Yes if the statement is true. Otherwise, select No.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//"
+      }
+    ],
+    "exam": {
+      "numberOfQuestions": 330,
+      "lastUpdated": "06 Aug 2025",
+      "id": 41,
+      "isBeta": false,
+      "name": "AI-102",
+      "isImplemented": true,
+      "isMCOnly": false,
+      "provider": "Microsoft"
+    },
+    "currentPage": 21
+  },
+  "__N_SSP": true
+}

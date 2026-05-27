@@ -1,0 +1,727 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "784DaYtb6aTJQwfytNC9",
+        "question_text": "You are developing a new sales system that will process the video and text from a public-facing website.\nYou plan to monitor the sales system to ensure that it provides equitable results regardless of the user's location or background.\nWhich two responsible AI principles provide guidance to meet the monitoring requirements? Each correct answer presents part of the solution.\nNOTE: Each correct selection is worth one point.",
+        "answer": "BC",
+        "unix_timestamp": 1651219800,
+        "question_id": 56,
+        "discussion": [
+          {
+            "comments": [
+              {
+                "upvote_count": "1",
+                "timestamp": "1723301280.0",
+                "poster": "anto69",
+                "content": "agree with B, C",
+                "comment_id": "1263556"
+              }
+            ],
+            "timestamp": "1657040640.0",
+            "poster": "Eltooth",
+            "upvote_count": "27",
+            "content": "Selected Answer: BC\nB and C are correct answers.",
+            "comment_id": "627552"
+          },
+          {
+            "comment_id": "936358",
+            "content": "Selected Answer: BC\nBC is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cloud-adoption-framework/innovate/best-practices/trusted-ai#fairness\nFairness is a core ethical principle that all humans aim to understand and apply. This principle is even more important when AI systems are being developed. Key checks and balances need to make sure that the system's decisions don't discriminate or run a gender, race, sexual orientation, or religion bias toward a group or individual.\n\nhttps://learn.microsoft.com/en-us/azure/cloud-adoption-framework/innovate/best-practices/trusted-ai#inclusiveness\nInclusiveness mandates that AI should consider all human races and experiences, and inclusive design practices can help developers to understand and address potential barriers that could unintentionally exclude people. Where possible, speech-to-text, text-to-speech, and visual recognition technology should be used to empower people with hearing, visual, and other impairments.",
+            "timestamp": "1687941660.0",
+            "poster": "zellck",
+            "upvote_count": "7"
+          },
+          {
+            "content": "Selected Answer: BC\nFairness Avoiding bias, ensuring equal treatment\nInclusiveness Ensuring access, representation, and equal participation",
+            "upvote_count": "1",
+            "timestamp": "1748340180.0",
+            "poster": "man5484",
+            "comment_id": "1572638"
+          },
+          {
+            "content": "Selected Answer: BC\nFairness is CORRECT because it ensures that AI systems provide equitable outcomes and do not discriminate against any individual or group. Monitoring the sales system for equitable results based on user location or background aligns directly with the principle of fairness.\n\nInclusiveness is CORRECT because it aims to engage and empower people of all backgrounds. Ensuring that the sales system works well for users regardless of their location or background aligns with the principle of inclusiveness.\n\nBC are correct",
+            "poster": "syupwsh",
+            "timestamp": "1740740160.0",
+            "upvote_count": "1",
+            "comment_id": "1362939"
+          },
+          {
+            "comment_id": "1220062",
+            "content": "Why not A&B?\nTransparency\nTransparency in Azure Machine Learning: The model interpretability and counterfactual what-if components of the Responsible AI dashboard enable data scientists and developers to generate human-understandable descriptions of the predictions of a model\n\nfairness - no comment. it is clear.",
+            "poster": "tolliik",
+            "timestamp": "1716882060.0",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Selected Answer: BC\nIt must be B and C.",
+            "upvote_count": "1",
+            "timestamp": "1716562800.0",
+            "poster": "nanaw770",
+            "comment_id": "1217631"
+          },
+          {
+            "comment_id": "1211306",
+            "poster": "JamesKJoker",
+            "timestamp": "1715676240.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: BC\nBC is obviously correct"
+          },
+          {
+            "comment_id": "1195249",
+            "poster": "CDL_Learner",
+            "upvote_count": "2",
+            "timestamp": "1713064140.0",
+            "content": "Selected Answer: BC\nB. Fairness: This principle is about ensuring that the AI system provides equitable results regardless of a user’s location or background. It involves minimizing bias in the AI system’s outcomes and providing equal opportunities for all users.\nC. Inclusiveness: This principle is about designing AI systems that are accessible and usable by the widest possible range of people, regardless of their location or background. It involves considering the diverse characteristics of potential users during the design and deployment of the AI system."
+          },
+          {
+            "comment_id": "1194708",
+            "content": "Selected Answer: BC\nB and C",
+            "timestamp": "1712990940.0",
+            "upvote_count": "2",
+            "poster": "sivapolam90"
+          },
+          {
+            "timestamp": "1712718720.0",
+            "poster": "michaelmorar",
+            "upvote_count": "1",
+            "content": "Selected Answer: BC\nThe requirements to not mention reliability and safety, only that the users are treated equally regardless of their characteristics or background.",
+            "comment_id": "1192638"
+          },
+          {
+            "comment_id": "1181739",
+            "timestamp": "1711292400.0",
+            "poster": "f2c587e",
+            "upvote_count": "1",
+            "content": "Selected Answer: BC\nEn la pregunta claramente hablan sobre Equidad y la inclusión al abordar que debe ser independiente de la ubicación"
+          },
+          {
+            "comment_id": "1147004",
+            "timestamp": "1707631440.0",
+            "upvote_count": "1",
+            "poster": "evangelist",
+            "content": "Selected Answer: BC\ntransparency (A) is important for making the operations of AI systems understandable to users, and reliability and safety (D), along with privacy and security (E), are crucial for ensuring the system's dependable operation, user safety, and data protection, fairness and inclusiveness are specifically targeted towards ensuring equitable results and addressing the monitoring requirements stated in your scenario."
+          },
+          {
+            "content": "A and B 100%, key word is to Monitor\nTransparency means you should be clear about how the system works and how it makes decisions, so you can monitor the results and ensure that they're not biased against any particular group of users. And fairness means that the system should be designed to treat all users equally, regardless of their location or background. By monitoring the system to ensure that it's transparent and fair, you can help to prevent any unintended biases or discrimination in the results. It's all about being ethical and responsible in the development and use of AI systems.",
+            "timestamp": "1701428520.0",
+            "poster": "natgurulearning",
+            "upvote_count": "6",
+            "comment_id": "1085160"
+          },
+          {
+            "upvote_count": "3",
+            "poster": "rdemontis",
+            "timestamp": "1698833700.0",
+            "content": "Selected Answer: BC\nFairness (equity) and Inclusiveness (regardless locations and backgrounds)",
+            "comment_id": "1059556"
+          },
+          {
+            "comment_id": "916982",
+            "content": "Selected Answer: BC\nB, C are correct",
+            "upvote_count": "3",
+            "timestamp": "1686123480.0",
+            "poster": "EliteAllen"
+          },
+          {
+            "content": "Selected Answer: BC\nChatGPT answer : \nThe two responsible AI principles that provide guidance to meet the monitoring requirements are B. fairness and C. inclusiveness.\n\nFairness is the principle of ensuring that AI systems do not discriminate against any group or individual. In this scenario, monitoring the sales system to ensure equitable results regardless of the user's location or background helps to meet the fairness principle.\n\nInclusiveness is the principle of ensuring that AI systems are designed to be accessible to all users, regardless of their individual characteristics or abilities. Monitoring the sales system to ensure equitable results helps to meet the inclusiveness principle by ensuring that the system is not excluding or discriminating against any particular group or individual.",
+            "upvote_count": "4",
+            "timestamp": "1678964460.0",
+            "poster": "marti_tremblay000",
+            "comment_id": "840848"
+          },
+          {
+            "comment_id": "826046",
+            "content": "According to me, A and B",
+            "upvote_count": "2",
+            "timestamp": "1677686160.0",
+            "poster": "claps92"
+          }
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/74870-exam-ai-102-topic-1-question-6-discussion/",
+        "answer_ET": "BC",
+        "timestamp": "2022-04-29 10:10:00",
+        "answer_images": [],
+        "choices": {
+          "A": "transparency",
+          "B": "fairness",
+          "E": "privacy and security",
+          "D": "reliability and safety",
+          "C": "inclusiveness"
+        },
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "topic": "1",
+        "answers_community": [
+          "BC (100%)"
+        ],
+        "exam_id": 41
+      },
+      {
+        "id": "mSWUPdWpJ0XCEmaNCZQo",
+        "question_text": "HOTSPOT -\n\nYou have an Azure OpenAI resource named AI1 that hosts three deployments of the GPT 3.5 model. Each deployment is optimized for a unique workload.\n\nYou plan to deploy three apps. Each app will access AI1 by using the REST API and will use the deployment that was optimized for the app's intended workload.\n\nYou need to provide each app with access to AI1 and the appropriate deployment. The solution must ensure that only the apps can access AI1.\n\nWhat should you use to provide access to AI1, and what should each app use to connect to its appropriate deployment? To answer, select the appropriate options in the answer area.\n\nNOTE: Each correct selection is worth one point.\n\n//IMG//",
+        "answer": "",
+        "question_id": 57,
+        "unix_timestamp": 1709368080,
+        "discussion": [
+          {
+            "content": "API key\nDeployment name (Different deployments can be configured on oai.azure.com)",
+            "comments": [
+              {
+                "comment_id": "1288005",
+                "upvote_count": "2",
+                "poster": "mrg998",
+                "timestamp": "1727071860.0",
+                "comments": [
+                  {
+                    "comment_id": "1288006",
+                    "comments": [
+                      {
+                        "timestamp": "1733506680.0",
+                        "upvote_count": "1",
+                        "poster": "nkorczynski",
+                        "content": "REST API reference:\nWith Azure OpenAI the model parameter requires model deployment name. If your model deployment name is different than the underlying model name then you would adjust your code to \"model\": \"{your-custom-model-deployment-name}\".\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/assistants-quickstart?tabs=command-line%2Cjavascript-keyless%2Ctypescript-keyless&pivots=rest-api",
+                        "comment_id": "1322867"
+                      }
+                    ],
+                    "poster": "mrg998",
+                    "timestamp": "1727071980.0",
+                    "upvote_count": "2",
+                    "content": "code example here shows deployment name and API key - https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-python"
+                  }
+                ],
+                "content": "this is correct, a endpoint itself can have multiple deployments. You need to specify the deployment you require out of the three so it has to be deployment name."
+              }
+            ],
+            "timestamp": "1709404440.0",
+            "poster": "Harry300",
+            "upvote_count": "30",
+            "comment_id": "1164322"
+          },
+          {
+            "comment_id": "1182357",
+            "content": "Final Answer:\nAPI Key\nDeployment Name:",
+            "poster": "varinder82",
+            "timestamp": "1711359540.0",
+            "upvote_count": "7"
+          },
+          {
+            "content": "Answer: \n1 An API Key\n2 A Deployment Name",
+            "upvote_count": "4",
+            "timestamp": "1740658140.0",
+            "poster": "avneetsingh_bungai",
+            "comment_id": "1362508"
+          },
+          {
+            "comment_id": "1354926",
+            "content": "An API key is CORRECT because it is a common method for authenticating applications when accessing APIs, including Azure OpenAI services. API keys are straightforward to use and provide the necessary authentication to ensure that only authorized applications can access the specific deployments optimized for their intended workloads.\n\nA deployment endpoint is CORRECT because each deployment of the GPT-3.5 model in Azure OpenAI provides a unique endpoint URL that applications can use to access the specific deployment. By using the deployment endpoint, each app can connect to the specific deployment optimized for its intended workload. This ensures that the apps access the correct model deployment.",
+            "upvote_count": "3",
+            "timestamp": "1739265540.0",
+            "poster": "syupwsh"
+          },
+          {
+            "content": "API Key: Each app should use an API Key for secure access to the Azure OpenAI resource. API keys are commonly used to authenticate requests to Azure OpenAI resources.\n\nDeployment name: Each app should specify the deployment name to connect to the appropriate GPT 3.5 deployment optimized for its unique workload. \n\nThe deployment name ensures the app uses the correct model version or configuration hosted in AI1",
+            "poster": "Sujeeth",
+            "upvote_count": "2",
+            "timestamp": "1729114200.0",
+            "comment_id": "1298965"
+          },
+          {
+            "comment_id": "1275840",
+            "content": "Answer is api-key (no confusion) and deployment_name. The issue with deployment name is that it is meant to confuse. There are three deployments of the model. The endpoint of all three of them remain the same. I worked with this and multiple deployments all the time, but still I forgot that the endpoint for azure-openai is same for all deployments. Of course to call you need the endpoint and the deployment name both, but looks like Microsoft wants to confuse you with mentioning REST. Just sad this company does this\nAnswer is very clearly now: api-key and deployment_name (what microsoft wants to answer)",
+            "upvote_count": "4",
+            "timestamp": "1725165600.0",
+            "poster": "famco",
+            "comments": [
+              {
+                "comment_id": "1275842",
+                "content": "But looking at the answer options it looks more confusing. They did not say just \"endpoint\" but said deployment-endpoint. In the azure openai studio the deployments mention \"endpoint\" as the target URL that includes the deployment name. So it is technically deployment endpoint. We have to check with a lawyer. What will I answer? Probably deployment endpoint (just random guess) but maybe they want you to know just that it is same endpoint for all the deployments. Still not clear",
+                "comments": [
+                  {
+                    "comment_id": "1275843",
+                    "content": "OR maybe this microsoft employee, with his inexperience, might have thought that for the SDK use you need to give deployment name (in addition to key and resource endpoint), but for the REST API you need deployment-endpoint (endpoint + deployment-name) and can be copied from the azure-openai studio. So, did he think the right answer is deployment_endpoint ??",
+                    "comments": [
+                      {
+                        "comment_id": "1275844",
+                        "timestamp": "1725166380.0",
+                        "upvote_count": "1",
+                        "poster": "famco",
+                        "content": "Hoping it is the documentation that he read, and the documentation did not change from the time that guy looked at it while creating the question and now, I will still go for deployment_name (but that is NOT enough to make a rest call)."
+                      }
+                    ],
+                    "poster": "famco",
+                    "timestamp": "1725166200.0",
+                    "upvote_count": "1"
+                  }
+                ],
+                "upvote_count": "2",
+                "timestamp": "1725165900.0",
+                "poster": "famco"
+              }
+            ]
+          },
+          {
+            "upvote_count": "2",
+            "timestamp": "1725164640.0",
+            "poster": "famco",
+            "content": "I have years of experience using this, but I can't even understand the intent of the question. The build up is fine, but the question and the options make me really wonder. We use RBAC to connect in an enterprise environment.\n\nLooks like the org that Microsoft outsourced this to (and getting money from them instead of paying) is asking the question on some image from REST api documentation. Guessing the low paid employee, I guess the answer he expects is :\napi-key and end_point. REST api uses api-key as the header and also uses end-point to connect. \n\nThe scenario describing separate deployments does not make sense. An attempt at confusing the developer with experience from the real world. Nice work, vendor.",
+            "comment_id": "1275835"
+          },
+          {
+            "comment_id": "1265986",
+            "upvote_count": "2",
+            "poster": "moonlightc",
+            "timestamp": "1723670940.0",
+            "content": "This was in the exam on 15/08/2024"
+          },
+          {
+            "comment_id": "1264957",
+            "timestamp": "1723520700.0",
+            "poster": "shanakrs",
+            "upvote_count": "1",
+            "content": "Answer is \nAn API Key\nA Deployment Endpoint\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/switching-endpoints\n\nNote: There are key requirements in the questions (\"Each app will access AI1 by using the REST API\"). With this, apps will connect AI1 with REST API calls and to connect azure open ai with rest api, it is recommended to use API KEY and ENDPOINT as mentioned in above article."
+          },
+          {
+            "upvote_count": "4",
+            "poster": "Sylviaaaaaaa",
+            "timestamp": "1723257060.0",
+            "content": "API key and deployment name.\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=programming-language-python",
+            "comment_id": "1263288"
+          },
+          {
+            "comment_id": "1248783",
+            "upvote_count": "1",
+            "timestamp": "1721120520.0",
+            "poster": "krzkrzkra",
+            "content": "An API key\nA deployment endpoint"
+          },
+          {
+            "comment_id": "1235385",
+            "content": "The Azure portal and documentation consistently talk about each Azure Open AI resource having a single endpoint, and each deployment having a name. \n\nSo the correct answer is most likely:\nAn API key\nA deployment name",
+            "upvote_count": "5",
+            "poster": "yfontana",
+            "timestamp": "1719059580.0"
+          },
+          {
+            "content": "An API key\nA deployment endpoint",
+            "timestamp": "1718450820.0",
+            "upvote_count": "1",
+            "poster": "gary_cooper",
+            "comment_id": "1230907"
+          },
+          {
+            "comment_id": "1221244",
+            "content": "While bearer tokens are commonly used for authentication, they are not specifically mentioned in the context of Azure OpenAI resource access. API keys are the recommended way to authenticate applications.\n\nSo, the answer should be API key and deployment endpoint.",
+            "poster": "PeteColag",
+            "timestamp": "1717014120.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1221072",
+            "timestamp": "1716994860.0",
+            "upvote_count": "3",
+            "poster": "fuck_india",
+            "content": "1. An API key\n2. A deployment endpoint"
+          },
+          {
+            "comment_id": "1217345",
+            "content": "on exam today, I selected Api key and deployment endpoint",
+            "poster": "funny_penguin",
+            "upvote_count": "3",
+            "timestamp": "1716542640.0"
+          },
+          {
+            "content": "An API key\nA deployment endpoint",
+            "poster": "Jimmy1017",
+            "upvote_count": "4",
+            "timestamp": "1714143180.0",
+            "comment_id": "1202665"
+          },
+          {
+            "comment_id": "1201249",
+            "content": "chatgpt's answer was the bearer token and deployment name",
+            "upvote_count": "2",
+            "timestamp": "1713951780.0",
+            "poster": "wheebe"
+          },
+          {
+            "content": "Provide access to All by using:\n\nAn API key\nConnect to the deployment by using:\n\nA deployment name",
+            "timestamp": "1712942640.0",
+            "upvote_count": "1",
+            "poster": "Jimmy1017",
+            "comment_id": "1194448"
+          },
+          {
+            "comment_id": "1187863",
+            "timestamp": "1712035740.0",
+            "upvote_count": "3",
+            "poster": "NullVoider_0",
+            "content": "To provide each app with access to the Azure OpenAI resource AI1 and ensure that only the apps can access it, you should use the following:\n\nProvide access to AI1 by using:\nAn API key\nConnect to the deployment by using:\nA deployment endpoint\n\nThe API key is used for authentication, allowing the apps to access the Azure OpenAI resource. The deployment endpoint is a unique URL that each app will use to connect to its appropriate deployment, ensuring that the app uses the deployment optimized for its intended workload."
+          },
+          {
+            "comment_id": "1184903",
+            "upvote_count": "2",
+            "timestamp": "1711645800.0",
+            "poster": "Murtuza",
+            "content": "In summary:\n\nProvide Access: Use an API key.\nConnect to Deployment: Use the deployment endpoint along with the API key.\nThis approach ensures secure and controlled access to AI1 while allowing each app to connect to the appropriate deployment."
+          },
+          {
+            "content": "ChatGPT says a bearer token (hence why someone likely chose this as an answer) but it is incorrect. It should be an API key of course, very commonly used in Azure.\n\nWith regard to the second one, I think it should be endpoint. Deployment endpoint is usually referred to with an URL that you use to connect to it. Each deployment has its own endpoint URL, which contains the deployment name to make it unique. When you choose the name, the answer is only partially correct.",
+            "timestamp": "1711496460.0",
+            "poster": "Mehe323",
+            "upvote_count": "1",
+            "comment_id": "1183718"
+          },
+          {
+            "comment_id": "1170054",
+            "content": "API Key\nDeployment Name: \n\ncurl $AZURE_OPENAI_ENDPOINT/openai/deployments/gpt-35-turbo-instruct/completions?api-version=2023-05-15 \\\n -H \"Content-Type: application/json\" \\\n -H \"api-key: $AZURE_OPENAI_API_KEY\" \\\n -d \"{\\\"prompt\\\": \\\"Once upon a time\\\"}\"\n\nThe format of your first line of the command with an example endpoint would appear as follows curl https://docs-test-001.openai.azure.com/openai/deployments/{YOUR-DEPLOYMENT_NAME_HERE}/completions?api-version=2023-05-15 \\. If you encounter an error double check to make sure that you don't have a doubling of the / at the separation between your endpoint and /openai/deployments.",
+            "upvote_count": "4",
+            "poster": "chandiochan",
+            "timestamp": "1710045120.0",
+            "comments": [
+              {
+                "comments": [
+                  {
+                    "content": "WOW, that's like a guessing game on what the brilliant mind of the question creator had in mind. A classic bad question. All of microsoft-azure certification exams are this way.",
+                    "poster": "famco",
+                    "upvote_count": "1",
+                    "timestamp": "1725165180.0",
+                    "comment_id": "1275838"
+                  }
+                ],
+                "poster": "vovap0vovap",
+                "timestamp": "1716313920.0",
+                "upvote_count": "3",
+                "content": "Yes. That ort of controversial. But if you working with API - you will do one URL and 3 different deployment names from code standpoint. And that likely what they mean.",
+                "comment_id": "1215144"
+              }
+            ]
+          },
+          {
+            "content": "Provide access to AI1 by using:\n\nAn API key: API keys are used to authenticate applications to cloud services securely. They ensure that only authorized applications can access your AI1 resource.\n\nConnect to the deployment by using:\nA deployment endpoint: Each deployment will have a unique endpoint that the app can use to connect to it. This endpoint is specific to a deployment within the Azure OpenAI resource, which allows each app to use the deployment optimized for its intended workload.",
+            "poster": "chandiochan",
+            "upvote_count": "3",
+            "timestamp": "1710042300.0",
+            "comment_id": "1170036"
+          }
+        ],
+        "timestamp": "2024-03-02 09:28:00",
+        "answer_ET": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135042-exam-ai-102-topic-1-question-60-discussion/",
+        "answer_images": [
+          "https://img.examtopics.com/ai-102/image206.png"
+        ],
+        "question_images": [
+          "https://img.examtopics.com/ai-102/image93.png"
+        ],
+        "isMC": false,
+        "answer_description": "",
+        "topic": "1",
+        "answers_community": [],
+        "exam_id": 41
+      },
+      {
+        "id": "ORm4PNCi9d8tToVcVNhi",
+        "answers_community": [
+          "A (100%)"
+        ],
+        "topic": "1",
+        "exam_id": 41,
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "choices": {
+          "A": "Run the Bot Framework Emulator.",
+          "D": "Run Windows Terminal.",
+          "B": "Run the Bot Framework Composer.",
+          "C": "Register the bot with Azure Bot Service."
+        },
+        "question_id": 58,
+        "unix_timestamp": 1709415300,
+        "question_text": "You build a bot by using the Microsoft Bot Framework SDK.\n\nYou start the bot on a local computer.\n\nYou need to validate the functionality of the bot.\n\nWhat should you do before you connect to the bot?",
+        "answer": "A",
+        "timestamp": "2024-03-02 22:35:00",
+        "answer_ET": "A",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135070-exam-ai-102-topic-1-question-61-discussion/",
+        "answer_images": [],
+        "discussion": [
+          {
+            "content": "The answer looks correct:\n\nhttps://learn.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0&tabs=csharp",
+            "poster": "Mehe323",
+            "upvote_count": "12",
+            "timestamp": "1709443800.0",
+            "comment_id": "1164511"
+          },
+          {
+            "timestamp": "1721689200.0",
+            "upvote_count": "8",
+            "poster": "nithin_reddy",
+            "content": "BOT Framework is now out of scope of exam, please check before you waste any time",
+            "comment_id": "1253318"
+          },
+          {
+            "comment_id": "1354215",
+            "content": "Selected Answer: A\nBot Framework Emulator is a desktop application that allows you to test and debug your bot locally. It provides a way to connect to your locally running bot and interact with it as if it were deployed in a live environment, enabling you to validate its functionality.\n\nAnswer is A",
+            "poster": "syupwsh",
+            "timestamp": "1739161020.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1330814",
+            "content": "Selected Answer: A\nA is right.",
+            "upvote_count": "1",
+            "poster": "Sridevijain",
+            "timestamp": "1734959040.0"
+          },
+          {
+            "timestamp": "1729560420.0",
+            "upvote_count": "1",
+            "poster": "Sujeeth",
+            "content": "A. Run the Bot Framework Emulator.\n\nThe Bot Framework Emulator allows you to connect to and test your bot locally before deploying it. You don't need to register the bot with Azure Bot Service for local testing, and the Emulator is designed specifically for this purpose.",
+            "comment_id": "1301353"
+          },
+          {
+            "comment_id": "1217588",
+            "content": "Selected Answer: A\nA is good answer.",
+            "upvote_count": "2",
+            "timestamp": "1716561120.0",
+            "poster": "nanaw770"
+          },
+          {
+            "comment_id": "1213777",
+            "timestamp": "1716122700.0",
+            "upvote_count": "1",
+            "poster": "reiwanotora",
+            "content": "Selected Answer: A\nA is right."
+          },
+          {
+            "comment_id": "1187865",
+            "upvote_count": "2",
+            "timestamp": "1712035980.0",
+            "poster": "NullVoider_0",
+            "content": "Correct answer."
+          },
+          {
+            "content": "Selected Answer: A\nBefore connecting to the bot and validating its functionality, you should run the Bot Framework Emulator. The Bot Framework Emulator is a powerful tool that allows you to test and debug your bot locally",
+            "timestamp": "1711646040.0",
+            "upvote_count": "2",
+            "poster": "Murtuza",
+            "comment_id": "1184908"
+          },
+          {
+            "timestamp": "1709415300.0",
+            "upvote_count": "2",
+            "poster": "Razvan_C",
+            "content": "Answer seems to be correct",
+            "comment_id": "1164375"
+          }
+        ]
+      },
+      {
+        "id": "AAEAro5NXC0EZEbNk93w",
+        "question_text": "You have an Azure OpenAI model named AI1.\n\nYou are building a web app named App1 by using the Azure OpenAI SDK.\n\nYou need to configure App1 to connect to AI1.\n\nWhat information must you provide?",
+        "answer": "C",
+        "unix_timestamp": 1709401500,
+        "question_id": 59,
+        "discussion": [
+          {
+            "content": "Selected Answer: C\nDeployment name: This specifies which deployment of the model you want to use. In Azure OpenAI, you might have multiple deployments of the same model optimized for different tasks.\n\nEndpoint: This is the URL where your AI1 model is hosted. It directs the API requests to the correct Azure service instance.\n\nKey: This is the authentication key that allows your web app to access the Azure OpenAI service securely. It ensures that only authorized applications can use the service.\n\nC is the answer",
+            "poster": "syupwsh",
+            "timestamp": "1739161200.0",
+            "upvote_count": "1",
+            "comment_id": "1354217"
+          },
+          {
+            "poster": "moonlightc",
+            "timestamp": "1723670940.0",
+            "upvote_count": "1",
+            "content": "This was in the exam on 15/08/2024",
+            "comment_id": "1265987"
+          },
+          {
+            "timestamp": "1717643400.0",
+            "poster": "p2006",
+            "upvote_count": "2",
+            "content": "Selected Answer: C\n\"AI1\" is deployment name.\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api#retrieve-key-and-endpoint\n\nDEPLOYMENT-NAME This value will correspond to the custom name you chose for your deployment when you deployed a model.",
+            "comment_id": "1225119"
+          },
+          {
+            "poster": "anntv252",
+            "timestamp": "1714560780.0",
+            "upvote_count": "2",
+            "content": "C. the deployment name, endpoint, and key .\nEndpoint should include model name",
+            "comment_id": "1205019"
+          },
+          {
+            "content": "Selected Answer: C\nCorrect, remember that Model Name and Type aren't relevant, we only need the deployment details and key.",
+            "poster": "michaelmorar",
+            "upvote_count": "2",
+            "timestamp": "1712893260.0",
+            "comment_id": "1194119"
+          },
+          {
+            "content": "Selected Answer: C\nCorrect answer.",
+            "poster": "NullVoider_0",
+            "timestamp": "1712036880.0",
+            "upvote_count": "2",
+            "comment_id": "1187868"
+          },
+          {
+            "comment_id": "1183719",
+            "poster": "Mehe323",
+            "upvote_count": "1",
+            "timestamp": "1711496700.0",
+            "comments": [
+              {
+                "comment_id": "1190207",
+                "upvote_count": "1",
+                "poster": "Training",
+                "timestamp": "1712373360.0",
+                "content": "https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api"
+              }
+            ],
+            "content": "Selected Answer: C\nCorrect.\n\nWhen you access the model via the API you will need to refer to the deployment name rather than the underlying model name in API calls. \nhttps://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal"
+          },
+          {
+            "content": "Selected Answer: C\nTo connect to an Azure OpenAI model using the Azure OpenAI SDK, you need to provide:\nThe deployment name of the model that you want to use. This is the name that you assigned to the model when you deployed it.\nThe endpoint of your Azure OpenAI resource. This is the URL that you can find in the Overview section of your resource in the Azure portal or by using the Azure CLI.\nThe key of your Azure OpenAI resource. This is the API key that you can find in the Keys and Endpoint section of your resource in the Azure portal or by using the Azure CLI.",
+            "comments": [
+              {
+                "content": "It is the name of the deployed model, that means it is \"model name\", not \"deployment name\"",
+                "timestamp": "1711229700.0",
+                "upvote_count": "1",
+                "poster": "AlviraTony",
+                "comments": [
+                  {
+                    "comment_id": "1181166",
+                    "timestamp": "1711229760.0",
+                    "poster": "AlviraTony",
+                    "upvote_count": "1",
+                    "content": "Ignore my comment"
+                  }
+                ],
+                "comment_id": "1181165"
+              }
+            ],
+            "timestamp": "1709582040.0",
+            "poster": "GHill1982",
+            "upvote_count": "4",
+            "comment_id": "1165948"
+          },
+          {
+            "comment_id": "1164377",
+            "timestamp": "1709415780.0",
+            "upvote_count": "1",
+            "poster": "Razvan_C",
+            "content": "Selected Answer: C\nAnswer seems to be correct"
+          }
+        ],
+        "answer_ET": "C",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135059-exam-ai-102-topic-1-question-62-discussion/",
+        "timestamp": "2024-03-02 18:45:00",
+        "answer_images": [],
+        "choices": {
+          "B": "the deployment name, key, and model name",
+          "C": "the deployment name, endpoint, and key",
+          "D": "the endpoint, key, and model type",
+          "A": "the endpoint, key, and model name"
+        },
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "topic": "1",
+        "answers_community": [
+          "C (100%)"
+        ],
+        "exam_id": 41
+      },
+      {
+        "id": "zB2npMEIIeb0RGOf2GSx",
+        "answer_description": "",
+        "isMC": true,
+        "question_images": [],
+        "exam_id": 41,
+        "answers_community": [
+          "D (100%)"
+        ],
+        "topic": "1",
+        "answer_images": [],
+        "answer_ET": "D",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/135106-exam-ai-102-topic-1-question-63-discussion/",
+        "timestamp": "2024-03-03 10:41:00",
+        "discussion": [
+          {
+            "content": "Selected Answer: D\nCorrect.\nSource: https://learn.microsoft.com/en-us/azure/ai-services/cognitive-services-virtual-networks?tabs=portal",
+            "poster": "Harry300",
+            "upvote_count": "6",
+            "timestamp": "1709458860.0",
+            "comment_id": "1164663"
+          },
+          {
+            "comment_id": "1365425",
+            "poster": "Mattt",
+            "upvote_count": "1",
+            "timestamp": "1741184280.0",
+            "content": "Selected Answer: D\nD is correct"
+          },
+          {
+            "comment_id": "1354218",
+            "content": "Selected Answer: D\nvirtual network rules they allow you to restrict access to the Azure AI Language service to specific Azure resources within a virtual network. By configuring virtual network rules, you can ensure that only designated processes and services within your Azure infrastructure can access the Language service. This approach minimizes administrative effort by leveraging Azure's built-in network security capabilities.\n\nAnswer is D",
+            "upvote_count": "1",
+            "timestamp": "1739161440.0",
+            "poster": "syupwsh"
+          },
+          {
+            "upvote_count": "4",
+            "poster": "rookiee1111",
+            "timestamp": "1719105000.0",
+            "content": "answer is virtual network rules. why?\nbecause it helps configure IP range address to restrict access to an end point only to services deployed in those IP ranges. this way the access can be restricted. Gateway can work but too much of an effort, and IPsec is for securing an already established channel of communication between 2 points.",
+            "comment_id": "1235662"
+          },
+          {
+            "comment_id": "1214371",
+            "upvote_count": "3",
+            "poster": "takaimomoGcup",
+            "timestamp": "1716213300.0",
+            "content": "Selected Answer: D\nI believe D is right answer."
+          },
+          {
+            "content": "Selected Answer: D\nD is OK.",
+            "upvote_count": "1",
+            "poster": "dragongoseki",
+            "timestamp": "1716157980.0",
+            "comment_id": "1214010"
+          },
+          {
+            "comment_id": "1194122",
+            "poster": "michaelmorar",
+            "upvote_count": "2",
+            "timestamp": "1712893380.0",
+            "content": "Selected Answer: D\nThis question is more relevant to AZ104 (Azure Administration) rather than AI, but anyway, I reckon the answer is D."
+          }
+        ],
+        "unix_timestamp": 1709458860,
+        "question_id": 60,
+        "answer": "D",
+        "question_text": "You are building a solution in Azure that will use Azure Cognitive Service for Language to process sensitive customer data.\n\nYou need to ensure that only specific Azure processes can access the Language service. The solution must minimize administrative effort.\n\nWhat should you include in the solution?",
+        "choices": {
+          "A": "IPsec rules",
+          "D": "virtual network rules",
+          "B": "Azure Application Gateway",
+          "C": "a virtual network gateway"
+        }
+      }
+    ],
+    "exam": {
+      "name": "AI-102",
+      "id": 41,
+      "lastUpdated": "06 Aug 2025",
+      "isBeta": false,
+      "provider": "Microsoft",
+      "isImplemented": true,
+      "isMCOnly": false,
+      "numberOfQuestions": 330
+    },
+    "currentPage": 12
+  },
+  "__N_SSP": true
+}

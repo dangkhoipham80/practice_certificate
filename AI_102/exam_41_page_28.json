@@ -1,0 +1,677 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "pmzb9WeSArYL0ISPnRnJ",
+        "unix_timestamp": 1625072820,
+        "question_id": 136,
+        "question_text": "Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.\nAfter you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.\nYou develop an application to identify species of flowers by training a Custom Vision model.\nYou receive images of new flower species.\nYou need to add the new images to the classifier.\nSolution: You add the new images, and then use the Smart Labeler tool.\nDoes this meet the goal?",
+        "answer": "B",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/56451-exam-ai-102-topic-3-question-2-discussion/",
+        "answer_ET": "B",
+        "timestamp": "2021-06-30 19:07:00",
+        "answer_images": [],
+        "discussion": [
+          {
+            "upvote_count": "15",
+            "poster": "TheB",
+            "timestamp": "1625327160.0",
+            "content": "The answer is correct.",
+            "comment_id": "397708"
+          },
+          {
+            "comment_id": "1040056",
+            "timestamp": "1696988940.0",
+            "upvote_count": "12",
+            "poster": "sl_mslconsulting",
+            "content": "Selected Answer: B\nThe answer is B is because the limitations of the smart labeler: You should only request suggested tags for images whose tags have already been trained on once. Don't get suggestions for a new tag that you're just beginning to train. You are given new images of species that have not been seen by the model how can you expect it to suggest what they are? Also you can train the model right in the smart labeler: check the workflow and the limitations in the doc. https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/suggested-tags"
+          },
+          {
+            "content": "Selected Answer: A\nYes, this meets the goal.\n\nExplanation:\nWhen you're using Custom Vision to build a classifier and receive new images, you must do two things:\n\nAdd the new images to your project.\n\nLabel the images appropriately so the model can learn from them.\n\nWhat is the Smart Labeler?\nThe Smart Labeler is a tool in Custom Vision that automatically suggests tags for unlabeled images based on your existing trained model.\n\nIt helps you quickly label new images by leveraging what the model already knows.\n\nWhy this solution works:\nBy adding the new images and using the Smart Labeler to tag them, you're following the proper process to update and improve your classifier with new data.\n\nAfter labeling, you'd typically retrain the model to incorporate the new examples.\n\n✅ So yes, this solution does meet the goal for updating a Custom Vision classifier with new flower species.",
+            "timestamp": "1749684660.0",
+            "upvote_count": "1",
+            "poster": "azuretrainer1",
+            "comment_id": "1576689"
+          },
+          {
+            "comment_id": "1363401",
+            "content": "Selected Answer: B\nhttps://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/suggested-tags\n\n\nWhen to use Smart Labeler\nYou should only request suggested tags for images whose tags have already been trained on once. Don't get suggestions for a new tag that you're just beginning to train on.\n\nAnswer is No",
+            "timestamp": "1740806820.0",
+            "upvote_count": "1",
+            "poster": "syupwsh"
+          },
+          {
+            "comment_id": "1346665",
+            "content": "Selected Answer: A\nYes, your solution meets the goal. Using the Smart Labeler tool in Custom Vision allows you to add new images to your classifier efficiently. The Smart Labeler tool helps to automate the labeling process by suggesting appropriate tags for new images based on existing data, thereby speeding up the process of integrating new flower species into your model.",
+            "poster": "f250399",
+            "upvote_count": "1",
+            "timestamp": "1737840960.0"
+          },
+          {
+            "comment_id": "1313588",
+            "poster": "9cc71b6",
+            "timestamp": "1731855180.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nAnswer is B"
+          },
+          {
+            "content": "Selected Answer: B\nAnswer and explanation are correct.\nhttps://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/suggested-tags",
+            "timestamp": "1699108260.0",
+            "upvote_count": "1",
+            "poster": "rdemontis",
+            "comment_id": "1062164"
+          },
+          {
+            "content": "Selected Answer: B\nSmart Labeler for suggestion https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/suggested-tags",
+            "timestamp": "1692367080.0",
+            "upvote_count": "1",
+            "poster": "james2033",
+            "comment_id": "984555"
+          },
+          {
+            "poster": "zellck",
+            "timestamp": "1688030400.0",
+            "upvote_count": "3",
+            "content": "Selected Answer: B\nB is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/suggested-tags\nSmart Labeler will generate suggested tags for images. This lets you label a large number of images more quickly when you're training a Custom Vision model.\n\nWhen you tag images for a Custom Vision model, the service uses the latest trained iteration of the model to predict the labels of new images. It shows these predictions as suggested tags, based on the selected confidence threshold and prediction uncertainty. You can then either confirm or change the suggestions, speeding up the process of manually tagging the images for training.",
+            "comment_id": "937841"
+          },
+          {
+            "poster": "hens",
+            "upvote_count": "2",
+            "timestamp": "1684131840.0",
+            "content": "chat gpt \"\nChatGPT\nA. Yes.\n\nUsing the Smart Labeler tool is a valid way to train a Custom Vision model with new images. It allows the user to label images more efficiently by using an active learning approach that selects images that will have the highest impact on the model's performance.\"",
+            "comment_id": "898081"
+          },
+          {
+            "content": "retrain model so answer is B",
+            "timestamp": "1659891180.0",
+            "upvote_count": "1",
+            "poster": "ExamGuruBhai",
+            "comment_id": "643780"
+          },
+          {
+            "content": "Selected Answer: B\nB is correct answer : No.\n\nInstead the model need to be extended and retrained (Udemy answer).",
+            "timestamp": "1658149200.0",
+            "upvote_count": "4",
+            "poster": "Eltooth",
+            "comment_id": "633029"
+          },
+          {
+            "poster": "hendriktytgatpwc",
+            "timestamp": "1646139720.0",
+            "upvote_count": "1",
+            "content": "answer is correct",
+            "comment_id": "558742"
+          },
+          {
+            "content": "Label + Retrain",
+            "timestamp": "1641423600.0",
+            "upvote_count": "2",
+            "poster": "sumanshu",
+            "comment_id": "517850"
+          },
+          {
+            "comment_id": "394985",
+            "poster": "azurelearner666",
+            "upvote_count": "5",
+            "timestamp": "1625072820.0",
+            "content": "correct! retraining is necesary!"
+          }
+        ],
+        "choices": {
+          "A": "Yes",
+          "B": "No"
+        },
+        "question_images": [],
+        "isMC": true,
+        "answer_description": "",
+        "answers_community": [
+          "B (92%)",
+          "8%"
+        ],
+        "topic": "3",
+        "exam_id": 41
+      },
+      {
+        "id": "GrFD83HpeqZCRgXjKVOP",
+        "choices": {
+          "A": "Enable active learning.",
+          "C": "Add additional examples to the GetContactDetails intent.",
+          "B": "Add a machine learned entity.",
+          "D": "Add examples to the None intent."
+        },
+        "answer": "D",
+        "question_text": "You are training a Language Understanding model for a user support system.\nYou create the first intent named GetContactDetails and add 200 examples.\nYou need to decrease the likelihood of a false positive.\nWhat should you do?",
+        "question_id": 137,
+        "unix_timestamp": 1653378840,
+        "discussion": [
+          {
+            "comment_id": "606556",
+            "poster": "Isidro",
+            "upvote_count": "33",
+            "timestamp": "1653378840.0",
+            "comments": [
+              {
+                "comment_id": "663122",
+                "content": "Agreed, as stated in the link:\n\"You should also consider adding false positive examples to the None intent.\"",
+                "timestamp": "1662613020.0",
+                "poster": "mk1967",
+                "upvote_count": "5"
+              },
+              {
+                "comment_id": "1062236",
+                "content": "agree with you, thanks for the provided documentation",
+                "timestamp": "1699113600.0",
+                "upvote_count": "4",
+                "poster": "rdemontis"
+              }
+            ],
+            "content": "I would say is D) as per the following: https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/conversational-language-understanding/concepts/none-intent#adding-examples-to-the-none-intent"
+          },
+          {
+            "content": "False positive means =>\nThe model needs examples of what it should not classify as \"GetContactDetails,\" which is the role of the \"None\" intent.\nTherefore, the most effective approach is to add a diverse range of examples to the \"None\" intent, covering various phrases and queries that are outside the scope of \"GetContactDetails.\" This helps create a clear boundary for the model, reducing the likelihood of it mistakenly classifying unrelated inputs as belonging to the \"GetContactDetails\" intent.",
+            "poster": "evangelist",
+            "timestamp": "1706327400.0",
+            "upvote_count": "9",
+            "comment_id": "1133040"
+          },
+          {
+            "content": "Selected Answer: D\nProviding examples for the None intent helps the model learn what queries do not belong to any intent. This reduces the likelihood of false positives by helping the model differentiate between relevant and irrelevant queries.\n\nAnswer is D",
+            "timestamp": "1739177220.0",
+            "upvote_count": "1",
+            "poster": "syupwsh",
+            "comment_id": "1354350"
+          },
+          {
+            "content": "Selected Answer: D\nI say this answer is D.",
+            "poster": "HaraTadahisa",
+            "timestamp": "1719037620.0",
+            "upvote_count": "1",
+            "comment_id": "1235201"
+          },
+          {
+            "content": "Selected Answer: D\nD is answer.",
+            "poster": "reigenchimpo",
+            "upvote_count": "1",
+            "timestamp": "1718202060.0",
+            "comment_id": "1229237"
+          },
+          {
+            "content": "Selected Answer: D\nFor me and ChatGPT: d",
+            "upvote_count": "1",
+            "poster": "anto69",
+            "timestamp": "1717557060.0",
+            "comment_id": "1224485"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1716986640.0",
+            "poster": "omankoman",
+            "content": "Selected Answer: D\nD. Add examples to the None intent.",
+            "comment_id": "1220939"
+          },
+          {
+            "timestamp": "1716559440.0",
+            "poster": "nanaw770",
+            "upvote_count": "1",
+            "content": "Selected Answer: D\nIt must be D.",
+            "comment_id": "1217552"
+          },
+          {
+            "comment_id": "1130202",
+            "content": "Selected Answer: D\nThe correct option to decrease the likelihood of a false positive in the Language Understanding model is to add additional None intent examples.\n\nOption D is correct. By adding more varied examples that do not map to a valid intent to the None intent, the model can better learn when an utterance does not apply and avoid falsely matching invalid queries to a valid intent.\n\nOptions A, B, and C may improve the model in certain ways, but they do not directly address reducing false positives. Only adding additional out-of-scope examples to the None intent will help the model better distinguish when new utterances do not match any existing intent's patterns.\n\nSo out of the options, adding examples to the None intent is the way to decrease the likelihood of false positives.",
+            "timestamp": "1706069280.0",
+            "upvote_count": "3",
+            "poster": "evangelist"
+          },
+          {
+            "poster": "rdemontis",
+            "upvote_count": "2",
+            "timestamp": "1699113660.0",
+            "content": "Selected Answer: D\nto me the answer is D. Non intents have the purpose to reduce false positive too.\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/language-service/conversational-language-understanding/concepts/none-intent#adding-examples-to-the-none-intent",
+            "comment_id": "1062237"
+          },
+          {
+            "comment_id": "984516",
+            "timestamp": "1692364500.0",
+            "upvote_count": "1",
+            "poster": "james2033",
+            "content": "Selected Answer: D\n200 sample data. --> much false positive. --> Increase number of training data. --> Add example to the None intent, not active learning in this context."
+          },
+          {
+            "timestamp": "1688012520.0",
+            "upvote_count": "2",
+            "poster": "zellck",
+            "content": "Selected Answer: D\nD is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/conversational-language-understanding/concepts/none-intent#adding-examples-to-the-none-intent\nThe None intent is also treated like any other intent in your project. If there are utterances that you want predicted as None, consider adding similar examples to them in your training data. For example, if you would like to categorize utterances that are not important to your project as None, such as greetings, yes and no answers, responses to questions such as providing a number, then add those utterances to your intent.\n\nYou should also consider adding false positive examples to the None intent. For example, in a flight booking project it is likely that the utterance \"I want to buy a book\" could be confused with a Book Flight intent. Adding \"I want to buy a book\" or \"I love reading books\" as None training utterances helps alter the predictions of those types of utterances towards the None intent instead of Book Flight.",
+            "comment_id": "937494"
+          },
+          {
+            "comment_id": "921788",
+            "content": "A. Enable active learning.\n\nBy enabling active learning, the model can actively request feedback from users when it encounters uncertain or ambiguous queries. This feedback loop helps improve the model's understanding and reduces false positives by incorporating user input into its training process. Option A (Enable active learning) is the correct choice to decrease the likelihood of false positives.",
+            "upvote_count": "1",
+            "timestamp": "1686610800.0",
+            "poster": "Drummer"
+          },
+          {
+            "comment_id": "920753",
+            "poster": "ziggy1117",
+            "upvote_count": "3",
+            "timestamp": "1686492780.0",
+            "content": "Selected Answer: D\nYou should also consider adding false positive examples to the None intent. For example, in a flight booking project it is likely that the utterance \"I want to buy a book\" could be confused with a Book Flight intent. Adding \"I want to buy a book\" or \"I love reading books\" as None training utterances helps alter the predictions of those types of utterances towards the None intent instead of Book Flight.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/conversational-language-understanding/concepts/none-intent#adding-examples-to-the-none-intent"
+          },
+          {
+            "upvote_count": "1",
+            "timestamp": "1686267840.0",
+            "poster": "ziggy1117",
+            "content": "You should also consider adding false positive examples to the None intent. For example, in a flight booking project it is likely that the utterance \"I want to buy a book\" could be confused with a Book Flight intent. Adding \"I want to buy a book\" or \"I love reading books\" as None training utterances helps alter the predictions of those types of utterances towards the None intent instead of Book Flight.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/conversational-language-understanding/concepts/none-intent#adding-examples-to-the-none-intent",
+            "comment_id": "918759"
+          },
+          {
+            "comment_id": "817673",
+            "upvote_count": "2",
+            "timestamp": "1677058200.0",
+            "poster": "Marilena96",
+            "comments": [
+              {
+                "content": "Nope, 20-30 examples per intent is recommended. See https://learn.microsoft.com/en-us/azure/cognitive-services/LUIS/concepts/application-design#create-example-utterances-for-each-intent",
+                "poster": "Rob77",
+                "upvote_count": "1",
+                "timestamp": "1684310160.0",
+                "comment_id": "899829"
+              }
+            ],
+            "content": "To decrease the likelihood of a false positive, you can add additional examples to the GetContactDetails intent. This will help the model to better understand the intent and reduce the likelihood of false positive predictions."
+          },
+          {
+            "comment_id": "779290",
+            "poster": "ap1234pa",
+            "upvote_count": "4",
+            "timestamp": "1673985120.0",
+            "content": "Selected Answer: D\nAs explained in MS Document\n\"false positive\" = None intent"
+          },
+          {
+            "timestamp": "1673913000.0",
+            "upvote_count": "2",
+            "poster": "ap1234pa",
+            "content": "Selected Answer: D\nAdd examples to \"None\" intent",
+            "comment_id": "778387"
+          },
+          {
+            "content": "Selected Answer: D\nAnswer is D.\nReference - https://learn.microsoft.com/en-us/azure/cognitive-services/LUIS/concepts/application-design",
+            "upvote_count": "3",
+            "poster": "SSJA",
+            "timestamp": "1670790780.0",
+            "comment_id": "742076"
+          },
+          {
+            "content": "Selected Answer: A\nMy reasoning for active learning is that it will be better in the long run whereas None intent is but a temporary fix to the current issue.",
+            "upvote_count": "3",
+            "timestamp": "1666876860.0",
+            "poster": "GigaCaster",
+            "comment_id": "705586"
+          },
+          {
+            "comment_id": "668948",
+            "poster": "Internal_Koala",
+            "upvote_count": "2",
+            "timestamp": "1663154400.0",
+            "content": "Selected Answer: D\nAs described by Isidro and mk1967."
+          },
+          {
+            "poster": "nekkilodeon",
+            "timestamp": "1660653780.0",
+            "upvote_count": "2",
+            "content": "Definitely D)\nAdding examples to None reduces the chances of selecting the wrong intent.",
+            "comment_id": "647654"
+          },
+          {
+            "comment_id": "646449",
+            "poster": "ninjia",
+            "timestamp": "1660423980.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nThe requirement is to decrease the likelihood of a false positive. ie utterances that are identified as GetContactDetails intent are not actually GetContactDetails intent. Initially created 200 examples may not be optimal. \n\nAs such, active learning can help turning utterances queries. \n\n\"The process of reviewing endpoint utterances for correct predictions is called Active learning. Active learning captures queries that are sent to the endpoint, and selects user utterances that it is unsure of. You review these utterances to select the intent and mark the entities for these real-world utterances. Then you can accept these changes into your app's example utterances. \"\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/how-to/improve-application"
+          }
+        ],
+        "answer_images": [],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/76239-exam-ai-102-topic-3-question-20-discussion/",
+        "answer_ET": "D",
+        "timestamp": "2022-05-24 09:54:00",
+        "topic": "3",
+        "answers_community": [
+          "D (88%)",
+          "13%"
+        ],
+        "exam_id": 41,
+        "question_images": [],
+        "answer_description": "",
+        "isMC": true
+      },
+      {
+        "id": "LPgcJDrrGlbEQcSzgodO",
+        "answers_community": [],
+        "topic": "3",
+        "exam_id": 41,
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0015300001.jpg"
+        ],
+        "isMC": false,
+        "answer_description": "Box 1: GeographyV2 -\nThe prebuilt geographyV2 entity detects places. Because this entity is already trained, you do not need to add example utterances containing GeographyV2 to the application intents.\n\nBox 2: Email -\nEmail prebuilt entity for a LUIS app: Email extraction includes the entire email address from an utterance. Because this entity is already trained, you do not need to add example utterances containing email to the application intents.\n\nBox 3: Machine learned -\nThe machine-learning entity is the preferred entity for building LUIS applications.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-geographyv2 https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-email https://docs.microsoft.com/en-us/azure/cognitive-services/luis/reference-entity-machine-learned-entity",
+        "unix_timestamp": 1655882280,
+        "question_id": 138,
+        "question_text": "DRAG DROP -\nYou are building a Language Understanding model for purchasing tickets.\nYou have the following utterance for an intent named PurchaseAndSendTickets.\nPurchase [2 audit business] tickets to [Paris] [next Monday] and send tickets to [email@domain.com]\nYou need to select the entity types. The solution must use built-in entity types to minimize training data whenever possible.\nWhich entity type should you use for each label? To answer, drag the appropriate entity types to the correct labels. Each entity type may be used once, more than once, or not at all.\nYou may need to drag the split bar between panes or scroll to view content.\nSelect and Place:\n//IMG//",
+        "answer": "",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/77006-exam-ai-102-topic-3-question-21-discussion/",
+        "answer_ET": "",
+        "timestamp": "2022-06-22 09:18:00",
+        "answer_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0015400001.jpg"
+        ],
+        "discussion": [
+          {
+            "timestamp": "1703749200.0",
+            "upvote_count": "12",
+            "poster": "Pixelmate",
+            "content": "THIS WAS ON EXAM 28/06",
+            "comment_id": "936184"
+          },
+          {
+            "upvote_count": "7",
+            "poster": "rdemontis",
+            "timestamp": "1714831620.0",
+            "content": "correct answer",
+            "comment_id": "1062239"
+          },
+          {
+            "content": "Paris --> GeographyV2 is CORRECT because it is a built-in entity type designed to recognize and extract geographical locations, such as cities, states, countries, and landmarks. Using this built-in entity type minimizes the need for additional training data.\n\nemail@domain.com --> Email is CORRECT because it is a built-in entity type designed to recognize and extract email addresses, minimizing the need for additional training data.\n\n2 audit business --> Machine learned is CORRECT because it is the preferred entity type for building Language Understanding (LUIS) applications, as it allows for more flexibility and accuracy in recognizing complex patterns and combinations of words. By training the model with a variety of examples, you can ensure it accurately recognizes and extracts entities like \"2 audit business\" from the utterances.",
+            "upvote_count": "1",
+            "timestamp": "1739923140.0",
+            "poster": "syupwsh",
+            "comment_id": "1358507"
+          },
+          {
+            "timestamp": "1732464120.0",
+            "poster": "nanaw770",
+            "upvote_count": "2",
+            "content": "Paris: GeographyV2\nemail@domain.com: Email\n2 audit business: Machine learned",
+            "comment_id": "1217549"
+          },
+          {
+            "content": "The answer is correct",
+            "timestamp": "1721787360.0",
+            "upvote_count": "3",
+            "poster": "evangelist",
+            "comment_id": "1130207"
+          },
+          {
+            "poster": "zellck",
+            "timestamp": "1704130560.0",
+            "upvote_count": "5",
+            "content": "1. GeographyV2 \n2. Email\n3. Machine learned\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-geographyv2?tabs=V3\nThe prebuilt geographyV2 entity detects places. Because this entity is already trained, you do not need to add example utterances containing GeographyV2 to the application intents.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-email?tabs=V3\nEmail extraction includes the entire email address from an utterance. Because this entity is already trained, you do not need to add example utterances containing email to the application intents.",
+            "comment_id": "940120"
+          },
+          {
+            "comment_id": "633395",
+            "content": "Answer is correct : \nGeography v2 : \nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-geographyv2?tabs=V3\n\nEmail : \nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-email?tabs=V3-verbose \n\nMachine Learned :\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/reference-entity-machine-learned-entity?tabs=V3\n\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/concepts/entities",
+            "upvote_count": "4",
+            "timestamp": "1674116700.0",
+            "poster": "Eltooth"
+          },
+          {
+            "upvote_count": "2",
+            "poster": "sdokmak",
+            "timestamp": "1671700680.0",
+            "content": "Correct.\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-email?tabs=V3",
+            "comment_id": "620224"
+          }
+        ]
+      },
+      {
+        "id": "budykn2zhlALwoBejQ0L",
+        "exam_id": 41,
+        "answers_community": [
+          "B (100%)"
+        ],
+        "topic": "3",
+        "isMC": true,
+        "answer_description": "",
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0015500001.png"
+        ],
+        "choices": {
+          "A": "create_resource(\"res1\", \"ContentModerator\", \"S0\", \"eastus\")",
+          "D": "create_resource(\"res1\", \"TextAnalytics\", \"Standard\", \"East US\")",
+          "C": "create_resource(\"res1\", \"ContentModerator\", \"Standard\", \"East US\")",
+          "B": "create_resource(\"res1\", \"TextAnalytics\", \"S0\", \"eastus\")"
+        },
+        "url": "https://www.examtopics.com/discussions/microsoft/view/75322-exam-ai-102-topic-3-question-22-discussion/",
+        "answer_ET": "B",
+        "timestamp": "2022-05-09 06:45:00",
+        "answer_images": [],
+        "discussion": [
+          {
+            "poster": "syupwsh",
+            "timestamp": "1739177460.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nThe resource kind for performing sentiment analysis is \"TextAnalytics\" and the appropriate SKU for Azure Cognitive Services is \"S0\". Additionally, the region should be specified in lowercase with no spaces, which is \"eastus\".\n\nB is the answer",
+            "comment_id": "1354353"
+          },
+          {
+            "upvote_count": "3",
+            "timestamp": "1732891500.0",
+            "poster": "omankoman",
+            "content": "Selected Answer: B\nB is right answer. TextAnalytics is justice.",
+            "comment_id": "1220941"
+          },
+          {
+            "content": "Selected Answer: B\nSKU is S0.\nRegion is eastus. \nSentiment analysis uses TextAnalytics",
+            "timestamp": "1732464360.0",
+            "poster": "nanaw770",
+            "upvote_count": "2",
+            "comment_id": "1217555"
+          },
+          {
+            "timestamp": "1722045060.0",
+            "upvote_count": "3",
+            "poster": "evangelist",
+            "content": "free tier==>S0, region eastus not East US, sentiment analysis=>TextAnalytics",
+            "comment_id": "1133043"
+          },
+          {
+            "content": "Selected Answer: B\nregion has to be in format of: eastus\nContentModerator cannot do sentimental Analsysis",
+            "timestamp": "1721787420.0",
+            "upvote_count": "1",
+            "poster": "evangelist",
+            "comment_id": "1130209"
+          },
+          {
+            "comment_id": "1062724",
+            "content": "Selected Answer: B\nhttps://learn.microsoft.com/en-us/azure/synapse-analytics/machine-learning/tutorial-text-analytics-use-mmlspark",
+            "timestamp": "1714891920.0",
+            "upvote_count": "1",
+            "poster": "rdemontis"
+          },
+          {
+            "poster": "SaviB",
+            "timestamp": "1713300600.0",
+            "upvote_count": "2",
+            "comments": [
+              {
+                "comment_id": "1094840",
+                "upvote_count": "1",
+                "poster": "Mobidic",
+                "timestamp": "1718211060.0",
+                "content": "@SaviB, did you found a solution? Accessed more than page #23?"
+              }
+            ],
+            "content": "Is there any way to get this entire Q & A for free? I'm unable to go past page #23, even though I've signed up for an account.",
+            "comment_id": "1045256"
+          },
+          {
+            "comment_id": "937491",
+            "upvote_count": "1",
+            "poster": "zellck",
+            "timestamp": "1703830800.0",
+            "content": "Selected Answer: B\nB is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/language-service/sentiment-opinion-mining/overview\nSentiment analysis and opinion mining are features offered by Azure Cognitive Service for Language, a collection of machine learning and AI algorithms in the cloud for developing intelligent applications that involve written language. These features help you find out what people think of your brand or topic by mining text for clues about positive or negative sentiment, and can associate them with specific aspects of the text."
+          },
+          {
+            "comment_id": "778394",
+            "content": "Selected Answer: B\nB is correct",
+            "timestamp": "1689544380.0",
+            "upvote_count": "1",
+            "poster": "ap1234pa"
+          },
+          {
+            "comment_id": "633398",
+            "content": "Selected Answer: B\nCorrect answer is B. \ncreate_resource(\"res1\", \"TextAnalytics\", \"S0\", \"eastus\")\n\nNote TextAnalysis will be rebranded into Cognitive Services for Language Service",
+            "upvote_count": "3",
+            "poster": "Eltooth",
+            "timestamp": "1674117240.0"
+          },
+          {
+            "comment_id": "612719",
+            "timestamp": "1670419800.0",
+            "poster": "PHD_CHENG",
+            "upvote_count": "2",
+            "content": "Was on exam 7 Jun 2022"
+          },
+          {
+            "comment_id": "598839",
+            "content": "Selected Answer: B\nAnswer is correct",
+            "upvote_count": "3",
+            "timestamp": "1667976300.0",
+            "poster": "PHD_CHENG"
+          }
+        ],
+        "unix_timestamp": 1652071500,
+        "question_id": 139,
+        "question_text": "You have the following C# method.\n//IMG//\n\nYou need to deploy an Azure resource to the East US Azure region. The resource will be used to perform sentiment analysis.\nHow should you call the method?",
+        "answer": "B"
+      },
+      {
+        "id": "9rHqdIVcKblgIjLNxJ1a",
+        "question_text": "You build a Conversational Language Understanding model by using the Language Services portal.\nYou export the model as a JSON file as shown in the following sample.\n//IMG//\n\nTo what does the Weather.Historic entity correspond in the utterance?",
+        "answer": "A",
+        "unix_timestamp": 1666115520,
+        "question_id": 140,
+        "discussion": [
+          {
+            "comment_id": "1354359",
+            "poster": "syupwsh",
+            "upvote_count": "1",
+            "timestamp": "1739178000.0",
+            "content": "Selected Answer: A\nby month is CORRECT because the Weather.Historic entity, as indicated by the startPos of 23 and endPos of 30 in the JSON file, corresponds to the phrase \"by month\" in the sample utterance.\n\nAnswer is A"
+          },
+          {
+            "comment_id": "1279662",
+            "upvote_count": "1",
+            "timestamp": "1725635580.0",
+            "poster": "famco",
+            "content": "It should be \"last year\". Does the question creators get extra time to make these questions because english is not their native language?"
+          },
+          {
+            "comment_id": "1263100",
+            "content": "Selected Answer: A\nby month, basic math",
+            "poster": "anto69",
+            "timestamp": "1723215900.0",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1220920",
+            "content": "Selected Answer: A\nby month",
+            "timestamp": "1716985200.0",
+            "upvote_count": "1",
+            "poster": "omankoman"
+          },
+          {
+            "comment_id": "1217522",
+            "timestamp": "1716558420.0",
+            "upvote_count": "2",
+            "poster": "reiwanotora",
+            "content": "Selected Answer: A\n23 to 30 is by month."
+          },
+          {
+            "comment_id": "1217358",
+            "poster": "funny_penguin",
+            "upvote_count": "3",
+            "timestamp": "1716543540.0",
+            "content": "Selected Answer: A\non exam, by month"
+          },
+          {
+            "comment_id": "1158440",
+            "content": "Selected Answer: A\n\"by month\" seems correct",
+            "timestamp": "1708845180.0",
+            "upvote_count": "1",
+            "poster": "anto69"
+          },
+          {
+            "poster": "evangelist",
+            "timestamp": "1706327520.0",
+            "upvote_count": "2",
+            "content": "Selected Answer: A\nby month means to check history in the past by each month, no doubt answer is A",
+            "comment_id": "1133044"
+          },
+          {
+            "comment_id": "1130214",
+            "content": "Selected Answer: A\nNo doubt, A checked by different AI: chatgpt, claude 2 and Google bard",
+            "upvote_count": "1",
+            "timestamp": "1706070060.0",
+            "poster": "evangelist"
+          },
+          {
+            "content": "Selected Answer: A\ncorrect",
+            "timestamp": "1699174440.0",
+            "upvote_count": "1",
+            "poster": "rdemontis",
+            "comment_id": "1062725"
+          },
+          {
+            "content": "Selected Answer: A\ncorrect answer",
+            "timestamp": "1698325500.0",
+            "poster": "chenglim",
+            "upvote_count": "2",
+            "comment_id": "1054589"
+          },
+          {
+            "comment_id": "698417",
+            "poster": "David_ml",
+            "upvote_count": "2",
+            "timestamp": "1666115520.0",
+            "content": "Selected Answer: A\ncorrect"
+          }
+        ],
+        "url": "https://www.examtopics.com/discussions/microsoft/view/85823-exam-ai-102-topic-3-question-23-discussion/",
+        "answer_ET": "A",
+        "timestamp": "2022-10-18 19:52:00",
+        "answer_images": [],
+        "choices": {
+          "C": "rain",
+          "B": "chicago",
+          "D": "location",
+          "A": "by month"
+        },
+        "question_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0015600001.png"
+        ],
+        "isMC": true,
+        "answer_description": "",
+        "topic": "3",
+        "answers_community": [
+          "A (100%)"
+        ],
+        "exam_id": 41
+      }
+    ],
+    "exam": {
+      "provider": "Microsoft",
+      "isMCOnly": false,
+      "isImplemented": true,
+      "name": "AI-102",
+      "isBeta": false,
+      "lastUpdated": "06 Aug 2025",
+      "id": 41,
+      "numberOfQuestions": 330
+    },
+    "currentPage": 28
+  },
+  "__N_SSP": true
+}

@@ -1,0 +1,1039 @@
+{
+  "pageProps": {
+    "questions": [
+      {
+        "id": "9I8WL2YCDqlNYkgFL8uC",
+        "answer_ET": "A",
+        "question_id": 31,
+        "answer_images": [],
+        "unix_timestamp": 1663142760,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/82105-exam-ai-102-topic-1-question-37-discussion/",
+        "topic": "1",
+        "answer_description": "",
+        "answer": "A",
+        "choices": {
+          "B": "Computer Vision",
+          "C": "Azure Video Analyzer for Media (formerly Video Indexer)",
+          "A": "Face"
+        },
+        "question_images": [],
+        "timestamp": "2022-09-14 10:06:00",
+        "exam_id": 41,
+        "answers_community": [
+          "A (40%)",
+          "B (31%)",
+          "C (29%)"
+        ],
+        "isMC": true,
+        "question_text": "You have a factory that produces food products.\nYou need to build a monitoring solution for staff compliance with personal protective equipment (PPE) requirements. The solution must meet the following requirements:\n* Identify staff who have removed masks or safety glasses.\n* Perform a compliance check every 15 minutes.\n* Minimize development effort.\n* Minimize costs.\nWhich service should you use?",
+        "discussion": [
+          {
+            "upvote_count": "19",
+            "content": "A. Face. The solution link explains:\n\nEmbed facial recognition into your apps for a seamless and highly secured user experience. No machine-learning expertise is required. Features include face detection that perceives facial features and attributes—such as a face mask, glasses, or face location—in an image, and identification of a person by a match to your private repository or via photo ID.",
+            "comment_id": "673730",
+            "poster": "Davard",
+            "timestamp": "1663637160.0"
+          },
+          {
+            "comments": [
+              {
+                "poster": "zellck",
+                "timestamp": "1688774280.0",
+                "comment_id": "946049",
+                "content": "Gotten this in Jul 2023 exam.",
+                "upvote_count": "3"
+              }
+            ],
+            "timestamp": "1687865460.0",
+            "poster": "zellck",
+            "comment_id": "935290",
+            "content": "Selected Answer: A\nA is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-identity#face-detection-and-analysis\nFace detection is required as a first step in all the other scenarios. The Detect API detects human faces in an image and returns the rectangle coordinates of their locations. It also returns a unique ID that represents the stored face data. This is used in later operations to identify or verify faces.\n\nOptionally, face detection can extract a set of face-related attributes, such as head pose, age, emotion, facial hair, and glasses. These attributes are general predictions, not actual classifications. Some attributes are useful to ensure that your application is getting high-quality face data when users add themselves to a Face service. For example, your application could advise users to take off their sunglasses if they're wearing sunglasses.",
+            "upvote_count": "8"
+          },
+          {
+            "comment_id": "1578822",
+            "timestamp": "1750314420.0",
+            "poster": "sema2232",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nB is the right one"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nComputer Vision is the best choice for your needs:\nWhy: It offers a flexible, cost-effective solution for detecting PPE compliance (masks and safety glasses) using custom-trained models. Its API-driven approach minimizes development effort, and it can be integrated into a system that processes video or image snapshots every 15 minutes. Costs are manageable since you’re only analyzing periodic snapshots rather than continuous video streams.",
+            "comment_id": "1551289",
+            "timestamp": "1743890760.0",
+            "poster": "gil906"
+          },
+          {
+            "comment_id": "1395728",
+            "timestamp": "1741991820.0",
+            "poster": "WorldTraveller",
+            "upvote_count": "2",
+            "content": "Selected Answer: B\nYes, Azure Computer Vision can be used to monitor staff compliance with personal protective equipment (PPE) requirements by detecting whether employees are wearing the necessary safety gear, such as helmets and masks, in real-time. This technology helps ensure workplace safety and compliance with safety standards."
+          },
+          {
+            "content": "Selected Answer: C\nFor monitoring staff compliance with PPE requirements in your factory, Azure Video Analyzer for Media (formerly Video Indexer) is the most suitable option. This service can identify staff who have removed masks or safety glasses, perform compliance checks every 15 minutes, and minimize both development effort and costs",
+            "upvote_count": "1",
+            "poster": "tejas29",
+            "timestamp": "1741694280.0",
+            "comment_id": "1387374"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nVideo indexer is the correct answer as it has built-in mask detection.\n\nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/intro-to-spatial-analysis-public-preview?tabs=sa#social-distancing-and-face-mask-detection",
+            "comment_id": "1361552",
+            "poster": "user1024",
+            "timestamp": "1740510780.0"
+          },
+          {
+            "content": "Selected Answer: A\nFace meets the requirements of identifying staff and checking PPE compliance effectively while keeping both development effort and costs low.",
+            "upvote_count": "1",
+            "poster": "ceris22962",
+            "timestamp": "1739886480.0",
+            "comment_id": "1358305"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nTo meet the requirements of identifying staff who have removed masks or safety glasses, performing a compliance check every 15 minutes, and minimizing both development effort and costs, you should use:\n\nB. Computer Vision\n\nAzure Computer Vision can analyze images and videos to detect whether staff are wearing masks and safety glasses. It can be set up to perform checks at regular intervals, meeting the compliance requirement.\n\nFor more information, you can refer to the official - https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview",
+            "comment_id": "1357228",
+            "timestamp": "1739707560.0",
+            "poster": "gyaansastra"
+          },
+          {
+            "comment_id": "1356386",
+            "poster": "syupwsh",
+            "timestamp": "1739516100.0",
+            "upvote_count": "2",
+            "content": "Selected Answer: A\n\"identify\" and \"check every 15 minutes\"\n\nhttps://learn.microsoft.com/en-gb/azure/ai-services/computer-vision/overview-identity\n\nVerify user identity: Verify a person against a trusted face image. This verification could be used to grant access to digital or physical properties such as a bank account, access to a building, and so on. In most cases, the trusted face image could come from a government-issued ID such as a passport or driver’s license, or it could come from an enrollment photo taken in person. During verification, liveness detection can play a critical role in verifying that the image comes from a real person, not a printed photo or mask\n\nThe goal of liveness detection is to ensure that the system is interacting with a physically present live person at the time of authentication\n\nI would say A"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nThe Face API does indeed detect human faces and can return various attributes, which is essential for applications where face recognition or verification is needed.\n\nHowever, in the specific context of monitoring PPE compliance, while face detection is a crucial step, it might not be the most cost-effective and efficient choice compared to using the Computer Vision API directly, especially if the primary task is identifying PPE like masks and safety glasses. The Computer Vision API can perform both object detection (including PPE) and OCR, which might streamline the process with minimal development effort and cost.",
+            "comment_id": "1339099",
+            "poster": "hannah380099",
+            "timestamp": "1736586660.0"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nBecause you have to IDENTIFY staff, it is definitely Face.",
+            "comment_id": "1319436",
+            "timestamp": "1732824480.0",
+            "poster": "Alan_CA"
+          },
+          {
+            "upvote_count": "2",
+            "content": "Selected Answer: A\n\"A\" makes sense. The task is to recognize people, that DO NOT wear their equipment, not to see who is wearing.\nWhy check for social distancing, identifying masks, goggles, etc. if we only need to find the people that are not wearing that stuff and therefore are easily detected by Face.",
+            "comment_id": "1315180",
+            "timestamp": "1732098300.0",
+            "poster": "joeakim"
+          },
+          {
+            "content": "Selected Answer: B\nCopilot: B\n\nTo build a monitoring solution for staff compliance with PPE requirements, you should use B. Computer Vision. This service can analyze images and videos to detect whether staff are wearing masks or safety glasses. It is cost-effective and requires minimal development effort compared to other options",
+            "upvote_count": "3",
+            "timestamp": "1731052800.0",
+            "poster": "AL_everyday",
+            "comment_id": "1308668"
+          },
+          {
+            "timestamp": "1730715180.0",
+            "poster": "vivekgoel15",
+            "comment_id": "1306879",
+            "content": "C is the right option",
+            "upvote_count": "1"
+          },
+          {
+            "timestamp": "1729546860.0",
+            "poster": "Sujeeth",
+            "comment_id": "1301273",
+            "content": "The best service to use is B. Computer Vision.\nComputer Vision can be used to detect and analyze objects in images, including PPE compliance like masks and safety glasses. It meets the requirements for identifying staff who have removed protective equipment, can be run at intervals (e.g., every 15 minutes), and minimizes both development effort and costs compared to more complex solutions like Azure Video Analyzer.",
+            "upvote_count": "1"
+          },
+          {
+            "content": "Face is not the best option to identify objects like masks so C Azure Video Analyzer for Media (formerly Video Indexer )",
+            "upvote_count": "1",
+            "poster": "Christian_garcia_martin",
+            "timestamp": "1728888780.0",
+            "comment_id": "1297257"
+          },
+          {
+            "comment_id": "1296831",
+            "timestamp": "1728811380.0",
+            "poster": "4371883",
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nFacial recognition is lower effort than Video Indexer"
+          },
+          {
+            "timestamp": "1727712180.0",
+            "comments": [
+              {
+                "comments": [
+                  {
+                    "poster": "mrg998",
+                    "timestamp": "1727963280.0",
+                    "comment_id": "1292809",
+                    "content": "face does this also.\nIt says to minimise effort, with option C, you need to save the video then upload to blob or storage for it to then analyse. This cannot be the easiest option, the easiest option is op A",
+                    "upvote_count": "1"
+                  }
+                ],
+                "timestamp": "1727712240.0",
+                "poster": "yibes",
+                "comment_id": "1291612",
+                "content": "https://learn.microsoft.com/en-us/azure/azure-video-indexer/video-indexer-overview#videoaudio-ai-features",
+                "upvote_count": "1"
+              }
+            ],
+            "poster": "yibes",
+            "comment_id": "1291611",
+            "content": "It is C. Video Indexer\nhttps://learn.microsoft.com/en-us/azure/azure-video-indexer/video-indexer-overview#:~:text=Video%20models-,Face%20detection,-%3A%20Detects%20and%20groups",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "mrg998",
+            "timestamp": "1727673720.0",
+            "comment_id": "1291410",
+            "content": "Selected Answer: A\nits this for sure",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1284992",
+            "poster": "AzureGeek79",
+            "timestamp": "1726535100.0",
+            "upvote_count": "1",
+            "content": "B is the answer according to Bing AI (ChatGPT).\nC is the answer according to Google gemini.\nI think C is the correct answer."
+          },
+          {
+            "content": "Selected Answer: A\nAnswer is face",
+            "upvote_count": "1",
+            "timestamp": "1726533840.0",
+            "poster": "BoPeng",
+            "comment_id": "1284987"
+          },
+          {
+            "content": "Selected Answer: B\nI think is Vision (using Spatial Analysis)\nhttps://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/cognitive-services-spatial-analysis-enables-safety-alerts-with/ba-p/3641130",
+            "upvote_count": "2",
+            "poster": "19089ba",
+            "timestamp": "1726146240.0",
+            "comment_id": "1282643"
+          },
+          {
+            "comment_id": "1279699",
+            "timestamp": "1725639720.0",
+            "poster": "dalin02",
+            "upvote_count": "2",
+            "content": "Why is it not Computer Vision?\nI mean Computer Vision can analyse images or video frames to detect the presence or absence of specific objects for example masks. A scheduler can also be set up that captures images every 15 mins and then pass them to the Computer Vision service, and tbh it is also the most cost effective of all the options and has pre-built models"
+          },
+          {
+            "comment_id": "1274632",
+            "poster": "famco",
+            "timestamp": "1724949840.0",
+            "upvote_count": "1",
+            "content": "Even with an open book nobody can answer these kind of questions. The dysfunctional company like Microsoft seems to have outsourced this to another vendor and also charging them extra. Looks like they hired non-IT people to create these questions."
+          },
+          {
+            "poster": "JakeCallham",
+            "comments": [
+              {
+                "content": "no, the answer is face. also due to cost constraints. Refer to below link and search for mask or glasses. https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-face-detection#attributes",
+                "upvote_count": "1",
+                "comments": [
+                  {
+                    "timestamp": "1724575560.0",
+                    "comments": [
+                      {
+                        "content": "No, If you scroll up on the left side sidebar, it is part of face service. Microsoft messed up on the URL part so don't get fooled by it :). If you search for azure AI face service, it will open the same link. The answer is Face.",
+                        "upvote_count": "1",
+                        "timestamp": "1724782620.0",
+                        "poster": "nimeshshroti11",
+                        "comment_id": "1273639"
+                      }
+                    ],
+                    "poster": "JakeCallham",
+                    "comment_id": "1272064",
+                    "content": "your link refers to computer vision but you say answer a? You mean B?",
+                    "upvote_count": "1"
+                  }
+                ],
+                "timestamp": "1724264640.0",
+                "poster": "nimeshshroti11",
+                "comment_id": "1270335"
+              },
+              {
+                "upvote_count": "1",
+                "content": "to add: https://learn.microsoft.com/en-us/legal/cognitive-services/face/characteristics-and-limitations#plan-for-variations-in-subject-appearance-and-behavior it shows that face api will not work if some one is wearing ppe mask, therfor this api wont work. like I said with will just show a face is not recognized, you get false positives that are not usefull for this task.",
+                "comment_id": "1269937",
+                "poster": "JakeCallham",
+                "timestamp": "1724225760.0"
+              }
+            ],
+            "timestamp": "1724225100.0",
+            "comment_id": "1269926",
+            "content": "Selected Answer: C\nread this guys:https://learn.microsoft.com/en-us/azure/azure-video-indexer/video-indexer-overview\nEverybody is saying Face but this link shows exactly that it will not be sufficient. Its a shame A is voted best just because it mentions face. But face recognition will generate false positives. You will end up with a lot of people you cannot recognize due to mask. but any person that is not known as personel will also be not recognized, even though they dont wear a mask.",
+            "upvote_count": "2"
+          },
+          {
+            "comment_id": "1265524",
+            "timestamp": "1723615320.0",
+            "poster": "anto69",
+            "upvote_count": "2",
+            "content": "Selected Answer: B\nI tried to ask ChatGPT (also) reversing the question and there's no way: Computer Vision is always the solution to this problem"
+          },
+          {
+            "comment_id": "1245856",
+            "comments": [
+              {
+                "poster": "JakeCallham",
+                "timestamp": "1724224920.0",
+                "comment_id": "1269921",
+                "content": "I agree, everybody is saying Face but your link shows exactly that that will not be sufficient. Its a shame its voted best just because it mentions face. but face recognition with generate false positives. You will end up with a lot of people you cannot recoginize due to mask. but any person that is not known as personel will also be not recognized, even though they dont wear a mask.",
+                "upvote_count": "1"
+              }
+            ],
+            "timestamp": "1720668780.0",
+            "poster": "Toby86",
+            "upvote_count": "2",
+            "content": "It's C.\nFrom: https://learn.microsoft.com/en-us/azure/azure-video-indexer/video-indexer-overview\n\nPeople's detected clothing (preview): Detects the clothing types of people appearing in the video and provides information such as long or short sleeves, long or short pants and skirt or dress. The detected clothing is associated with the people wearing it and the exact timestamp (start, end) along with a confidence level for the detection are provided. For more information, see detected clothing.\nFeatured clothing (preview): Captures featured clothing images appearing in a video. You can improve your targeted ads by using the featured clothing insight. For information on how the featured clothing images are ranked and how to get the insights, see featured clothing."
+          },
+          {
+            "content": "Selected Answer: A\nMay be Face.",
+            "upvote_count": "1",
+            "poster": "HaraTadahisa",
+            "timestamp": "1719036360.0",
+            "comment_id": "1235160"
+          },
+          {
+            "comment_id": "1233522",
+            "poster": "ES_Capgemini_IandD",
+            "timestamp": "1718871000.0",
+            "upvote_count": "1",
+            "content": "A is the correct because video Analyzer only detect faces but it doesn't analyze faces, it's only done by Face."
+          },
+          {
+            "upvote_count": "2",
+            "content": "Selected Answer: C\nAzure Video Analyzer for Media (formerly Video Indexer)",
+            "comment_id": "1231500",
+            "poster": "gary_cooper",
+            "timestamp": "1718563260.0"
+          },
+          {
+            "comment_id": "1218956",
+            "timestamp": "1716723180.0",
+            "poster": "PeteColag",
+            "upvote_count": "4",
+            "content": "Selected Answer: C\nAccording to both chatgpt (4o) and Gemini, the correct answer is C."
+          },
+          {
+            "comment_id": "1213589",
+            "timestamp": "1716089520.0",
+            "poster": "juicingbliss",
+            "upvote_count": "2",
+            "content": "B is the answer.\nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/intro-to-spatial-analysis-public-preview?tabs=sa#social-distancing-and-face-mask-detection"
+          },
+          {
+            "content": "Answer : A",
+            "upvote_count": "1",
+            "poster": "pramod80",
+            "timestamp": "1714583640.0",
+            "comment_id": "1205178"
+          },
+          {
+            "upvote_count": "1",
+            "content": "answer B",
+            "comment_id": "1203124",
+            "timestamp": "1714222680.0",
+            "poster": "Jimmy1017"
+          },
+          {
+            "comment_id": "1187362",
+            "timestamp": "1711968780.0",
+            "poster": "NullVoider_0",
+            "upvote_count": "3",
+            "content": "Selected Answer: C\nC. Azure Video Analyzer for Media (formerly Video Indexer) - This service is designed to analyze video content and can be used to identify specific scenarios, such as whether individuals in a video are wearing masks or safety glasses. It supports a range of video analytics capabilities, including object detection, which can be leveraged to monitor PPE compliance. Using Azure Video Analyzer for Media can minimize development effort by providing built-in models for analyzing video content and can be set up to perform compliance checks at specified intervals, such as every 15 minutes."
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nI don't think Face alone can do a compliance check, Face does the recognition but the service needs to do something after that (determine it is compliant/not compliant, so you need to have the more comprehensive services of Computer Vision (AI vision) which includes Face.",
+            "comment_id": "1163280",
+            "timestamp": "1709276100.0",
+            "poster": "Mehe323"
+          },
+          {
+            "comment_id": "1156657",
+            "timestamp": "1708631280.0",
+            "comments": [
+              {
+                "content": "Thanks for the link. I agree Azure AI Vision Spatial Analysis seems correct.",
+                "upvote_count": "1",
+                "timestamp": "1712377440.0",
+                "poster": "GHill1982",
+                "comment_id": "1190221"
+              }
+            ],
+            "poster": "audlindr",
+            "upvote_count": "3",
+            "content": "Selected Answer: B\nShould be B Computer Vision. Spatial Analysis in Computer vision. Spatial Analysis can also be configured to detect if a person is wearing a protective face covering such as a mask. \nhttps://learn.microsoft.com/en-us/azure/ai-services/computer-vision/intro-to-spatial-analysis-public-preview?tabs=sa"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nNo doubt the correct answer is A: link is here\nhttps://learn.microsoft.com/en-us/legal/cognitive-services/face/characteristics-and-limitations",
+            "comment_id": "1147863",
+            "poster": "evangelist",
+            "timestamp": "1707721920.0"
+          },
+          {
+            "timestamp": "1698856260.0",
+            "poster": "rdemontis",
+            "comment_id": "1059907",
+            "content": "Selected Answer: A\nI suppose the correct answer is A because every 15 minutes you can take a snapshot from the video surveillance system and process the image with the Face API. This is certainly less expensive and easier than using Video Indexer.",
+            "upvote_count": "2"
+          },
+          {
+            "comment_id": "1049555",
+            "poster": "sl_mslconsulting",
+            "timestamp": "1697898000.0",
+            "upvote_count": "4",
+            "content": "Selected Answer: C\nWe are dealing with videos here and you need to check every 15 minutes. All these need to be done with minimum development and cost. Face won't work as it mainly deals with images and PPEs are not limited to just goggles. Check different video models available here: https://learn.microsoft.com/en-us/azure/azure-video-indexer/video-indexer-overview"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nQuote \"For example, your application could advise users to take off their sunglasses if they're wearing sunglasses.\" \n\nat https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-identity#face-detection-and-analysis",
+            "comment_id": "984244",
+            "timestamp": "1692343320.0",
+            "poster": "james2033"
+          },
+          {
+            "comment_id": "935259",
+            "timestamp": "1687863180.0",
+            "poster": "foexams",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nPPE does not include only face. Therefore, as chat GPT says, the correct answer is Computer Vision"
+          },
+          {
+            "content": "azure Spatial Analysis is correct. This question is not up to date.",
+            "upvote_count": "2",
+            "timestamp": "1685339940.0",
+            "poster": "examworld",
+            "comment_id": "909073"
+          },
+          {
+            "poster": "KingChuang",
+            "timestamp": "1673917920.0",
+            "comment_id": "778434",
+            "content": "on my exam (2023-01-16 Passed)\n\nMy Answer:A",
+            "upvote_count": "3"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: A\nFace includes face masks, glasses, or face location",
+            "comment_id": "687344",
+            "poster": "Davard",
+            "timestamp": "1665015780.0",
+            "comments": [
+              {
+                "content": "face doesnt include ppe mask. it includes like halloween mask, totally different type of mask.",
+                "upvote_count": "1",
+                "timestamp": "1724225280.0",
+                "poster": "JakeCallham",
+                "comment_id": "1269930"
+              }
+            ]
+          },
+          {
+            "upvote_count": "3",
+            "content": "I think Computer Vision for the Mask/Glasses detection.",
+            "comment_id": "668749",
+            "timestamp": "1663142760.0",
+            "poster": "momentumhd"
+          }
+        ]
+      },
+      {
+        "id": "7f3wMQZVF9UMF94sQxIC",
+        "answer_ET": "B",
+        "question_id": 32,
+        "answer_images": [],
+        "unix_timestamp": 1662341580,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/80176-exam-ai-102-topic-1-question-38-discussion/",
+        "topic": "1",
+        "answer_description": "",
+        "answer": "B",
+        "choices": {
+          "D": "retrievable, facetable, and key",
+          "B": "searchable, facetable, and retrievable",
+          "A": "searchable, sortable, and retrievable",
+          "C": "retrievable, filterable, and sortable"
+        },
+        "question_images": [],
+        "timestamp": "2022-09-05 03:33:00",
+        "exam_id": 41,
+        "answers_community": [
+          "B (96%)",
+          "4%"
+        ],
+        "isMC": true,
+        "question_text": "You have an Azure Cognitive Search solution and a collection of blog posts that include a category field.\nYou need to index the posts. The solution must meet the following requirements:\n* Include the category field in the search results.\n* Ensure that users can search for words in the category field.\n* Ensure that users can perform drill down filtering based on category.\nWhich index attributes should you configure for the category field?",
+        "discussion": [
+          {
+            "content": "Selected Answer: B\nVote for B\nRetrievable: Include the category field in the search results.\nSearchable: Ensure that users can search for words in the category field.\nFacetable: Ensure that users can perform drill down filtering based on category.",
+            "upvote_count": "51",
+            "poster": "Internal_Koala",
+            "timestamp": "1662341580.0",
+            "comment_id": "659657"
+          },
+          {
+            "upvote_count": "6",
+            "content": "Was on exam 22 Jan 2024",
+            "comment_id": "1128852",
+            "timestamp": "1705938720.0",
+            "poster": "qs99"
+          },
+          {
+            "upvote_count": "2",
+            "content": "This was in the exam on 15/08/2024",
+            "comment_id": "1265980",
+            "timestamp": "1723670760.0",
+            "poster": "moonlightc"
+          },
+          {
+            "comment_id": "1235159",
+            "timestamp": "1719036300.0",
+            "poster": "HaraTadahisa",
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nsee if you can spot this one C."
+          },
+          {
+            "content": "Answer is C\nStrings are attributed as Retrievable and Searchable. Integers are attributed as Retrievable, Filterable, Sortable, and Facetable. so B doesn't seem to fit the answer",
+            "upvote_count": "1",
+            "timestamp": "1719012180.0",
+            "poster": "raj_evergreen",
+            "comment_id": "1235040"
+          },
+          {
+            "comment_id": "1218658",
+            "poster": "PeteColag",
+            "timestamp": "1716684540.0",
+            "upvote_count": "4",
+            "content": "B. searchable, facetable, and retrievable\n\nHere's why:\n\nSearchable: This allows the category field to be included in full-text searches, meaning users can search for words within the category field.\nFacetable: This allows the category field to be used in drill-down filtering, enabling users to filter search results based on the categories.\nRetrievable: This ensures that the category field is included in the search results that are returned to the user.\nThese attributes together satisfy all the given requirements."
+          },
+          {
+            "content": "Selected Answer: B\nB is right.",
+            "upvote_count": "1",
+            "timestamp": "1716124980.0",
+            "poster": "reiwanotora",
+            "comment_id": "1213798"
+          },
+          {
+            "timestamp": "1712809500.0",
+            "poster": "michaelmorar",
+            "comment_id": "1193424",
+            "content": "Selected Answer: B\nFilterable - can be included in filter expressions\nFacetable - can be used to determine values for facets (user interface elements used to filter results based on a list of known field values, including hit counts by category)\nRetrievable - can be included in the search results - by default all fields are retrievable",
+            "upvote_count": "1"
+          },
+          {
+            "comment_id": "1184418",
+            "timestamp": "1711577340.0",
+            "poster": "f2c587e",
+            "upvote_count": "2",
+            "content": "Selected Answer: B\nEn la pregunta no es necesario que los resultados sean ordenables. Por eso la opcion es B"
+          },
+          {
+            "content": "Selected Answer: B\n* Include the category field in the search results. - Retrievable: Fields returned in a query response.\n* Ensure that users can search for words in the category field. - Searchable: Fields used in full text search. Strings are searchable. Numeric fields and Boolean fields are often marked as not searchable.\n* Ensure that users can perform drill down filtering based on category. - Facetable: Fields used in a faceted navigation structure.",
+            "upvote_count": "2",
+            "timestamp": "1708631760.0",
+            "poster": "audlindr",
+            "comment_id": "1156665"
+          },
+          {
+            "timestamp": "1707722220.0",
+            "poster": "evangelist",
+            "comment_id": "1147869",
+            "content": "facetable and filterable are almost synonyms and they should not appear in the same options.",
+            "upvote_count": "3"
+          },
+          {
+            "upvote_count": "2",
+            "content": "Selected Answer: B\nFor indexing blog posts in Azure Cognitive Search with the requirements specified, the correct attributes for the category field would be:\n\nB. searchable, facetable, and retrievable\n\nsearchable: Allows users to search for words within the category field.\nfacetable: Enables drill down filtering based on category, which is essential for users to narrow down search results.\nretrievable: Ensures that the category field is included in the search results, allowing users to see which category each blog post belongs to.",
+            "comment_id": "1147865",
+            "poster": "evangelist",
+            "timestamp": "1707722040.0"
+          },
+          {
+            "poster": "rdemontis",
+            "comments": [
+              {
+                "upvote_count": "1",
+                "content": "this should be voted up. thanks.",
+                "comment_id": "1307466",
+                "poster": "noahsark",
+                "timestamp": "1730826420.0"
+              }
+            ],
+            "timestamp": "1698856800.0",
+            "comment_id": "1059913",
+            "content": "Selected Answer: B\nhttps://learn.microsoft.com/en-us/azure/search/search-what-is-an-index",
+            "upvote_count": "3"
+          },
+          {
+            "comment_id": "984249",
+            "timestamp": "1692343980.0",
+            "poster": "james2033",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nWhat is facet query:\nhttps://www.tutorialspoint.com/apache_solr/apache_solr_faceting.htm\n\nhttps://learn.microsoft.com/en-us/azure/search/search-faceted-navigation#faceted-navigation-in-a-search-page See left side of image."
+          },
+          {
+            "comment_id": "935639",
+            "timestamp": "1687886520.0",
+            "poster": "msdfqwerfewf",
+            "upvote_count": "2",
+            "content": "Selected Answer: C\n!!! 'searchable' its based on full text search and not related to results. so it should be retrivevable the field contents will show up in the results."
+          },
+          {
+            "poster": "zellck",
+            "comments": [
+              {
+                "comment_id": "946050",
+                "poster": "zellck",
+                "timestamp": "1688774280.0",
+                "upvote_count": "4",
+                "content": "Gotten this in Jul 2023 exam."
+              },
+              {
+                "comment_id": "935288",
+                "poster": "zellck",
+                "timestamp": "1687865280.0",
+                "upvote_count": "1",
+                "content": "https://learn.microsoft.com/en-us/azure/search/search-faceted-navigation\nFaceted navigation is used for self-directed drilldown filtering on query results in a search app, where your application offers form controls for scoping search to groups of documents (for example, categories or brands), and Azure Cognitive Search provides the data structures and filters to back the experience."
+              }
+            ],
+            "timestamp": "1687865280.0",
+            "comment_id": "935287",
+            "content": "Selected Answer: B\nB is the answer.\n\nhttps://learn.microsoft.com/en-us/rest/api/searchservice/create-index#-field-definitions-\n- retrievable\nIndicates whether the field can be returned in a search result. \n- searchable\nIndicates whether the field is full-text searchable and can be referenced in search queries.\n- facetable\nIndicates whether to enable the field to be referenced in facet queries.",
+            "upvote_count": "5"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: B\n\"Searchable\" attribute: This attribute allows users to search for words in the category field. It means that the field can be included in full-text searches.\n\n\"Facetable\" attribute: This attribute allows users to perform drill-down filtering based on category. Faceting is used for self-directed drill-down filtering on query results in a search app, where your application offers form controls for scoping search to groups of documents (for example, categories or brands), and Azure Cognitive Search provides the data structures and filters to back the experience.\n\n\"Retrievable\" attribute: This attribute allows the category field to be included in the search results. It means that the field can be included in the search results returned by the search service.",
+            "comment_id": "921486",
+            "poster": "EliteAllen",
+            "timestamp": "1686576120.0"
+          },
+          {
+            "content": "Chat GPT Response:\nTo meet the given requirements, you can configure the following index attributes for the \"category\" field in the Azure Cognitive Search solution:\n\n\"searchable\": This attribute enables searching for words in the category field.\n\n\"filterable\": This attribute enables filtering based on category.\n\n\"retrievable\": This attribute ensures that the category field is included in the search results.\n\nTherefore, the correct answer would be to configure the \"searchable\", \"filterable\", and \"retrievable\" attributes for the \"category\" field in the index schema of Azure Cognitive Search.\nHope it clarifies.",
+            "upvote_count": "1",
+            "timestamp": "1681088580.0",
+            "poster": "Sachz88",
+            "comment_id": "865919"
+          },
+          {
+            "content": "The answer is correct C\nhttps://learn.microsoft.com/en-us/azure/search/search-get-started-dotnet",
+            "upvote_count": "1",
+            "timestamp": "1676142120.0",
+            "poster": "NNU",
+            "comment_id": "805547"
+          },
+          {
+            "comment_id": "780195",
+            "timestamp": "1674058440.0",
+            "poster": "ap1234pa",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nDrill down so facetable"
+          },
+          {
+            "comment_id": "668755",
+            "timestamp": "1663143000.0",
+            "poster": "momentumhd",
+            "upvote_count": "1",
+            "content": "Selected Answer: B\nI Agree, facetable is for drill"
+          },
+          {
+            "content": "Selected Answer: B\nhttps://docs.microsoft.com/en-us/azure/search/search-faceted-navigation",
+            "upvote_count": "1",
+            "timestamp": "1662761400.0",
+            "poster": "Sharks82",
+            "comment_id": "664956"
+          },
+          {
+            "timestamp": "1662416220.0",
+            "poster": "[Removed]",
+            "comment_id": "660585",
+            "content": "Selected Answer: B\nAgree with Internal_Koala, Answer should be B. \nI can't see any requirement related with Sortable here.",
+            "upvote_count": "1"
+          }
+        ]
+      },
+      {
+        "id": "k2HFRDbvvoWeCYZdPAYe",
+        "unix_timestamp": 1674378300,
+        "topic": "1",
+        "answer_description": "Step 1: In the Azure dashboard, click Create a resource.\nStep 2: In the search bar, type \"Cognitive Services.\"\nYou'll get information about the cognitive services resource and a legal notice. Click Create.\nStep 3: You'll need to specify the following details about the cognitive service (refer to the image below for a completed example of this page):\nSubscription: choose your paid or trial subscription, depending on how you created your Azure account.\nResource group: click create new to create a new resource group or choose an existing one.\nRegion: choose the Azure region for your cognitive service. Choose: East US Azure region.\nName: choose a name for your cognitive service. Enter: AAA12345678\nPricing Tier: Select: Free pricing tier\n\nStep 4: Review and create the resource, and wait for deployment to complete. Then go to the deployed resource.\nNote: The Computer Vision Image Analysis service can extract a wide variety of visual features from your images. For example, it can determine whether an image contains adult content, find specific brands or objects, or find human faces.\n\nTag visual features -\nIdentify and tag visual features in an image, from a set of thousands of recognizable objects, living things, scenery, and actions. When the tags are ambiguous or not common knowledge, the API response provides hints to clarify the context of the tag. Tagging isn't limited to the main subject, such as a person in the foreground, but also includes the setting (indoor or outdoor), furniture, tools, plants, animals, accessories, gadgets, and so on.\nTry out the image tagging features quickly and easily in your browser using Vision Studio.\nReference:\nhttps://docs.microsoft.com/en-us/learn/modules/analyze-images-computer-vision/3-analyze-images https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-image-analysis",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/96461-exam-ai-102-topic-1-question-39-discussion/",
+        "question_id": 33,
+        "answer_ET": "See explanation below.",
+        "answer_images": [
+          "https://www.examtopics.com/assets/media/exam-media/04271/0005700001.jpg"
+        ],
+        "answer": "See explanation below.",
+        "exam_id": 41,
+        "question_images": [],
+        "timestamp": "2023-01-22 10:05:00",
+        "question_text": "SIMULATION -\nUse the following login credentials as needed:\nTo enter your username, place your cursor in the Sign in box and click on the username below.\nTo enter your password, place your cursor in the Enter password box and click on the password below.\n\nAzure Username: admin@abc.com -\n\nAzure Password: XXXXXXXXXXXX -\nThe following information is for technical support purposes only:\n\nLab Instance: 12345678 -\n\nTask -\nYou plan to build an API that will identify whether an image includes a Microsoft Surface Pro or Surface Studio.\nYou need to deploy a service in Azure Cognitive Services for the API. The service must be named AAA12345678 and must be in the East US Azure region. The solution must use the Free pricing tier.\nTo complete this task, sign in to the Azure portal.",
+        "discussion": [
+          {
+            "upvote_count": "7",
+            "content": "Computer Vision should be the resource we need to create.",
+            "comment_id": "784098",
+            "timestamp": "1674378300.0",
+            "comments": [
+              {
+                "content": "agree with you",
+                "upvote_count": "1",
+                "timestamp": "1698857160.0",
+                "poster": "rdemontis",
+                "comment_id": "1059916"
+              }
+            ],
+            "poster": "dev2dev"
+          },
+          {
+            "comment_id": "1229191",
+            "poster": "omankoman",
+            "timestamp": "1718200260.0",
+            "upvote_count": "5",
+            "content": "This type of simulation question was not included in the real exam, which was taken on 12 June."
+          },
+          {
+            "content": "Simulation questions will not appear on the actual exam as of May 25, 2024; ET should remove this type of question.",
+            "upvote_count": "3",
+            "timestamp": "1716562260.0",
+            "poster": "nanaw770",
+            "comment_id": "1217616"
+          },
+          {
+            "poster": "michaelmorar",
+            "timestamp": "1713844740.0",
+            "comment_id": "1200463",
+            "content": "Both are Microsoft Products - so we don't need Brand recognition and it seems more like a Custom Vision solution. \n\nHOWEVER, Computer Vision now seems to offer Product Recognition. \n\nSo, while I'm still leaning towards Custom Vision, it seems that Computer Vision might also be viable. \n\nQuestion is probably out of date.",
+            "upvote_count": "1"
+          },
+          {
+            "poster": "GHill1982",
+            "timestamp": "1710410220.0",
+            "comment_id": "1173302",
+            "content": "I think this is Custom Vision too. I don't believe Computer Vision is able to detect the difference between the two different devices which both have the Microsoft brand logo.",
+            "upvote_count": "3"
+          },
+          {
+            "comment_id": "1121396",
+            "poster": "dimsok",
+            "timestamp": "1705132620.0",
+            "upvote_count": "2",
+            "content": "I think it is a Custom Vision project because it is not about recognizing a brand, its a about two laptops that need to be identified among tens of others...."
+          },
+          {
+            "upvote_count": "2",
+            "content": "This is a Computer Vision task, in computer vision you can extract the logo brands to identify if there is any. It also let you extract text to be analyzed if is necessary. Custom Vision is useful to detect custom objects within an image or the image itself. More info here: https://stackoverflow.com/questions/52155632/difference-between-computer-vision-api-and-custom-vision-api",
+            "comment_id": "1077556",
+            "poster": "ccampagna",
+            "timestamp": "1700670960.0"
+          },
+          {
+            "timestamp": "1686150120.0",
+            "comments": [
+              {
+                "timestamp": "1701758400.0",
+                "poster": "AnonymousJhb",
+                "comment_id": "1088224",
+                "content": "this is not CUSTOM vision because - Brand detection is a specialized mode of object detection that uses a database of thousands of global logos to identify commercial brands in images or video. You can use this feature, for example, to discover which brands are most popular on social media or most prevalent in media product placement.\n\nThe built-in logo database covers popular brands in consumer electronics, clothing, and more. \n\nONLY - If you find that the brand you're looking for is not detected by the Azure AI Vision service, you could also try creating and training your own logo detector using the Custom Vision service.",
+                "upvote_count": "2"
+              }
+            ],
+            "poster": "ziggy1117",
+            "comment_id": "917325",
+            "content": "1. create cognitive service east-us, free\n2. go to custom vision ai and choose #1\n3. uploaded images of surface pro or studio\n4. train the model\n5. test\n6. publish",
+            "upvote_count": "2"
+          }
+        ],
+        "isMC": false,
+        "answers_community": []
+      },
+      {
+        "id": "Ztbw5YyQtv3Wh7P4QVYX",
+        "choices": {
+          "D": "Computer Vision",
+          "B": "Personalizer",
+          "C": "Form Recognizer",
+          "A": "Custom Vision"
+        },
+        "answer": "C",
+        "url": "https://www.examtopics.com/discussions/microsoft/view/76962-exam-ai-102-topic-1-question-4-discussion/",
+        "topic": "1",
+        "answer_description": "",
+        "unix_timestamp": 1655747820,
+        "answer_images": [],
+        "answer_ET": "C",
+        "question_id": 34,
+        "discussion": [
+          {
+            "upvote_count": "17",
+            "content": "https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0#receipt\n> Form Recognizer is now Azure AI Document Intelligence!",
+            "comment_id": "1208213",
+            "comments": [
+              {
+                "upvote_count": "4",
+                "content": "https://techcommunity.microsoft.com/blog/azure-ai-services-blog/azure-form-recognizer-is-now-azure-ai-document-intelligence-with-new-and-updated/3875765",
+                "comment_id": "1321981",
+                "timestamp": "1733325720.0",
+                "poster": "Azure-JL"
+              }
+            ],
+            "timestamp": "1715150100.0",
+            "poster": "p2006"
+          },
+          {
+            "comment_id": "1572637",
+            "poster": "man5484",
+            "timestamp": "1748339460.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nC. Form Recognizer\nHas a prebuilt receipt model for English receipts.\nCan extract: vendor, total, date, items, tax, etc.\nSuper low-code — literally just upload a PDF or image and hit the API.\nYou can even customize it if your receipts are non-standard.\n— minimal dev effort, high accuracy, designed for receipts."
+          },
+          {
+            "comment_id": "1352988",
+            "poster": "syupwsh",
+            "timestamp": "1738933260.0",
+            "upvote_count": "4",
+            "content": "Selected Answer: C\nForm recognizer (Azure AI Document Intelligence) is CORRECT because it is specifically designed to extract structured data from various types of documents, including receipts. It provides pre-built models for extracting common fields like vendor names, transaction totals, and dates from receipts, thus minimizing the development effort required."
+          },
+          {
+            "poster": "coolDude_2K",
+            "timestamp": "1736746080.0",
+            "comment_id": "1339797",
+            "content": "Selected Answer: C\nDocument Intelligence",
+            "upvote_count": "1"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nC. Form Recognizer without doubts",
+            "comment_id": "1263555",
+            "timestamp": "1723301100.0",
+            "poster": "anto69"
+          },
+          {
+            "comment_id": "1253783",
+            "poster": "60ties",
+            "timestamp": "1721753040.0",
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nVery obvious, C: Form Recognizer"
+          },
+          {
+            "content": "Selected Answer: C\nC is right.",
+            "upvote_count": "1",
+            "poster": "reiwanotora",
+            "timestamp": "1716125100.0",
+            "comment_id": "1213801"
+          },
+          {
+            "upvote_count": "2",
+            "content": "Selected Answer: C\nForm Recognizer is an AI-powered document extraction service that understands your forms, enabling you to extract text, tables, and key-value pairs from your documents, whether print or handwritten. It’s designed to recognize and extract information from receipts, among other types of documents, which makes it the best choice for this scenario. It can easily extract top-level information such as the vendor and transaction total from receipts, thereby reducing the time employees spend on logging receipts in expense reports. This solution also minimizes development effort as it provides pre-built models for common extraction tasks.",
+            "comment_id": "1195215",
+            "comments": [
+              {
+                "timestamp": "1713060120.0",
+                "poster": "CDL_Learner",
+                "comment_id": "1195219",
+                "content": "the other options are not suitable:\n• A. Custom Vision: This service is used to build custom image classification models. It could be used to recognize receipts, but it wouldn’t extract the detailed information from them like Form Recognizer can.\n• B. Personalizer: This is an AI service that delivers personalized user experiences. It’s not designed for processing receipts or extracting information from documents.\n• D. Computer Vision: This service can analyze visual features in images, but it’s not specialized for extracting structured data from forms or receipts. It would require significant additional development to extract specific fields from a receipt compared to Form Recognizer.",
+                "upvote_count": "2"
+              }
+            ],
+            "timestamp": "1713060000.0",
+            "poster": "CDL_Learner"
+          },
+          {
+            "comment_id": "1191333",
+            "timestamp": "1712547780.0",
+            "poster": "michaelmorar",
+            "upvote_count": "1",
+            "content": "Selected Answer: C\nForm recogniser supports among other common document types, receipts and invoices."
+          },
+          {
+            "upvote_count": "2",
+            "content": "Selected Answer: C\nno doubt using Form recognizer to locate the content to be OCR",
+            "comment_id": "1147002",
+            "timestamp": "1707631200.0",
+            "poster": "evangelist"
+          },
+          {
+            "content": "The correct answer is C \"Form Recognizer\". This service had changed its name to Document Intelligence a few weeks ago",
+            "upvote_count": "4",
+            "poster": "ccampagna",
+            "timestamp": "1699869240.0",
+            "comment_id": "1069191"
+          },
+          {
+            "content": "Selected Answer: C\nanswer is correct",
+            "upvote_count": "1",
+            "poster": "rdemontis",
+            "timestamp": "1698832560.0",
+            "comment_id": "1059540"
+          },
+          {
+            "content": "Selected Answer: C\nForm Recognizer",
+            "upvote_count": "2",
+            "timestamp": "1690125600.0",
+            "poster": "dazdzadzadzaazd",
+            "comment_id": "960570"
+          },
+          {
+            "timestamp": "1689278820.0",
+            "poster": "james2033",
+            "comment_id": "950970",
+            "content": "Selected Answer: C\nSee example of Invoice with Azure Form Recognizer at https://learn.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/overview?view=form-recog-3.0.0#invoice",
+            "upvote_count": "2"
+          },
+          {
+            "comments": [
+              {
+                "upvote_count": "3",
+                "content": "Gotten this in Jul 2023 exam.",
+                "comment_id": "945456",
+                "poster": "zellck",
+                "timestamp": "1688716080.0"
+              }
+            ],
+            "timestamp": "1687941840.0",
+            "poster": "zellck",
+            "comment_id": "936362",
+            "content": "Selected Answer: C\nC is the answer.\n\nhttps://learn.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/overview?view=form-recog-3.0.0\nAzure Form Recognizer is a cloud-based Azure Applied AI Service that enables you to build intelligent document processing solutions. Massive amounts of data, spanning a wide variety of data types, are stored in forms and documents. Form Recognizer enables you to effectively manage the velocity at which data is collected and processed and is key to improved operations, informed data-driven decisions, and enlightened innovation.",
+            "upvote_count": "4"
+          },
+          {
+            "comment_id": "749999",
+            "timestamp": "1671464580.0",
+            "poster": "kml2003",
+            "upvote_count": "2",
+            "content": "Selected Answer: C\nForm recognizer"
+          },
+          {
+            "upvote_count": "1",
+            "content": "C. Form Recognizer",
+            "comment_id": "673180",
+            "timestamp": "1663583580.0",
+            "poster": "NK0709"
+          }
+        ],
+        "question_text": "Your company wants to reduce how long it takes for employees to log receipts in expense reports. All the receipts are in English.\nYou need to extract top-level information from the receipts, such as the vendor and the transaction total. The solution must minimize development effort.\nWhich Azure service should you use?",
+        "answers_community": [
+          "C (100%)"
+        ],
+        "isMC": true,
+        "exam_id": 41,
+        "question_images": [],
+        "timestamp": "2022-06-20 19:57:00"
+      },
+      {
+        "id": "24h46bZEXAZ3IE0u5pjf",
+        "answers_community": [],
+        "isMC": false,
+        "question_text": "SIMULATION -\nUse the following login credentials as needed:\nTo enter your username, place your cursor in the Sign in box and click on the username below.\nTo enter your password, place your cursor in the Enter password box and click on the password below.\n\nAzure Username: admin@abc.com -\n\nAzure Password: XXXXXXXXXXXX -\nThe following information is for technical support purposes only:\n\nLab Instance: 12345678 -\n\nTask -\nYou need to build an API that uses the service in Azure Cognitive Services named AAA12345678 to identify whether an image includes a Microsoft Surface Pro or\nSurface Studio.\nTo achieve this goal, you must use the sample images in the C:\\Resources\\Images folder.\nTo complete this task, sign in to the Azure portal.",
+        "discussion": [
+          {
+            "upvote_count": "10",
+            "content": "Is it possible to get questions like this on the exam?",
+            "comment_id": "838020",
+            "poster": "t_isk",
+            "timestamp": "1678720680.0",
+            "comments": [
+              {
+                "content": "End of Dec 2023, no simulations in the exam",
+                "upvote_count": "13",
+                "poster": "ArminZ11",
+                "comments": [
+                  {
+                    "content": "Beginning of March 2024, no simulations in the exam",
+                    "upvote_count": "6",
+                    "poster": "audlindr",
+                    "timestamp": "1709401320.0",
+                    "comment_id": "1164256"
+                  }
+                ],
+                "timestamp": "1705401780.0",
+                "comment_id": "1124104"
+              }
+            ]
+          },
+          {
+            "upvote_count": "3",
+            "content": "This type of simulation question was not included in the real exam, which was taken on 12 June.",
+            "comment_id": "1229190",
+            "poster": "omankoman",
+            "timestamp": "1718200260.0"
+          },
+          {
+            "content": "Simulation questions will not appear on the actual exam as of May 25, 2024; ET should remove this type of question.",
+            "upvote_count": "2",
+            "timestamp": "1716562260.0",
+            "poster": "nanaw770",
+            "comment_id": "1217618"
+          },
+          {
+            "comment_id": "1147074",
+            "comments": [],
+            "timestamp": "1707641700.0",
+            "poster": "chandiochan",
+            "upvote_count": "2",
+            "content": "Will these simulation questions appear in exams on 2024 as of Feb"
+          },
+          {
+            "upvote_count": "1",
+            "content": "This is a Computer Vision task, in computer vision you can extract the logo brands to identify if there is any. It also let you extract text to be analyzed if is necessary. Custom Vision is useful to detect custom objects within an image or the image itself. More info here: https://stackoverflow.com/questions/52155632/difference-between-computer-vision-api-and-custom-vision-api",
+            "comment_id": "1077555",
+            "poster": "ccampagna",
+            "timestamp": "1700670960.0"
+          },
+          {
+            "upvote_count": "2",
+            "content": "steps are:\n1. create cognitive resource\n2. go to https://www.customvision.ai/. \n3. upload images of each item. 5 minimum\n4. train\n5. verify via Quick test\n6. publish",
+            "comment_id": "914779",
+            "timestamp": "1685892840.0",
+            "poster": "ziggy1117"
+          },
+          {
+            "timestamp": "1678627800.0",
+            "poster": "marti_tremblay000",
+            "comment_id": "837048",
+            "content": "as per ChatGPT : \nFor identifying whether an image includes a Microsoft Surface Pro or Surface Studio, you can use the Azure Custom Vision service. Azure Custom Vision is a machine learning service that enables you to build, train, and deploy custom image classification models.\n\nTo use Azure Custom Vision for your API, you can follow these general steps:\n\nCreate an Azure Custom Vision project and upload a set of labeled images that include Microsoft Surface Pro or Surface Studio.\n\nTrain the model using the labeled images.\n\nPublish the trained model as an API endpoint that can be used to classify new images.\n\nIntegrate the API endpoint into your own application to provide the image classification service.",
+            "upvote_count": "2"
+          },
+          {
+            "upvote_count": "1",
+            "content": "Image tagging won't work. It is either 'Brand Detection', if the sample images contain actual surface logos or 'Custom Vision' to train a model to detect surface pro/studios",
+            "comment_id": "714241",
+            "poster": "halfway",
+            "timestamp": "1667962440.0"
+          }
+        ],
+        "question_images": [],
+        "timestamp": "2022-11-09 03:54:00",
+        "exam_id": 41,
+        "answer": "See explanation below.",
+        "answer_ET": "See explanation below.",
+        "question_id": 35,
+        "answer_images": [],
+        "unix_timestamp": 1667962440,
+        "url": "https://www.examtopics.com/discussions/microsoft/view/87191-exam-ai-102-topic-1-question-40-discussion/",
+        "topic": "1",
+        "answer_description": "Step 1: In the Azure dashboard, click Create a resource.\nStep 2: In the search bar, type \"Cognitive Services.\"\nYou'll get information about the cognitive services resource and a legal notice. Click Create.\nStep 3: You'll need to specify the following details about the cognitive service (refer to the image below for a completed example of this page):\nSubscription: choose your paid or trial subscription, depending on how you created your Azure account.\nResource group: click create new to create a new resource group or choose an existing one.\nRegion: choose the Azure region for your cognitive service. Choose: East US Azure region.\nName: choose a name for your cognitive service. Enter: AAA12345678\nPricing Tier: Select: Free pricing tier\nStep 4: Review and create the resource, and wait for deployment to complete. Then go to the deployed resource.\nNote: The Computer Vision Image Analysis service can extract a wide variety of visual features from your images. For example, it can determine whether an image contains adult content, find specific brands or objects, or find human faces.\n\nTag visual features -\nIdentify and tag visual features in an image, from a set of thousands of recognizable objects, living things, scenery, and actions. When the tags are ambiguous or not common knowledge, the API response provides hints to clarify the context of the tag. Tagging isn't limited to the main subject, such as a person in the foreground, but also includes the setting (indoor or outdoor), furniture, tools, plants, animals, accessories, gadgets, and so on.\nTry out the image tagging features quickly and easily in your browser using Vision Studio.\nReference:\nhttps://docs.microsoft.com/en-us/learn/modules/analyze-images-computer-vision/3-analyze-images https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-image-analysis"
+      }
+    ],
+    "exam": {
+      "id": 41,
+      "name": "AI-102",
+      "provider": "Microsoft",
+      "isBeta": false,
+      "lastUpdated": "06 Aug 2025",
+      "numberOfQuestions": 330,
+      "isImplemented": true,
+      "isMCOnly": false
+    },
+    "currentPage": 7
+  },
+  "__N_SSP": true
+}
