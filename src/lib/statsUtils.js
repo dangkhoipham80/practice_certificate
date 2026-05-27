@@ -26,7 +26,7 @@ export function computePartStats(partIndex, partProgress, partSizes) {
     wrong,
     unanswered,
     attempted,
-    pct: Math.round((correct / size) * 100),
+    pct: size ? Math.round((correct / size) * 100) : 0,
     hasProgress: true
   };
 }

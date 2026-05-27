@@ -46,7 +46,7 @@ export function Dashboard({
   const wrongCount = getWrongIndices(partProgress, cert.partSizes, cert.partStarts).length;
   const newCount = getUnansweredIndices(partProgress, cert.partSizes, cert.partStarts).length;
   const bank = computeBankProgress(partProgress, cert.partSizes, cert.questions.length);
-  const partLabel = cert.id.startsWith('ai-') ? 'topics' : 'parts';
+  const partLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
 
   function handleClearData() {
     clearAllData();

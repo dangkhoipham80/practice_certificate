@@ -15,12 +15,19 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
   const [searchParams] = useSearchParams();
   const domainFilter = searchParams.get('domain');
   const quizCount = getQuizQuestions(cert).length;
-  const sectionLabel = cert.id.startsWith('ai-') ? 'topics' : 'parts';
+  const sectionLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
 
   const domainQuizCount = useMemo(() => {
     if (cert.id !== 'ai-102' || !domainFilter) return 0;
     return getQuizIndicesForDomain(cert.questions, domainFilter).length;
   }, [cert, domainFilter]);
+
+  const domainCounts = useMemo(() => {
+    if (cert.id !== 'ai-102') return {};
+    return Object.fromEntries(
+      AI102_EXAM_DOMAINS.map((domain) => [domain.id, getQuizIndicesForDomain(cert.questions, domain.id).length]),
+    );
+  }, [cert]);
 
   function startDomainQuiz(count = 20) {
     const indices = getQuizIndicesForDomain(cert.questions, domainFilter);
@@ -59,13 +66,19 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
           <p className="text-xs font-bold uppercase text-muted dark:text-slate-400">Practice by exam domain</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {AI102_EXAM_DOMAINS.map((domain) => (
-              <Link
-                key={domain.id}
-                className={`filter-chip ${domainFilter === domain.id ? 'filter-chip-active' : ''}`}
-                to={`${pathFromRouteId('practice', cert.id)}?domain=${domain.id}`}
-              >
-                {domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')}
-              </Link>
+              domainCounts[domain.id] ? (
+                <Link
+                  key={domain.id}
+                  className={`filter-chip ${domainFilter === domain.id ? 'filter-chip-active' : ''}`}
+                  to={`${pathFromRouteId('practice', cert.id)}?domain=${domain.id}`}
+                >
+                  {domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')} ({domainCounts[domain.id]})
+                </Link>
+              ) : (
+                <span className="filter-chip cursor-not-allowed opacity-50" key={domain.id}>
+                  {domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')} (0)
+                </span>
+              )
             ))}
             {domainFilter && (
               <Link className="filter-chip" to={pathFromRouteId('practice', cert.id)}>

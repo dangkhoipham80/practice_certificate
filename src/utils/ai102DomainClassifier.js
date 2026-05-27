@@ -10,14 +10,19 @@ export const AI102_DOMAIN_IDS = [
 
 const RULES = [
   {
+    id: 'plan-manage',
+    weight: 5,
+    re: /\b(content safety|responsible ai|content filter|blocklist|prompt shield|harm detection|protected material|moderate (?:text|image|content)|hateful|self-harm|sexual|violence)\b/i,
+  },
+  {
     id: 'agentic',
     weight: 3,
-    re: /\b(agent service|azure ai agent|ai agent|autogen|semantic kernel|multi-?agent|agent framework|agent playground|chatcompletionagent)\b/i,
+    re: /\b(agent service|azure ai agent|ai agent|autogen|semantic kernel|multi-?agent|agent framework|agent playground|chatcompletionagent|model context protocol|\bmcp\b|foundry iq|voice live agent|a2a protocol)\b/i,
   },
   {
     id: 'generative-ai',
     weight: 2,
-    re: /\b(retrieval augmented|\brag\b|azure openai|openai service|gpt-?|dall-?e|prompt flow|fine-?tun|embedding|chat playground|ground(?:ing)? model|generative ai|prompt engineering)\b/i,
+    re: /\b(retrieval augmented|\brag\b|azure openai|openai service|gpt-?|dall-?e|sora|prompt flow|fine-?tun|embedding|chat playground|ground(?:ing)? model|generative ai|prompt engineering|foundry model|responses api)\b/i,
   },
   {
     id: 'computer-vision',
@@ -37,7 +42,7 @@ const RULES = [
   {
     id: 'plan-manage',
     weight: 1,
-    re: /\b(content safety|responsible ai|azure monitor|pricing calculator|private link|subscription key|entra id|multi-service|foundry hub|foundry project|model catalog|cicd|content filter|prompt shield|harm detection)\b/i,
+    re: /\b(azure monitor|pricing calculator|private link|subscription key|entra id|multi-service|foundry hub|foundry project|model catalog|cicd|ci\/cd|diagnostic setting|key vault|managed identity|rbac|cost management)\b/i,
   },
 ];
 

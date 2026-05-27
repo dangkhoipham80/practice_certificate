@@ -6,8 +6,8 @@ import { SectionHeader } from '../ui/SectionHeader';
 
 export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
   const { questions, partSizes, partStarts } = cert;
-  const sectionPrefix = cert.id.startsWith('ai-') ? 'T' : 'P';
-  const [parts, setParts] = useState(() => partSizes.map((_, index) => index));
+  const sectionPrefix = cert.id === 'ai-102' ? 'D' : cert.id.startsWith('ai-') ? 'T' : 'P';
+  const [parts, setParts] = useState(() => partSizes.map((size, index) => (size ? index : null)).filter((index) => index !== null));
   const [questionType, setQuestionType] = useState('all');
   const [source, setSource] = useState('all');
   const [order, setOrder] = useState('random');
@@ -56,8 +56,8 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
       <SectionHeader kicker="Custom quiz" title="Build your session" description="Filter by section, question type, and wrong/unanswered pools." />
       <div className="flex flex-wrap gap-2">
         {partSizes.map((size, index) => (
-          <label className={`filter-chip cursor-pointer ${parts.includes(index) ? 'filter-chip-active' : ''}`} key={index}>
-            <input className="hidden" type="checkbox" checked={parts.includes(index)} onChange={() => togglePart(index)} />
+          <label className={`filter-chip ${size ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'} ${parts.includes(index) ? 'filter-chip-active' : ''}`} key={index}>
+            <input className="hidden" type="checkbox" checked={parts.includes(index)} disabled={!size} onChange={() => togglePart(index)} />
             {sectionPrefix}{String(index + 1).padStart(2, '0')} ({size})
           </label>
         ))}

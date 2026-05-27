@@ -38,7 +38,7 @@ function normalizeText(text = '', images = []) {
 async function loadClassifier() {
   const classifierPath = path.join(root, 'src/utils/ai102DomainClassifier.js');
   const mod = await import(pathToFileURL(classifierPath).href);
-  return mod.classifyAi102Domain;
+  return mod;
 }
 
 function transformQuestion(raw, classifyDomain) {
@@ -149,6 +149,32 @@ function buildTopicParts(questions, topics) {
   return { partSizes, partStarts, partTitles, topics };
 }
 
+function buildDomainParts(questions, classifier) {
+  const domainIds = classifier.AI102_DOMAIN_IDS;
+  const domainOrder = new Map(domainIds.map((id, index) => [id, index]));
+  const sortedQuestions = [...questions].sort((a, b) => {
+    const domainDelta = (domainOrder.get(a.domainId) ?? 999) - (domainOrder.get(b.domainId) ?? 999);
+    if (domainDelta) return domainDelta;
+    return a.questionId - b.questionId;
+  });
+  const partSizes = domainIds.map((domainId) => sortedQuestions.filter((q) => q.domainId === domainId).length);
+  const partStarts = partSizes.reduce((acc, size, index) => {
+    acc.push(index === 0 ? 0 : acc[index - 1] + partSizes[index - 1]);
+    return acc;
+  }, []);
+  const partTitles = domainIds.map((domainId) => classifier.getDomainLabel(domainId));
+  return {
+    questions: sortedQuestions,
+    parts: {
+      partSizes,
+      partStarts,
+      partTitles,
+      partDomains: domainIds,
+      topics: [...new Set(sortedQuestions.map((q) => q.topic))].sort((a, b) => Number(a) - Number(b)),
+    },
+  };
+}
+
 function writeModule(exam, questions, meta) {
   const outPath = path.join(root, exam.output);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
@@ -166,19 +192,21 @@ export const ${exam.metaName} = ${JSON.stringify(meta, null, 2)};
 }
 
 for (const exam of EXAMS) {
-  const classifyDomain = exam.examCode === 'AI-102' ? await loadClassifier() : null;
+  const classifier = exam.examCode === 'AI-102' ? await loadClassifier() : null;
+  const classifyDomain = classifier?.classifyAi102Domain ?? null;
   const { questions, topics, fileCount = 0 } = loadExamQuestions(exam, classifyDomain);
-  const parts = buildTopicParts(questions, topics);
+  const prepared = classifier ? buildDomainParts(questions, classifier) : { questions, parts: buildTopicParts(questions, topics) };
+  const finalQuestions = prepared.questions;
   const meta = {
     examCode: exam.examCode,
-    total: questions.length,
-    quizEligible: questions.filter((q) => q.quizEligible).length,
+    total: finalQuestions.length,
+    quizEligible: finalQuestions.filter((q) => q.quizEligible).length,
     sourceFiles: fileCount,
-    ...(exam.examCode === 'AI-102' ? { domainStats: buildDomainStats(questions) } : {}),
-    ...parts,
+    ...(exam.examCode === 'AI-102' ? { domainStats: buildDomainStats(finalQuestions) } : {}),
+    ...prepared.parts,
   };
 
-  const outPath = writeModule(exam, questions, meta);
+  const outPath = writeModule(exam, finalQuestions, meta);
   console.log(
     `${exam.examCode}: wrote ${questions.length} questions (${meta.quizEligible} MC) from ${fileCount} files → ${path.relative(root, outPath)}`,
   );
