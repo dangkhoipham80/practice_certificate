@@ -9,6 +9,8 @@ export function MainHeader({ pageTitle, cert, dark, persistTheme, exportData, im
     { path: '/catalog', label: 'Catalog', end: false },
     { path: pathFromRouteId('cert-dashboard', cert.id), label: cert.exam, end: true },
     { path: pathFromRouteId('practice', cert.id), label: 'Practice', end: false },
+    ...(cert.features.learn ? [{ path: pathFromRouteId('learn', cert.id), label: 'Learn', end: false }] : []),
+    ...(cert.features.labs ? [{ path: pathFromRouteId('labs', cert.id), label: 'Labs', end: false }] : []),
     { path: pathFromRouteId('flashcards', cert.id), label: 'Cards', end: false },
     { path: libraryPath, label: 'Library', end: false },
   ];

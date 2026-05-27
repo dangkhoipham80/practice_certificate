@@ -28,6 +28,7 @@ export const CERT_REGISTRY = {
     status: 'Ready',
     features: {
       learn: true,
+      labs: false,
       legacyImport: true,
       images: false,
     },
@@ -44,7 +45,8 @@ export const CERT_REGISTRY = {
     ...withExamParts(ai102ExamMeta),
     status: 'Ready',
     features: {
-      learn: false,
+      learn: true,
+      labs: true,
       legacyImport: false,
       images: true,
     },
@@ -62,6 +64,7 @@ export const CERT_REGISTRY = {
     status: 'Coming soon',
     features: {
       learn: false,
+      labs: false,
       legacyImport: false,
       images: true,
     },

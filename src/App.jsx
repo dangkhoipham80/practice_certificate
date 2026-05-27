@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, Link } from 'react-router-dom';
 import { Learn } from './Learn';
+import { Ai102Labs } from './components/learn/Ai102Labs';
 import { useCertForge } from './hooks/useCertForge';
 import { CertProvider } from './context/CertContext';
 import { isCertReady } from './config/certRegistry';
@@ -110,6 +111,10 @@ function AppShell() {
                 }
               />
               <Route path="/c/:certId/learn" element={<Learn cert={app.cert} />} />
+              <Route
+                path="/c/:certId/labs"
+                element={app.cert.features.labs ? <Ai102Labs cert={app.cert} /> : <Navigate to={`/c/${app.cert.id}`} replace />}
+              />
               <Route
                 path="/c/:certId/flashcards"
                 element={

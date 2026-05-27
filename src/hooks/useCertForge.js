@@ -528,6 +528,7 @@ export function useCertForge() {
     practice: session ? session.label : `${cert.exam} practice`,
     flashcards: flash ? flash.label ?? 'Flashcard deck' : 'Flashcards',
     learn: `${cert.exam} knowledge base`,
+    labs: `${cert.exam} labs`,
     library: `${cert.exam} question library`
   }[route];
 

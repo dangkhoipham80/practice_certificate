@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Award, BarChart3, BookOpen, Brain, ClipboardList, GraduationCap, Layers3, Play } from 'lucide-react';
+import { Award, BarChart3, BookOpen, Brain, ClipboardList, FlaskConical, GraduationCap, Layers3, Play } from 'lucide-react';
 import { pathFromRouteId } from '../../config/routes';
 import { isCertReady } from '../../config/certRegistry';
 import { useCertContext } from '../../context/CertContext';
@@ -32,6 +32,9 @@ export function Sidebar({ onQuickStart }) {
         <NavButton to={pathFromRouteId('practice', activeCertId)} icon={ClipboardList} label="Practice" />
         {activeCert.features.learn && (
           <NavButton to={pathFromRouteId('learn', activeCertId)} icon={GraduationCap} label="Learn" />
+        )}
+        {activeCert.features.labs && (
+          <NavButton to={pathFromRouteId('labs', activeCertId)} icon={FlaskConical} label="Labs" />
         )}
         <NavButton to={pathFromRouteId('flashcards', activeCertId)} icon={Brain} label="Flashcards" />
         <NavButton to={pathFromRouteId('library', activeCertId)} icon={BookOpen} label="Question library" />

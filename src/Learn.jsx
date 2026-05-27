@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ExternalLink, Search } from 'lucide-react';
 import { SectionHeader } from './components/ui/SectionHeader';
+import { Ai102Learn } from './components/learn/Ai102Learn';
 
 const CHEVRON_SVG =
   '<svg class="kb-chevron-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
@@ -78,6 +79,10 @@ function toggleKbCard(trigger) {
 }
 
 export function Learn({ cert }) {
+  if (cert?.id === 'ai-102') {
+    return <Ai102Learn />;
+  }
+
   if (!cert?.features?.learn) {
     return (
       <section className="panel empty-state p-10 text-center animate-slide-up">
@@ -88,6 +93,11 @@ export function Learn({ cert }) {
       </section>
     );
   }
+
+  return <LegacyKnowledgeBase />;
+}
+
+function LegacyKnowledgeBase() {
   const [html, setHtml] = useState('');
   const [search, setSearch] = useState('');
   const [loadError, setLoadError] = useState('');

@@ -5,6 +5,7 @@ export const APP_ROUTES = [
   { id: 'cert-dashboard', path: '/c/:certId', title: 'Cert workspace' },
   { id: 'practice', path: '/c/:certId/practice', title: 'Practice' },
   { id: 'learn', path: '/c/:certId/learn', title: 'Knowledge base' },
+  { id: 'labs', path: '/c/:certId/labs', title: 'Labs' },
   { id: 'flashcards', path: '/c/:certId/flashcards', title: 'Flashcards' },
   { id: 'library', path: '/c/:certId/library', title: 'Question library' },
 ];
@@ -33,6 +34,7 @@ export function routeIdFromPath(pathname) {
   if (!section) return 'cert-dashboard';
   if (section === 'practice') return 'practice';
   if (section === 'learn') return 'learn';
+  if (section === 'labs') return 'labs';
   if (section === 'flashcards') return 'flashcards';
   if (section === 'library') return 'library';
   return 'cert-dashboard';
