@@ -1,6 +1,8 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AlertTriangle, ExternalLink, FlaskConical } from 'lucide-react';
 import { SectionHeader } from '../ui/SectionHeader';
+import { getDomainLabel, labDomainToId } from '../../utils/ai102DomainClassifier';
 
 const SOURCE_LINKS = [
   {
@@ -504,6 +506,17 @@ const LEGACY_LABS = [
 ];
 
 const LEVELS = ['Foundation', 'Core', 'Advanced'];
+const STATUS_ORDER = ['not-started', 'in-progress', 'completed'];
+const STATUS_LABELS = {
+  'not-started': 'Chưa bắt đầu',
+  'in-progress': 'Đang làm',
+  completed: 'Hoàn thành',
+};
+const STATUS_TONE = {
+  'not-started': 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200',
+  'in-progress': 'bg-sky-100 text-sky-800 dark:bg-sky-500/20 dark:text-sky-100',
+  completed: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-100',
+};
 const FIT_TONE = {
   High: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-200',
   Medium: 'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-200',
@@ -528,7 +541,83 @@ function getStats(labs) {
   };
 }
 
+export function buildAi102LabCatalog() {
+  return [...OFFICIAL_LABS, ...LEGACY_LABS].map((lab) => ({
+    ...lab,
+    domainId: labDomainToId(lab.domain),
+  }));
+}
+
+export const AI102_LAB_CATALOG = buildAi102LabCatalog();
+
 export function Ai102Labs({ cert }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const domainFilter = searchParams.get('domain');
+  const searchQuery = searchParams.get('q') ?? '';
+  const statusFilter = searchParams.get('status') ?? 'all';
+
+  const [statusByUrl, setStatusByUrl] = useState({});
+
+  useEffect(() => {
+    try {
+      const raw = globalThis.localStorage?.getItem('ai102LabStatus');
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        setStatusByUrl(parsed);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      globalThis.localStorage?.setItem('ai102LabStatus', JSON.stringify(statusByUrl));
+    } catch {
+      // ignore
+    }
+  }, [statusByUrl]);
+
+  const handleSearchChange = (event) => {
+    const next = new URLSearchParams(searchParams);
+    const value = event.target.value;
+    if (value) {
+      next.set('q', value);
+    } else {
+      next.delete('q');
+    }
+    setSearchParams(next);
+  };
+
+  const handleDomainFilterChange = (nextDomain) => {
+    const next = new URLSearchParams(searchParams);
+    if (nextDomain) {
+      next.set('domain', nextDomain);
+    } else {
+      next.delete('domain');
+    }
+    setSearchParams(next);
+  };
+
+  const handleStatusFilterChange = (event) => {
+    const value = event.target.value;
+    const next = new URLSearchParams(searchParams);
+    if (value && value !== 'all') {
+      next.set('status', value);
+    } else {
+      next.delete('status');
+    }
+    setSearchParams(next);
+  };
+
+  const setLabStatus = (url, status) => {
+    setStatusByUrl((prev) => ({
+      ...prev,
+      [url]: status,
+    }));
+  };
+
   const discoveredLinks = useMemo(() => {
     const known = new Set([...OFFICIAL_LABS, ...LEGACY_LABS].map((lab) => normalizeUrl(lab.url)));
     const discovered = new Set();
@@ -546,17 +635,130 @@ export function Ai102Labs({ cert }) {
     return [...discovered].sort((a, b) => a.localeCompare(b));
   }, [cert.questions]);
 
-  const labs = useMemo(() => [...OFFICIAL_LABS, ...LEGACY_LABS], []);
+  const labs = useMemo(() => {
+    let filtered = AI102_LAB_CATALOG;
+
+    if (domainFilter) {
+      filtered = filtered.filter((lab) => lab.domainId === domainFilter);
+    }
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.trim().toLowerCase();
+      filtered = filtered.filter((lab) => {
+        return (
+          lab.title.toLowerCase().includes(q) ||
+          lab.domain.toLowerCase().includes(q) ||
+          lab.note.toLowerCase().includes(q) ||
+          lab.source.toLowerCase().includes(q)
+        );
+      });
+    }
+
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter((lab) => (statusByUrl[lab.url] ?? 'not-started') === statusFilter);
+    }
+
+    return filtered;
+  }, [domainFilter, searchQuery, statusFilter, statusByUrl]);
+
+  const statusStats = useMemo(() => {
+    const result = {
+      total: AI102_LAB_CATALOG.length,
+      completed: 0,
+      inProgress: 0,
+    };
+    AI102_LAB_CATALOG.forEach((lab) => {
+      const status = statusByUrl[lab.url] ?? 'not-started';
+      if (status === 'completed') result.completed += 1;
+      if (status === 'in-progress') result.inProgress += 1;
+    });
+    return result;
+  }, [statusByUrl]);
+
+  const allDomains = useMemo(() => {
+    const groups = new Map();
+    AI102_LAB_CATALOG.forEach((lab) => {
+      const current = groups.get(lab.domainId) ?? {
+        id: lab.domainId,
+        label: lab.domain,
+        count: 0,
+      };
+      current.count += 1;
+      groups.set(lab.domainId, current);
+    });
+    return Array.from(groups.values());
+  }, []);
+
   const stats = useMemo(() => getStats(labs), [labs]);
-  const domains = useMemo(() => [...new Set(labs.map((lab) => lab.domain))], [labs]);
 
   return (
     <section className="animate-slide-up space-y-6">
       <SectionHeader
         kicker="AI-102 Labs"
         title="Hands-on lab catalog"
-        description="Da research tu Microsoft Learn, MicrosoftLearning GitHub Pages va cac repo mslearn-* hien hanh. Labs duoc phan cap de hoc dung trong tam AI-102."
+        description="Hands-on labs from Microsoft Learn and mslearn-* repos, grouped by AI-102 exam domain. Bạn có thể search, filter theo domain và đánh dấu trạng thái đã làm."
       />
+
+      <div className="panel flex flex-col gap-4 p-5 md:flex-row md:items-end md:justify-between">
+        <div className="w-full md:w-1/2">
+          <label className="text-xs font-bold uppercase text-muted dark:text-slate-400" htmlFor="ai102-labs-search">
+            Search labs
+          </label>
+          <input
+            id="ai102-labs-search"
+            type="search"
+            placeholder="Search by title, domain, source..."
+            className="mt-2 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm shadow-sm outline-none ring-accent/30 focus:border-accent focus:ring-2 dark:border-slate-700 dark:bg-slate-900"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        </div>
+        <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-end">
+          <div>
+            <label className="text-xs font-bold uppercase text-muted dark:text-slate-400" htmlFor="ai102-labs-status">
+              Status filter
+            </label>
+            <select
+              id="ai102-labs-status"
+              className="mt-2 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm shadow-sm outline-none ring-accent/30 focus:border-accent focus:ring-2 dark:border-slate-700 dark:bg-slate-900 md:w-48"
+              value={statusFilter}
+              onChange={handleStatusFilterChange}
+            >
+              <option value="all">Tất cả</option>
+              <option value="not-started">Chưa bắt đầu</option>
+              <option value="in-progress">Đang làm</option>
+              <option value="completed">Hoàn thành</option>
+            </select>
+          </div>
+          <div className="rounded-lg bg-slate-50 px-3 py-2 text-xs font-semibold text-muted dark:bg-slate-800 dark:text-slate-300">
+            <p>
+              Hoàn thành: <span className="font-bold text-emerald-700 dark:text-emerald-300">{statusStats.completed}</span> /{' '}
+              {statusStats.total}
+            </p>
+            <p className="mt-0.5">
+              Đang làm:{' '}
+              <span className="font-bold text-sky-700 dark:text-sky-300">
+                {statusStats.inProgress}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {domainFilter && (
+        <div className="panel border-accent-200 bg-accent-50/50 p-4 dark:border-accent-500/30 dark:bg-accent-500/10">
+          <p className="text-sm font-semibold text-ink dark:text-slate-100">
+            Filtered: {getDomainLabel(domainFilter)}
+          </p>
+          <button
+            type="button"
+            className="mt-2 inline-flex items-center text-sm font-semibold text-accent-600 hover:underline dark:text-accent-300"
+            onClick={() => handleDomainFilterChange(undefined)}
+          >
+            Show all labs
+          </button>
+        </div>
+      )}
 
       <div className="grid gap-3 md:grid-cols-4">
         <div className="panel p-5">
@@ -610,14 +812,26 @@ export function Ai102Labs({ cert }) {
 
       <div className="panel p-5">
         <h3 className="text-base font-black">Coverage map</h3>
+        <p className="mt-1 text-xs text-muted dark:text-slate-400">
+          Click một domain để filter labs thuộc objective đó.
+        </p>
         <div className="mt-4 grid gap-2 md:grid-cols-2">
-          {domains.map((domain) => (
-            <div className="rounded-lg border border-line bg-white/70 p-3 dark:border-slate-700 dark:bg-slate-900/60" key={domain}>
-              <p className="text-sm font-bold">{domain}</p>
+          {allDomains.map((domain) => (
+            <button
+              key={domain.id}
+              type="button"
+              onClick={() => handleDomainFilterChange(domain.id)}
+              className={`flex flex-col items-start rounded-lg border p-3 text-left transition hover:border-accent hover:bg-accent-50/70 dark:hover:border-accent-400 dark:hover:bg-accent-500/10 ${
+                domainFilter === domain.id
+                  ? 'border-accent-500 bg-accent-50/80 dark:border-accent-400 dark:bg-accent-500/20'
+                  : 'border-line bg-white/70 dark:border-slate-700 dark:bg-slate-900/60'
+              }`}
+            >
+              <p className="text-sm font-bold">{domain.label}</p>
               <p className="mt-1 text-xs text-muted dark:text-slate-400">
-                {labs.filter((lab) => lab.domain === domain).length} labs
+                {domain.count} labs
               </p>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -647,10 +861,43 @@ export function Ai102Labs({ cert }) {
                         <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${FIT_TONE[lab.fit]}`}>
                           {lab.fit} AI-102 fit
                         </span>
+                        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-700 dark:bg-slate-700 dark:text-slate-200">
+                          {lab.level}
+                        </span>
+                        <span
+                          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${STATUS_TONE[statusByUrl[lab.url] ?? 'not-started']}`}
+                        >
+                          <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                          {STATUS_LABELS[statusByUrl[lab.url] ?? 'not-started']}
+                        </span>
                       </div>
                       <h3 className="mt-3 text-lg font-black text-ink dark:text-slate-100">{lab.title}</h3>
                       <p className="mt-1 text-sm font-semibold text-accent dark:text-sky-300">{lab.domain}</p>
                       <p className="mt-2 text-sm text-muted dark:text-slate-400">{lab.note}</p>
+                      <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted dark:text-slate-400">
+                        <span className="rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+                          Domain ID: <span className="font-semibold">{lab.domainId}</span>
+                        </span>
+                        <span className="rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+                          Nguồn: <span className="font-semibold">{lab.source}</span>
+                        </span>
+                      </div>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {STATUS_ORDER.map((status) => (
+                          <button
+                            key={status}
+                            type="button"
+                            className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+                              (statusByUrl[lab.url] ?? 'not-started') === status
+                                ? 'border-accent-500 bg-accent-50 text-accent-700 dark:border-accent-400 dark:bg-accent-500/20 dark:text-accent-100'
+                                : 'border-transparent bg-slate-100 text-muted hover:border-line hover:bg-slate-50 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
+                            }`}
+                            onClick={() => setLabStatus(lab.url, status)}
+                          >
+                            {STATUS_LABELS[status]}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                     <a className="secondary-button !min-h-10 shrink-0" href={lab.url} target="_blank" rel="noopener noreferrer">
                       Open lab

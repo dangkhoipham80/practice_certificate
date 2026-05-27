@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
@@ -35,13 +35,21 @@ function normalizeText(text = '', images = []) {
   return result;
 }
 
-function transformQuestion(raw) {
+async function loadClassifier() {
+  const classifierPath = path.join(root, 'src/utils/ai102DomainClassifier.js');
+  const mod = await import(pathToFileURL(classifierPath).href);
+  return mod.classifyAi102Domain;
+}
+
+function transformQuestion(raw, classifyDomain) {
   const images = raw.question_images ?? [];
   const text = normalizeText(raw.question_text, images);
   const topic = String(raw.topic ?? '0');
   const explanation = (raw.answer_description || raw.answer_ET || '').trim();
+  const domainId = classifyDomain ? classifyDomain({ text, explanation, topic }) : undefined;
   const base = {
     topic,
+    domainId,
     questionId: raw.question_id,
     images,
     explanation: explanation || undefined,
@@ -88,7 +96,7 @@ function transformQuestion(raw) {
   };
 }
 
-function loadExamQuestions(exam) {
+function loadExamQuestions(exam, classifyDomain) {
   const dir = path.join(root, exam.folder);
   if (!fs.existsSync(dir)) {
     return { questions: [], topics: [] };
@@ -111,12 +119,24 @@ function loadExamQuestions(exam) {
     for (const raw of payload.pageProps?.questions ?? []) {
       if (seen.has(raw.question_id)) continue;
       seen.add(raw.question_id);
-      questions.push(transformQuestion(raw));
+      questions.push(transformQuestion(raw, classifyDomain));
     }
   }
 
   const topics = [...new Set(questions.map((q) => q.topic))].sort((a, b) => Number(a) - Number(b));
   return { questions, topics, fileCount: files.length };
+}
+
+function buildDomainStats(questions) {
+  const stats = {};
+  for (const q of questions) {
+    const id = q.domainId ?? 'unknown';
+    if (!stats[id]) stats[id] = { total: 0, quizEligible: 0, examTopics: {} };
+    stats[id].total += 1;
+    if (q.quizEligible) stats[id].quizEligible += 1;
+    stats[id].examTopics[q.topic] = (stats[id].examTopics[q.topic] ?? 0) + 1;
+  }
+  return stats;
 }
 
 function buildTopicParts(questions, topics) {
@@ -146,13 +166,15 @@ export const ${exam.metaName} = ${JSON.stringify(meta, null, 2)};
 }
 
 for (const exam of EXAMS) {
-  const { questions, topics, fileCount = 0 } = loadExamQuestions(exam);
+  const classifyDomain = exam.examCode === 'AI-102' ? await loadClassifier() : null;
+  const { questions, topics, fileCount = 0 } = loadExamQuestions(exam, classifyDomain);
   const parts = buildTopicParts(questions, topics);
   const meta = {
     examCode: exam.examCode,
     total: questions.length,
     quizEligible: questions.filter((q) => q.quizEligible).length,
     sourceFiles: fileCount,
+    ...(exam.examCode === 'AI-102' ? { domainStats: buildDomainStats(questions) } : {}),
     ...parts,
   };
 

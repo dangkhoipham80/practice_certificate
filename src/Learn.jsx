@@ -78,9 +78,9 @@ function toggleKbCard(trigger) {
   setKbCardOpen(card, !card.classList.contains('kb-open'));
 }
 
-export function Learn({ cert }) {
+export function Learn({ cert, startQuiz }) {
   if (cert?.id === 'ai-102') {
-    return <Ai102Learn />;
+    return <Ai102Learn cert={cert} startQuiz={startQuiz} />;
   }
 
   if (!cert?.features?.learn) {

@@ -110,7 +110,7 @@ function AppShell() {
                   />
                 }
               />
-              <Route path="/c/:certId/learn" element={<Learn cert={app.cert} />} />
+              <Route path="/c/:certId/learn" element={<Learn cert={app.cert} startQuiz={app.startQuiz} />} />
               <Route
                 path="/c/:certId/labs"
                 element={app.cert.features.labs ? <Ai102Labs cert={app.cert} /> : <Navigate to={`/c/${app.cert.id}`} replace />}

@@ -1,5 +1,6 @@
 import { AlertTriangle, BookOpen, ExternalLink, Route } from 'lucide-react';
 import { SectionHeader } from '../ui/SectionHeader';
+import { Ai102ExamReadiness } from './Ai102ExamReadiness';
 
 const EXAM_RESOURCES = [
   {
@@ -151,7 +152,7 @@ function getStats(paths) {
   };
 }
 
-export function Ai102Learn() {
+export function Ai102Learn({ cert, startQuiz }) {
   const stats = getStats(LEARNING_PATHS);
 
   return (
@@ -159,7 +160,7 @@ export function Ai102Learn() {
       <SectionHeader
         kicker="AI-102 Learn"
         title="Microsoft Learn roadmap"
-        description="Lo trinh hoc AI-102 da duoc cap nhat theo Microsoft Learn hien hanh: Microsoft Foundry, generative AI, agents, vision, language va information extraction."
+        description="Lo trinh hoc AI-102: checklist 6 video Exam Readiness Zone, trong so domain Dec 2025, va learning paths Microsoft Foundry."
       />
 
       <div className="grid gap-3 md:grid-cols-4">
@@ -194,6 +195,8 @@ export function Ai102Learn() {
           </div>
         </div>
       </div>
+
+      <Ai102ExamReadiness cert={cert} startQuiz={startQuiz} />
 
       <section className="space-y-3">
         <div className="flex items-center gap-2">

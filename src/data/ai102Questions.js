@@ -4,6 +4,7 @@
 export const ai102Questions = [
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 1,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0000200001.png"
@@ -19,6 +20,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 2,
     "images": [],
     "explanation": "D",
@@ -38,6 +40,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 3,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0001700001.png"
@@ -63,6 +66,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 4,
     "images": [],
     "explanation": "ABF",
@@ -86,6 +90,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 5,
     "images": [],
     "explanation": "A",
@@ -105,6 +110,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 6,
     "images": [],
     "explanation": "B",
@@ -122,6 +128,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 7,
     "images": [],
     "explanation": "B",
@@ -139,6 +146,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 8,
     "images": [],
     "explanation": "B",
@@ -156,6 +164,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 9,
     "images": [],
     "explanation": "A",
@@ -175,6 +184,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 10,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0002300001.png"
@@ -190,6 +200,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 11,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0002500001.png"
@@ -205,6 +216,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 12,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0000300001.png",
@@ -220,6 +232,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 13,
     "images": [],
     "explanation": "DE",
@@ -241,6 +254,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 14,
     "images": [],
     "explanation": "B",
@@ -259,6 +273,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 15,
     "images": [],
     "explanation": "A",
@@ -276,6 +291,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 16,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0002900001.png"
@@ -290,6 +306,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 17,
     "images": [],
     "explanation": "C",
@@ -309,6 +326,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 18,
     "images": [],
     "explanation": "D",
@@ -328,6 +346,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 19,
     "images": [],
     "explanation": "B",
@@ -345,6 +364,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 20,
     "images": [],
     "explanation": "B",
@@ -362,6 +382,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 21,
     "images": [],
     "explanation": "A",
@@ -379,6 +400,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 22,
     "images": [],
     "explanation": "D",
@@ -398,6 +420,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 23,
     "images": [],
     "explanation": "C",
@@ -417,6 +440,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 24,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0003500001.png"
@@ -431,6 +455,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 25,
     "images": [],
     "explanation": "B",
@@ -450,6 +475,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 26,
     "images": [],
     "explanation": "A",
@@ -467,6 +493,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 27,
     "images": [],
     "explanation": "Step 1: Sign in to the QnA portal.\nStep 2: Create an Azure Cognitive multi-service resource:\n\nStep 3: On the Create page, provide the following information.\n\nName: Text12345678 -\n\nStep 4: Configure additional settings for your resource as needed, read and accept the conditions (as applicable), and then select Review + create.\nStep 5: Navigate to the Azure portal. Then locate and select The Text Analytics service resource Text12345678 (which you created in Step 4).\nStep 6: Next, from the left-hand navigation menu, locate Monitoring and select Diagnostic settings. This screen contains all previously created diagnostic settings for this resource.\nStep 7: Select + Add diagnostic setting.\nStep 8: When prompted to configure, select the storage account and OMS workspace that you'd like to use to store you diagnostic logs. Note: If you don't have a storage account or OMS workspace, follow the prompts to create one.\nStep 9: Select Audit, RequestResponse, and AllMetrics. Then set the retention period for your diagnostic log data. If a retention policy is set to zero, events for that log category are stored indefinitely.\nStep 10: Click Save.\nIt can take up to two hours before logging data is available to query and analyze. So don't worry if you don't see anything right away.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account https://docs.microsoft.com/en-us/azure/cognitive-services/diagnostic-logging",
@@ -480,6 +507,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 28,
     "images": [],
     "explanation": "Part 1: Create a search service search12345678\nStep 1: Sign in to the QnA portal.\nStep 2: Create an Azure Cognitive multi-service resource:\n\nStep 3: On the Create page, provide the following information.\n\nName: search12345678 -\n\n\nStep 4: Click Review + create -\nPart 2: Start the Import data wizard and create a data source\nStep 5: Click Import data on the command bar to create and populate a search index.\n\nStep 6: In the wizard, click Connect to your data > Samples > hotels-sample. This data source is built-in. If you were creating your own data source, you would need to specify a name, type, and connection information. Once created, it becomes an \"existing data source\" that can be reused in other import operations.\n\nStep 7: Continue to the next page.\nStep 8: Skip the \"Enrich content\" page\nStep 9: Configure index.\nMake sure English is selected for the fields.\n\nStep 10: Continue and finish the wizard.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account https://docs.microsoft.com/en-us/azure/search/search-get-started-portal",
@@ -493,6 +521,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 29,
     "images": [],
     "explanation": "Part 1: Create a search service captions12345678\nStep 1: Sign in to the QnA portal.\nStep 2: Create an Azure Cognitive multi-service resource:\n\nStep 3: On the Create page, provide the following information.\nName: captions12345678ֲ¨\n\nPricing tier: Free -\n\n\nStep 4: Click Review + create -\n(Step 5: Create a data source\nIn Connect to your data, choose Azure Blob Storage. Choose an existing connection to the storage account and container you created. Give the data source a name, and use default values for the rest.)\n\nReference:\nhttps://docs.microsoft.com/en-us/azure/search/search-create-service-portal https://docs.microsoft.com/en-us/azure/search/cognitive-search-quickstart-ocr",
@@ -506,6 +535,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 30,
     "images": [],
     "explanation": "Step 1: Sign in to the Azure Portal.\nStep 2: Navigate to the Form Recognizer Sample Tool (at https://fott-2-1.azurewebsites.net)\nStep 3: On the sample tool home page select Use prebuilt model to get data.\n\nStep 4: Select the Form Type you would like to analyze from the dropdown window.\nStep 5: In the Source: URL field, paste the selected URL and select the Fetch button.\nStep 6: In the Choose file for analysis use the file in the C:\\Resources\\Invoices folder and select the Fetch button.\n\nStep 7: Select Run analysis. The Form Recognizer Sample Labeling tool will call the Analyze Prebuilt API and analyze the document.\nStep 8: View the results - see the key-value pairs extracted, line items, highlighted text extracted and tables detected.\n\nStep 9: Save the results as C:\\Resources\\Invoices\\Results.json.\nReference:\nhttps://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/try-sample-label-tool",
@@ -519,6 +549,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 31,
     "images": [],
     "explanation": "A",
@@ -537,6 +568,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 32,
     "images": [],
     "explanation": "B",
@@ -556,6 +588,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "computer-vision",
     "questionId": 33,
     "images": [],
     "explanation": "Step 1: In the Azure dashboard, click Create a resource.\nStep 2: In the search bar, type \"Cognitive Services.\"\nYou'll get information about the cognitive services resource and a legal notice. Click Create.\nStep 3: You'll need to specify the following details about the cognitive service (refer to the image below for a completed example of this page):\nSubscription: choose your paid or trial subscription, depending on how you created your Azure account.\nResource group: click create new to create a new resource group or choose an existing one.\nRegion: choose the Azure region for your cognitive service. Choose: East US Azure region.\nName: choose a name for your cognitive service. Enter: AAA12345678\nPricing Tier: Select: Free pricing tier\n\nStep 4: Review and create the resource, and wait for deployment to complete. Then go to the deployed resource.\nNote: The Computer Vision Image Analysis service can extract a wide variety of visual features from your images. For example, it can determine whether an image contains adult content, find specific brands or objects, or find human faces.\n\nTag visual features -\nIdentify and tag visual features in an image, from a set of thousands of recognizable objects, living things, scenery, and actions. When the tags are ambiguous or not common knowledge, the API response provides hints to clarify the context of the tag. Tagging isn't limited to the main subject, such as a person in the foreground, but also includes the setting (indoor or outdoor), furniture, tools, plants, animals, accessories, gadgets, and so on.\nTry out the image tagging features quickly and easily in your browser using Vision Studio.\nReference:\nhttps://docs.microsoft.com/en-us/learn/modules/analyze-images-computer-vision/3-analyze-images https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-image-analysis",
@@ -569,6 +602,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 34,
     "images": [],
     "explanation": "C",
@@ -588,6 +622,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "computer-vision",
     "questionId": 35,
     "images": [],
     "explanation": "Step 1: In the Azure dashboard, click Create a resource.\nStep 2: In the search bar, type \"Cognitive Services.\"\nYou'll get information about the cognitive services resource and a legal notice. Click Create.\nStep 3: You'll need to specify the following details about the cognitive service (refer to the image below for a completed example of this page):\nSubscription: choose your paid or trial subscription, depending on how you created your Azure account.\nResource group: click create new to create a new resource group or choose an existing one.\nRegion: choose the Azure region for your cognitive service. Choose: East US Azure region.\nName: choose a name for your cognitive service. Enter: AAA12345678\nPricing Tier: Select: Free pricing tier\nStep 4: Review and create the resource, and wait for deployment to complete. Then go to the deployed resource.\nNote: The Computer Vision Image Analysis service can extract a wide variety of visual features from your images. For example, it can determine whether an image contains adult content, find specific brands or objects, or find human faces.\n\nTag visual features -\nIdentify and tag visual features in an image, from a set of thousands of recognizable objects, living things, scenery, and actions. When the tags are ambiguous or not common knowledge, the API response provides hints to clarify the context of the tag. Tagging isn't limited to the main subject, such as a person in the foreground, but also includes the setting (indoor or outdoor), furniture, tools, plants, animals, accessories, gadgets, and so on.\nTry out the image tagging features quickly and easily in your browser using Vision Studio.\nReference:\nhttps://docs.microsoft.com/en-us/learn/modules/analyze-images-computer-vision/3-analyze-images https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-image-analysis",
@@ -601,6 +636,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 36,
     "images": [],
     "explanation": "Step 1: Login -\nBrowse to the Azure Video Indexer website and sign in.\nURL: https://www.videoindexer.ai/\n\nLogin admin@abc.com -\nStep 2: Create a project from your video\nYou can create a new project directly from a video in your account.\n1. Go to the Library tab of the Azure Video Indexer website.\n2. Open the video that you want to use to create your project. On the insights and timeline page, select the Video editor button.\nFolder: C:\\Resources\\Video\\Media.mp4\nThis takes you to the same page that you used to create a new project. Unlike the new project, you see the timestamped insights segments of the video, that you had started editing previously.\nStep 3: Save the insights to the C:\\Resources\\Video\\Insights.json folder.\nReference:\nhttps://docs.microsoft.com/en-us/azure/azure-video-indexer/use-editor-create-project",
@@ -614,6 +650,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 37,
     "images": [],
     "explanation": "Step 1: Provision a Cognitive Services resource\nIf you don't already have one in your subscription, you'll need to provision a Cognitive Services resource.\n1. Open the Azure portal at https://portal.azure.com, and sign in using the Microsoft account associated with your Azure subscription.\n2. Select the Create a resource button, search for cognitive services, and create a Cognitive Services resource with the following settings:\nSubscription: Your Azure subscription\nResource group: Choose or create a resource group (if you are using a restricted subscription, you may not have permission to create a new resource group - use the one provided)\n\nRegion: East US Azure region -\n\nName: caption12345678 -\n\nPricing tier: Free F0 -\n3. Select the required checkboxes and create the resource.\nWait for deployment to complete, and then view the deployment details.\n4. When the resource has been deployed, go to it and view its Keys and Endpoint page. You will need the endpoint and one of the keys from this page in the next procedure.\nStep 2: Save Key and Endpoint values in Params.json\nOpen the configuration file, C:\\Resources\\Caption\\Params.json. and update the configuration values it contains to reflect the endpoint and an authentication key for your cognitive services resource. Save your changes.\nReference:\nhttps://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/15-computer-vision.html",
@@ -627,6 +664,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 38,
     "images": [],
     "explanation": "Step 1: Create private endpoint for your web app\n1. In the left-hand menu, select All Resources > caption12345678 - the name of your web app.\n2. In the web app overview, select Settings > Networking.\n3. In Networking, select Private endpoints.\n4. Select + Add in the Private Endpoint connections page.\n5. Enter or select the following information in the Add Private Endpoint page:\nName: Enter caption12345678.\nSubscription Select your Azure subscription.\nVirtual network Select VNet1.\nSubnet: -\nIntegrate with private DNS zone: Select Yes.\n6. Select OK.\n\nReference:\nhttps://docs.microsoft.com/en-us/azure/private-link/tutorial-private-endpoint-webapp-portal",
@@ -640,6 +678,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 39,
     "images": [],
     "explanation": "Manually rotate subscription keys\n1. (Update your application code to reference the secondary key for the Azure account and deploy.)\n2. In the Azure portal, navigate to your Azure account.\n3. Under Settings, select Authentication.\n4. To regenerate the primary key for your Azure account, select the Regenerate button next to the primary key.\n5. (Update your application code to reference the new primary key and deploy.)\n6. Regenerate the secondary key in the same manner.\nReference:\nhttps://github.com/MicrosoftDocs/azure-docs/blob/main/articles/azure-maps/how-to-manage-authentication.md",
@@ -653,6 +692,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 40,
     "images": [],
     "explanation": "A",
@@ -672,6 +712,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "computer-vision",
     "questionId": 41,
     "images": [],
     "explanation": "D",
@@ -691,6 +732,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "computer-vision",
     "questionId": 42,
     "images": [
       "https://img.examtopics.com/ai-102/image1.png"
@@ -705,6 +747,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 43,
     "images": [],
     "explanation": "A",
@@ -724,6 +767,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 44,
     "images": [],
     "explanation": "C",
@@ -743,6 +787,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 45,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0000900001.png"
@@ -758,6 +803,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 46,
     "images": [],
     "explanation": "C",
@@ -777,6 +823,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 47,
     "images": [],
     "explanation": "D",
@@ -796,6 +843,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 48,
     "images": [
       "https://img.examtopics.com/ai-102/image24.png"
@@ -810,6 +858,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 49,
     "images": [],
     "explanation": "A",
@@ -828,6 +877,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 50,
     "images": [
       "https://img.examtopics.com/ai-102/image45.png"
@@ -842,6 +892,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 51,
     "images": [
       "https://img.examtopics.com/ai-102/image47.png"
@@ -856,6 +907,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 52,
     "images": [],
     "explanation": "B",
@@ -875,6 +927,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 53,
     "images": [],
     "explanation": "BD",
@@ -896,6 +949,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "generative-ai",
     "questionId": 54,
     "images": [
       "https://img.examtopics.com/ai-102/image89.png"
@@ -910,6 +964,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 55,
     "images": [
       "https://img.examtopics.com/ai-102/image91.png"
@@ -924,6 +979,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 56,
     "images": [],
     "explanation": "BC",
@@ -945,6 +1001,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "generative-ai",
     "questionId": 57,
     "images": [
       "https://img.examtopics.com/ai-102/image93.png"
@@ -959,6 +1016,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 58,
     "images": [],
     "explanation": "A",
@@ -978,6 +1036,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "generative-ai",
     "questionId": 59,
     "images": [],
     "explanation": "C",
@@ -997,6 +1056,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 60,
     "images": [],
     "explanation": "D",
@@ -1016,6 +1076,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 61,
     "images": [],
     "explanation": "D",
@@ -1035,6 +1096,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 62,
     "images": [
       "https://img.examtopics.com/ai-102/image115.png"
@@ -1049,6 +1111,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 63,
     "images": [],
     "explanation": "D",
@@ -1068,6 +1131,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "computer-vision",
     "questionId": 64,
     "images": [],
     "explanation": "D",
@@ -1087,6 +1151,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 65,
     "images": [],
     "explanation": "AE",
@@ -1108,6 +1173,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 66,
     "images": [],
     "explanation": "A",
@@ -1127,6 +1193,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 67,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0001200003.png"
@@ -1141,6 +1208,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 68,
     "images": [],
     "explanation": "C",
@@ -1160,6 +1228,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "knowledge-mining",
     "questionId": 69,
     "images": [
       "https://img.examtopics.com/ai-102/image167.png"
@@ -1174,6 +1243,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "nlp",
     "questionId": 70,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0001400001.png"
@@ -1189,6 +1259,7 @@ export const ai102Questions = [
   },
   {
     "topic": "1",
+    "domainId": "plan-manage",
     "questionId": 71,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0001500001.png"
@@ -1210,6 +1281,7 @@ export const ai102Questions = [
   },
   {
     "topic": "10",
+    "domainId": "knowledge-mining",
     "questionId": 72,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0012500005.png"
@@ -1225,6 +1297,7 @@ export const ai102Questions = [
   },
   {
     "topic": "10",
+    "domainId": "computer-vision",
     "questionId": 73,
     "images": [],
     "explanation": "A",
@@ -1244,6 +1317,7 @@ export const ai102Questions = [
   },
   {
     "topic": "11",
+    "domainId": "nlp",
     "questionId": 74,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0018000001.png"
@@ -1259,6 +1333,7 @@ export const ai102Questions = [
   },
   {
     "topic": "12",
+    "domainId": "knowledge-mining",
     "questionId": 75,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0018600001.png"
@@ -1280,6 +1355,7 @@ export const ai102Questions = [
   },
   {
     "topic": "13",
+    "domainId": "knowledge-mining",
     "questionId": 76,
     "images": [],
     "explanation": "ABF",
@@ -1303,6 +1379,7 @@ export const ai102Questions = [
   },
   {
     "topic": "14",
+    "domainId": "nlp",
     "questionId": 77,
     "images": [],
     "explanation": "BC",
@@ -1324,6 +1401,7 @@ export const ai102Questions = [
   },
   {
     "topic": "14",
+    "domainId": "knowledge-mining",
     "questionId": 78,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0021700001.png"
@@ -1339,6 +1417,7 @@ export const ai102Questions = [
   },
   {
     "topic": "14",
+    "domainId": "knowledge-mining",
     "questionId": 79,
     "images": [],
     "explanation": "D",
@@ -1358,6 +1437,7 @@ export const ai102Questions = [
   },
   {
     "topic": "14",
+    "domainId": "knowledge-mining",
     "questionId": 80,
     "images": [],
     "explanation": "A",
@@ -1377,6 +1457,7 @@ export const ai102Questions = [
   },
   {
     "topic": "15",
+    "domainId": "plan-manage",
     "questionId": 81,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0027000001.jpg"
@@ -1392,6 +1473,7 @@ export const ai102Questions = [
   },
   {
     "topic": "15",
+    "domainId": "nlp",
     "questionId": 82,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0027300001.png"
@@ -1407,6 +1489,7 @@ export const ai102Questions = [
   },
   {
     "topic": "15",
+    "domainId": "plan-manage",
     "questionId": 83,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0027600001.png"
@@ -1422,6 +1505,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 84,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008000001.png",
@@ -1437,6 +1521,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 85,
     "images": [],
     "explanation": "A",
@@ -1457,6 +1542,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 86,
     "images": [],
     "explanation": "AD",
@@ -1478,6 +1564,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 87,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0009700001.png"
@@ -1493,6 +1580,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 88,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0009800001.png"
@@ -1507,6 +1595,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 89,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0010000001.png",
@@ -1523,6 +1612,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 90,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0010200001.png"
@@ -1537,6 +1627,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 91,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0010400001.png"
@@ -1558,6 +1649,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 92,
     "images": [],
     "explanation": "A",
@@ -1577,6 +1669,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 93,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0010700001.png"
@@ -1599,6 +1692,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 94,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0010800001.png"
@@ -1613,6 +1707,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 95,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008200001.jpg"
@@ -1635,6 +1730,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 96,
     "images": [],
     "explanation": "B",
@@ -1654,6 +1750,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "knowledge-mining",
     "questionId": 97,
     "images": [],
     "explanation": "B",
@@ -1673,6 +1770,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 98,
     "images": [
       "https://img.examtopics.com/ai-102/image3.png"
@@ -1687,6 +1785,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 99,
     "images": [],
     "explanation": "B",
@@ -1706,6 +1805,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 100,
     "images": [
       "https://img.examtopics.com/ai-102/image5.png",
@@ -1722,6 +1822,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "knowledge-mining",
     "questionId": 101,
     "images": [],
     "explanation": "A",
@@ -1741,6 +1842,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 102,
     "images": [
       "https://img.examtopics.com/ai-102/image26.png"
@@ -1755,6 +1857,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "knowledge-mining",
     "questionId": 103,
     "images": [],
     "explanation": "A",
@@ -1773,6 +1876,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 104,
     "images": [],
     "explanation": "C",
@@ -1792,6 +1896,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 105,
     "images": [
       "https://img.examtopics.com/ai-102/image28.png",
@@ -1807,6 +1912,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 106,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008300001.png"
@@ -1821,6 +1927,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 107,
     "images": [
       "https://img.examtopics.com/ai-102/image31.png"
@@ -1835,6 +1942,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 108,
     "images": [
       "https://img.examtopics.com/ai-102/image49.png",
@@ -1850,6 +1958,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 109,
     "images": [],
     "explanation": "B",
@@ -1869,6 +1978,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 110,
     "images": [],
     "explanation": "C",
@@ -1888,6 +1998,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 111,
     "images": [
       "https://img.examtopics.com/ai-102/image95.png"
@@ -1902,6 +2013,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 112,
     "images": [],
     "explanation": "CD",
@@ -1923,6 +2035,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 113,
     "images": [],
     "explanation": "B",
@@ -1942,6 +2055,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 114,
     "images": [
       "https://img.examtopics.com/ai-102/image117.png"
@@ -1956,6 +2070,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 115,
     "images": [
       "https://img.examtopics.com/ai-102/image119.png",
@@ -1971,6 +2086,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 116,
     "images": [
       "https://img.examtopics.com/ai-102/image151.png"
@@ -1993,6 +2109,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "knowledge-mining",
     "questionId": 117,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008500001.png"
@@ -2008,6 +2125,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 118,
     "images": [
       "https://img.examtopics.com/ai-102/image152.png"
@@ -2022,6 +2140,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "knowledge-mining",
     "questionId": 119,
     "images": [
       "https://img.examtopics.com/ai-102/image169.png"
@@ -2036,6 +2155,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 120,
     "images": [
       "https://img.examtopics.com/ai-102/image171.png"
@@ -2058,6 +2178,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 121,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008600001.jpg"
@@ -2072,6 +2193,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 122,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008700001.png",
@@ -2088,6 +2210,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 123,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0008900001.png"
@@ -2103,6 +2226,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 124,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0009000001.jpg"
@@ -2118,6 +2242,7 @@ export const ai102Questions = [
   },
   {
     "topic": "2",
+    "domainId": "computer-vision",
     "questionId": 125,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0009300001.jpg"
@@ -2133,6 +2258,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 126,
     "images": [],
     "explanation": "B",
@@ -2150,6 +2276,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 127,
     "images": [],
     "explanation": "C",
@@ -2169,6 +2296,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 128,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0013900001.png",
@@ -2184,6 +2312,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 129,
     "images": [],
     "explanation": "A",
@@ -2204,6 +2333,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 130,
     "images": [],
     "explanation": "B",
@@ -2223,6 +2353,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 131,
     "images": [],
     "explanation": "CDF",
@@ -2246,6 +2377,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 132,
     "images": [],
     "explanation": "CE",
@@ -2268,6 +2400,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 133,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0014700001.png"
@@ -2283,6 +2416,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 134,
     "images": [],
     "explanation": "B",
@@ -2300,6 +2434,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 135,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0015000006.png"
@@ -2319,6 +2454,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "computer-vision",
     "questionId": 136,
     "images": [],
     "explanation": "B",
@@ -2336,6 +2472,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 137,
     "images": [],
     "explanation": "D",
@@ -2355,6 +2492,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 138,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0015300001.jpg"
@@ -2370,6 +2508,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 139,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0015500001.png"
@@ -2391,6 +2530,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 140,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0015600001.png"
@@ -2412,6 +2552,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 141,
     "images": [],
     "explanation": "Step 1: Open Microsoft Bot Framework Composer\nStep 2: Select the bot bot12345678\nStep 3: Select Import existing resources. Read the instructions on the right side of the screen and select Next.\n\nStep 4: Browse to the C:\\Resources\\LU folder and select the available .lu file\nStep 5: In the pop-up window Importing existing resources, modify the JSON file content based on your resources information: Name the intent TaskReminder\nStep 6: Select Publish from the Composer menu. In the Publish your bots pane, select the bot to publish (bot12345678), then select a publish profile from the\nPublish target drop-down list.\n\nReference:\nhttps://docs.microsoft.com/en-us/composer/how-to-publish-bot",
@@ -2425,6 +2566,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 142,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0015700001.png"
@@ -2446,6 +2588,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 143,
     "images": [],
     "explanation": "Step 1: Open Microsoft Bot Framework Composer\nStep 2: Select the bot bot12345678\nStep 3: Select Configure.\nStep 4: Select the Azure Language Understanding tab\nStep 5: Select the Set up Language Understanding button. The Set up Language Understanding window will appear, shown below:\n\nStep 6: Select Use existing resources and then select Next at the bottom of the window.\nStep 7: Now select the Azure directory, Azure subscription, and Language Understanding resource name (French).\nStep 8: Select Next on the bottom. Your Key and Region will appear on the next on the next window, shown below:\n\n\nStep 9. Select Done -\nReference:\nhttps://docs.microsoft.com/en-us/composer/concept-language-understanding https://docs.microsoft.com/en-us/composer/how-to-add-luis",
@@ -2459,6 +2602,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 144,
     "images": [],
     "explanation": "A",
@@ -2478,6 +2622,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 145,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0016800001.png"
@@ -2493,6 +2638,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "computer-vision",
     "questionId": 146,
     "images": [],
     "explanation": "A",
@@ -2510,6 +2656,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "knowledge-mining",
     "questionId": 147,
     "images": [],
     "explanation": "C",
@@ -2529,6 +2676,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 148,
     "images": [],
     "explanation": "Create your LUIS model -\n1. You should navigate to your LUIS.ai management portal and create a new application. In the portal create a model.\n\nModel name: 1u12345678 -\n2. Define one intent as ג€Travelג€ and add an example utterances of Boat.\n\n3. Publish the model\nIn order to use your model, you have to publish it. This is as easy as hitting the Publish tab, selecting between the production or staging environments, and hitting\nPublish. As you can see from this page, you can also choose to enable sentiment analysis, speech priming to improve speech recognition, or the spell checker.\nFor now, you can leave those unchecked.\nReference:\nhttps://docs.microsoft.com/en-us/azure/health-bot/language_model_howto https://www.codemag.com/article/1809021/Natural-Language-Understanding-with-LUIS",
@@ -2542,6 +2690,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 149,
     "images": [],
     "explanation": "D",
@@ -2561,6 +2710,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 150,
     "images": [],
     "explanation": "C",
@@ -2580,6 +2730,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 151,
     "images": [
       "https://img.examtopics.com/ai-102/image9.png"
@@ -2594,6 +2745,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 152,
     "images": [
       "https://img.examtopics.com/ai-102/image11.png"
@@ -2608,6 +2760,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 153,
     "images": [],
     "explanation": "C",
@@ -2627,6 +2780,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 154,
     "images": [],
     "explanation": "A",
@@ -2646,6 +2800,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 155,
     "images": [
       "https://img.examtopics.com/ai-102/image13.png",
@@ -2661,6 +2816,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 156,
     "images": [],
     "explanation": "AC",
@@ -2681,6 +2837,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "computer-vision",
     "questionId": 157,
     "images": [],
     "explanation": "B",
@@ -2698,6 +2855,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 158,
     "images": [
       "https://img.examtopics.com/ai-102/image33.png"
@@ -2712,6 +2870,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 159,
     "images": [],
     "explanation": "B",
@@ -2731,6 +2890,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 160,
     "images": [
       "https://img.examtopics.com/ai-102/image35.png"
@@ -2745,6 +2905,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 161,
     "images": [],
     "explanation": "C",
@@ -2764,6 +2925,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 162,
     "images": [
       "https://img.examtopics.com/ai-102/image37.png"
@@ -2778,6 +2940,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 163,
     "images": [
       "https://img.examtopics.com/ai-102/image39.png"
@@ -2792,6 +2955,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 164,
     "images": [],
     "explanation": "AC",
@@ -2813,6 +2977,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 165,
     "images": [
       "https://img.examtopics.com/ai-102/image52.png",
@@ -2828,6 +2993,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 166,
     "images": [
       "https://img.examtopics.com/ai-102/image55.png"
@@ -2842,6 +3008,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 167,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0013100001.png"
@@ -2857,6 +3024,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 168,
     "images": [
       "https://img.examtopics.com/ai-102/image57.png"
@@ -2871,6 +3039,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 169,
     "images": [],
     "explanation": "A",
@@ -2888,6 +3057,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 170,
     "images": [
       "https://img.examtopics.com/ai-102/image59.png"
@@ -2902,6 +3072,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 171,
     "images": [
       "https://img.examtopics.com/ai-102/image61.png"
@@ -2916,6 +3087,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 172,
     "images": [
       "https://img.examtopics.com/ai-102/image72.png"
@@ -2930,6 +3102,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 173,
     "images": [
       "https://img.examtopics.com/ai-102/image74.png"
@@ -2944,6 +3117,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 174,
     "images": [
       "https://img.examtopics.com/ai-102/image76.png",
@@ -2966,6 +3140,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 175,
     "images": [
       "https://img.examtopics.com/ai-102/image78.png"
@@ -2987,6 +3162,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 176,
     "images": [
       "https://img.examtopics.com/ai-102/image79.png"
@@ -3001,6 +3177,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 177,
     "images": [
       "https://img.examtopics.com/ai-102/image81.png"
@@ -3015,6 +3192,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "computer-vision",
     "questionId": 178,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0013400001.png"
@@ -3029,6 +3207,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 179,
     "images": [
       "https://img.examtopics.com/ai-102/image97.png"
@@ -3043,6 +3222,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 180,
     "images": [],
     "explanation": "C",
@@ -3062,6 +3242,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 181,
     "images": [],
     "explanation": "C",
@@ -3081,6 +3262,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "plan-manage",
     "questionId": 182,
     "images": [],
     "explanation": "D",
@@ -3100,6 +3282,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 183,
     "images": [],
     "explanation": "D",
@@ -3119,6 +3302,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 184,
     "images": [],
     "explanation": "D",
@@ -3138,6 +3322,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 185,
     "images": [
       "https://img.examtopics.com/ai-102/image122.png",
@@ -3153,6 +3338,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 186,
     "images": [
       "https://img.examtopics.com/ai-102/image125.png",
@@ -3168,6 +3354,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 187,
     "images": [
       "https://img.examtopics.com/ai-102/image128.png"
@@ -3182,6 +3369,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 188,
     "images": [],
     "explanation": "B",
@@ -3201,6 +3389,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 189,
     "images": [],
     "explanation": "A",
@@ -3220,6 +3409,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 190,
     "images": [],
     "explanation": "A",
@@ -3239,6 +3429,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 191,
     "images": [
       "https://img.examtopics.com/ai-102/image130.png"
@@ -3253,6 +3444,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 192,
     "images": [],
     "explanation": "B",
@@ -3272,6 +3464,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 193,
     "images": [
       "https://img.examtopics.com/ai-102/image132.png"
@@ -3286,6 +3479,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "knowledge-mining",
     "questionId": 194,
     "images": [
       "https://img.examtopics.com/ai-102/image134.png"
@@ -3300,6 +3494,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 195,
     "images": [
       "https://img.examtopics.com/ai-102/image136.png"
@@ -3314,6 +3509,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 196,
     "images": [],
     "explanation": "C",
@@ -3333,6 +3529,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 197,
     "images": [],
     "explanation": "C",
@@ -3352,6 +3549,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 198,
     "images": [
       "https://img.examtopics.com/ai-102/image154.png"
@@ -3366,6 +3564,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 199,
     "images": [
       "https://img.examtopics.com/ai-102/image172.png"
@@ -3387,6 +3586,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 200,
     "images": [],
     "explanation": "A",
@@ -3406,6 +3606,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 201,
     "images": [],
     "explanation": "BD",
@@ -3426,6 +3627,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 202,
     "images": [
       "https://img.examtopics.com/ai-102/image173.png"
@@ -3447,6 +3649,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "knowledge-mining",
     "questionId": 203,
     "images": [],
     "explanation": "C",
@@ -3466,6 +3669,7 @@ export const ai102Questions = [
   },
   {
     "topic": "3",
+    "domainId": "nlp",
     "questionId": 204,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0013700001.jpg"
@@ -3480,6 +3684,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "nlp",
     "questionId": 205,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0018800001.jpg",
@@ -3496,6 +3701,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 206,
     "images": [],
     "explanation": "CDF",
@@ -3519,6 +3725,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "nlp",
     "questionId": 207,
     "images": [],
     "explanation": "BE",
@@ -3540,6 +3747,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 208,
     "images": [],
     "explanation": "Step 1 - Start the Import data wizard and create a data source\n1. Sign in to the Azure portal with your Azure account.\n2. Find your search service and on the Overview page, click Import data on the command bar to create and populate a search index.\n\n3. In the wizard, click Connect to your data, and select the sample database named realestate-us-sample\nStep 2 - Skip the \"Enrich content\" page\nThe wizard supports the creation of an AI enrichment pipeline for incorporating the Cognitive Services AI algorithms into indexing.\nWe'll skip this step for now, and move directly on to Customize target index.\n\nStep 3 - Configure index -\nThe solution must ensure that users can search the index in English for people, organizations, and locations.\nConfigure Searchable for the fields people, organizations, and locations.\n\nReference:\nhttps://docs.microsoft.com/en-us/azure/search/search-get-started-portal",
@@ -3553,6 +3761,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 209,
     "images": [
       "https://img.examtopics.com/ai-102/image16.png",
@@ -3568,6 +3777,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 210,
     "images": [],
     "explanation": "D",
@@ -3587,6 +3797,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 211,
     "images": [
       "https://img.examtopics.com/ai-102/image99.png",
@@ -3602,6 +3813,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 212,
     "images": [
       "https://img.examtopics.com/ai-102/image102.png",
@@ -3617,6 +3829,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 213,
     "images": [
       "https://img.examtopics.com/ai-102/image105.png"
@@ -3631,6 +3844,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 214,
     "images": [],
     "explanation": "C",
@@ -3650,6 +3864,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 215,
     "images": [],
     "explanation": "C",
@@ -3669,6 +3884,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 216,
     "images": [
       "https://img.examtopics.com/ai-102/image138.png"
@@ -3683,6 +3899,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 217,
     "images": [],
     "explanation": "C",
@@ -3702,6 +3919,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 218,
     "images": [],
     "explanation": "C",
@@ -3721,6 +3939,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 219,
     "images": [],
     "explanation": "D",
@@ -3740,6 +3959,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 220,
     "images": [
       "https://img.examtopics.com/ai-102/image156.png"
@@ -3754,6 +3974,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 221,
     "images": [
       "https://img.examtopics.com/ai-102/image174.png"
@@ -3768,6 +3989,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 222,
     "images": [
       "https://img.examtopics.com/ai-102/image158.png"
@@ -3782,6 +4004,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 223,
     "images": [],
     "explanation": "C",
@@ -3801,6 +4024,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 224,
     "images": [
       "https://img.examtopics.com/ai-102/image176.png"
@@ -3815,6 +4039,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 225,
     "images": [
       "https://img.examtopics.com/ai-102/image178.png"
@@ -3837,6 +4062,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 226,
     "images": [
       "https://img.examtopics.com/ai-102/image179.png"
@@ -3859,6 +4085,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 227,
     "images": [],
     "explanation": "D",
@@ -3878,6 +4105,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 228,
     "images": [
       "https://img.examtopics.com/ai-102/image180.png"
@@ -3892,6 +4120,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 229,
     "images": [
       "https://img.examtopics.com/ai-102/image182.png"
@@ -3906,6 +4135,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 230,
     "images": [
       "https://img.examtopics.com/ai-102/image184.png"
@@ -3920,6 +4150,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 231,
     "images": [],
     "explanation": "B",
@@ -3939,6 +4170,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 232,
     "images": [],
     "explanation": "ABE",
@@ -3961,6 +4193,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 233,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0019300001.png"
@@ -3976,6 +4209,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 234,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0019500001.jpg",
@@ -3992,6 +4226,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 235,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0019600005.png"
@@ -4013,6 +4248,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 236,
     "images": [],
     "explanation": "A",
@@ -4032,6 +4268,7 @@ export const ai102Questions = [
   },
   {
     "topic": "4",
+    "domainId": "knowledge-mining",
     "questionId": 237,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0019800001.png"
@@ -4047,6 +4284,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 238,
     "images": [],
     "explanation": "CE",
@@ -4068,6 +4306,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 239,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0023500001.png"
@@ -4083,6 +4322,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 240,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0023700001.png",
@@ -4098,6 +4338,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 241,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0024000001.png",
@@ -4114,6 +4355,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 242,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0024300001.png"
@@ -4129,6 +4371,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 243,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0024500001.png"
@@ -4150,6 +4393,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 244,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0024700001.png"
@@ -4165,6 +4409,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 245,
     "images": [],
     "explanation": "ABC",
@@ -4188,6 +4433,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 246,
     "images": [],
     "explanation": "C",
@@ -4207,6 +4453,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 247,
     "images": [],
     "explanation": "Step 1: Sign in to the QnAMaker.ai portal with your Azure credentials. Use the User1-12345678@abc.com account\nStep 2: Publish the knowledge base. In the QnA Maker portal, select Publish. Then to confirm, select Publish on the page.\nThe QnA Maker service is now successfully published. You can use the endpoint in your application or bot code.\n\nStep 3: In the QnA Maker portal, on the Publish page, select Create bot.\nThis button appears only after you've published the knowledge base.\nAfter publishing the knowledge base, you can create a bot from the Publish page.\n\nStep 4: A new browser tab opens for the Azure portal, with the Azure Bot Service's creation page. Configure the Azure bot service.\n\nBot name: bot12345678 -\nThe bot will be created.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/quickstarts/create-publish-knowledge-base",
@@ -4220,6 +4467,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 248,
     "images": [],
     "explanation": "Step 1: Sign in to the Azure portal create and a QnA Maker resource.\n\nStep 2: Select Create after you read the terms and conditions:\n\nStep 3: In QnA Maker, select the appropriate tiers and regions.\n\nName: QNA12345678 -\nIn the Name field, enter a unique name to identify this QnA Maker service. This name also identifies the QnA Maker endpoint that your knowledge bases will be associated with.\nResource Group Location: East US Azure\n\nStep 4: After all the fields are validated, select Create. The process can take a few minutes to complete.\nAfter deployment is completed, you'll see the following resources created in your subscription:\n\nRemember your Azure Active Directory ID, Subscription, QnA resource name you selected when you created the resource.\nStep 5: When you are done creating the resource in the Azure portal, return to the QnA Maker portal, refresh the browser page.\nStep 6: In the QnA Maker portal, select Create a knowledge base.\nStep 7: Skip Step 1 as you already have your QnA Maker resource.\nStep 8: In Step 2, select your Active directory, subscription, service (resource), and the language for all knowledge bases created in the service.\n\nAzure QnA service: QNA12345678 -\n\nStep 9: In Step 3, name your knowledge base\nStep 10: In Step 4, configure the following setting:\n+ Add URL: https://support.microsoft.com/en-us/help/12435/windows-10-upgrade-faq\nStep 11: In Step 5, Select Create your KB.\nThe extraction process takes a few moments to read the document and identify questions and answers.\nAfter QnA Maker successfully creates the knowledge base, the Knowledge base page opens.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/set-up-qnamaker-service-azure https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/quickstarts/create-publish-knowledge-base",
@@ -4233,6 +4481,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 249,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0022200001.jpg",
@@ -4249,6 +4498,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 250,
     "images": [],
     "explanation": "Step 1: Sign in to the QnA portal, then select the knowledge base to add the QnA pair to.\nStep 2: On the EDIT page of the knowledge base, select Add QnA pair to add a new QnA pair.\n\nStep 3: In the new QnA pair row, add the required question and answer fields. The other fields are optional. All fields can be changed at any time.\nQuestion: What will be the next version of Windows?\nStep 4: Select Save and train to see predictions including the new QnA pair.\nReference:\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/edit-knowledge-base",
@@ -4262,6 +4512,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 251,
     "images": [],
     "explanation": "C",
@@ -4281,6 +4532,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 252,
     "images": [
       "https://img.examtopics.com/ai-102/image19.png"
@@ -4295,6 +4547,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 253,
     "images": [],
     "explanation": "B",
@@ -4314,6 +4567,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 254,
     "images": [
       "https://img.examtopics.com/ai-102/image21.png"
@@ -4328,6 +4582,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 255,
     "images": [],
     "explanation": "B",
@@ -4345,6 +4600,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 256,
     "images": [],
     "explanation": "B",
@@ -4362,6 +4618,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 257,
     "images": [],
     "explanation": "A",
@@ -4379,6 +4636,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 258,
     "images": [],
     "explanation": "BCF",
@@ -4402,6 +4660,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 259,
     "images": [],
     "explanation": "BD",
@@ -4423,6 +4682,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 260,
     "images": [],
     "explanation": "A",
@@ -4440,6 +4700,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 261,
     "images": [],
     "explanation": "B",
@@ -4457,6 +4718,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 262,
     "images": [],
     "explanation": "B",
@@ -4474,6 +4736,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 263,
     "images": [
       "https://img.examtopics.com/ai-102/image23.png"
@@ -4495,6 +4758,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 264,
     "images": [],
     "explanation": "DE",
@@ -4516,6 +4780,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 265,
     "images": [],
     "explanation": "C",
@@ -4535,6 +4800,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 266,
     "images": [],
     "explanation": "C",
@@ -4553,6 +4819,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 267,
     "images": [],
     "explanation": "A",
@@ -4572,6 +4839,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 268,
     "images": [],
     "explanation": "B",
@@ -4589,6 +4857,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 269,
     "images": [
       "https://img.examtopics.com/ai-102/image43.png"
@@ -4603,6 +4872,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 270,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0022500001.png"
@@ -4618,6 +4888,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 271,
     "images": [],
     "explanation": "A",
@@ -4637,6 +4908,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 272,
     "images": [],
     "explanation": "A",
@@ -4656,6 +4928,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 273,
     "images": [
       "https://img.examtopics.com/ai-102/image63.png"
@@ -4670,6 +4943,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 274,
     "images": [],
     "explanation": "C",
@@ -4689,6 +4963,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 275,
     "images": [],
     "explanation": "ABE",
@@ -4712,6 +4987,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 276,
     "images": [
       "https://img.examtopics.com/ai-102/image65.png"
@@ -4726,6 +5002,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 277,
     "images": [
       "https://img.examtopics.com/ai-102/image67.png",
@@ -4741,6 +5018,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 278,
     "images": [],
     "explanation": "A",
@@ -4760,6 +5038,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 279,
     "images": [
       "https://img.examtopics.com/ai-102/image70.png"
@@ -4774,6 +5053,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 280,
     "images": [],
     "explanation": "B",
@@ -4793,6 +5073,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 281,
     "images": [],
     "explanation": "A",
@@ -4812,6 +5093,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 282,
     "images": [],
     "explanation": "CD",
@@ -4833,6 +5115,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 283,
     "images": [],
     "explanation": "B",
@@ -4850,6 +5133,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 284,
     "images": [
       "https://img.examtopics.com/ai-102/image86.png",
@@ -4865,6 +5149,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 285,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0022800001.png"
@@ -4879,6 +5164,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "nlp",
     "questionId": 286,
     "images": [],
     "explanation": "C",
@@ -4898,6 +5184,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 287,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0023100001.jpg",
@@ -4913,6 +5200,7 @@ export const ai102Questions = [
   },
   {
     "topic": "5",
+    "domainId": "computer-vision",
     "questionId": 288,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0023300001.png"
@@ -4927,6 +5215,7 @@ export const ai102Questions = [
   },
   {
     "topic": "6",
+    "domainId": "computer-vision",
     "questionId": 289,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0007100001.jpg"
@@ -4942,6 +5231,7 @@ export const ai102Questions = [
   },
   {
     "topic": "6",
+    "domainId": "generative-ai",
     "questionId": 290,
     "images": [
       "https://img.examtopics.com/ai-102/image107.png"
@@ -4956,6 +5246,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 291,
     "images": [],
     "explanation": "C",
@@ -4975,6 +5266,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "nlp",
     "questionId": 292,
     "images": [],
     "explanation": "D",
@@ -4994,6 +5286,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 293,
     "images": [
       "https://img.examtopics.com/ai-102/image145.png"
@@ -5008,6 +5301,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 294,
     "images": [
       "https://img.examtopics.com/ai-102/image147.png"
@@ -5022,6 +5316,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "nlp",
     "questionId": 295,
     "images": [
       "https://img.examtopics.com/ai-102/image149.png"
@@ -5036,6 +5331,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 296,
     "images": [
       "https://img.examtopics.com/ai-102/image160.png"
@@ -5050,6 +5346,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 297,
     "images": [
       "https://img.examtopics.com/ai-102/image162.png"
@@ -5064,6 +5361,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 298,
     "images": [
       "https://img.examtopics.com/ai-102/image164.png"
@@ -5078,6 +5376,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 299,
     "images": [],
     "explanation": "C",
@@ -5097,6 +5396,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 300,
     "images": [],
     "explanation": "C",
@@ -5116,6 +5416,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 301,
     "images": [
       "https://img.examtopics.com/ai-102/image186.png"
@@ -5140,6 +5441,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 302,
     "images": [],
     "explanation": "A",
@@ -5159,6 +5461,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 303,
     "images": [],
     "explanation": "D",
@@ -5178,6 +5481,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "nlp",
     "questionId": 304,
     "images": [],
     "explanation": "C",
@@ -5197,6 +5501,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 305,
     "images": [],
     "explanation": "A",
@@ -5216,6 +5521,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 306,
     "images": [],
     "explanation": "A",
@@ -5235,6 +5541,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 307,
     "images": [
       "https://img.examtopics.com/ai-102/image187.png"
@@ -5249,6 +5556,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "nlp",
     "questionId": 308,
     "images": [
       "https://img.examtopics.com/ai-102/image189.png",
@@ -5264,6 +5572,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 309,
     "images": [
       "https://img.examtopics.com/ai-102/image109.png"
@@ -5278,6 +5587,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 310,
     "images": [],
     "explanation": "A",
@@ -5297,6 +5607,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 311,
     "images": [],
     "explanation": "BC",
@@ -5318,6 +5629,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 312,
     "images": [
       "https://img.examtopics.com/ai-102/image111.png"
@@ -5332,6 +5644,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 313,
     "images": [
       "https://img.examtopics.com/ai-102/image113.png"
@@ -5346,6 +5659,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 314,
     "images": [
       "https://img.examtopics.com/ai-102/image140.png"
@@ -5360,6 +5674,7 @@ export const ai102Questions = [
   },
   {
     "topic": "7",
+    "domainId": "generative-ai",
     "questionId": 315,
     "images": [
       "https://img.examtopics.com/ai-102/image142.png",
@@ -5375,6 +5690,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "generative-ai",
     "questionId": 316,
     "images": [],
     "explanation": "B",
@@ -5394,6 +5710,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "nlp",
     "questionId": 317,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0007700003.png"
@@ -5409,6 +5726,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 318,
     "images": [],
     "explanation": "D",
@@ -5428,6 +5746,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 319,
     "images": [
       "https://img.examtopics.com/ai-102/image197.png"
@@ -5442,6 +5761,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "generative-ai",
     "questionId": 320,
     "images": [],
     "explanation": "B",
@@ -5461,6 +5781,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 321,
     "images": [
       "https://img.examtopics.com/ai-102/image192.png"
@@ -5482,6 +5803,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "knowledge-mining",
     "questionId": 322,
     "images": [],
     "explanation": "CD",
@@ -5503,6 +5825,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 323,
     "images": [
       "https://img.examtopics.com/ai-102/image193.png"
@@ -5517,6 +5840,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 324,
     "images": [],
     "explanation": "B",
@@ -5534,6 +5858,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 325,
     "images": [],
     "explanation": "A",
@@ -5551,6 +5876,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 326,
     "images": [],
     "explanation": "B",
@@ -5568,6 +5894,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 327,
     "images": [],
     "explanation": "B",
@@ -5585,6 +5912,7 @@ export const ai102Questions = [
   },
   {
     "topic": "8",
+    "domainId": "plan-manage",
     "questionId": 328,
     "images": [
       "https://img.examtopics.com/ai-102/image195.png"
@@ -5599,6 +5927,7 @@ export const ai102Questions = [
   },
   {
     "topic": "9",
+    "domainId": "knowledge-mining",
     "questionId": 329,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0011600001.jpg"
@@ -5614,6 +5943,7 @@ export const ai102Questions = [
   },
   {
     "topic": "9",
+    "domainId": "plan-manage",
     "questionId": 330,
     "images": [
       "https://www.examtopics.com/assets/media/exam-media/04271/0011900001.png"
@@ -5634,6 +5964,72 @@ export const ai102ExamMeta = {
   "total": 330,
   "quizEligible": 178,
   "sourceFiles": 66,
+  "domainStats": {
+    "nlp": {
+      "total": 116,
+      "quizEligible": 59,
+      "examTopics": {
+        "1": 16,
+        "3": 71,
+        "4": 2,
+        "5": 19,
+        "7": 4,
+        "8": 1,
+        "11": 1,
+        "14": 1,
+        "15": 1
+      }
+    },
+    "plan-manage": {
+      "total": 42,
+      "quizEligible": 28,
+      "examTopics": {
+        "1": 29,
+        "3": 1,
+        "8": 9,
+        "9": 1,
+        "15": 2
+      }
+    },
+    "knowledge-mining": {
+      "total": 65,
+      "quizEligible": 39,
+      "examTopics": {
+        "1": 18,
+        "2": 5,
+        "3": 3,
+        "4": 31,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "12": 1,
+        "13": 1,
+        "14": 3
+      }
+    },
+    "computer-vision": {
+      "total": 80,
+      "quizEligible": 39,
+      "examTopics": {
+        "1": 5,
+        "2": 37,
+        "3": 4,
+        "5": 32,
+        "6": 1,
+        "10": 1
+      }
+    },
+    "generative-ai": {
+      "total": 27,
+      "quizEligible": 13,
+      "examTopics": {
+        "1": 3,
+        "6": 1,
+        "7": 21,
+        "8": 2
+      }
+    }
+  },
   "partSizes": [
     71,
     42,
