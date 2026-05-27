@@ -1,5 +1,4 @@
 import { readJson } from './storage';
-import { storageKeys } from '../config/gh300Exam';
 
 export function shuffle(input) {
   const items = [...input];
@@ -41,9 +40,9 @@ export function applyWeakDelta(weakMap, questionIndex, isCorrect) {
   return next;
 }
 
-export function getInProgressQuiz(activeSession) {
+export function getInProgressQuiz(activeSession, savedQuizKey) {
   if (activeSession && !activeSession.finished) return activeSession;
-  const saved = readJson(storageKeys.savedQuiz, null);
+  const saved = readJson(savedQuizKey, null);
   if (saved?.indices?.length && !saved.finished) return saved;
   return null;
 }

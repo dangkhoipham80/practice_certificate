@@ -3,6 +3,7 @@ import { QuizResults } from './QuizResults';
 import { QuizSession } from './QuizSession';
 
 export function Practice({
+  cert,
   currentQuestion,
   flagged,
   session,
@@ -25,12 +26,13 @@ export function Practice({
   setSession
 }) {
   if (!session) {
-    return <PracticeSetup startQuiz={startQuiz} partProgress={partProgress} />;
+    return <PracticeSetup cert={cert} startQuiz={startQuiz} partProgress={partProgress} />;
   }
 
   if (session.finished) {
     return (
       <QuizResults
+        cert={cert}
         session={session}
         exitQuiz={exitQuiz}
         retryWrongFromSummary={retryWrongFromSummary}
@@ -42,6 +44,7 @@ export function Practice({
 
   return (
     <QuizSession
+      cert={cert}
       session={session}
       currentQuestion={currentQuestion}
       flagged={flagged}

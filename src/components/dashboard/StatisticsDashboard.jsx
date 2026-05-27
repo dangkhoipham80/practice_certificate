@@ -2,14 +2,14 @@ import { BarChart3, CalendarDays, ClipboardList, Flame, Target } from 'lucide-re
 import { computeDayStreak } from '../../lib/statsUtils';
 import { SectionHeader } from '../ui/SectionHeader';
 
-export function StatisticsDashboard({ history, stats }) {
+export function StatisticsDashboard({ history, stats, cert }) {
   const streak = computeDayStreak(history);
   const recent = history.slice(-10);
   const trend = recent.length ? recent : [];
 
   return (
     <div className="panel p-5 sm:p-6">
-      <SectionHeader kicker="Analytics" title="Statistics dashboard" description="Quiz trends, daily streak, and recent attempts — aligned with GH-300 Pro." />
+      <SectionHeader kicker="Analytics" title="Statistics dashboard" description={`Quiz trends, daily streak, and recent attempts for ${cert.exam}.`} />
 
       <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatTile label="Quizzes taken" value={stats.attempts} tone="accent" icon={ClipboardList} />

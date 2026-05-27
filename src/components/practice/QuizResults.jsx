@@ -1,9 +1,10 @@
 import { Copy, RotateCcw } from 'lucide-react';
-import { gh300Questions } from '../../data/gh300Questions';
 import { formatTimer, percent } from '../../lib/quizUtils';
+import { QuestionText } from '../shared/QuestionText';
 import { InfoTile } from '../ui/InfoTile';
 
-export function QuizResults({ session, exitQuiz, retryWrongFromSummary, copyQuizResults, retakeQuiz }) {
+export function QuizResults({ cert, session, exitQuiz, retryWrongFromSummary, copyQuizResults, retakeQuiz }) {
+  const { questions } = cert;
   const wrongSlots = session.wrongSlots ?? [];
   const correct = session.indices.length - wrongSlots.length;
   const score = percent(correct, session.indices.length);
@@ -37,14 +38,14 @@ export function QuizResults({ session, exitQuiz, retryWrongFromSummary, copyQuiz
           <p className="text-xs font-bold text-danger-600 dark:text-danger-300">Review ({wrongSlots.length})</p>
           {wrongSlots.slice(0, 60).map((slot) => {
             const questionIndex = session.indices[slot];
-            const question = gh300Questions[questionIndex];
+            const question = questions[questionIndex];
             const userAnswer = session.answers[slot].length
               ? session.answers[slot].map((item) => question.choices[item]).join('; ')
               : '(No answer)';
             const correctAnswer = question.correct.map((item) => question.choices[item]).join('; ');
             return (
               <div className="rounded-xl border border-danger-200/80 bg-danger-50/40 p-4 dark:border-danger-500/30 dark:bg-danger-500/5" key={slot}>
-                <p className="text-sm font-semibold leading-6">{question.text}</p>
+                <QuestionText text={question.text} images={question.images} className="text-sm font-semibold" />
                 <p className="mt-2 text-xs text-danger-700 dark:text-danger-200">Your answer: {userAnswer}</p>
                 <p className="mt-1 text-xs text-success-700 dark:text-success-200">Correct: {correctAnswer}</p>
               </div>
@@ -59,20 +60,20 @@ export function QuizResults({ session, exitQuiz, retryWrongFromSummary, copyQuiz
         </div>
       )}
       <div className="flex flex-wrap gap-3 bg-subtle/40 p-5 dark:bg-gh-subtle/30">
-        <button className="secondary-button" onClick={exitQuiz}>
+        <button className="secondary-button" onClick={exitQuiz} type="button">
           New quiz
         </button>
         {wrongSlots.length > 0 && (
-          <button className="danger-button" onClick={retryWrongFromSummary}>
+          <button className="danger-button" onClick={retryWrongFromSummary} type="button">
             <RotateCcw size={16} />
             Retry wrong
           </button>
         )}
-        <button className="secondary-button" onClick={copyQuizResults}>
+        <button className="secondary-button" onClick={copyQuizResults} type="button">
           <Copy size={16} />
           Copy results
         </button>
-        <button className="primary-button" onClick={retakeQuiz}>
+        <button className="primary-button" onClick={retakeQuiz} type="button">
           <RotateCcw size={16} />
           Retake
         </button>

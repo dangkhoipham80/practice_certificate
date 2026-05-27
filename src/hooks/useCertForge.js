@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppNavigation } from './useAppNavigation';
-import { gh300Questions } from '../data/gh300Questions';
-import { partSizes, partStarts, storageKeys } from '../config/gh300Exam';
+import { useCertContext } from '../context/CertContext';
+import { getQuizQuestions } from '../config/certRegistry';
 import { readJson, removeKey, writeJson } from '../lib/storage';
 import {
   applyWeakDelta,
@@ -18,25 +18,60 @@ import {
 } from '../lib/progressUtils';
 import { buildExportPayload, normalizeHistory, parseImportPayload } from '../lib/importExport';
 
+function loadCertState(storageKeys) {
+  return {
+    history: readJson(storageKeys.history, []),
+    flagged: readJson(storageKeys.flagged, []),
+    weak: readJson(storageKeys.weak, {}),
+    partProgress: readJson(storageKeys.partProgress, {}),
+  };
+}
+
 export function useCertForge() {
-  const { route, navigateTo } = useAppNavigation();
+  const { route, navigateTo, certId } = useAppNavigation();
+  const { activeCert, activeCertId } = useCertContext();
+  const cert = activeCert;
+  const { questions, partSizes, partStarts, storageKeys } = cert;
+  const quizQuestions = useMemo(() => getQuizQuestions(cert), [cert]);
+  const quizQuestionIndices = useMemo(
+    () => questions.map((q, index) => (q.quizEligible !== false && q.choices?.length ? index : null)).filter((index) => index !== null),
+    [questions]
+  );
+  const quizIndexSet = useMemo(() => new Set(quizQuestionIndices), [quizQuestionIndices]);
+
   const [dark, setDark] = useState(() => localStorage.getItem('certforge-theme') === 'dark');
-  const [history, setHistory] = useState(() => readJson(storageKeys.history, []));
-  const [flagged, setFlagged] = useState(() => readJson(storageKeys.flagged, []));
-  const [weak, setWeak] = useState(() => readJson(storageKeys.weak, {}));
+  const [history, setHistory] = useState(() => loadCertState(storageKeys).history);
+  const [flagged, setFlagged] = useState(() => loadCertState(storageKeys).flagged);
+  const [weak, setWeak] = useState(() => loadCertState(storageKeys).weak);
+  const [partProgress, setPartProgress] = useState(() => loadCertState(storageKeys).partProgress);
   const [session, setSession] = useState(null);
   const [flash, setFlash] = useState(null);
   const [search, setSearch] = useState('');
-  const [partProgress, setPartProgress] = useState(() => readJson(storageKeys.partProgress, {}));
   const [saveHint, setSaveHint] = useState('');
   const [syncHint, setSyncHint] = useState(null);
   const [pendingStart, setPendingStart] = useState(null);
+
+  useEffect(() => {
+    const next = loadCertState(storageKeys);
+    setHistory(next.history);
+    setFlagged(next.flagged);
+    setWeak(next.weak);
+    setPartProgress(next.partProgress);
+    setSession(null);
+    setFlash(null);
+    setPendingStart(null);
+    setSaveHint('');
+  }, [activeCertId]);
 
   function showSyncHint(type, message) {
     setSyncHint({ type, message });
     window.setTimeout(() => setSyncHint(null), 4500);
   }
-  const hasSavedQuiz = useMemo(() => !!getInProgressQuiz(session), [session, saveHint]);
+
+  const hasSavedQuiz = useMemo(
+    () => !!getInProgressQuiz(session, storageKeys.savedQuiz),
+    [session, saveHint, storageKeys.savedQuiz]
+  );
 
   const stats = useMemo(() => {
     const attempts = history.length;
@@ -74,14 +109,14 @@ export function useCertForge() {
   function createPool(mode, partIndex = null) {
     if (partIndex !== null) {
       const start = partStarts[partIndex];
-      return Array.from({ length: partSizes[partIndex] }, (_, index) => start + index);
+      return Array.from({ length: partSizes[partIndex] }, (_, index) => start + index).filter((index) => quizIndexSet.has(index));
     }
-    if (mode === 'flagged') return flagged.filter((index) => index < gh300Questions.length);
-    if (mode === 'weak') return Object.keys(weak).map(Number);
-    if (mode === 'wrong') return getWrongIndices(partProgress);
-    if (mode === 'unanswered') return getUnansweredIndices(partProgress);
-    if (mode === 'multi') return gh300Questions.map((_, index) => index).filter((index) => gh300Questions[index].multiple);
-    return gh300Questions.map((_, index) => index);
+    if (mode === 'flagged') return flagged.filter((index) => quizIndexSet.has(index));
+    if (mode === 'weak') return Object.keys(weak).map(Number).filter((index) => quizIndexSet.has(index));
+    if (mode === 'wrong') return getWrongIndices(partProgress, partSizes, partStarts).filter((index) => quizIndexSet.has(index));
+    if (mode === 'unanswered') return getUnansweredIndices(partProgress, partSizes, partStarts).filter((index) => quizIndexSet.has(index));
+    if (mode === 'multi') return [...quizIndexSet].filter((index) => questions[index].multiple);
+    return [...quizIndexSet];
   }
 
   function startQuiz({ mode = 'random', count = 20, partIndex = null, label, shufflePool = true, customIndices = null }) {
@@ -97,7 +132,8 @@ export function useCertForge() {
     removeKey(storageKeys.savedQuiz);
     setSaveHint('');
     setSession({
-      label: label ?? `${mode === 'random' ? 'Random' : mode} - ${indices.length}`,
+      certId: activeCertId,
+      label: label ?? `${cert.exam} · ${mode === 'random' ? 'Random' : mode} - ${indices.length}`,
       indices,
       current: 0,
       answers: indices.map(() => []),
@@ -105,11 +141,11 @@ export function useCertForge() {
       finished: false,
       timerSec: 0
     });
-    navigateTo('gh-300');
+    navigateTo('practice', { certId: activeCertId });
   }
 
   function requestStartQuiz(options) {
-    const inProgress = getInProgressQuiz(session);
+    const inProgress = getInProgressQuiz(session, storageKeys.savedQuiz);
     if (inProgress) {
       setPendingStart({ options, inProgress });
       return;
@@ -118,15 +154,16 @@ export function useCertForge() {
   }
 
   function continueInProgressQuiz() {
-    const inProgress = pendingStart?.inProgress ?? getInProgressQuiz(session);
+    const inProgress = pendingStart?.inProgress ?? getInProgressQuiz(session, storageKeys.savedQuiz);
     setPendingStart(null);
     if (!inProgress) return;
+    const resumeCertId = inProgress.certId ?? activeCertId;
     if (session && !session.finished) {
-      navigateTo('gh-300');
+      navigateTo('practice', { certId: resumeCertId });
       return;
     }
     setSession({ ...inProgress, finished: false, wrongSlots: undefined });
-    navigateTo('gh-300');
+    navigateTo('practice', { certId: resumeCertId });
   }
 
   function confirmStartFresh() {
@@ -139,7 +176,7 @@ export function useCertForge() {
   function resolveCurrentAttempt(current) {
     const slot = current.current;
     const questionIndex = current.indices[slot];
-    const ok = sameAnswer(current.answers[slot], gh300Questions[questionIndex].correct);
+    const ok = sameAnswer(current.answers[slot], questions[questionIndex].correct);
     setWeak((prev) => {
       const next = applyWeakDelta(prev, questionIndex, ok);
       writeJson(storageKeys.weak, next);
@@ -151,7 +188,7 @@ export function useCertForge() {
   function toggleChoice(choiceIndex) {
     setSession((current) => {
       if (!current || current.checked[current.current]) return current;
-      const question = gh300Questions[current.indices[current.current]];
+      const question = questions[current.indices[current.current]];
       const answers = current.answers.map((answer) => [...answer]);
       const selected = answers[current.current];
       if (question.multiple) {
@@ -208,11 +245,11 @@ export function useCertForge() {
     const wrongSlots = [];
     let correct = 0;
     session.indices.forEach((questionIndex, slot) => {
-      const ok = sameAnswer(session.answers[slot], gh300Questions[questionIndex].correct);
+      const ok = sameAnswer(session.answers[slot], questions[questionIndex].correct);
       if (ok) correct += 1;
       else wrongSlots.push(slot);
     });
-    savePartProgress(updatePartProgressFromSession(partProgress, session));
+    savePartProgress(updatePartProgressFromSession(partProgress, session, questions, partStarts, partSizes));
     saveHistory([
       ...history,
       {
@@ -246,6 +283,7 @@ export function useCertForge() {
     if (!session?.wrongSlots?.length) return;
     const indices = session.wrongSlots.map((slot) => session.indices[slot]);
     setSession({
+      certId: activeCertId,
       label: `Retry Wrong · ${indices.length}`,
       indices,
       current: 0,
@@ -288,7 +326,7 @@ export function useCertForge() {
     if (!session?.finished) return;
     const correct = session.indices.length - (session.wrongSlots?.length ?? 0);
     const text = [
-      '📋 GH-300 Quiz Results',
+      `📋 ${cert.exam} Quiz Results`,
       '━━━━━━━━━━━━━━━━━━━━━',
       `Quiz: ${session.label}`,
       `Score: ${percent(correct, session.indices.length)}% (${correct}/${session.indices.length})`,
@@ -313,6 +351,7 @@ export function useCertForge() {
       const start = partStarts[partIndex];
       for (let i = 0; i < partSizes[partIndex]; i += 1) pool.push(start + i);
     });
+    pool = pool.filter((index) => quizIndexSet.has(index));
 
     if (mode === 'flagged') pool = pool.filter((index) => flagged.includes(index));
     else if (mode === 'weak') pool = pool.filter((index) => weak[index]);
@@ -337,13 +376,13 @@ export function useCertForge() {
       known: 0,
       review: 0
     });
-    navigateTo('flashcards');
+    navigateTo('flashcards', { certId: activeCertId });
   }
 
   function startFlash(mode = 'all') {
     if (mode === 'weak') launchFlash({ mode: 'weak', count: 0, label: `Weak areas · ${Object.keys(weak).length}` });
     else if (mode === 'flagged') launchFlash({ mode: 'flagged', count: 0, label: `Flagged · ${flagged.length}` });
-    else launchFlash({ count: 0, label: `All cards · ${gh300Questions.length}` });
+    else launchFlash({ count: 0, label: `All cards · ${quizQuestions.length}` });
   }
 
   function markFlashKnown(questionIndex) {
@@ -372,8 +411,11 @@ export function useCertForge() {
   }
 
   function exportData() {
-    const filename = `certforge-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    const filename = `certforge-${activeCertId}-progress-${new Date().toISOString().slice(0, 10)}.json`;
     const payload = buildExportPayload({
+      certId: activeCertId,
+      exam: cert.exam,
+      storageKeys,
       history,
       flagged,
       weak,
@@ -437,7 +479,7 @@ export function useCertForge() {
 
   function clearAllData() {
     const confirmed = window.confirm(
-      'Clear all GH-300 progress?\n\nThis includes: quiz history, per-part progress, flagged, weak areas, flashcards, and saved in-progress quiz.\n\nThis cannot be undone. Light/dark theme is kept.'
+      `Clear all ${cert.exam} progress?\n\nThis includes: quiz history, per-part progress, flagged, weak areas, flashcards, and saved in-progress quiz.\n\nThis cannot be undone. Light/dark theme is kept.`
     );
     if (!confirmed) return;
     Object.values(storageKeys).forEach(removeKey);
@@ -449,13 +491,13 @@ export function useCertForge() {
     setFlash(null);
     setPendingStart(null);
     setSaveHint('');
-    showSyncHint('success', 'All GH-300 progress data has been cleared.');
+    showSyncHint('success', `All ${cert.exam} progress data has been cleared.`);
   }
 
   useEffect(() => {
     if (!session || session.finished) return;
     writeJson(storageKeys.savedQuiz, session);
-  }, [session]);
+  }, [session, storageKeys.savedQuiz]);
 
   useEffect(() => {
     if (!session || session.finished) return undefined;
@@ -468,7 +510,7 @@ export function useCertForge() {
   useEffect(() => {
     function onKeyDown(event) {
       if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
-      if (route !== 'gh-300' || !session || session.finished) return;
+      if (route !== 'practice' || !session || session.finished) return;
       if (event.key === 'ArrowRight' || event.key === 'n') moveQuestion(1);
       if (event.key === 'ArrowLeft' || event.key === 'p') moveQuestion(-1);
       if ((event.key === 'Enter' || event.key === 'c') && !event.ctrlKey && !event.metaKey) checkCurrent();
@@ -477,20 +519,24 @@ export function useCertForge() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [route, session]);
 
-  const currentQuestion = session ? gh300Questions[session.indices[session.current]] : null;
+  const currentQuestion = session ? questions[session.indices[session.current]] : null;
 
   const pageTitle = {
-    dashboard: 'GH-300 workspace',
+    home: 'CertForge home',
     catalog: 'Certification catalog',
-    'gh-300': session ? session.label : 'GH-300 practice',
+    'cert-dashboard': `${cert.exam} workspace`,
+    practice: session ? session.label : `${cert.exam} practice`,
     flashcards: flash ? flash.label ?? 'Flashcard deck' : 'Flashcards',
-    learn: 'Knowledge base',
-    library: 'Question library'
+    learn: `${cert.exam} knowledge base`,
+    library: `${cert.exam} question library`
   }[route];
 
   return {
     route,
     navigateTo,
+    certId: activeCertId,
+    cert,
+    quizQuestions,
     dark,
     persistTheme,
     history,

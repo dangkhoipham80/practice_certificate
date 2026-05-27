@@ -1,19 +1,20 @@
 import { X } from 'lucide-react';
-import { partTitles } from '../../config/gh300Exam';
 import { computePartStats } from '../../lib/statsUtils';
 
-export function PartDetailPanel({ partIndex, partProgress, onClose }) {
+export function PartDetailPanel({ cert, partIndex, partProgress, onClose }) {
   if (partIndex === null) return null;
-  const stats = computePartStats(partIndex, partProgress);
+  const { partTitles, partSizes } = cert;
+  const sectionLabel = cert.id.startsWith('ai-') ? 'Topic' : 'Part';
+  const stats = computePartStats(partIndex, partProgress, partSizes);
   const rows = partProgress[partIndex];
 
   return (
     <div className="panel p-5">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <p className="section-kicker">Part detail</p>
+          <p className="section-kicker">{sectionLabel} detail</p>
           <h3 className="text-lg font-extrabold">
-            Part {String(partIndex + 1).padStart(2, '0')} — {partTitles[partIndex]}
+            {sectionLabel} {String(partIndex + 1).padStart(2, '0')} — {partTitles[partIndex]}
           </h3>
         </div>
         <button className="icon-button" onClick={onClose} type="button" aria-label="Close part detail">

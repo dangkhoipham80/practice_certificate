@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { gh300Questions } from '../../data/gh300Questions';
-import { GRID_PAGE_SIZE } from '../../config/gh300Exam';
 import { percent, sameAnswer } from '../../lib/quizUtils';
 
-export function QuestionMap({ session, flagged, setSession }) {
+export function QuestionMap({ cert, session, flagged, setSession }) {
+  const { questions, GRID_PAGE_SIZE } = cert;
   const [gridPage, setGridPage] = useState(() => Math.floor(session.current / GRID_PAGE_SIZE));
   const answered = session.checked.filter(Boolean).length;
   const total = session.indices.length;
@@ -13,7 +12,7 @@ export function QuestionMap({ session, flagged, setSession }) {
 
   useEffect(() => {
     setGridPage(Math.floor(session.current / GRID_PAGE_SIZE));
-  }, [session.current]);
+  }, [session.current, GRID_PAGE_SIZE]);
 
   return (
     <aside className="panel h-fit p-4 xl:sticky xl:top-24">
@@ -37,13 +36,13 @@ export function QuestionMap({ session, flagged, setSession }) {
           const index = start + offset;
           const done = session.checked[index];
           const picked = session.answers[index].length > 0;
-          const ok = done && sameAnswer(session.answers[index], gh300Questions[questionIndex].correct);
+          const ok = done && sameAnswer(session.answers[index], questions[questionIndex].correct);
           let state = 'map-idle';
           if (session.current === index) state = 'map-current';
           else if (done) state = ok ? 'map-correct' : 'map-wrong';
           else if (picked) state = 'map-selected';
           return (
-            <button key={`${questionIndex}-${index}`} className={`map-cell ${state}`} onClick={() => setSession({ ...session, current: index })}>
+            <button key={`${questionIndex}-${index}`} className={`map-cell ${state}`} onClick={() => setSession({ ...session, current: index })} type="button">
               {index + 1}
               {flagged.includes(questionIndex) ? '🚩' : ''}
             </button>
@@ -52,13 +51,13 @@ export function QuestionMap({ session, flagged, setSession }) {
       </div>
       {pages > 1 && (
         <div className="mt-3 flex items-center justify-between text-[10px]">
-          <button className="secondary-button !min-h-8 px-2 py-1" disabled={gridPage === 0} onClick={() => setGridPage((page) => page - 1)}>
+          <button className="secondary-button !min-h-8 px-2 py-1" disabled={gridPage === 0} onClick={() => setGridPage((page) => page - 1)} type="button">
             ←
           </button>
           <span className="text-muted">
             {start + 1}–{end} / {total}
           </span>
-          <button className="secondary-button !min-h-8 px-2 py-1" disabled={gridPage >= pages - 1} onClick={() => setGridPage((page) => page + 1)}>
+          <button className="secondary-button !min-h-8 px-2 py-1" disabled={gridPage >= pages - 1} onClick={() => setGridPage((page) => page + 1)} type="button">
             →
           </button>
         </div>

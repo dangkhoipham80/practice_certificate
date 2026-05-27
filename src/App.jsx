@@ -1,27 +1,67 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, Link } from 'react-router-dom';
 import { Learn } from './Learn';
 import { useCertForge } from './hooks/useCertForge';
+import { CertProvider } from './context/CertContext';
+import { isCertReady } from './config/certRegistry';
 import { Sidebar } from './components/layout/Sidebar';
 import { MainHeader } from './components/layout/MainHeader';
 import { ResumeQuizDialog } from './components/layout/ResumeQuizDialog';
 import { Dashboard } from './components/dashboard/Dashboard';
+import { Home } from './components/home/Home';
 import { Catalog } from './components/catalog/Catalog';
 import { Practice } from './components/practice/Practice';
 import { Flashcards } from './components/flashcards/Flashcards';
 import { Library } from './components/library/Library';
 
-export function App() {
+function CertWorkspace({ app }) {
+  if (!isCertReady(app.cert)) {
+    return (
+      <section className="panel empty-state p-10 text-center animate-slide-up">
+        <p className="text-lg font-bold">{app.cert.exam} is not ready yet</p>
+        <p className="mt-2 text-sm text-muted dark:text-slate-400">{app.cert.description}</p>
+        <Link className="primary-button mt-6 inline-flex" to="/catalog">
+          Back to catalog
+        </Link>
+      </section>
+    );
+  }
+
+  return (
+    <Dashboard
+      cert={app.cert}
+      quizQuestions={app.quizQuestions}
+      stats={app.stats}
+      history={app.history}
+      flagged={app.flagged}
+      weak={app.weak}
+      partProgress={app.partProgress}
+      hasSavedQuiz={app.hasSavedQuiz}
+      startQuiz={app.requestStartQuiz}
+      resumeQuiz={app.resumeQuiz}
+      onNavigate={app.navigateTo}
+      exportData={app.exportData}
+      importData={app.importData}
+      clearAllData={app.clearAllData}
+      syncHint={app.syncHint}
+    />
+  );
+}
+
+function AppShell() {
   const app = useCertForge();
   const shellClass = app.dark ? 'dark' : '';
 
   return (
     <div className={shellClass}>
       <div className="app-shell">
-        <Sidebar onQuickStart={() => app.requestStartQuiz({ count: 20, label: 'GH-300 - Random 20' })} />
+        <Sidebar
+          onQuickStart={() => app.requestStartQuiz({ count: 20, label: `${app.cert.exam} · Random 20` })}
+        />
 
         <main className="relative z-[1] lg:pl-[272px]">
           <MainHeader
             pageTitle={app.pageTitle}
+            cert={app.cert}
             dark={app.dark}
             persistTheme={app.persistTheme}
             exportData={app.exportData}
@@ -32,31 +72,20 @@ export function App() {
 
           <div className="page-content">
             <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/catalog" element={<Catalog startQuiz={app.requestStartQuiz} />} />
+              <Route path="/practice" element={<Navigate to="/c/gh-300/practice" replace />} />
               <Route
-                path="/"
+                path="/c/:certId"
                 element={
-                  <Dashboard
-                    stats={app.stats}
-                    history={app.history}
-                    flagged={app.flagged}
-                    weak={app.weak}
-                    partProgress={app.partProgress}
-                    hasSavedQuiz={app.hasSavedQuiz}
-                    startQuiz={app.requestStartQuiz}
-                    resumeQuiz={app.resumeQuiz}
-                    onNavigate={app.navigateTo}
-                    exportData={app.exportData}
-                    importData={app.importData}
-                    clearAllData={app.clearAllData}
-                    syncHint={app.syncHint}
-                  />
+                  <CertWorkspace app={app} />
                 }
               />
-              <Route path="/catalog" element={<Catalog startQuiz={app.requestStartQuiz} />} />
               <Route
-                path="/practice"
+                path="/c/:certId/practice"
                 element={
                   <Practice
+                    cert={app.cert}
                     currentQuestion={app.currentQuestion}
                     flagged={app.flagged}
                     session={app.session}
@@ -80,11 +109,12 @@ export function App() {
                   />
                 }
               />
-              <Route path="/learn" element={<Learn />} />
+              <Route path="/c/:certId/learn" element={<Learn cert={app.cert} />} />
               <Route
-                path="/flashcards"
+                path="/c/:certId/flashcards"
                 element={
                   <Flashcards
+                    cert={app.cert}
                     flash={app.flash}
                     setFlash={app.setFlash}
                     launchFlash={app.launchFlash}
@@ -96,8 +126,16 @@ export function App() {
                 }
               />
               <Route
-                path="/library"
-                element={<Library search={app.search} setSearch={app.setSearch} flagged={app.flagged} toggleFlag={app.toggleFlag} />}
+                path="/c/:certId/library"
+                element={
+                  <Library
+                    cert={app.cert}
+                    search={app.search}
+                    setSearch={app.setSearch}
+                    flagged={app.flagged}
+                    toggleFlag={app.toggleFlag}
+                  />
+                }
               />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
@@ -115,5 +153,13 @@ export function App() {
         )}
       </div>
     </div>
+  );
+}
+
+export function App() {
+  return (
+    <CertProvider>
+      <AppShell />
+    </CertProvider>
   );
 }

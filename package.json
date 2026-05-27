@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "node scripts/build-exam-questions.mjs && vite build",
+    "build:questions": "node scripts/build-exam-questions.mjs",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

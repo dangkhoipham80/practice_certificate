@@ -10,9 +10,11 @@ import {
 } from 'lucide-react';
 import { getPartIndex } from '../../lib/progressUtils';
 import { formatTimer, percent, sameAnswer } from '../../lib/quizUtils';
+import { QuestionText } from '../shared/QuestionText';
 import { QuestionMap } from './QuestionMap';
 
 export function QuizSession({
+  cert,
   session,
   currentQuestion,
   flagged,
@@ -35,7 +37,7 @@ export function QuizSession({
   const isCorrect = checked && sameAnswer(selected, currentQuestion.correct);
   const isFlagged = flagged.includes(questionIndex);
   const progress = percent(session.current + 1, session.indices.length);
-  const partIndex = getPartIndex(questionIndex);
+  const partIndex = getPartIndex(questionIndex, cert.partStarts);
 
   return (
     <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
@@ -70,7 +72,11 @@ export function QuizSession({
         </div>
 
         <div className="px-5 py-5 sm:px-6">
-          <p className="mb-4 max-w-4xl text-lg font-semibold leading-8 text-ink dark:text-slate-100 sm:text-xl">{currentQuestion.text}</p>
+          <QuestionText
+            text={currentQuestion.text}
+            images={currentQuestion.images}
+            className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
+          />
           {currentQuestion.warn && (
             <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs font-medium text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
               {currentQuestion.warn}
@@ -107,6 +113,9 @@ export function QuizSession({
               <span>
                 {isCorrect ? '✓ Correct!' : '✗ Incorrect'} — Answer:{' '}
                 {currentQuestion.correct.map((item) => String.fromCharCode(65 + item)).join(', ')}
+                {currentQuestion.explanation && (
+                  <span className="mt-2 block text-xs font-normal opacity-90">{currentQuestion.explanation.slice(0, 500)}</span>
+                )}
               </span>
             </div>
           )}
@@ -151,7 +160,7 @@ export function QuizSession({
           </button>
         </div>
       </div>
-      <QuestionMap session={session} flagged={flagged} setSession={setSession} />
+      <QuestionMap cert={cert} session={session} flagged={flagged} setSession={setSession} />
     </section>
   );
 }

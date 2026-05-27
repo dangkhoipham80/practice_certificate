@@ -77,7 +77,17 @@ function toggleKbCard(trigger) {
   setKbCardOpen(card, !card.classList.contains('kb-open'));
 }
 
-export function Learn() {
+export function Learn({ cert }) {
+  if (!cert?.features?.learn) {
+    return (
+      <section className="panel empty-state p-10 text-center animate-slide-up">
+        <p className="text-lg font-bold">{cert.exam} knowledge base</p>
+        <p className="mt-2 text-sm text-muted dark:text-slate-400">
+          Study material is not available for this certification yet. Use Practice or the Question library instead.
+        </p>
+      </section>
+    );
+  }
   const [html, setHtml] = useState('');
   const [search, setSearch] = useState('');
   const [loadError, setLoadError] = useState('');

@@ -1,19 +1,23 @@
-import { Play } from 'lucide-react';
-import { certifications } from '../../config/certifications';
+import { Play, ArrowRight, Award } from 'lucide-react';
+import { certifications, getCert, isCertReady } from '../../config/certRegistry';
+import { useCertContext } from '../../context/CertContext';
 import { InfoTile } from '../ui/InfoTile';
 import { SectionHeader } from '../ui/SectionHeader';
 
 export function Catalog({ startQuiz }) {
+  const { openCertWorkspace } = useCertContext();
+
   return (
     <section className="animate-slide-up space-y-6">
       <SectionHeader
         kicker="Certification catalog"
         title="Training paths"
-        description="GH-300 is available now. Additional certification sets are staged as placeholders."
+        description="GH-300, AI-102, and AI-200 — each with its own workspace, progress tracking, and question bank."
       />
       <div className="grid gap-5 md:grid-cols-3">
         {certifications.map((cert) => {
-          const ready = cert.id === 'gh-300';
+          const fullCert = getCert(cert.id);
+          const ready = isCertReady(fullCert);
           return (
             <article className={`panel p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover ${ready ? 'cert-card-ready' : 'opacity-90'}`} key={cert.id}>
               <div className="mb-6 flex items-start justify-between gap-3">
@@ -24,14 +28,36 @@ export function Catalog({ startQuiz }) {
                 </div>
                 <span className={`status-badge ${ready ? 'status-ready' : 'status-muted'}`}>{cert.status}</span>
               </div>
+              <p className="mb-4 text-sm leading-6 text-muted dark:text-slate-400">{cert.description}</p>
               <div className="mb-6 grid grid-cols-2 gap-3 text-sm">
                 <InfoTile label="Level" value={cert.level} />
-                <InfoTile label="Questions" value={cert.questions || 'Seed data'} />
+                <InfoTile label="Questions" value={cert.questions || '—'} />
+                <InfoTile label="Quiz pool" value={cert.quizEligible || '—'} />
+                <InfoTile label="Provider" value={cert.provider} />
               </div>
-              <button className="primary-button w-full" disabled={!ready} onClick={() => startQuiz({ count: 20, label: 'GH-300 - Random 20' })}>
-                <Play size={16} />
-                {ready ? 'Start practice' : 'Not available'}
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  className="primary-button w-full"
+                  disabled={!ready}
+                  onClick={() => openCertWorkspace(cert.id)}
+                >
+                  <Award size={16} />
+                  {ready ? 'Open workspace' : 'Not available'}
+                </button>
+                {ready && (
+                  <button
+                    className="secondary-button w-full"
+                    onClick={() => {
+                      openCertWorkspace(cert.id);
+                      startQuiz({ count: 20, label: `${cert.exam} · Random 20` });
+                    }}
+                  >
+                    <Play size={16} />
+                    Quick practice 20
+                    <ArrowRight size={16} />
+                  </button>
+                )}
+              </div>
             </article>
           );
         })}

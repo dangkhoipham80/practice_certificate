@@ -1,4 +1,14 @@
-import { storageKeys } from '../config/gh300Exam';
+export function normalizeHistory(rows = []) {
+  if (!Array.isArray(rows)) return [];
+  return rows.map((row) => ({
+    id: row.id ?? crypto.randomUUID(),
+    label: row.label ?? 'Quiz',
+    total: row.total ?? 0,
+    correct: row.correct ?? 0,
+    score: row.score ?? row.pct ?? 0,
+    date: row.date ?? new Date().toISOString()
+  }));
+}
 
 const LEGACY_KEYS = {
   'gh300-history': 'history',
@@ -17,18 +27,6 @@ function parseStoredValue(value) {
   } catch {
     return value;
   }
-}
-
-export function normalizeHistory(rows = []) {
-  if (!Array.isArray(rows)) return [];
-  return rows.map((row) => ({
-    id: row.id ?? crypto.randomUUID(),
-    label: row.label ?? 'Quiz',
-    total: row.total ?? 0,
-    correct: row.correct ?? 0,
-    score: row.score ?? row.pct ?? 0,
-    date: row.date ?? new Date().toISOString()
-  }));
 }
 
 export function parseImportPayload(raw) {
@@ -71,9 +69,11 @@ export function parseImportPayload(raw) {
   throw new Error('Unrecognized progress file.');
 }
 
-export function buildExportPayload({ history, flagged, weak, partProgress, fcKnown, fcUnknown }) {
+export function buildExportPayload({ certId, exam, storageKeys, history, flagged, weak, partProgress, fcKnown, fcUnknown }) {
   return {
-    version: 1,
+    version: 2,
+    certId,
+    exam,
     exportedAt: new Date().toISOString(),
     storageKeys,
     history,

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Play } from 'lucide-react';
-import { gh300Questions } from '../../data/gh300Questions';
-import { partSizes, partStarts } from '../../config/gh300Exam';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
 import { shuffle } from '../../lib/quizUtils';
 import { SectionHeader } from '../ui/SectionHeader';
 
-export function QuizCustomSetup({ startQuiz, partProgress }) {
+export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
+  const { questions, partSizes, partStarts } = cert;
+  const sectionPrefix = cert.id.startsWith('ai-') ? 'T' : 'P';
   const [parts, setParts] = useState(() => partSizes.map((_, index) => index));
   const [questionType, setQuestionType] = useState('all');
   const [source, setSource] = useState('all');
@@ -23,7 +23,8 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
       const start = partStarts[partIndex];
       for (let i = 0; i < partSizes[partIndex]; i += 1) {
         const questionIndex = start + i;
-        const question = gh300Questions[questionIndex];
+        const question = questions[questionIndex];
+        if (question.quizEligible === false || !question.choices?.length) continue;
         if (questionType === 'multiple' && !question.multiple) continue;
         if (questionType === 'single' && question.multiple) continue;
         pool.push(questionIndex);
@@ -31,11 +32,11 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
     });
     if (!pool.length) return window.alert('No questions match.');
     if (source === 'wrong') {
-      pool = pool.filter((index) => getWrongIndices(partProgress).includes(index));
+      pool = pool.filter((index) => getWrongIndices(partProgress, partSizes, partStarts).includes(index));
       if (!pool.length) return window.alert('No wrong answers in the selected scope!');
     }
     if (source === 'unanswered') {
-      pool = pool.filter((index) => getUnansweredIndices(partProgress).includes(index));
+      pool = pool.filter((index) => getUnansweredIndices(partProgress, partSizes, partStarts).includes(index));
       if (!pool.length) return window.alert('All questions in the selected scope have been answered!');
     }
     const ordered = order === 'random' ? shuffle(pool) : [...pool];
@@ -44,7 +45,7 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
     startQuiz({
       mode: 'custom',
       count: parsed,
-      label: `${order === 'random' ? 'Random' : 'Sequential'}${srcLabel} · ${parsed}`,
+      label: `${cert.exam} · ${order === 'random' ? 'Random' : 'Sequential'}${srcLabel} · ${parsed}`,
       shufflePool: false,
       customIndices: ordered.slice(0, parsed)
     });
@@ -52,12 +53,12 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
 
   return (
     <div className="panel space-y-4 p-5">
-      <SectionHeader kicker="Custom quiz" title="Build your session" description="Filter by part, question type, and wrong/unanswered pools like GH-300 Pro." />
+      <SectionHeader kicker="Custom quiz" title="Build your session" description="Filter by section, question type, and wrong/unanswered pools." />
       <div className="flex flex-wrap gap-2">
         {partSizes.map((size, index) => (
           <label className={`filter-chip cursor-pointer ${parts.includes(index) ? 'filter-chip-active' : ''}`} key={index}>
             <input className="hidden" type="checkbox" checked={parts.includes(index)} onChange={() => togglePart(index)} />
-            P{String(index + 1).padStart(2, '0')} ({size})
+            {sectionPrefix}{String(index + 1).padStart(2, '0')} ({size})
           </label>
         ))}
       </div>
@@ -70,7 +71,7 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
               ['single', 'Single'],
               ['multiple', 'Multiple']
             ].map(([id, label]) => (
-              <button key={id} className={`filter-chip ${questionType === id ? 'filter-chip-active' : ''}`} onClick={() => setQuestionType(id)}>
+              <button key={id} className={`filter-chip ${questionType === id ? 'filter-chip-active' : ''}`} onClick={() => setQuestionType(id)} type="button">
                 {label}
               </button>
             ))}
@@ -84,7 +85,7 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
               ['wrong', 'Wrong only'],
               ['unanswered', 'Unanswered']
             ].map(([id, label]) => (
-              <button key={id} className={`filter-chip ${source === id ? 'filter-chip-active' : ''}`} onClick={() => setSource(id)}>
+              <button key={id} className={`filter-chip ${source === id ? 'filter-chip-active' : ''}`} onClick={() => setSource(id)} type="button">
                 {label}
               </button>
             ))}
@@ -97,7 +98,7 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
               ['random', 'Random'],
               ['seq', 'Sequential']
             ].map(([id, label]) => (
-              <button key={id} className={`filter-chip ${order === id ? 'filter-chip-active' : ''}`} onClick={() => setOrder(id)}>
+              <button key={id} className={`filter-chip ${order === id ? 'filter-chip-active' : ''}`} onClick={() => setOrder(id)} type="button">
                 {label}
               </button>
             ))}
@@ -110,7 +111,7 @@ export function QuizCustomSetup({ startQuiz, partProgress }) {
           />
         </div>
       </div>
-      <button className="primary-button" onClick={launchCustomFixed}>
+      <button className="primary-button" onClick={launchCustomFixed} type="button">
         <Play size={16} />
         Launch custom quiz
       </button>

@@ -1,15 +1,13 @@
-import { gh300Questions } from '../data/gh300Questions';
-import { partSizes, partStarts } from '../config/gh300Exam';
 import { sameAnswer } from './quizUtils';
 
-export function getPartIndex(questionIndex) {
+export function getPartIndex(questionIndex, partStarts) {
   for (let part = partStarts.length - 1; part >= 0; part -= 1) {
     if (questionIndex >= partStarts[part]) return part;
   }
   return 0;
 }
 
-export function getWrongIndices(partProgress) {
+export function getWrongIndices(partProgress, partSizes, partStarts) {
   const wrong = [];
   partSizes.forEach((size, partIndex) => {
     const rows = partProgress[partIndex];
@@ -21,7 +19,7 @@ export function getWrongIndices(partProgress) {
   return wrong;
 }
 
-export function getUnansweredIndices(partProgress) {
+export function getUnansweredIndices(partProgress, partSizes, partStarts) {
   const unanswered = [];
   partSizes.forEach((size, partIndex) => {
     const rows = partProgress[partIndex];
@@ -36,14 +34,14 @@ export function getUnansweredIndices(partProgress) {
   return unanswered;
 }
 
-export function updatePartProgressFromSession(partProgress, session) {
+export function updatePartProgressFromSession(partProgress, session, questions, partStarts, partSizes) {
   const next = { ...partProgress };
   session.indices.forEach((questionIndex, slot) => {
     if (!session.answers[slot].length) return;
-    const partIndex = getPartIndex(questionIndex);
+    const partIndex = getPartIndex(questionIndex, partStarts);
     const localIndex = questionIndex - partStarts[partIndex];
     if (!next[partIndex]) next[partIndex] = new Array(partSizes[partIndex]).fill(null);
-    const ok = sameAnswer(session.answers[slot], gh300Questions[questionIndex].correct);
+    const ok = sameAnswer(session.answers[slot], questions[questionIndex].correct);
     next[partIndex] = [...next[partIndex]];
     next[partIndex][localIndex] = ok ? 'correct' : 'wrong';
   });

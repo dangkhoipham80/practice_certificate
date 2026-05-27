@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { ChevronDown, Flag, Search } from 'lucide-react';
-import { gh300Questions } from '../../data/gh300Questions';
 import { SectionHeader } from '../ui/SectionHeader';
+import { QuestionText } from '../shared/QuestionText';
 
-export function Library({ search, setSearch, flagged, toggleFlag }) {
+export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
   const [filter, setFilter] = useState('all');
   const [expanded, setExpanded] = useState(() => new Set());
+  const { questions } = cert;
 
-  const filtered = gh300Questions
+  const filtered = questions
     .map((question, index) => ({ ...question, index }))
     .filter((question) => {
       if (filter === 'flagged' && !flagged.includes(question.index)) return false;
       if (filter === 'multi' && !question.multiple) return false;
       if (filter === 'single' && question.multiple) return false;
-      return !search.trim() || `${question.text} ${question.choices.join(' ')}`.toLowerCase().includes(search.toLowerCase());
+      if (filter === 'quiz' && question.quizEligible === false) return false;
+      if (filter === 'interactive' && question.quizEligible !== false) return false;
+      return !search.trim() || `${question.text} ${(question.choices ?? []).join(' ')}`.toLowerCase().includes(search.toLowerCase());
     });
 
   function toggleDetail(index) {
@@ -29,7 +32,7 @@ export function Library({ search, setSearch, flagged, toggleFlag }) {
     <section className="space-y-4">
       <SectionHeader
         kicker="Question library"
-        title="Browse GH-300 bank"
+        title={`Browse ${cert.exam} bank`}
         description={`${filtered.length} matching questions. Showing the first 80 for fast scanning.`}
       />
       <div className="panel sticky top-[88px] z-[5] space-y-4 p-4 shadow-card">
@@ -47,9 +50,11 @@ export function Library({ search, setSearch, flagged, toggleFlag }) {
             ['all', 'All'],
             ['flagged', `Flagged (${flagged.length})`],
             ['multi', 'Multi-answer'],
-            ['single', 'Single-answer']
+            ['single', 'Single-answer'],
+            ['quiz', 'Quiz MC'],
+            ['interactive', 'Interactive']
           ].map(([id, label]) => (
-            <button key={id} className={`filter-chip ${filter === id ? 'filter-chip-active' : ''}`} onClick={() => setFilter(id)}>
+            <button key={id} className={`filter-chip ${filter === id ? 'filter-chip-active' : ''}`} onClick={() => setFilter(id)} type="button">
               {label}
             </button>
           ))}
@@ -58,13 +63,20 @@ export function Library({ search, setSearch, flagged, toggleFlag }) {
       <div className="grid gap-3">
         {filtered.slice(0, 80).map((question) => {
           const isOpen = expanded.has(question.index);
-          const correctLabels = question.correct.map((item) => String.fromCharCode(65 + item)).join(', ');
+          const correctLabels = (question.correct ?? []).map((item) => String.fromCharCode(65 + item)).join(', ');
           return (
             <article className="question-row" key={question.index}>
               <div className="mb-3 flex items-start justify-between gap-3">
                 <div className="flex min-w-0 gap-3">
                   <span className="question-number">{question.index + 1}</span>
-                  <p className="text-sm font-semibold leading-6">{question.text}</p>
+                  <div className="min-w-0">
+                    <QuestionText text={question.text} images={isOpen ? question.images : []} className="text-sm font-semibold" />
+                    {question.quizEligible === false && (
+                      <span className="mt-1 inline-block rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:bg-amber-500/15 dark:text-amber-200">
+                        Interactive / library only
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex shrink-0 gap-1.5">
                   <button
@@ -86,10 +98,10 @@ export function Library({ search, setSearch, flagged, toggleFlag }) {
                 </div>
               </div>
               <p className="ml-10 text-xs text-muted dark:text-slate-400">
-                {question.multiple ? 'Multiple answer' : 'Single answer'}
-                {!isOpen && ' · tap Detail to view choices'}
+                {question.multiple ? 'Multiple answer' : question.choices?.length ? 'Single answer' : 'Non-MC'}
+                {!isOpen && question.choices?.length ? ' · tap Detail to view choices' : ''}
               </p>
-              {isOpen && (
+              {isOpen && question.choices?.length > 0 && (
                 <div className="ml-10 mt-4 space-y-3">
                   <div className="space-y-2">
                     {question.choices.map((choice, choiceIndex) => {
@@ -110,9 +122,16 @@ export function Library({ search, setSearch, flagged, toggleFlag }) {
                       );
                     })}
                   </div>
-                  <p className="rounded-xl border border-success-200 bg-success-50 px-3 py-2 text-xs font-semibold text-success-800 dark:border-success-500/30 dark:bg-success-500/10 dark:text-success-200">
-                    Correct answer{question.correct.length > 1 ? 's' : ''}: {correctLabels}
-                  </p>
+                  {correctLabels && (
+                    <p className="rounded-xl border border-success-200 bg-success-50 px-3 py-2 text-xs font-semibold text-success-800 dark:border-success-500/30 dark:bg-success-500/10 dark:text-success-200">
+                      Correct answer{question.correct.length > 1 ? 's' : ''}: {correctLabels}
+                    </p>
+                  )}
+                  {question.explanation && (
+                    <p className="rounded-xl border border-line/70 bg-subtle/50 px-3 py-2 text-xs leading-6 text-muted dark:border-gh-border dark:bg-gh-subtle/50 dark:text-slate-400">
+                      {question.explanation.slice(0, 800)}
+                    </p>
+                  )}
                 </div>
               )}
             </article>

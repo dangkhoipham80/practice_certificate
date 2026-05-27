@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Award, BarChart3, BookOpen, Brain, ClipboardList, GraduationCap, Layers3, Play } from 'lucide-react';
-import { APP_ROUTES } from '../../config/routes';
-import { gh300Questions } from '../../data/gh300Questions';
+import { pathFromRouteId } from '../../config/routes';
+import { isCertReady } from '../../config/certRegistry';
+import { useCertContext } from '../../context/CertContext';
 import { NavButton } from '../ui/NavButton';
 
-const paths = Object.fromEntries(APP_ROUTES.map((r) => [r.id, r.path]));
-
 export function Sidebar({ onQuickStart }) {
+  const { activeCert, activeCertId } = useCertContext();
+  const ready = isCertReady(activeCert);
+  const certBase = pathFromRouteId('cert-dashboard', activeCertId);
+
   return (
     <aside className="sidebar">
-      <Link className="sidebar-brand" to={paths.dashboard}>
+      <Link className="sidebar-brand" to="/">
         <span className="sidebar-logo">
           <Award size={22} />
         </span>
@@ -18,19 +21,27 @@ export function Sidebar({ onQuickStart }) {
           <span className="text-xs text-muted dark:text-slate-400">Certification workspace</span>
         </span>
       </Link>
-      <div className="sidebar-section">Workspace</div>
+      <div className="sidebar-section">Global</div>
       <nav className="flex-1 space-y-0.5">
-        <NavButton to={paths.dashboard} end icon={BarChart3} label="Dashboard" />
-        <NavButton to={paths.catalog} icon={Layers3} label="Cert catalog" />
-        <NavButton to={paths['gh-300']} icon={ClipboardList} label="GH-300 practice" />
-        <NavButton to={paths.learn} icon={GraduationCap} label="Learn" />
-        <NavButton to={paths.flashcards} icon={Brain} label="Flashcards" />
-        <NavButton to={paths.library} icon={BookOpen} label="Question library" />
+        <NavButton to="/" end icon={BarChart3} label="Home" />
+        <NavButton to="/catalog" icon={Layers3} label="Cert catalog" />
+      </nav>
+      <div className="sidebar-section">{activeCert.exam} workspace</div>
+      <nav className="space-y-0.5">
+        <NavButton to={certBase} end icon={BarChart3} label="Dashboard" />
+        <NavButton to={pathFromRouteId('practice', activeCertId)} icon={ClipboardList} label="Practice" />
+        {activeCert.features.learn && (
+          <NavButton to={pathFromRouteId('learn', activeCertId)} icon={GraduationCap} label="Learn" />
+        )}
+        <NavButton to={pathFromRouteId('flashcards', activeCertId)} icon={Brain} label="Flashcards" />
+        <NavButton to={pathFromRouteId('library', activeCertId)} icon={BookOpen} label="Question library" />
       </nav>
       <div className="mt-auto rounded-2xl border border-line/70 bg-subtle/60 p-4 dark:border-gh-border dark:bg-gh-subtle/40">
-        <p className="text-xs font-bold text-ink dark:text-slate-200">GH-300 ready</p>
-        <p className="mt-1 text-xs text-muted dark:text-slate-400">{gh300Questions.length} questions in bank</p>
-        <button className="primary-button mt-3 w-full" onClick={onQuickStart}>
+        <p className="text-xs font-bold text-ink dark:text-slate-200">{activeCert.exam} {ready ? 'ready' : activeCert.status}</p>
+        <p className="mt-1 text-xs text-muted dark:text-slate-400">
+          {activeCert.questions.length} questions · {activeCert.questions.filter((q) => q.quizEligible !== false).length} quiz
+        </p>
+        <button className="primary-button mt-3 w-full" disabled={!ready} onClick={onQuickStart}>
           <Play size={16} />
           Quick start
         </button>

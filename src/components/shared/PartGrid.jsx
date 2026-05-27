@@ -1,16 +1,18 @@
 import { ArrowRight } from 'lucide-react';
-import { partSizes, partTitles } from '../../config/gh300Exam';
 import { computePartStats } from '../../lib/statsUtils';
 
-export function PartGrid({ startQuiz, partProgress = {}, compact = false, onShowDetail }) {
+export function PartGrid({ cert, startQuiz, partProgress = {}, compact = false, onShowDetail }) {
+  const { partSizes, partTitles } = cert;
+  const sectionLabel = cert.id.startsWith('ai-') ? 'Topic' : 'Part';
+
   return (
     <div className={compact ? 'panel divide-y divide-line overflow-hidden dark:divide-gh-border' : 'grid gap-3 md:grid-cols-2 xl:grid-cols-4'}>
       {partSizes.map((size, index) => {
-        const stats = computePartStats(index, partProgress);
+        const stats = computePartStats(index, partProgress, partSizes);
         return (
           <div
             className={compact ? '' : 'panel group overflow-hidden p-0 transition hover:-translate-y-0.5 hover:border-accent-300 hover:shadow-soft dark:hover:border-accent-500/60'}
-            key={partTitles[index]}
+            key={`${partTitles[index]}-${index}`}
           >
             <button
               className={compact ? 'part-row w-full' : 'w-full p-4 text-left'}
@@ -18,7 +20,7 @@ export function PartGrid({ startQuiz, partProgress = {}, compact = false, onShow
                 startQuiz({
                   partIndex: index,
                   count: 'all',
-                  label: `Part ${String(index + 1).padStart(2, '0')} · ${size}`,
+                  label: `${sectionLabel} ${String(index + 1).padStart(2, '0')} · ${size}`,
                   shufflePool: false
                 })
               }
@@ -45,7 +47,7 @@ export function PartGrid({ startQuiz, partProgress = {}, compact = false, onShow
               ) : (
                 <>
                   <div className="mb-3 flex items-center justify-between">
-                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted dark:text-slate-400">Part {index + 1}</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted dark:text-slate-400">{sectionLabel} {index + 1}</p>
                     <span className="rounded-md bg-subtle px-2 py-1 text-xs font-semibold text-muted dark:bg-gh-subtle dark:text-slate-400">
                       {stats.hasProgress ? `${stats.pct}%` : size}
                     </span>

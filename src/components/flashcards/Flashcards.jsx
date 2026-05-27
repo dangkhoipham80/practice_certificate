@@ -1,20 +1,19 @@
 import { Check, ChevronLeft, X } from 'lucide-react';
-import { gh300Questions } from '../../data/gh300Questions';
-import { storageKeys } from '../../config/gh300Exam';
 import { readJson } from '../../lib/storage';
 import { percent } from '../../lib/quizUtils';
+import { QuestionText } from '../shared/QuestionText';
 import { FlashcardSetup } from './FlashcardSetup';
 
-export function Flashcards({ flash, setFlash, launchFlash, flagged, weak, markFlashKnown, markFlashUnknown }) {
-  const fcKnown = readJson(storageKeys.fcKnown, []);
-  const fcUnknown = readJson(storageKeys.fcUnknown, []);
+export function Flashcards({ cert, flash, setFlash, launchFlash, flagged, weak, markFlashKnown, markFlashUnknown }) {
+  const fcKnown = readJson(cert.storageKeys.fcKnown, []);
+  const fcUnknown = readJson(cert.storageKeys.fcUnknown, []);
 
   if (!flash) {
-    return <FlashcardSetup launchFlash={launchFlash} flagged={flagged} weak={weak} fcKnown={fcKnown} fcUnknown={fcUnknown} />;
+    return <FlashcardSetup cert={cert} launchFlash={launchFlash} flagged={flagged} weak={weak} fcKnown={fcKnown} fcUnknown={fcUnknown} />;
   }
 
-  const question = gh300Questions[flash.pool[flash.current]];
   const questionIndex = flash.pool[flash.current];
+  const question = cert.questions[questionIndex];
 
   function advanceCard(mark) {
     if (mark === 'known') markFlashKnown(questionIndex);
@@ -44,18 +43,18 @@ export function Flashcards({ flash, setFlash, launchFlash, flagged, weak, markFl
             Card {flash.current + 1} <span className="font-medium text-muted dark:text-slate-400">/ {flash.pool.length}</span>
           </h2>
         </div>
-        <button className="icon-button" onClick={() => setFlash(null)} title="Close">
+        <button className="icon-button" onClick={() => setFlash(null)} title="Close" type="button">
           <X size={18} />
         </button>
       </div>
       <div className="progress-bar mb-5">
         <div className="progress-bar-fill" style={{ width: `${cardProgress}%` }} />
       </div>
-      <button className={`flashcard ${flash.flipped ? 'flashcard-flipped' : ''}`} onClick={() => setFlash({ ...flash, flipped: !flash.flipped })}>
+      <button className={`flashcard ${flash.flipped ? 'flashcard-flipped' : ''}`} onClick={() => setFlash({ ...flash, flipped: !flash.flipped })} type="button">
         {!flash.flipped ? (
           <>
             <p className="section-kicker">Question — tap to reveal</p>
-            <p className="mt-5 text-xl font-semibold leading-8 sm:text-2xl">{question.text}</p>
+            <QuestionText text={question.text} images={question.images} className="mt-5 text-xl font-semibold sm:text-2xl" />
             <p className="mt-8 text-xs font-medium text-muted dark:text-slate-500">Click anywhere on the card to flip</p>
           </>
         ) : (
@@ -76,15 +75,15 @@ export function Flashcards({ flash, setFlash, launchFlash, flagged, weak, markFl
         )}
       </button>
       <div className="mt-5 flex flex-wrap gap-3">
-        <button className="secondary-button" onClick={() => setFlash({ ...flash, current: Math.max(0, flash.current - 1), flipped: false })}>
+        <button className="secondary-button" onClick={() => setFlash({ ...flash, current: Math.max(0, flash.current - 1), flipped: false })} type="button">
           <ChevronLeft size={16} />
           Previous
         </button>
-        <button className="primary-button flex-1 sm:flex-none" onClick={() => advanceCard('known')}>
+        <button className="primary-button flex-1 sm:flex-none" onClick={() => advanceCard('known')} type="button">
           <Check size={16} />
           I know this
         </button>
-        <button className="danger-button" onClick={() => advanceCard('unknown')}>
+        <button className="danger-button" onClick={() => advanceCard('unknown')} type="button">
           Review again
         </button>
       </div>

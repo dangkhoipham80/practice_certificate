@@ -1,6 +1,3 @@
-import { gh300Questions } from '../data/gh300Questions';
-import { partSizes, partStarts } from '../config/gh300Exam';
-
 export function computeDayStreak(history) {
   if (!history.length) return 0;
   const days = new Set(history.map((row) => row.date.slice(0, 10)));
@@ -13,7 +10,7 @@ export function computeDayStreak(history) {
   return streak;
 }
 
-export function computePartStats(partIndex, partProgress) {
+export function computePartStats(partIndex, partProgress, partSizes) {
   const size = partSizes[partIndex];
   const rows = partProgress[partIndex];
   if (!rows) {
@@ -34,8 +31,7 @@ export function computePartStats(partIndex, partProgress) {
   };
 }
 
-export function computeBankProgress(partProgress) {
-  const total = gh300Questions.length;
+export function computeBankProgress(partProgress, partSizes, totalQuestions) {
   let correct = 0;
   let wrong = 0;
   partSizes.forEach((size, partIndex) => {
@@ -47,12 +43,12 @@ export function computeBankProgress(partProgress) {
     });
   });
   const attempted = correct + wrong;
-  const unanswered = total - attempted;
-  const pct = attempted ? Math.round((correct / total) * 100) : 0;
-  const masteryPct = Math.round((correct / total) * 100);
-  return { total, correct, wrong, attempted, unanswered, pct, masteryPct };
+  const unanswered = totalQuestions - attempted;
+  const pct = attempted ? Math.round((correct / totalQuestions) * 100) : 0;
+  const masteryPct = Math.round((correct / totalQuestions) * 100);
+  return { total: totalQuestions, correct, wrong, attempted, unanswered, pct, masteryPct };
 }
 
-export function getQuestionGlobalIndex(partIndex, localIndex) {
+export function getQuestionGlobalIndex(partIndex, localIndex, partStarts) {
   return partStarts[partIndex] + localIndex;
 }

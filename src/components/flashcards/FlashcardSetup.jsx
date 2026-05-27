@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Flag, Play } from 'lucide-react';
-import { partSizes } from '../../config/gh300Exam';
 import { SectionHeader } from '../ui/SectionHeader';
 
-export function FlashcardSetup({ launchFlash, flagged, weak, fcKnown, fcUnknown }) {
+export function FlashcardSetup({ cert, launchFlash, flagged, weak, fcKnown, fcUnknown }) {
+  const { partSizes } = cert;
+  const sectionPrefix = cert.id.startsWith('ai-') ? 'T' : 'P';
   const [parts, setParts] = useState(() => partSizes.map((_, index) => index));
   const [source, setSource] = useState('all');
   const [order, setOrder] = useState('random');
@@ -17,16 +18,16 @@ export function FlashcardSetup({ launchFlash, flagged, weak, fcKnown, fcUnknown 
     <section className="animate-slide-up space-y-6">
       <SectionHeader
         kicker="Flashcards"
-        title="Build your deck"
-        description="Pick parts, card source, count, and order — like GH-300 Pro (no 40-card cap)."
+        title={`${cert.exam} flashcards`}
+        description="Pick sections, card source, count, and order."
       />
       <div className="panel space-y-5 p-5">
         <div>
-          <p className="mb-2 text-xs font-bold uppercase text-muted">Parts</p>
+          <p className="mb-2 text-xs font-bold uppercase text-muted">Sections</p>
           <div className="flex flex-wrap gap-2">
             {partSizes.map((size, index) => (
               <button key={index} type="button" className={`filter-chip ${parts.includes(index) ? 'filter-chip-active' : ''}`} onClick={() => togglePart(index)}>
-                P{String(index + 1).padStart(2, '0')} ({size})
+                {sectionPrefix}{String(index + 1).padStart(2, '0')} ({size})
               </button>
             ))}
           </div>
