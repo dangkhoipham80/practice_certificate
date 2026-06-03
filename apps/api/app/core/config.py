@@ -30,6 +30,11 @@ class Settings(BaseSettings):
     database_url: str = Field(validation_alias="DATABASE_URL")
     cors_origins: str = Field(validation_alias="CORS_ORIGINS")
 
+    jwt_secret: str = Field(validation_alias="JWT_SECRET")
+    jwt_algorithm: str = Field(default="HS256", validation_alias="JWT_ALGORITHM")
+    access_token_expire_minutes: int = Field(default=60, validation_alias="ACCESS_TOKEN_EXPIRE_MINUTES")
+    bootstrap_admin_email: str | None = Field(default=None, validation_alias="BOOTSTRAP_ADMIN_EMAIL")
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]

@@ -4,16 +4,16 @@
 
 | Thành phần | Công nghệ | Vai trò |
 |------------|-----------|---------|
-| FE | React + Vite (`src/`) | UI, routing, local cache |
+| FE | React + Vite (`apps/web/`) | UI, routing, local cache |
 | BE | FastAPI (`apps/api/`) | API REST, business logic |
 | DB | PostgreSQL | Câu hỏi, meta chứng chỉ, sessions |
-| Nguồn câu hỏi | `AI_102/*.json`, `src/data/gh300Questions.js` | Source of truth trước migrate |
-| Pipeline | `scripts/` | Build JS bundle + migrate vào DB |
+| Nguồn câu hỏi | `apps/web/src/data/*.js` | Bundles FE; DB qua migrate |
+| Pipeline | `scripts/` (repo root) | Build JS bundle + migrate vào DB |
 
 ```mermaid
 flowchart LR
   subgraph sources [Nguồn dữ liệu]
-    JSON[AI_102 JSON]
+    AI102[ai102Questions.js]
     GH[gh300Questions.js]
   end
 
@@ -32,54 +32,50 @@ flowchart LR
     Q[questions]
   end
 
-  subgraph fe [src]
+  subgraph fe [apps/web]
     UI[React app]
   end
 
-  JSON --> BUILD
-  JSON --> MIGRATE
+  AI102 --> BUILD
+  AI102 --> MIGRATE
   GH --> MIGRATE
-  BUILD --> JS[src/data/ai102Questions.js]
+  BUILD --> AI102
   MIGRATE --> PARTS
   MIGRATE --> db
   API --> db
   UI -.-> API
-  UI --> JS
+  UI --> AI102
 ```
 
 ## Cấu trúc thư mục
 
 ```
 practice_certificate/
-├── apps/api/              # FastAPI
-│   ├── app/
-│   │   ├── api/v1/        # HTTP routers
-│   │   ├── core/          # config, deps
-│   │   ├── db/            # engine, base
-│   │   ├── models/        # SQLAlchemy ORM
-│   │   ├── schemas/       # Pydantic
-│   │   ├── repositories/  # truy vấn DB
-│   │   └── services/      # business logic
-│   └── alembic/           # schema migrations
-├── scripts/
-│   ├── lib/               # transform + load sources
-│   ├── build-exam-questions.mjs
-│   └── migrate-questions-to-db.mjs
-├── docs/                  # tài liệu
-├── AI_102/                # raw AI-102 pages
-└── src/                   # frontend
+├── apps/
+│   ├── api/               # FastAPI (BE)
+│   │   ├── app/
+│   │   └── alembic/
+│   └── web/               # React + Vite (FE)
+│       ├── src/
+│       ├── public/
+│       └── vite.config.js
+├── scripts/               # build + migrate (orchestration)
+├── docs/
+├── .env                   # shared env (DB, JWT, Vite proxy)
+├── package.json           # npm scripts (dev, api, migrate)
+└── alembic.ini
 ```
 
 ## Luồng dữ liệu câu hỏi
 
-1. **Develop**: sửa JSON trong `AI_102/` hoặc `gh300Questions.js`.
-2. **Build FE (tùy chọn)**: `npm run build:questions` → `ai102Questions.js`.
+1. **Develop**: sửa `apps/web/src/data/ai102Questions.js` hoặc `gh300Questions.js`.
+2. **Build FE (tùy chọn)**: `npm run build:questions`.
 3. **Schema DB**: `npm run db:migrate`.
 4. **Seed DB**: `npm run migrate:questions`.
-5. **Runtime**: FE có thể đọc static hoặc `GET /api/v1/certs/{id}/questions`.
+5. **Runtime**: FE đọc static hoặc `GET /api/v1/certs/{id}/questions`.
 
 ## Phase tiếp theo
 
 - Auth + `user_cert_progress` sync
-- FE online-first qua `src/api/`
+- FE online-first qua `apps/web/src/api/`
 - Redis cache (khi traffic cao)

@@ -20,8 +20,8 @@ app = FastAPI(
     title=settings.app_name,
     version="0.1.0",
     lifespan=lifespan,
-    docs_url="/api/docs",
-    openapi_url="/api/openapi.json",
+    docs_url="/docs",
+    openapi_url="/openapi.json",
 )
 
 app.add_middleware(
@@ -37,4 +37,4 @@ app.include_router(api_router, prefix="/api/v1")
 
 @app.get("/api")
 async def root() -> dict:
-    return {"message": "Practice Certificate API", "docs": "/api/docs"}
+    return {"message": "Practice Certificate API", "docs": "/docs"}

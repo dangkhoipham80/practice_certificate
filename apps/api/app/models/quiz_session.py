@@ -11,6 +11,9 @@ class QuizSession(Base):
     __tablename__ = "quiz_sessions"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True
+    )
     cert_id: Mapped[str] = mapped_column(
         String(32), ForeignKey("certifications.id", ondelete="CASCADE"), nullable=False, index=True
     )

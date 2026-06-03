@@ -1,4 +1,4 @@
-import { classifyInteractiveKind } from '../../src/utils/ai102InteractiveKind.js';
+import { classifyInteractiveKind } from '../../apps/web/src/utils/ai102InteractiveKind.js';
 
 const CHOICE_ORDER = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 

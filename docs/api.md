@@ -2,7 +2,7 @@
 
 Base URL: `http://localhost:8000`
 
-Swagger: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+Swagger: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ## Endpoints
 
@@ -18,6 +18,19 @@ Swagger: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
 |--------|------|--------|
 | GET | `/api/v1/health` | Liveness |
 | GET | `/api/v1/health/ready` | Readiness + ping DB |
+
+### Auth (email / password)
+
+| Method | Path | Auth | Mô tả |
+|--------|------|------|--------|
+| POST | `/api/v1/auth/register` | — | Đăng ký (role `student`) |
+| POST | `/api/v1/auth/login` | — | Đăng nhập → JWT |
+| POST | `/api/v1/auth/logout` | — | Client xóa token |
+| GET | `/api/v1/auth/me` | Bearer | User hiện tại |
+| GET | `/api/v1/users` | admin | Danh sách user |
+| PATCH | `/api/v1/users/{id}/role` | admin | Đổi role |
+
+Chi tiết RBAC: [auth.md](auth.md).
 
 ### Certifications & questions
 

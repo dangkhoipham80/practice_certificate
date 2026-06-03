@@ -4,14 +4,16 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
-    "api:install": "cd apps/api && python -m venv venv && venv\\Scripts\\python.exe -m pip install --upgrade pip && venv\\Scripts\\pip.exe install -r requirements.txt",
-    "api": "cd apps/api && venv\\Scripts\\python.exe -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
-    "db:migrate": "cd apps/api && venv\\Scripts\\alembic.exe upgrade head",
+    "dev": "vite --config apps/web/vite.config.js --host 0.0.0.0",
+    "api:install": "node scripts/ensure-api-venv.mjs",
+    "api": "node scripts/run-api.mjs",
+    "api:lan": "node scripts/run-api.mjs --lan",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "seed:users": "node scripts/seed-sample-users.mjs",
     "migrate:questions": "node scripts/migrate-questions-to-db.mjs",
-    "build": "node scripts/build-exam-questions.mjs && vite build",
+    "build": "node scripts/build-exam-questions.mjs && vite build --config apps/web/vite.config.js",
     "build:questions": "node scripts/build-exam-questions.mjs",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --config apps/web/vite.config.js --host 0.0.0.0"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

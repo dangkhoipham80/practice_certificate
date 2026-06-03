@@ -19,8 +19,8 @@ Nguồn thô  →  scripts/lib (transform)  →  PostgreSQL  →  FastAPI
 
 | Cert | Nguồn |
 |------|--------|
-| `ai-102` | `AI_102/exam_41_page_*.json` |
-| `gh-300` | `src/data/gh300Questions.js` + meta `src/config/gh300Exam.js` |
+| `ai-102` | `apps/web/src/data/ai102Questions.js` |
+| `gh-300` | `apps/web/src/data/gh300Questions.js` + meta `apps/web/src/config/gh300Exam.js` |
 
 Thêm cert mới: mở rộng `EXAM_SOURCES`, chạy lại migrate.
 
@@ -42,7 +42,7 @@ Thêm cert mới: mở rộng `EXAM_SOURCES`, chạy lại migrate.
 npm run build:questions
 ```
 
-Chỉ ghi `src/data/ai102Questions.js` (AI-102). GH-300 vẫn từ `gh300Questions.js`.
+Chỉ ghi `apps/web/src/data/ai102Questions.js` (AI-102). GH-300 vẫn từ `gh300Questions.js`.
 
 ## Kiểm tra sau migrate
 

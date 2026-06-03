@@ -1,13 +1,7 @@
-import fs from 'fs';
+import { pathToFileURL } from 'url';
 import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { fileURLToPath } from 'url';
 import { buildPartsFromLayout, distinctTopics } from './exam-layout.mjs';
-import {
-  buildDomainParts,
-  buildDomainStats,
-  buildTopicParts,
-  transformRawQuestion,
-} from './question-transform.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '../..');
@@ -20,9 +14,9 @@ export const EXAM_SOURCES = [
     provider: 'Microsoft',
     level: 'Associate',
     description: 'Designing and Implementing a Microsoft Azure AI Solution.',
-    folder: 'AI_102',
-    filePattern: /^exam_41_page_(\d+)\.json$/,
-    usesDomainClassifier: true,
+    modulePath: 'apps/web/src/data/ai102Questions.js',
+    questionsExport: 'ai102Questions',
+    metaExport: 'ai102ExamMeta',
   },
   {
     certId: 'gh-300',
@@ -31,55 +25,18 @@ export const EXAM_SOURCES = [
     provider: 'GitHub',
     level: 'Fundamentals',
     description: 'GitHub Copilot certification prep.',
-    modulePath: 'src/data/gh300Questions.js',
-    metaModulePath: 'src/config/gh300Exam.js',
-    usesDomainClassifier: false,
+    modulePath: 'apps/web/src/data/gh300Questions.js',
+    questionsExport: 'gh300Questions',
+    metaModulePath: 'apps/web/src/config/gh300Exam.js',
   },
 ];
 
-async function loadClassifier() {
-  const classifierPath = path.join(root, 'src/utils/ai102DomainClassifier.js');
-  return import(pathToFileURL(classifierPath).href);
-}
-
-function loadJsonExamQuestions(source, classifyDomain) {
-  const dir = path.join(root, source.folder);
-  if (!fs.existsSync(dir)) {
-    return { questions: [], topics: [], fileCount: 0 };
-  }
-
-  const files = fs
-    .readdirSync(dir)
-    .filter((file) => source.filePattern.test(file))
-    .sort((a, b) => {
-      const pageA = Number(a.match(source.filePattern)[1]);
-      const pageB = Number(b.match(source.filePattern)[1]);
-      return pageA - pageB;
-    });
-
-  const seen = new Set();
-  const questions = [];
-
-  for (const file of files) {
-    const payload = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
-    for (const raw of payload.pageProps?.questions ?? []) {
-      if (seen.has(raw.question_id)) continue;
-      seen.add(raw.question_id);
-      questions.push(transformRawQuestion(raw, classifyDomain));
-    }
-  }
-
-  const topics = distinctTopics(questions);
-  return { questions, topics, fileCount: files.length };
-}
-
 async function loadModuleQuestions(source) {
   const mod = await import(pathToFileURL(path.join(root, source.modulePath)).href);
-  const metaMod = await import(pathToFileURL(path.join(root, source.metaModulePath)).href);
-  const questions = (mod.gh300Questions ?? []).map((q, index) => ({
-    topic: '1',
-    domainId: undefined,
-    questionId: index + 1,
+  const questions = (mod[source.questionsExport] ?? []).map((q, index) => ({
+    topic: q.topic ?? '1',
+    domainId: q.domainId,
+    questionId: q.questionId ?? index + 1,
     images: q.images ?? [],
     explanation: q.explanation,
     quizEligible: q.quizEligible !== false && Boolean(q.choices?.length),
@@ -92,17 +49,31 @@ async function loadModuleQuestions(source) {
     warn: q.warn,
   }));
 
+  let meta;
+  if (source.metaExport) {
+    meta = mod[source.metaExport];
+  } else {
+    const metaMod = await import(pathToFileURL(path.join(root, source.metaModulePath)).href);
+    meta = {
+      partSizes: metaMod.partSizes,
+      partTitles: metaMod.partTitles,
+      partDomains: metaMod.partDomains ?? [],
+      GRID_PAGE_SIZE: metaMod.GRID_PAGE_SIZE ?? 50,
+      sourceFiles: 0,
+    };
+  }
+
   const parts = buildPartsFromLayout({
-    partSizes: metaMod.partSizes,
-    partTitles: metaMod.partTitles,
-    partDomains: [],
+    partSizes: meta.partSizes,
+    partTitles: meta.partTitles,
+    partDomains: meta.partDomains ?? [],
   });
 
   return {
     questions,
     parts,
-    gridPageSize: metaMod.GRID_PAGE_SIZE ?? 50,
-    sourceFileCount: 0,
+    gridPageSize: meta.GRID_PAGE_SIZE ?? 50,
+    sourceFileCount: meta.sourceFiles ?? 0,
   };
 }
 
@@ -150,31 +121,12 @@ export async function loadAllQuestionBanks() {
       sourceFileCount: 0,
     };
 
-    if (source.folder) {
-      const classifier = source.usesDomainClassifier ? await loadClassifier() : null;
-      const classifyDomain = classifier?.classifyAi102Domain ?? null;
-      const { questions, fileCount } = loadJsonExamQuestions(source, classifyDomain);
-      const prepared = classifier
-        ? buildDomainParts(questions, classifier)
-        : { questions, parts: buildTopicParts(questions, distinctTopics(questions)) };
-      const finalQuestions = prepared.questions;
-      const parts = buildPartsFromLayout(prepared.parts);
-
-      banks.push({
-        cert: { ...certBase, sourceFileCount: fileCount },
-        parts,
-        questions: finalQuestions,
-        domainStats: classifier ? buildDomainStats(finalQuestions) : null,
-      });
-      continue;
-    }
-
     const { questions, parts, gridPageSize, sourceFileCount } = await loadModuleQuestions(source);
     banks.push({
       cert: { ...certBase, gridPageSize, sourceFileCount },
       parts,
       questions,
-      domainStats: null,
+      domainStats: source.certId === 'ai-102' ? (await import(pathToFileURL(path.join(root, source.modulePath)).href))[source.metaExport]?.domainStats : null,
     });
   }
 

@@ -1,0 +1,118 @@
+@layer components {
+  .auth-shell {
+    @apply relative flex min-h-screen bg-canvas text-ink transition-colors duration-300 dark:bg-gh-dark dark:text-slate-100;
+  }
+
+  .auth-shell::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: theme('backgroundImage.mesh-light');
+  }
+
+  .dark .auth-shell::before {
+    background-image: theme('backgroundImage.mesh-dark');
+  }
+
+  .auth-brand {
+    @apply relative z-[1] hidden w-[44%] max-w-xl flex-col justify-between border-r border-line/60 bg-white/40 p-10 backdrop-blur-sm dark:border-gh-border/50 dark:bg-gh-panel/30 lg:flex xl:p-12;
+  }
+
+  .auth-brand-inner {
+    @apply relative flex flex-1 flex-col justify-center;
+  }
+
+  .auth-brand-glow {
+    @apply pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-accent-400/20 blur-3xl dark:bg-accent-500/25;
+  }
+
+  .auth-brand-glow-2 {
+    @apply pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-success-300/15 blur-3xl dark:bg-success-500/10;
+  }
+
+  .auth-logo {
+    @apply relative grid h-14 w-14 place-items-center overflow-hidden rounded-2xl text-white shadow-glow;
+    background-image: theme('backgroundImage.hero-gradient');
+  }
+
+  .dark .auth-logo {
+    background-image: theme('backgroundImage.hero-gradient-dark');
+  }
+
+  .auth-logo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.2));
+  }
+
+  .auth-feature {
+    @apply flex items-start gap-3 rounded-xl border border-line/60 bg-white/60 px-4 py-3 dark:border-gh-border/60 dark:bg-gh-subtle/40;
+  }
+
+  .auth-feature-icon {
+    @apply grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-accent-100 bg-gradient-to-br from-accent-50 to-white text-accent-600 dark:border-accent-500/25 dark:from-accent-500/15 dark:to-gh-panel dark:text-accent-300;
+  }
+
+  .auth-main {
+    @apply relative z-[1] flex flex-1 flex-col items-center justify-center px-4 py-10 sm:px-6 lg:px-10;
+  }
+
+  .auth-back {
+    @apply absolute left-4 top-6 inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm font-semibold text-muted transition-colors hover:text-ink dark:text-slate-400 dark:hover:text-white sm:left-6 lg:left-10 lg:top-8;
+  }
+
+  .auth-card {
+    @apply w-full max-w-md animate-slide-up overflow-hidden rounded-3xl border border-line/70 bg-white/95 shadow-card backdrop-blur-sm dark:border-gh-border/60 dark:bg-gh-panel/95;
+  }
+
+  .auth-tabs {
+    @apply grid grid-cols-2 border-b border-line/70 bg-subtle/50 p-1.5 dark:border-gh-border dark:bg-gh-subtle/30;
+  }
+
+  .auth-tab {
+    @apply rounded-xl px-4 py-2.5 text-center text-sm font-bold text-muted transition-all duration-200 dark:text-slate-400;
+  }
+
+  .auth-tab:hover {
+    @apply text-ink dark:text-slate-200;
+  }
+
+  .auth-tab-active {
+    @apply bg-white text-ink shadow-sm dark:bg-gh-elevated dark:text-white;
+  }
+
+  .auth-form-body {
+    @apply p-6 sm:p-8;
+  }
+
+  .auth-field-label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted dark:text-slate-500;
+  }
+
+  .auth-field-wrap {
+    @apply relative;
+  }
+
+  .auth-field-icon {
+    @apply pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted dark:text-slate-500;
+  }
+
+  .auth-input {
+    @apply w-full rounded-xl border border-line/80 bg-white py-2.5 pl-10 pr-4 text-sm outline-none transition-all duration-200 placeholder:text-muted/60 focus:border-accent-400 focus:ring-2 focus:ring-accent-400/20 dark:border-gh-border dark:bg-gh-subtle dark:placeholder:text-slate-500 dark:focus:border-accent-500;
+  }
+
+  .auth-hint {
+    @apply mt-1.5 text-xs text-muted dark:text-slate-500;
+  }
+
+  .auth-error {
+    @apply flex items-start gap-2 rounded-xl border border-danger-300/80 bg-danger-50 px-3.5 py-2.5 text-sm text-danger-700 dark:border-danger-500/40 dark:bg-danger-500/10 dark:text-danger-300;
+  }
+
+  .auth-footer-note {
+    @apply border-t border-line/70 bg-subtle/30 px-6 py-4 text-center text-xs leading-5 text-muted dark:border-gh-border dark:bg-gh-subtle/20 dark:text-slate-500 sm:px-8;
+  }
+}

@@ -4,8 +4,9 @@
 
 | Lệnh | Script | Mô tả |
 |------|--------|--------|
-| `npm run build:questions` | `build-exam-questions.mjs` | Build `ai102Questions.js` từ `AI_102/` |
+| `npm run build:questions` | `build-exam-questions.mjs` | Re-export `ai102Questions.js` từ bundle hiện có |
 | `npm run migrate:questions` | `migrate-questions-to-db.mjs` | Đẩy tất cả certs vào PostgreSQL |
+| `npm run seed:users` | `seed-sample-users.mjs` | Tạo 3 tài khoản mẫu (student / teacher / admin) |
 
 Yêu cầu: `.env` với `PG*`, schema đã `alembic upgrade head`.
 

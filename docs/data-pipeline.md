@@ -9,15 +9,11 @@
 | `scripts/build-exam-questions.mjs` | Export `ai102Questions.js` |
 | `scripts/migrate-questions-to-db.mjs` | Ghi vào PostgreSQL |
 
-## Transform (AI-102)
+## AI-102
 
-Raw JSON (`pageProps.questions[]`) → object:
+Nguồn runtime: `apps/web/src/data/ai102Questions.js` (+ `ai102ExamMeta`).
 
-- MC: map `choices` A–H → array, `answer` → `correct` indices
-- Interactive: `quizEligible: false`, `questionKind` từ `ai102InteractiveKind`
-- Domain: `ai102DomainClassifier`
-
-Dedupe theo `question_id` khi đọc nhiều page files.
+Để sửa câu hỏi AI-102: chỉnh `ai102Questions.js` (hoặc tái tạo từ backup JSON nếu có), rồi `npm run migrate:questions`.
 
 ## GH-300
 
@@ -27,7 +23,7 @@ Dedupe theo `question_id` khi đọc nhiều page files.
 
 1. Thêm entry vào `EXAM_SOURCES` (folder JSON hoặc module JS).
 2. Nếu cần bundle FE: thêm vào `JS_OUTPUTS` trong `build-exam-questions.mjs`.
-3. Đăng ký cert trong `src/config/certRegistry.js`.
+3. Đăng ký cert trong `apps/web/src/config/certRegistry.js`.
 4. `npm run db:migrate` (nếu đổi schema) + `npm run migrate:questions`.
 
 ## Không commit
@@ -35,4 +31,4 @@ Dedupe theo `question_id` khi đọc nhiều page files.
 - `.env` (credentials)
 - `node_modules/`, `dist/`
 
-Nguồn JSON `AI_102/` và `gh300Questions.js` vẫn là source — DB là runtime store cho API/multi-client.
+Nguồn JS trong `apps/web/src/data/` — DB là runtime store cho API/multi-client.
