@@ -119,7 +119,7 @@ export function useCertForge() {
     return [...quizIndexSet];
   }
 
-  function startQuiz({ mode = 'random', count = 20, partIndex = null, label, shufflePool = true, customIndices = null }) {
+  function startQuiz({ mode = 'random', count = 20, partIndex = null, label, shufflePool = true, customIndices = null, reviewMode = false }) {
     const base = customIndices ?? createPool(mode, partIndex);
     if (!base.length) {
       if (mode === 'wrong') window.alert('No wrong answers yet! Complete a quiz first.');
@@ -139,7 +139,8 @@ export function useCertForge() {
       answers: indices.map(() => []),
       checked: indices.map(() => false),
       finished: false,
-      timerSec: 0
+      timerSec: 0,
+      reviewMode,
     });
     navigateTo('practice', { certId: activeCertId });
   }
@@ -237,6 +238,25 @@ export function useCertForge() {
     setSession((current) => {
       if (!current) return current;
       return { ...current, current: Math.max(0, Math.min(current.indices.length - 1, current.current + delta)) };
+    });
+  }
+
+  function finishReview() {
+    if (!session?.reviewMode) return;
+    const flaggedCount = session.indices.filter((questionIndex) => flagged.includes(questionIndex)).length;
+    removeKey(storageKeys.savedQuiz);
+    setSaveHint('');
+    setSession({ ...session, finished: true, flaggedCount });
+  }
+
+  function retakeReview() {
+    if (!session?.reviewMode) return;
+    setSession({
+      ...session,
+      current: 0,
+      finished: false,
+      flaggedCount: undefined,
+      timerSec: 0,
     });
   }
 
@@ -572,6 +592,8 @@ export function useCertForge() {
     saveQuizProgress,
     resumeQuiz,
     exitQuiz,
+    finishReview,
+    retakeReview,
     reviewFlaggedInSession,
     copyQuizResults,
     toggleFlag,

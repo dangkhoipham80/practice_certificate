@@ -104,6 +104,8 @@ function AppShell() {
                     retryWrongFromSummary={app.retryWrongFromSummary}
                     saveQuizProgress={app.saveQuizProgress}
                     exitQuiz={app.exitQuiz}
+                    finishReview={app.finishReview}
+                    retakeReview={app.retakeReview}
                     reviewFlaggedInSession={app.reviewFlaggedInSession}
                     copyQuizResults={app.copyQuizResults}
                     setSession={app.setSession}

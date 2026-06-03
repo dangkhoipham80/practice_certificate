@@ -1,6 +1,6 @@
 /**
  * Exam Readiness Zone — AI-102 (6 episodes).
- * Topic bullets distilled from Microsoft prep video transcripts (video_scripts/part_1–6).
+ * Topic bullets distilled from Microsoft AI-102 prep material.
  * Exam weights: official study guide (Dec 23, 2025). Video weights noted where they differ.
  */
 

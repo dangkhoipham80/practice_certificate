@@ -1,4 +1,4 @@
-// Generated from GH_300/GH-300_Pro.html.
+// GH-300 question bank (source for DB migrate via scripts/migrate-questions-to-db.mjs).
 // Keep question content here so the app shell can support many certifications.
 
 export const gh300Questions = [

@@ -1,5 +1,7 @@
 import { PracticeSetup } from './PracticeSetup';
+import { InteractiveReviewSession } from './InteractiveReviewSession';
 import { QuizResults } from './QuizResults';
+import { ReviewResults } from './ReviewResults';
 import { QuizSession } from './QuizSession';
 
 export function Practice({
@@ -21,6 +23,8 @@ export function Practice({
   retryWrongFromSummary,
   saveQuizProgress,
   exitQuiz,
+  finishReview,
+  retakeReview,
   reviewFlaggedInSession,
   copyQuizResults,
   setSession
@@ -30,6 +34,9 @@ export function Practice({
   }
 
   if (session.finished) {
+    if (session.reviewMode) {
+      return <ReviewResults session={session} exitQuiz={exitQuiz} retakeReview={retakeReview} />;
+    }
     return (
       <QuizResults
         cert={cert}
@@ -38,6 +45,21 @@ export function Practice({
         retryWrongFromSummary={retryWrongFromSummary}
         copyQuizResults={copyQuizResults}
         retakeQuiz={retakeQuiz}
+      />
+    );
+  }
+
+  if (session.reviewMode) {
+    return (
+      <InteractiveReviewSession
+        cert={cert}
+        session={session}
+        flagged={flagged}
+        toggleFlag={toggleFlag}
+        moveQuestion={moveQuestion}
+        finishReview={finishReview}
+        exitQuiz={exitQuiz}
+        setSession={setSession}
       />
     );
   }

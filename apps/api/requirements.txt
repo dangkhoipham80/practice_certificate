@@ -1,0 +1,7 @@
+# FastAPI stack — cài trong venv: pip install -r requirements.txt
+fastapi>=0.115.0,<1.0
+uvicorn[standard]>=0.32.0,<1.0
+sqlalchemy[asyncio]>=2.0.36,<3.0
+asyncpg>=0.30.0,<1.0
+alembic>=1.14.0,<2.0
+pydantic-settings>=2.6.0,<3.0

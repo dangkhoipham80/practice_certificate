@@ -1,12 +1,19 @@
 import { useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Brain, ClipboardList, Flag, Layers3, Play, RotateCcw, Search } from 'lucide-react';
+import { Brain, ClipboardList, Flag, Layers3, MousePointerClick, Move, Play, RotateCcw, Search, Terminal } from 'lucide-react';
 import { getQuizQuestions } from '../../config/certRegistry';
 import { pathFromRouteId } from '../../config/routes';
 import { AI102_EXAM_DOMAINS } from '../../data/ai102ExamReadiness';
 import { getDomainLabel } from '../../utils/ai102DomainClassifier';
+import {
+  getIndicesForQuestionKind,
+  getInteractiveIndices,
+  getQuestionKindStats,
+  QUESTION_KIND_LABELS,
+} from '../../utils/ai102InteractiveKind';
 import { getQuizIndicesForDomain } from '../../utils/ai102StudyPlan';
 import { ActionButton } from '../ui/ActionButton';
+import { InfoTile } from '../ui/InfoTile';
 import { SectionHeader } from '../ui/SectionHeader';
 import { PartGrid } from '../shared/PartGrid';
 import { QuizCustomSetup } from './QuizCustomSetup';
@@ -28,6 +35,29 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
       AI102_EXAM_DOMAINS.map((domain) => [domain.id, getQuizIndicesForDomain(cert.questions, domain.id).length]),
     );
   }, [cert]);
+
+  const questionKindStats = useMemo(() => {
+    if (cert.id !== 'ai-102') return null;
+    return getQuestionKindStats(cert.questions);
+  }, [cert]);
+
+  function startInteractiveReview(kind) {
+    const indices =
+      kind === 'all'
+        ? getInteractiveIndices(cert.questions)
+        : getIndicesForQuestionKind(cert.questions, kind);
+    if (!indices.length) return;
+    const label =
+      kind === 'all'
+        ? `${cert.exam} · Interactive review`
+        : `${cert.exam} · ${QUESTION_KIND_LABELS[kind]} review`;
+    startQuiz({
+      reviewMode: true,
+      customIndices: indices,
+      count: 'all',
+      label,
+    });
+  }
 
   function startDomainQuiz(count = 20) {
     const indices = getQuizIndicesForDomain(cert.questions, domainFilter);
@@ -57,6 +87,49 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
             <Link className="secondary-button !min-h-10" to={pathFromRouteId('learn', cert.id)}>
               Back to Learn
             </Link>
+          </div>
+        </div>
+      )}
+
+      {cert.id === 'ai-102' && questionKindStats && (
+        <div className="panel p-5">
+          <SectionHeader
+            kicker="Question bank"
+            title="Phân loại câu hỏi"
+            description={`${cert.questions.length} câu tổng — ${quizCount} MC tự chấm (quiz pool) và ${questionKindStats.hotspot + questionKindStats['drag-drop'] + questionKindStats.simulation + questionKindStats.other} interactive chỉ ôn tập.`}
+          />
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+            <InfoTile label="Quiz pool (MC)" value={questionKindStats.mc} />
+            <InfoTile label="Hotspot" value={questionKindStats.hotspot} />
+            <InfoTile label="Drag & drop" value={questionKindStats['drag-drop']} />
+            <InfoTile label="Simulation" value={questionKindStats.simulation} />
+            <InfoTile label="Other interactive" value={questionKindStats.other} />
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <ActionButton
+              icon={MousePointerClick}
+              label="Hotspot review"
+              meta={`${questionKindStats.hotspot} câu`}
+              onClick={() => startInteractiveReview('hotspot')}
+            />
+            <ActionButton
+              icon={Move}
+              label="Drag & drop review"
+              meta={`${questionKindStats['drag-drop']} câu`}
+              onClick={() => startInteractiveReview('drag-drop')}
+            />
+            <ActionButton
+              icon={Terminal}
+              label="Simulation review"
+              meta={`${questionKindStats.simulation} câu`}
+              onClick={() => startInteractiveReview('simulation')}
+            />
+            <ActionButton
+              icon={Layers3}
+              label="All interactive"
+              meta={`${getInteractiveIndices(cert.questions).length} câu`}
+              onClick={() => startInteractiveReview('all')}
+            />
           </div>
         </div>
       )}

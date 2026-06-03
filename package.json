@@ -5,12 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
+    "api:install": "cd apps/api && python -m venv venv && venv\\Scripts\\python.exe -m pip install --upgrade pip && venv\\Scripts\\pip.exe install -r requirements.txt",
+    "api": "cd apps/api && venv\\Scripts\\python.exe -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "db:migrate": "cd apps/api && venv\\Scripts\\alembic.exe upgrade head",
+    "migrate:questions": "node scripts/migrate-questions-to-db.mjs",
     "build": "node scripts/build-exam-questions.mjs && vite build",
     "build:questions": "node scripts/build-exam-questions.mjs",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
+    "dotenv": "^16.4.7",
+    "pg": "^8.13.1",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
