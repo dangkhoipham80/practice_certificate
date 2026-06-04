@@ -22,7 +22,16 @@ Nguồn thô  →  scripts/lib (transform)  →  PostgreSQL  →  FastAPI
 | `ai-102` | `apps/web/src/data/ai102Questions.js` |
 | `gh-300` | `apps/web/src/data/gh300Questions.js` + meta `apps/web/src/config/gh300Exam.js` |
 
-Thêm cert mới: mở rộng `EXAM_SOURCES`, chạy lại migrate.
+Thêm cert mới: thêm `data/taxonomy/{cert-id}.json`, mở rộng `EXAM_SOURCES`, chạy lại migrate.
+
+## Taxonomy
+
+| File | Nội dung |
+|------|----------|
+| `data/taxonomy/ai-102.json` | 6 domains, 15 ExamTopics → domain, parts |
+| `data/taxonomy/gh-300.json` | 7 parts (không domain) |
+
+`migrate:questions` upsert `certification_domains` + `certification_topics` trước parts/questions.
 
 ## Script migrate
 

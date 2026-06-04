@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ACTIVE_CERT_KEY, DEFAULT_CERT_ID, getCert, isCertReady } from '../config/certRegistry';
+import { fetchCertQuestions } from '../lib/certQuestions';
 
 const CertContext = createContext(null);
 
@@ -12,7 +13,10 @@ export function CertProvider({ children }) {
     const saved = localStorage.getItem(ACTIVE_CERT_KEY);
     return saved && getCert(saved) ? saved : DEFAULT_CERT_ID;
   });
-  const [editedQuestionsByCert, setEditedQuestionsByCert] = useState({});
+  /** Per-cert question banks loaded from API (overrides bundled JS when set). */
+  const [questionsByCert, setQuestionsByCert] = useState({});
+  const [questionsSourceByCert, setQuestionsSourceByCert] = useState({});
+  const [questionsLoadingCertId, setQuestionsLoadingCertId] = useState(null);
 
   useEffect(() => {
     if (!routeCertId) return;
@@ -23,23 +27,26 @@ export function CertProvider({ children }) {
     }
   }, [routeCertId, activeCertId]);
 
+  const loadQuestions = useCallback(async (certId) => {
+    setQuestionsLoadingCertId(certId);
+    try {
+      const { questions, source } = await fetchCertQuestions(certId);
+      setQuestionsByCert((prev) => ({ ...prev, [certId]: questions }));
+      setQuestionsSourceByCert((prev) => ({ ...prev, [certId]: source }));
+    } finally {
+      setQuestionsLoadingCertId((current) => (current === certId ? null : current));
+    }
+  }, []);
+
+  useEffect(() => {
+    loadQuestions(activeCertId);
+  }, [activeCertId, loadQuestions]);
+
   const activeCert = useMemo(() => {
     const base = getCert(activeCertId);
-    const edited = editedQuestionsByCert[activeCertId];
-    if (!edited) return base;
-    return { ...base, questions: edited };
-  }, [activeCertId, editedQuestionsByCert]);
-
-  const updateQuestionAtIndex = useCallback(
-    (certId, index, patch) => {
-      setEditedQuestionsByCert((prev) => {
-        const base = prev[certId] ?? getCert(certId).questions;
-        const next = base.map((q, i) => (i === index ? { ...q, ...patch } : q));
-        return { ...prev, [certId]: next };
-      });
-    },
-    []
-  );
+    const questions = questionsByCert[activeCertId] ?? base.questions;
+    return { ...base, questions };
+  }, [activeCertId, questionsByCert]);
 
   function setActiveCert(certId, options = {}) {
     const cert = getCert(certId);
@@ -66,7 +73,9 @@ export function CertProvider({ children }) {
     setActiveCert,
     openCertWorkspace,
     isCertRoute: location.pathname.startsWith('/c/'),
-    updateQuestionAtIndex,
+    reloadCertQuestions: loadQuestions,
+    questionsLoading: questionsLoadingCertId === activeCertId,
+    questionsSource: questionsSourceByCert[activeCertId] ?? 'bundle',
   };
 
   return <CertContext.Provider value={value}>{children}</CertContext.Provider>;

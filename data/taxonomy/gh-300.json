@@ -1,0 +1,15 @@
+{
+  "certId": "gh-300",
+  "domains": [],
+  "topics": [],
+  "partSizes": [50, 48, 46, 50, 49, 46, 38],
+  "parts": [
+    { "sortOrder": 0, "domainSlug": null, "title": "Copilot fundamentals" },
+    { "sortOrder": 1, "domainSlug": null, "title": "Plans, setup, administration" },
+    { "sortOrder": 2, "domainSlug": null, "title": "Prompt engineering" },
+    { "sortOrder": 3, "domainSlug": null, "title": "Developer workflows" },
+    { "sortOrder": 4, "domainSlug": null, "title": "Responsible AI and security" },
+    { "sortOrder": 5, "domainSlug": null, "title": "Enterprise features" },
+    { "sortOrder": 6, "domainSlug": null, "title": "Exam review set" }
+  ]
+}

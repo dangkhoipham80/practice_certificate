@@ -73,6 +73,38 @@ async function upsertCertification(client, cert) {
   );
 }
 
+async function replaceTaxonomy(client, certId, taxonomy) {
+  if (!taxonomy) return;
+
+  await client.query('DELETE FROM certification_topics WHERE cert_id = $1', [certId]);
+  await client.query('DELETE FROM certification_domains WHERE cert_id = $1', [certId]);
+
+  for (const domain of taxonomy.domains) {
+    await client.query(
+      `INSERT INTO certification_domains (
+         cert_id, slug, title, sort_order, exam_weight_pct, is_active
+       ) VALUES ($1, $2, $3, $4, $5, $6)`,
+      [
+        certId,
+        domain.slug,
+        domain.title,
+        domain.sortOrder,
+        domain.examWeightPct ?? null,
+        domain.isActive !== false,
+      ],
+    );
+  }
+
+  for (const topic of taxonomy.topics) {
+    await client.query(
+      `INSERT INTO certification_topics (
+         cert_id, topic_number, label, primary_domain_slug
+       ) VALUES ($1, $2, $3, $4)`,
+      [certId, topic.topicNumber, topic.label ?? null, topic.primaryDomainSlug ?? null],
+    );
+  }
+}
+
 async function replaceParts(client, certId, parts) {
   await client.query('DELETE FROM certification_parts WHERE cert_id = $1', [certId]);
   for (const part of parts) {
@@ -139,12 +171,15 @@ async function main() {
   try {
     await client.query('BEGIN');
 
-    for (const { cert, parts, questions } of banks) {
+    for (const { cert, parts, questions, taxonomy } of banks) {
       await upsertCertification(client, cert);
+      await replaceTaxonomy(client, cert.id, taxonomy);
       await replaceParts(client, cert.id, parts);
       await replaceQuestions(client, cert.id, questions);
+      const domainCount = taxonomy?.domains?.length ?? 0;
+      const topicCount = taxonomy?.topics?.length ?? 0;
       console.log(
-        `  ✓ ${cert.examCode} (${cert.id}): ${questions.length} questions, ${parts.length} parts`,
+        `  ✓ ${cert.examCode} (${cert.id}): ${questions.length} questions, ${parts.length} parts, ${domainCount} domains, ${topicCount} topics`,
       );
     }
 

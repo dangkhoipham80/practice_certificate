@@ -108,60 +108,68 @@ export function syncAnswerArea(uiConfig) {
   });
 }
 
-export function buildSavePayload(draft, types) {
+/** Full question PATCH body — every editable field is sent so PostgreSQL is the source of truth. */
+export function buildSavePayload(draft, types, baseQuestion = {}) {
   const slug = draft.questionType;
   const typeRow = findQuestionType(types, slug);
+  const images = [...(draft.images ?? draft.uiConfig?.images ?? baseQuestion.images ?? [])].filter(Boolean);
   let uiConfig = syncAnswerArea({
     ...draft.uiConfig,
     type: slug,
     question_text: draft.text.trim(),
     question: draft.text.trim(),
     explanation: draft.explanation.trim() || undefined,
+    images,
   });
-
-  const payload = {
-    text: draft.text.trim(),
-    explanation: draft.explanation.trim() || null,
-    quizEligible: draft.quizEligible,
-    uiConfig,
-  };
-  if (typeRow?.id) {
-    payload.questionTypeId = typeRow.id;
-  }
 
   const choices = draft.choices.map((c) => c.trim()).filter(Boolean);
   const correct = draft.correct.filter((i) => i < choices.length);
 
   if (isChoicesType(types, slug)) {
-    payload.choices = choices;
-    payload.correct = correct;
-    payload.multiple = getCorrectMode(types, slug) === 'multiple' || correct.length > 1;
     uiConfig = {
       ...uiConfig,
       choices,
       correct_indices: correct,
       items: choices.map((label, i) => ({ id: `choice_${i + 1}`, label })),
     };
-    payload.uiConfig = uiConfig;
-  } else if (isDragDropType(types, slug) && draft.quizEligible) {
-    payload.choices = [];
-    payload.correct = [];
-    payload.multiple = false;
-    payload.uiConfig = uiConfig;
-  } else if (draft.quizEligible && choices.length) {
-    payload.choices = choices;
-    payload.correct = correct;
-    payload.multiple = correct.length > 1;
-    payload.uiConfig = {
+  } else if (draft.quizEligible && choices.length && !isDragDropType(types, slug)) {
+    uiConfig = {
       ...uiConfig,
       choices,
       correct_indices: correct,
     };
-  } else {
+  }
+
+  const payload = {
+    text: draft.text.trim(),
+    explanation: draft.explanation.trim() || null,
+    quizEligible: Boolean(draft.quizEligible),
+    domainId: draft.domainId ?? null,
+    topic: draft.topic != null && draft.topic !== '' ? String(draft.topic) : null,
+    images,
+    warn: draft.warn?.trim() ? draft.warn.trim() : null,
+    uiConfig,
+    choices: [],
+    correct: [],
+    multiple: false,
+  };
+
+  if (typeRow?.id) {
+    payload.questionTypeId = typeRow.id;
+  }
+
+  if (isChoicesType(types, slug)) {
+    payload.choices = choices;
+    payload.correct = correct;
+    payload.multiple = getCorrectMode(types, slug) === 'multiple' || correct.length > 1;
+  } else if (isDragDropType(types, slug)) {
     payload.choices = [];
     payload.correct = [];
     payload.multiple = false;
-    if (!draft.quizEligible) payload.quizEligible = false;
+  } else if (draft.quizEligible && choices.length) {
+    payload.choices = choices;
+    payload.correct = correct;
+    payload.multiple = correct.length > 1;
   }
 
   return payload;

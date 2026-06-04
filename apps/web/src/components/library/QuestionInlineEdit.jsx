@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ListChecks, Loader2, Plus, Sparkles, Trash2, X } from 'lucide-react';
-import { questionsApi } from '../../api/client';
+import { questionsApi, taxonomyApi } from '../../api/client';
+import { useCertContext } from '../../context/CertContext';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
 import { applyParsedUiConfig, getUiConfig } from '../../lib/examQuestionParser';
 import {
@@ -12,8 +13,13 @@ import {
   resolveUiType,
   syncAnswerArea,
 } from '../../lib/questionUiTypes';
-import { apiQuestionToLocal, getQuestionExternalId } from '../../lib/questionUtils';
+import { getQuestionExternalId } from '../../lib/questionUtils';
+import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
+import { isValidDomainSlug, slugifyDomainTitle } from '../../lib/domainSlug';
+import { formatQuizDomainLabel } from '../../lib/quizDomains';
+import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
 import { QuestionUiConfigEditor } from './QuestionUiConfigEditor';
+import { DragDropQuestion } from './questionTypes/DragDropQuestion';
 
 function buildDraft(question, types) {
   const uiConfig = { ...getUiConfig(question), ...(question.uiConfig ?? {}) };
@@ -32,16 +38,26 @@ function buildDraft(question, types) {
     correct,
     explanation: question.explanation ?? uiConfig.explanation ?? '',
     quizEligible: question.quizEligible !== false,
+    domainId: question.domainId ?? null,
+    topic: question.topic ?? null,
+    images: [...(question.images ?? uiConfig.images ?? [])],
+    warn: question.warn ?? null,
     questionType,
     uiConfig: defaultUiConfig(typeRow ?? questionType, uiConfig),
   };
 }
 
-export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved }) {
+export function QuestionInlineEdit({ certId, question, index, onCancel }) {
+  const { reloadCertQuestions, questionsSource } = useCertContext();
   const { types, loading: typesLoading } = useQuestionTypes();
+  const { domains, domainLabelMap, loading: taxonomyLoading, addDomain } = useCertTaxonomy(certId);
   const [draft, setDraft] = useState(() => buildDraft(question, types));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [showNewDomain, setShowNewDomain] = useState(false);
+  const [newDomainTitle, setNewDomainTitle] = useState('');
+  const [newDomainSlug, setNewDomainSlug] = useState('');
+  const [creatingDomain, setCreatingDomain] = useState(false);
 
   useEffect(() => {
     if (types.length) {
@@ -119,29 +135,18 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
     }));
   }
 
-  async function handleSave(e) {
-    e.preventDefault();
-    setError('');
+  function validateDraft() {
     if (!draft.text.trim()) {
-      setError('Question text is required.');
-      return;
+      return 'Question text is required.';
     }
-
     const choices = draft.choices.map((c) => c.trim()).filter(Boolean);
     const correct = draft.correct.filter((i) => i < choices.length);
 
     if (isChoicesType(types, draft.questionType)) {
-      if (!choices.length) {
-        setError('Add at least one choice.');
-        return;
-      }
-      if (!correct.length) {
-        setError('Mark at least one correct choice.');
-        return;
-      }
+      if (!choices.length) return 'Add at least one choice.';
+      if (!correct.length) return 'Mark at least one correct choice.';
       if (getCorrectMode(types, draft.questionType) === 'single' && correct.length > 1) {
-        setError('Single choice allows only one correct answer.');
-        return;
+        return 'Single choice allows only one correct answer.';
       }
     }
 
@@ -149,34 +154,43 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
       const ui = syncAnswerArea(draft.uiConfig);
       const zones = ui.answer_area?.drop_zones ?? [];
       const items = ui.draggable_items ?? [];
-      if (!zones.length) {
-        setError('Add at least one drop zone in the answer area.');
-        return;
-      }
+      if (!zones.length) return 'Add at least one drop zone in the answer area.';
       for (const zone of zones) {
         if (!zone.correct_item_id || !items.some((it) => it.id === zone.correct_item_id)) {
-          setError(`Pick the correct value for ${zone.id} from the Values list (e.g. item_1 → drop_1).`);
-          return;
+          return `Pick the correct value for ${zone.id} from the Values list (e.g. item_1 → drop_1).`;
         }
       }
-    } else if (draft.quizEligible) {
-      if (!choices.length) {
-        setError('Add at least one quiz answer choice.');
-        return;
-      }
-      if (!correct.length) {
-        setError('Mark at least one correct choice for the quiz.');
-        return;
-      }
+    } else if (draft.quizEligible && !isDragDropType(types, draft.questionType)) {
+      if (!choices.length) return 'Add at least one quiz answer choice.';
+      if (!correct.length) return 'Mark at least one correct choice for the quiz.';
     }
+    return null;
+  }
 
-    const payload = buildSavePayload(draft, types);
+  async function persistQuestionToDb(draftState) {
+    if (questionsSource !== 'api') {
+      throw new Error(
+        'Questions are loaded from the bundled copy. Start the API, run migrate:questions, then reload — edits only persist in PostgreSQL.',
+      );
+    }
+    const externalId = getQuestionExternalId(question, index);
+    const payload = buildSavePayload(draftState, types, question);
+    await questionsApi.update(certId, externalId, payload);
+    await reloadCertQuestions(certId);
+  }
+
+  async function handleSave(e) {
+    e.preventDefault();
+    setError('');
+    const validationError = validateDraft();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
     setSaving(true);
     try {
-      const externalId = getQuestionExternalId(question, index);
-      const updated = await questionsApi.update(certId, externalId, payload);
-      onSaved(index, apiQuestionToLocal(updated));
+      await persistQuestionToDb(draft);
       onCancel();
     } catch (err) {
       setError(err.message || 'Failed to save question.');
@@ -187,6 +201,61 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
 
   const isDragDrop = isDragDropType(types, draft.questionType);
   const showChoices = isChoicesType(types, draft.questionType) || (draft.quizEligible && !isDragDrop);
+
+  function handleNewDomainTitleChange(value) {
+    setNewDomainTitle(value);
+    setNewDomainSlug((slug) => {
+      if (!slug.trim() || slug === slugifyDomainTitle(newDomainTitle)) {
+        return slugifyDomainTitle(value);
+      }
+      return slug;
+    });
+  }
+
+  async function handleCreateDomain() {
+    const title = newDomainTitle.trim();
+    if (!title) {
+      setError('Enter a title for the new domain.');
+      return;
+    }
+    const slug = (newDomainSlug.trim() || slugifyDomainTitle(title)).toLowerCase();
+    if (!isValidDomainSlug(slug)) {
+      setError('Slug must be lowercase letters, numbers, and hyphens (e.g. my-domain).');
+      return;
+    }
+    if (domains.some((d) => d.slug === slug)) {
+      setError(`Domain "${slug}" already exists. Pick it from the list or use another slug.`);
+      return;
+    }
+
+    setCreatingDomain(true);
+    setError('');
+    try {
+      const created = await taxonomyApi.upsertDomain(certId, slug, {
+        slug,
+        title,
+        sortOrder: domains.length,
+        isActive: true,
+      });
+      addDomain(created);
+      const nextDraft = {
+        ...draft,
+        domainId: slug,
+        quizEligible: true,
+      };
+      setDraft(nextDraft);
+      setShowNewDomain(false);
+      setNewDomainTitle('');
+      setNewDomainSlug('');
+      if (questionsSource === 'api') {
+        await persistQuestionToDb(nextDraft);
+      }
+    } catch (err) {
+      setError(err.message || 'Failed to create domain.');
+    } finally {
+      setCreatingDomain(false);
+    }
+  }
 
   function toggleQuizPool() {
     setDraft((d) => {
@@ -205,7 +274,7 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
 
   if (typesLoading && !types.length) {
     return (
-      <div className="ml-10 mt-4 flex items-center gap-2 text-sm text-muted">
+      <div className="mt-4 flex items-center gap-2 text-sm text-muted">
         <Loader2 size={16} className="animate-spin" />
         Loading question types…
       </div>
@@ -214,12 +283,20 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
 
   return (
     <form
-      className="ml-10 mt-4 space-y-4 rounded-2xl border border-accent-200/80 bg-accent-50/40 p-4 dark:border-accent-500/30 dark:bg-accent-500/5 sm:p-5"
+      className="mt-4 w-full space-y-4 rounded-2xl border border-accent-200/80 bg-accent-50/40 p-4 dark:border-accent-500/30 dark:bg-accent-500/5 sm:p-5"
       onSubmit={handleSave}
     >
+      {questionsSource !== 'api' && (
+        <p className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-100">
+          Bundled question bank — Save will not write to PostgreSQL. Run the API and{' '}
+          <code className="text-[11px]">migrate:questions</code>, then reload this page.
+        </p>
+      )}
+
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs font-bold uppercase tracking-wide text-accent-700 dark:text-accent-300">
           Editing question {index + 1}
+          {questionsSource === 'api' ? ' · saved to database' : ''}
         </p>
         <button type="button" className="secondary-button !py-1.5 text-xs" onClick={autoParse}>
           <Sparkles size={14} />
@@ -227,12 +304,14 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
         </button>
       </div>
 
-      <QuestionUiConfigEditor
-        questionType={draft.questionType}
-        uiConfig={draft.uiConfig}
-        onTypeChange={handleTypeChange}
-        onUiConfigChange={(uiConfig) => setDraft((d) => ({ ...d, uiConfig }))}
-      />
+      {!isDragDrop && (
+        <QuestionUiConfigEditor
+          questionType={draft.questionType}
+          uiConfig={draft.uiConfig}
+          onTypeChange={handleTypeChange}
+          onUiConfigChange={(uiConfig) => setDraft((d) => ({ ...d, uiConfig }))}
+        />
+      )}
 
       <label className="block">
         <span className="auth-field-label">Question text</span>
@@ -244,6 +323,23 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
         />
       </label>
 
+      {isDragDrop && (
+        <>
+          <div className="w-full">
+            <DragDropQuestion
+              uiConfig={normalizeDragDropUiConfig(syncAnswerArea(draft.uiConfig))}
+              readOnly={false}
+            />
+          </div>
+          <QuestionUiConfigEditor
+            questionType={draft.questionType}
+            uiConfig={draft.uiConfig}
+            onTypeChange={handleTypeChange}
+            onUiConfigChange={(uiConfig) => setDraft((d) => ({ ...d, uiConfig }))}
+          />
+        </>
+      )}
+
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-line/70 bg-white/60 p-3 dark:border-gh-border dark:bg-gh-subtle/40">
         <span className="text-xs font-semibold text-muted dark:text-slate-400">Quiz practice</span>
         {draft.quizEligible ? (
@@ -251,6 +347,9 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
             <span className="inline-flex items-center gap-1 rounded-full bg-success-500/15 px-2.5 py-1 text-xs font-bold text-success-800 dark:text-success-200">
               <ListChecks size={14} />
               In quiz pool
+            </span>
+            <span className="inline-flex rounded-full bg-violet-100 px-2.5 py-1 text-xs font-semibold text-violet-800 dark:bg-violet-500/15 dark:text-violet-200">
+              {formatQuizDomainLabel(draft.domainId, domainLabelMap)}
             </span>
             <button type="button" className="secondary-button !py-1.5 text-xs" onClick={toggleQuizPool}>
               <X size={14} />
@@ -262,6 +361,105 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onSaved 
             <ListChecks size={14} />
             Add to quiz
           </button>
+        )}
+        {draft.quizEligible && (
+          <div className="flex w-full min-w-[12rem] flex-1 flex-col gap-2 sm:max-w-lg">
+            <span className="text-xs font-semibold text-muted dark:text-slate-400">Quiz domain</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <select
+                className="auth-input !pl-4 min-w-[12rem] flex-1 text-sm"
+                value={draft.domainId ?? ''}
+                disabled={taxonomyLoading || creatingDomain}
+                onChange={(e) =>
+                  setDraft((d) => ({
+                    ...d,
+                    domainId: e.target.value || null,
+                  }))
+                }
+              >
+                <option value="">Do not have domain</option>
+                {domains.map((d) => (
+                  <option key={d.slug} value={d.slug}>
+                    {d.title}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                className="secondary-button shrink-0 !py-1.5 text-xs"
+                disabled={taxonomyLoading || creatingDomain}
+                onClick={() => {
+                  setShowNewDomain((open) => !open);
+                  setError('');
+                }}
+              >
+                <Plus size={14} />
+                New domain
+              </button>
+            </div>
+            {showNewDomain && (
+              <div className="space-y-2 rounded-xl border border-line/70 bg-white/80 p-3 dark:border-gh-border dark:bg-gh-subtle/60">
+                <label className="block">
+                  <span className="text-xs font-semibold text-muted dark:text-slate-400">Domain title</span>
+                  <input
+                    className="auth-input !pl-4 mt-1 w-full text-sm"
+                    value={newDomainTitle}
+                    onChange={(e) => handleNewDomainTitleChange(e.target.value)}
+                    placeholder="e.g. Implement NLP solutions"
+                    disabled={creatingDomain}
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-xs font-semibold text-muted dark:text-slate-400">Slug (optional)</span>
+                  <input
+                    className="auth-input !pl-4 mt-1 w-full text-sm font-mono"
+                    value={newDomainSlug}
+                    onChange={(e) => setNewDomainSlug(e.target.value.toLowerCase())}
+                    placeholder="nlp"
+                    disabled={creatingDomain}
+                  />
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className="primary-button !py-1.5 text-xs"
+                    disabled={creatingDomain}
+                    onClick={handleCreateDomain}
+                  >
+                    {creatingDomain ? (
+                      <>
+                        <Loader2 size={14} className="animate-spin" />
+                        Creating…
+                      </>
+                    ) : (
+                      'Create & assign to question'
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    className="ghost-button !py-1.5 text-xs"
+                    disabled={creatingDomain}
+                    onClick={() => {
+                      setShowNewDomain(false);
+                      setNewDomainTitle('');
+                      setNewDomainSlug('');
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <p className="text-[11px] text-muted dark:text-slate-500">
+                  Creates the domain in the database and saves this question with that domain when the API bank is
+                  active.
+                </p>
+              </div>
+            )}
+            {!domains.length && !taxonomyLoading && !showNewDomain && (
+              <span className="text-xs text-muted dark:text-slate-500">
+                No domains yet — use <strong>New domain</strong> or run <code className="text-[11px]">migrate:questions</code>.
+              </span>
+            )}
+          </div>
         )}
         {isDragDrop && draft.quizEligible && (
           <p className="w-full text-xs text-muted dark:text-slate-500">

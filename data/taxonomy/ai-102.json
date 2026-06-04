@@ -1,0 +1,60 @@
+{
+  "certId": "ai-102",
+  "domains": [
+    {
+      "slug": "plan-manage",
+      "title": "Plan and manage an Azure AI solution",
+      "sortOrder": 0
+    },
+    {
+      "slug": "generative-ai",
+      "title": "Implement generative AI solutions",
+      "sortOrder": 1
+    },
+    {
+      "slug": "agentic",
+      "title": "Implement an agentic solution",
+      "sortOrder": 2
+    },
+    {
+      "slug": "computer-vision",
+      "title": "Implement computer vision solutions",
+      "sortOrder": 3
+    },
+    {
+      "slug": "nlp",
+      "title": "Implement natural language processing solutions",
+      "sortOrder": 4
+    },
+    {
+      "slug": "knowledge-mining",
+      "title": "Implement knowledge mining and information extraction",
+      "sortOrder": 5
+    }
+  ],
+  "topics": [
+    { "topicNumber": "1", "primaryDomainSlug": "plan-manage" },
+    { "topicNumber": "2", "primaryDomainSlug": "computer-vision" },
+    { "topicNumber": "3", "primaryDomainSlug": "nlp" },
+    { "topicNumber": "4", "primaryDomainSlug": "knowledge-mining" },
+    { "topicNumber": "5", "primaryDomainSlug": "computer-vision" },
+    { "topicNumber": "6", "primaryDomainSlug": "generative-ai" },
+    { "topicNumber": "7", "primaryDomainSlug": "nlp" },
+    { "topicNumber": "8", "primaryDomainSlug": "knowledge-mining" },
+    { "topicNumber": "9", "primaryDomainSlug": "plan-manage" },
+    { "topicNumber": "10", "primaryDomainSlug": "generative-ai" },
+    { "topicNumber": "11", "primaryDomainSlug": "nlp" },
+    { "topicNumber": "12", "primaryDomainSlug": "knowledge-mining" },
+    { "topicNumber": "13", "primaryDomainSlug": "computer-vision" },
+    { "topicNumber": "14", "primaryDomainSlug": "nlp" },
+    { "topicNumber": "15", "primaryDomainSlug": "plan-manage" }
+  ],
+  "parts": [
+    { "sortOrder": 0, "domainSlug": "plan-manage", "title": "Plan and manage an Azure AI solution" },
+    { "sortOrder": 1, "domainSlug": "generative-ai", "title": "Implement generative AI solutions" },
+    { "sortOrder": 2, "domainSlug": "agentic", "title": "Implement an agentic solution" },
+    { "sortOrder": 3, "domainSlug": "computer-vision", "title": "Implement computer vision solutions" },
+    { "sortOrder": 4, "domainSlug": "nlp", "title": "Implement natural language processing solutions" },
+    { "sortOrder": 5, "domainSlug": "knowledge-mining", "title": "Implement knowledge mining and information extraction" }
+  ]
+}

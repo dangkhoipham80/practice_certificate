@@ -36,8 +36,8 @@ export const ${cfg.metaName} = ${JSON.stringify(meta, null, 2)};
 const banks = await loadAllQuestionBanks();
 
 for (const bank of banks) {
-  const { cert, questions, domainStats } = bank;
-  const meta = bankToExamMeta(bank, domainStats);
+  const { cert, questions } = bank;
+  const meta = bankToExamMeta(bank);
   const outPath = writeModule(cert.examCode, cert.id, questions, meta);
   if (outPath) {
     console.log(

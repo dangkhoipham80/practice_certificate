@@ -4,13 +4,19 @@ import { useQuestionTypes } from '../../context/QuestionTypesContext';
 import { isDragDropType } from '../../lib/questionUiTypes';
 import { DragDropQuestion } from './questionTypes/DragDropQuestion';
 
-export function QuestionStructuredView({ question, readOnly = true }) {
+export function QuestionStructuredView({ question, readOnly = true, answerOnly = false }) {
   const { types } = useQuestionTypes();
   const uiConfig = getUiConfig(question);
   if (!uiConfig?.type) return null;
 
   if (isDragDropType(types, uiConfig.type)) {
-    return <DragDropQuestion uiConfig={normalizeDragDropUiConfig(uiConfig)} readOnly={readOnly} />;
+    return (
+      <DragDropQuestion
+        uiConfig={normalizeDragDropUiConfig(uiConfig)}
+        readOnly={readOnly || answerOnly}
+        answerOnly={answerOnly}
+      />
+    );
   }
 
   const typeLabel = types.find((t) => t.slug === uiConfig.type)?.label ?? uiConfig.type;

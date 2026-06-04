@@ -1,5 +1,7 @@
 from pydantic import BaseModel, Field
 
+from app.schemas.taxonomy import CertificationDomainOut, CertificationTopicOut
+
 
 class CertificationOut(BaseModel):
     id: str
@@ -41,5 +43,7 @@ class CertificationLayoutOut(BaseModel):
     part_domains: list[str] = Field(default_factory=list, alias="partDomains")
     parts: list[CertificationPartOut] = []
     domain_stats: dict | None = Field(None, alias="domainStats")
+    domains: list[CertificationDomainOut] = []
+    topic_map: list[CertificationTopicOut] = Field(default_factory=list, alias="topicMap")
 
     model_config = {"populate_by_name": True}

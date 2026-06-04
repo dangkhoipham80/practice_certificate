@@ -3,12 +3,14 @@ from app.models.question import Question
 from app.repositories.certification_repository import CertificationRepository
 from app.repositories.question_repository import QuestionRepository
 from app.repositories.question_type_repository import QuestionTypeRepository
+from app.repositories.taxonomy_repository import TaxonomyRepository
 from app.schemas.certification import (
     CertificationLayoutOut,
     CertificationOut,
     CertificationPartOut,
 )
 from app.schemas.question import QuestionListOut, QuestionOut, QuestionUpdateIn
+from app.schemas.taxonomy import CertificationDomainOut, CertificationTopicOut
 
 
 def question_to_schema(q: Question) -> QuestionOut:
@@ -52,10 +54,12 @@ class QuestionService:
         cert_repo: CertificationRepository,
         question_repo: QuestionRepository,
         question_type_repo: QuestionTypeRepository | None = None,
+        taxonomy_repo: TaxonomyRepository | None = None,
     ) -> None:
         self.cert_repo = cert_repo
         self.question_repo = question_repo
         self.question_type_repo = question_type_repo or QuestionTypeRepository(question_repo.session)
+        self.taxonomy_repo = taxonomy_repo or TaxonomyRepository(question_repo.session)
 
     async def list_certifications(self) -> list[CertificationOut]:
         rows = await self.cert_repo.list_with_counts()
@@ -99,6 +103,9 @@ class QuestionService:
 
         part_domains = [p.domain_id for p in parts if p.domain_id]
 
+        db_domains = await self.taxonomy_repo.list_domains(cert_id)
+        db_topics = await self.taxonomy_repo.list_topics(cert_id)
+
         return CertificationLayoutOut(
             certId=cert.id,
             examCode=cert.exam_code,
@@ -113,6 +120,24 @@ class QuestionService:
             partDomains=part_domains,
             parts=part_outs,
             domainStats=domain_stats,
+            domains=[
+                CertificationDomainOut(
+                    slug=d.slug,
+                    title=d.title,
+                    sortOrder=d.sort_order,
+                    examWeightPct=float(d.exam_weight_pct) if d.exam_weight_pct is not None else None,
+                    isActive=d.is_active,
+                )
+                for d in db_domains
+            ],
+            topicMap=[
+                CertificationTopicOut(
+                    topicNumber=t.topic_number,
+                    label=t.label,
+                    primaryDomainSlug=t.primary_domain_slug,
+                )
+                for t in db_topics
+            ],
         )
 
     async def list_questions(
@@ -120,10 +145,32 @@ class QuestionService:
         cert_id: str,
         *,
         quiz_only: bool = False,
+        page: int | None = None,
+        page_size: int = 20,
     ) -> QuestionListOut | None:
         cert = await self.cert_repo.get_by_id(cert_id)
         if not cert:
             return None
+
+        if page is not None:
+            total = await self.question_repo.count_list_by_cert(cert_id, quiz_only=quiz_only)
+            offset = (page - 1) * page_size
+            rows = await self.question_repo.list_by_cert(
+                cert_id,
+                quiz_only=quiz_only,
+                offset=offset,
+                limit=page_size,
+            )
+            total_pages = max(1, (total + page_size - 1) // page_size) if total else 1
+            return QuestionListOut(
+                certId=cert_id,
+                total=total,
+                questions=[question_to_schema(q) for q in rows],
+                page=page,
+                pageSize=page_size,
+                totalPages=total_pages,
+            )
+
         questions = await self.question_repo.list_by_cert(cert_id, quiz_only=quiz_only)
         return QuestionListOut(
             certId=cert_id,
@@ -146,6 +193,19 @@ class QuestionService:
             return None
 
         data = body.model_dump(exclude_unset=True)
+        nullable_clears = {
+            "domain_id": body.domain_id,
+            "topic": body.topic,
+            "explanation": body.explanation,
+            "warn": body.warn,
+        }
+        for field, value in nullable_clears.items():
+            if field in body.model_fields_set:
+                data[field] = None if value in ("", None) else value
+        if "quiz_eligible" in body.model_fields_set:
+            data["quiz_eligible"] = bool(body.quiz_eligible)
+        if "images" in body.model_fields_set and body.images is not None:
+            data["images"] = [str(u).strip() for u in body.images if u and str(u).strip()]
         if "choices" in data and data["choices"] is not None:
             data["choices"] = [c.strip() for c in data["choices"] if c and c.strip()]
         if "correct" in data and data["correct"] is not None:
@@ -172,6 +232,19 @@ class QuestionService:
             data["type"] = qt.legacy_type
             if ui_cfg := data.get("ui_config"):
                 ui_cfg["type"] = qt.slug
+
+        if "domain_id" in data and data["domain_id"]:
+            domain = await self.taxonomy_repo.get_domain(cert_id, data["domain_id"])
+            if domain is None:
+                domains = await self.taxonomy_repo.list_domains(cert_id)
+                if domains:
+                    raise ValueError(f"Unknown domain '{data['domain_id']}' for this certification")
+
+        if "topic" in data and data["topic"]:
+            topic_row = await self.taxonomy_repo.get_topic(cert_id, str(data["topic"]))
+            topics = await self.taxonomy_repo.list_topics(cert_id)
+            if topics and topic_row is None:
+                raise ValueError(f"Unknown topic '{data['topic']}' for this certification")
 
         for key, value in data.items():
             setattr(question, key, value)

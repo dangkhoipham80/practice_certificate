@@ -37,10 +37,17 @@ Chi tiết RBAC: [auth.md](auth.md).
 | Method | Path | Mô tả |
 |--------|------|--------|
 | GET | `/api/v1/certs` | Danh sách cert + số câu |
-| GET | `/api/v1/certs/{cert_id}/layout` | Parts + stats (tính từ DB) |
+| GET | `/api/v1/certs/{cert_id}/layout` | Parts + stats + `domains` + `topicMap` |
 | GET | `/api/v1/certs/{cert_id}/meta` | Alias `/layout` (deprecated) |
-| GET | `/api/v1/certs/{cert_id}/questions` | Toàn bộ câu hỏi |
+| GET | `/api/v1/certs/{cert_id}/taxonomy` | Domains + ExamTopics map |
+| PUT | `/api/v1/certs/{cert_id}/taxonomy` | admin — thay toàn bộ taxonomy |
+| PUT | `/api/v1/certs/{cert_id}/taxonomy/domains/{slug}` | admin — upsert một domain |
+| PUT | `/api/v1/certs/{cert_id}/taxonomy/topics/{topic_number}` | admin — upsert một topic |
+| GET | `/api/v1/certs/{cert_id}/questions` | Toàn bộ câu hỏi (không có `page`) |
+| GET | `/api/v1/certs/{cert_id}/questions?page=1&pageSize=20` | Trang câu hỏi (20 mặc định / trang) |
 | GET | `/api/v1/certs/{cert_id}/questions?quiz_only=true` | Chỉ MC quiz-eligible |
+
+Response phân trang thêm `page`, `pageSize`, `totalPages` (cùng `total` = tổng câu khớp filter).
 
 ### Response mẫu — question
 
@@ -66,7 +73,7 @@ Field names khớp object FE hiện tại (camelCase).
 
 | Method | Path | Auth | Mô tả |
 |--------|------|------|--------|
-| PATCH | `/api/v1/certs/{cert_id}/questions/{external_id}` | admin | Cập nhật câu (gồm `uiConfig`) |
+| PATCH | `/api/v1/certs/{cert_id}/questions/{external_id}` | admin | Cập nhật câu — gửi đủ field cần lưu: `text`, `explanation`, `quizEligible`, `domainId`, `topic`, `images`, `warn`, `choices`, `correct`, `multiple`, `uiConfig`, `questionTypeId` |
 
 ### Question types (DB)
 

@@ -1,5 +1,6 @@
 import { classifyInteractiveKind } from '../../apps/web/src/utils/ai102InteractiveKind.js';
 import { parseExamQuestion } from '../../apps/web/src/lib/examQuestionParser.js';
+import { buildPartsFromTaxonomy, sortQuestionsByTaxonomy } from './taxonomy.mjs';
 
 const CHOICE_ORDER = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
@@ -108,27 +109,21 @@ export function buildTopicParts(questions, topics) {
   return { partSizes, partStarts, partTitles, topics };
 }
 
-export function buildDomainParts(questions, classifier) {
-  const domainIds = classifier.AI102_DOMAIN_IDS;
-  const domainOrder = new Map(domainIds.map((id, index) => [id, index]));
-  const sortedQuestions = [...questions].sort((a, b) => {
-    const domainDelta = (domainOrder.get(a.domainId) ?? 999) - (domainOrder.get(b.domainId) ?? 999);
-    if (domainDelta) return domainDelta;
-    return a.questionId - b.questionId;
-  });
-  const partSizes = domainIds.map((domainId) => sortedQuestions.filter((q) => q.domainId === domainId).length);
+export function buildDomainParts(questions, taxonomy) {
+  const sortedQuestions = sortQuestionsByTaxonomy(taxonomy, questions);
+  const parts = buildPartsFromTaxonomy(taxonomy, sortedQuestions);
+  const partSizes = parts.map((p) => p.questionCount);
   const partStarts = partSizes.reduce((acc, size, index) => {
     acc.push(index === 0 ? 0 : acc[index - 1] + partSizes[index - 1]);
     return acc;
   }, []);
-  const partTitles = domainIds.map((domainId) => classifier.getDomainLabel(domainId));
   return {
     questions: sortedQuestions,
     parts: {
       partSizes,
       partStarts,
-      partTitles,
-      partDomains: domainIds,
+      partTitles: parts.map((p) => p.title),
+      partDomains: parts.map((p) => p.domainId).filter(Boolean),
       topics: [...new Set(sortedQuestions.map((q) => q.topic))].sort((a, b) => Number(a) - Number(b)),
     },
   };

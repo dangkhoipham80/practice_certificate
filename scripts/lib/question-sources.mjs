@@ -1,7 +1,13 @@
 import { pathToFileURL } from 'url';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { buildPartsFromLayout, distinctTopics } from './exam-layout.mjs';
+import { distinctTopics } from './exam-layout.mjs';
+import { buildDomainStats } from './question-transform.mjs';
+import {
+  buildPartsFromTaxonomy,
+  loadTaxonomy,
+  sortQuestionsByTaxonomy,
+} from './taxonomy.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '../..');
@@ -16,7 +22,6 @@ export const EXAM_SOURCES = [
     description: 'Designing and Implementing a Microsoft Azure AI Solution.',
     modulePath: 'apps/web/src/data/ai102Questions.js',
     questionsExport: 'ai102Questions',
-    metaExport: 'ai102ExamMeta',
   },
   {
     certId: 'gh-300',
@@ -27,13 +32,13 @@ export const EXAM_SOURCES = [
     description: 'GitHub Copilot certification prep.',
     modulePath: 'apps/web/src/data/gh300Questions.js',
     questionsExport: 'gh300Questions',
-    metaModulePath: 'apps/web/src/config/gh300Exam.js',
   },
 ];
 
 async function loadModuleQuestions(source) {
+  const taxonomy = loadTaxonomy(source.certId);
   const mod = await import(pathToFileURL(path.join(root, source.modulePath)).href);
-  const questions = (mod[source.questionsExport] ?? []).map((q, index) => ({
+  let questions = (mod[source.questionsExport] ?? []).map((q, index) => ({
     topic: q.topic ?? '1',
     domainId: q.domainId,
     questionId: q.questionId ?? index + 1,
@@ -49,36 +54,28 @@ async function loadModuleQuestions(source) {
     warn: q.warn,
   }));
 
-  let meta;
-  if (source.metaExport) {
-    meta = mod[source.metaExport];
-  } else {
-    const metaMod = await import(pathToFileURL(path.join(root, source.metaModulePath)).href);
-    meta = {
-      partSizes: metaMod.partSizes,
-      partTitles: metaMod.partTitles,
-      partDomains: metaMod.partDomains ?? [],
-      GRID_PAGE_SIZE: metaMod.GRID_PAGE_SIZE ?? 50,
-      sourceFiles: 0,
-    };
+  if (taxonomy?.domainSlugs?.length) {
+    questions = sortQuestionsByTaxonomy(taxonomy, questions);
   }
 
-  const parts = buildPartsFromLayout({
-    partSizes: meta.partSizes,
-    partTitles: meta.partTitles,
-    partDomains: meta.partDomains ?? [],
-  });
+  const parts = taxonomy ? buildPartsFromTaxonomy(taxonomy, questions) : [];
+
+  const metaMod =
+    source.certId === 'gh-300'
+      ? await import(pathToFileURL(path.join(root, 'apps/web/src/config/gh300Exam.js')).href)
+      : null;
 
   return {
     questions,
     parts,
-    gridPageSize: meta.GRID_PAGE_SIZE ?? 50,
-    sourceFileCount: meta.sourceFiles ?? 0,
+    taxonomy,
+    gridPageSize: metaMod?.GRID_PAGE_SIZE ?? 50,
+    sourceFileCount: source.certId === 'ai-102' ? 66 : 0,
   };
 }
 
 /** Dùng cho build-exam-questions.mjs (export JS bundle). */
-export function bankToExamMeta(bank, domainStats = null) {
+export function bankToExamMeta(bank) {
   const { cert, parts, questions } = bank;
   const partSizes = parts.map((p) => p.questionCount);
   let start = 0;
@@ -88,13 +85,14 @@ export function bankToExamMeta(bank, domainStats = null) {
     return s;
   });
   const partDomains = parts.map((p) => p.domainId).filter((id) => id != null);
+  const domainStats = buildDomainStats(questions);
 
   return {
     examCode: cert.examCode,
     total: questions.length,
     quizEligible: questions.filter((q) => q.quizEligible).length,
     sourceFiles: cert.sourceFileCount ?? 0,
-    ...(domainStats ? { domainStats } : {}),
+    domainStats: Object.keys(domainStats).length ? domainStats : undefined,
     partSizes,
     partStarts,
     partTitles: parts.map((p) => p.title),
@@ -104,7 +102,7 @@ export function bankToExamMeta(bank, domainStats = null) {
   };
 }
 
-/** @returns {Promise<Array<{ cert, parts, questions }>>} */
+/** @returns {Promise<Array<{ cert, parts, questions, taxonomy }>>} */
 export async function loadAllQuestionBanks() {
   const banks = [];
 
@@ -121,12 +119,13 @@ export async function loadAllQuestionBanks() {
       sourceFileCount: 0,
     };
 
-    const { questions, parts, gridPageSize, sourceFileCount } = await loadModuleQuestions(source);
+    const { questions, parts, taxonomy, gridPageSize, sourceFileCount } =
+      await loadModuleQuestions(source);
     banks.push({
       cert: { ...certBase, gridPageSize, sourceFileCount },
       parts,
       questions,
-      domainStats: source.certId === 'ai-102' ? (await import(pathToFileURL(path.join(root, source.modulePath)).href))[source.metaExport]?.domainStats : null,
+      taxonomy,
     });
   }
 

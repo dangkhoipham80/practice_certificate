@@ -85,9 +85,13 @@ export function tokenizeCodeLine(line, language = 'csharp') {
     if (word) {
       const w = word[0];
       let type = 'plain';
-      if (language === 'csharp' || language === 'javascript') {
+      if (language === 'csharp' || language === 'javascript' || language === 'typescript') {
         if (CSHARP_KEYWORDS.has(w)) type = 'keyword';
         else if (CSHARP_TYPES.has(w) || /^[A-Z][a-zA-Z]+$/.test(w)) type = 'type';
+      } else if (language === 'python' && ['def', 'import', 'from', 'return', 'if', 'else', 'for', 'in', 'async', 'await', 'class', 'True', 'False', 'None'].includes(w)) {
+        type = 'keyword';
+      } else if (language === 'plain') {
+        type = 'plain';
       }
       tokens.push({ type, value: w });
       i += w.length;
@@ -108,6 +112,53 @@ export function tokenizeCodeLine(line, language = 'csharp') {
   return tokens;
 }
 
+/** Layout of the answer-area template(s). */
+export const ANSWER_AREA_FORMATS = [
+  { id: 'code', label: 'Code' },
+  { id: 'text', label: 'Text / prose' },
+  { id: 'both', label: 'Text + code' },
+];
+
+/** Syntax highlighting for code blocks (optional). */
+export const TEMPLATE_LANGUAGES = [
+  { id: 'csharp', label: 'C#' },
+  { id: 'javascript', label: 'JavaScript' },
+  { id: 'typescript', label: 'TypeScript' },
+  { id: 'python', label: 'Python' },
+  { id: 'sql', label: 'SQL' },
+  { id: 'powershell', label: 'PowerShell' },
+  { id: 'xml', label: 'XML' },
+  { id: 'html', label: 'HTML' },
+  { id: 'json', label: 'JSON' },
+  { id: 'plain', label: 'Plain (no highlighting)' },
+];
+
+export function normalizeAnswerAreaFormat(format) {
+  if (format === 'code' || format === 'text' || format === 'both') return format;
+  return 'code';
+}
+
 export function isCodeAnswerArea(answerArea) {
-  return answerArea?.format === 'code' || answerArea?.language === 'csharp' || answerArea?.language === 'javascript';
+  const format = normalizeAnswerAreaFormat(answerArea?.format);
+  if (format === 'text') return false;
+  const code = answerArea?.template?.trim();
+  if (format === 'code' || format === 'both') return Boolean(code);
+  return (
+    answerArea?.format === 'code' ||
+    answerArea?.language === 'csharp' ||
+    answerArea?.language === 'javascript'
+  );
+}
+
+export function resolveCodeTemplate(answerArea = {}) {
+  const format = normalizeAnswerAreaFormat(answerArea.format);
+  if (format === 'text') return '';
+  return answerArea.template ?? '';
+}
+
+export function resolveTextTemplate(answerArea = {}) {
+  const format = normalizeAnswerAreaFormat(answerArea.format);
+  if (format === 'code') return '';
+  if (format === 'text') return answerArea.text_template ?? answerArea.template ?? '';
+  return answerArea.text_template ?? '';
 }

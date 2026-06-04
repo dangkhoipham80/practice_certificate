@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth_deps import require_roles
@@ -7,6 +7,7 @@ from app.models.user import User, UserRole
 from app.repositories.certification_repository import CertificationRepository
 from app.repositories.question_repository import QuestionRepository
 from app.repositories.question_type_repository import QuestionTypeRepository
+from app.repositories.taxonomy_repository import TaxonomyRepository
 from app.schemas.certification import CertificationLayoutOut, CertificationOut
 from app.schemas.question import QuestionListOut, QuestionOut, QuestionUpdateIn
 from app.services.question_service import QuestionService
@@ -19,6 +20,7 @@ def get_question_service(db: AsyncSession = Depends(get_db)) -> QuestionService:
         CertificationRepository(db),
         QuestionRepository(db),
         QuestionTypeRepository(db),
+        TaxonomyRepository(db),
     )
 
 
@@ -54,9 +56,16 @@ async def get_cert_meta_legacy(
 async def get_cert_questions(
     cert_id: str,
     quiz_only: bool = False,
+    page: int | None = Query(None, ge=1, description="Page number (1-based). Omit to return all questions."),
+    page_size: int = Query(20, ge=1, le=100, alias="pageSize", description="Questions per page when `page` is set."),
     service: QuestionService = Depends(get_question_service),
 ) -> QuestionListOut:
-    result = await service.list_questions(cert_id, quiz_only=quiz_only)
+    result = await service.list_questions(
+        cert_id,
+        quiz_only=quiz_only,
+        page=page,
+        page_size=page_size,
+    )
     if not result:
         raise HTTPException(status_code=404, detail=f"Certification '{cert_id}' not found")
     return result

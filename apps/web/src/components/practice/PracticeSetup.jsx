@@ -3,15 +3,21 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Brain, ClipboardList, Flag, Layers3, MousePointerClick, Move, Play, RotateCcw, Search, Terminal } from 'lucide-react';
 import { getQuizQuestions } from '../../config/certRegistry';
 import { pathFromRouteId } from '../../config/routes';
-import { AI102_EXAM_DOMAINS } from '../../data/ai102ExamReadiness';
 import { getDomainLabel } from '../../utils/ai102DomainClassifier';
+import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
+import {
+  QUIZ_DOMAIN_NONE,
+  QUIZ_DOMAIN_NONE_LABEL,
+  countQuizByDomain,
+  formatQuizDomainLabel,
+  getQuizIndicesForDomainFilter,
+} from '../../lib/quizDomains';
 import {
   getIndicesForQuestionKind,
   getInteractiveIndices,
   getQuestionKindStats,
   QUESTION_KIND_LABELS,
 } from '../../utils/ai102InteractiveKind';
-import { getQuizIndicesForDomain } from '../../utils/ai102StudyPlan';
 import { ActionButton } from '../ui/ActionButton';
 import { InfoTile } from '../ui/InfoTile';
 import { SectionHeader } from '../ui/SectionHeader';
@@ -23,18 +29,14 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
   const domainFilter = searchParams.get('domain');
   const quizCount = getQuizQuestions(cert).length;
   const sectionLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
+  const { domains, domainLabelMap } = useCertTaxonomy(cert.id);
 
   const domainQuizCount = useMemo(() => {
-    if (cert.id !== 'ai-102' || !domainFilter) return 0;
-    return getQuizIndicesForDomain(cert.questions, domainFilter).length;
-  }, [cert, domainFilter]);
+    if (!domainFilter) return 0;
+    return getQuizIndicesForDomainFilter(cert.questions, domainFilter).length;
+  }, [cert.questions, domainFilter]);
 
-  const domainCounts = useMemo(() => {
-    if (cert.id !== 'ai-102') return {};
-    return Object.fromEntries(
-      AI102_EXAM_DOMAINS.map((domain) => [domain.id, getQuizIndicesForDomain(cert.questions, domain.id).length]),
-    );
-  }, [cert]);
+  const domainCounts = useMemo(() => countQuizByDomain(cert.questions, domains), [cert.questions, domains]);
 
   const questionKindStats = useMemo(() => {
     if (cert.id !== 'ai-102') return null;
@@ -60,20 +62,28 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
   }
 
   function startDomainQuiz(count = 20) {
-    const indices = getQuizIndicesForDomain(cert.questions, domainFilter);
+    const indices = getQuizIndicesForDomainFilter(cert.questions, domainFilter);
     if (!indices.length) return;
+    const title =
+      domainFilter === QUIZ_DOMAIN_NONE
+        ? QUIZ_DOMAIN_NONE_LABEL
+        : formatQuizDomainLabel(domainFilter, domainLabelMap) || getDomainLabel(domainFilter, domainLabelMap);
     startQuiz({
       customIndices: indices,
       count: count === 'all' ? 'all' : Math.min(count, indices.length),
-      label: `${cert.exam} · ${getDomainLabel(domainFilter)}`,
+      label: `${cert.exam} · ${title}`,
     });
   }
 
   return (
     <section className="space-y-6">
-      {cert.id === 'ai-102' && domainFilter && domainQuizCount > 0 && (
+      {domainFilter && domainQuizCount > 0 && (
         <div className="panel border-accent-200 bg-accent-50/50 p-5 dark:border-accent-500/30 dark:bg-accent-500/10">
-          <p className="font-bold text-ink dark:text-slate-100">{getDomainLabel(domainFilter)}</p>
+          <p className="font-bold text-ink dark:text-slate-100">
+            {domainFilter === QUIZ_DOMAIN_NONE
+              ? QUIZ_DOMAIN_NONE_LABEL
+              : formatQuizDomainLabel(domainFilter, domainLabelMap) || getDomainLabel(domainFilter, domainLabelMap)}
+          </p>
           <p className="mt-1 text-sm text-muted dark:text-slate-400">
             {domainQuizCount} multiple-choice questions tagged to this exam domain (keyword + topic rules).
           </p>
@@ -134,25 +144,38 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
         </div>
       )}
 
-      {cert.id === 'ai-102' && (
+      {domains.length > 0 && (
         <div className="panel p-5">
-          <p className="text-xs font-bold uppercase text-muted dark:text-slate-400">Practice by exam domain</p>
+          <p className="text-xs font-bold uppercase text-muted dark:text-slate-400">Practice by quiz domain</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {AI102_EXAM_DOMAINS.map((domain) => (
-              domainCounts[domain.id] ? (
+            {domains.map((domain) => {
+              const count = domainCounts[domain.slug] ?? 0;
+              const shortTitle =
+                cert.id === 'ai-102'
+                  ? domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')
+                  : domain.title;
+              return count ? (
                 <Link
-                  key={domain.id}
-                  className={`filter-chip ${domainFilter === domain.id ? 'filter-chip-active' : ''}`}
-                  to={`${pathFromRouteId('practice', cert.id)}?domain=${domain.id}`}
+                  key={domain.slug}
+                  className={`filter-chip ${domainFilter === domain.slug ? 'filter-chip-active' : ''}`}
+                  to={`${pathFromRouteId('practice', cert.id)}?domain=${domain.slug}`}
                 >
-                  {domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')} ({domainCounts[domain.id]})
+                  {shortTitle} ({count})
                 </Link>
               ) : (
-                <span className="filter-chip cursor-not-allowed opacity-50" key={domain.id}>
-                  {domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')} (0)
+                <span className="filter-chip cursor-not-allowed opacity-50" key={domain.slug}>
+                  {shortTitle} (0)
                 </span>
-              )
-            ))}
+              );
+            })}
+            {(domainCounts[QUIZ_DOMAIN_NONE] ?? 0) > 0 && (
+              <Link
+                className={`filter-chip ${domainFilter === QUIZ_DOMAIN_NONE ? 'filter-chip-active' : ''}`}
+                to={`${pathFromRouteId('practice', cert.id)}?domain=${QUIZ_DOMAIN_NONE}`}
+              >
+                {QUIZ_DOMAIN_NONE_LABEL} ({domainCounts[QUIZ_DOMAIN_NONE]})
+              </Link>
+            )}
             {domainFilter && (
               <Link className="filter-chip" to={pathFromRouteId('practice', cert.id)}>
                 Clear filter

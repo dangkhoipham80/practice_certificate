@@ -18,12 +18,7 @@ class QuestionRepository:
         row = result.one()
         return int(row.total or 0), int(row.quiz_eligible or 0)
 
-    async def list_by_cert(
-        self,
-        cert_id: str,
-        *,
-        quiz_only: bool = False,
-    ) -> list[Question]:
+    def _list_by_cert_stmt(self, cert_id: str, *, quiz_only: bool = False):
         stmt = (
             select(Question)
             .options(selectinload(Question.question_type))
@@ -32,6 +27,26 @@ class QuestionRepository:
         )
         if quiz_only:
             stmt = stmt.where(Question.quiz_eligible.is_(True))
+        return stmt
+
+    async def count_list_by_cert(self, cert_id: str, *, quiz_only: bool = False) -> int:
+        stmt = select(func.count(Question.id)).where(Question.cert_id == cert_id)
+        if quiz_only:
+            stmt = stmt.where(Question.quiz_eligible.is_(True))
+        result = await self.session.execute(stmt)
+        return int(result.scalar_one() or 0)
+
+    async def list_by_cert(
+        self,
+        cert_id: str,
+        *,
+        quiz_only: bool = False,
+        offset: int = 0,
+        limit: int | None = None,
+    ) -> list[Question]:
+        stmt = self._list_by_cert_stmt(cert_id, quiz_only=quiz_only)
+        if limit is not None:
+            stmt = stmt.offset(offset).limit(limit)
         result = await self.session.execute(stmt)
         return list(result.scalars().all())
 

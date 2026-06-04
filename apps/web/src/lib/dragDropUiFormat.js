@@ -10,7 +10,8 @@ export function detectCodeLanguage(snippet = '') {
   if (/\bawait\s+/.test(snippet) || /\bvar\s+\w+\s*=/.test(snippet)) return 'csharp';
   if (/=>|function\s*\(/.test(snippet)) return 'javascript';
   if (/^\s*SELECT\b/i.test(snippet)) return 'sql';
-  return 'text';
+  if (/^\s*def\s+\w+/.test(snippet) || /\bimport\s+\w+/.test(snippet)) return 'python';
+  return 'plain';
 }
 
 export function tokenizeBlanks(rawTemplate, zoneCount) {
@@ -121,6 +122,7 @@ export function buildDragDropUiConfig({
     format: uiType === 'code_completion' || /var\s+|await\s+/.test(rawTemplate) ? 'code' : 'text',
     language: detectCodeLanguage(rawTemplate),
     template,
+    text_template: '',
     drop_zones,
     content: template,
     targets: drop_zones.map((z) => ({
@@ -199,19 +201,45 @@ export function normalizeDragDropUiConfig(uiConfig = {}) {
     };
   });
 
-  const language = uiConfig.answer_area?.language ?? detectCodeLanguage(template);
-  const format = uiConfig.answer_area?.format ?? (template.includes('var ') ? 'code' : 'text');
-  const preservedTemplate =
-    format === 'code' || language === 'csharp' || language === 'javascript'
-      ? preserveCodeTemplate(template)
-      : template;
+  const rawFormat = uiConfig.answer_area?.format;
+  const inferredCode = /var\s+|await\s+/.test(templateRaw);
+  const format =
+    rawFormat === 'code' || rawFormat === 'text' || rawFormat === 'both'
+      ? rawFormat
+      : inferredCode
+        ? 'code'
+        : 'text';
+
+  const language =
+    uiConfig.answer_area?.language && uiConfig.answer_area.language !== 'text'
+      ? uiConfig.answer_area.language
+      : detectCodeLanguage(templateRaw);
+
+  let codeTemplate = '';
+  let textTemplate = uiConfig.answer_area?.text_template ?? '';
+  if (format === 'text') {
+    textTemplate = textTemplate || templateRaw;
+  } else if (format === 'both') {
+    codeTemplate = uiConfig.answer_area?.template ?? templateRaw;
+    textTemplate = textTemplate || '';
+  } else {
+    codeTemplate = uiConfig.answer_area?.template ?? templateRaw;
+  }
+
+  const preservedCode =
+    format === 'code' || format === 'both'
+      ? preserveCodeTemplate(codeTemplate)
+      : '';
+  const preservedText = format === 'text' || format === 'both' ? textTemplate : '';
+  const topLevelTemplate = format === 'text' ? preservedText : preservedCode;
 
   const answer_area = {
     format,
     language,
-    template: preservedTemplate,
+    template: preservedCode,
+    text_template: preservedText,
     drop_zones,
-    content: preservedTemplate,
+    content: topLevelTemplate,
     targets: drop_zones.map((z) => ({
       id: z.id,
       type: 'drop',
@@ -225,7 +253,7 @@ export function normalizeDragDropUiConfig(uiConfig = {}) {
     items: draggable_items,
     values: draggable_items.map((it) => it.label),
     drop_zones,
-    template: preservedTemplate,
+    template: topLevelTemplate,
     answer_area,
   };
 }

@@ -1,3 +1,4 @@
+import { getQuizIndicesForDomainFilter } from '../lib/quizDomains';
 import { AI102_EXAMTOPIC_PRIMARY_DOMAIN } from './ai102DomainClassifier';
 
 export function getExamTopicsForDomain(domainId) {
@@ -8,10 +9,7 @@ export function getExamTopicsForDomain(domainId) {
 }
 
 export function getQuizIndicesForDomain(questions, domainId) {
-  return questions
-    .map((q, index) => ({ q, index }))
-    .filter(({ q }) => q.domainId === domainId && q.quizEligible)
-    .map(({ index }) => index);
+  return getQuizIndicesForDomainFilter(questions, domainId ?? 'all');
 }
 
 export function getDomainQuestionStats(questions, domainId) {

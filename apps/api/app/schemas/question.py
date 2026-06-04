@@ -27,6 +27,9 @@ class QuestionListOut(BaseModel):
     cert_id: str = Field(alias="certId")
     total: int
     questions: list[QuestionOut]
+    page: int | None = None
+    page_size: int | None = Field(None, alias="pageSize")
+    total_pages: int | None = Field(None, alias="totalPages")
 
     model_config = {"populate_by_name": True}
 
@@ -38,6 +41,10 @@ class QuestionUpdateIn(BaseModel):
     multiple: bool | None = None
     explanation: str | None = None
     quiz_eligible: bool | None = Field(None, alias="quizEligible")
+    domain_id: str | None = Field(None, alias="domainId")
+    topic: str | None = None
+    images: list[str] | None = None
+    warn: str | None = None
     ui_config: dict | None = Field(None, alias="uiConfig")
     question_type_id: int | None = Field(None, alias="questionTypeId")
 

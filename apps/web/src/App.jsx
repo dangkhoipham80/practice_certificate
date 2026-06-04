@@ -2,7 +2,7 @@ import { Navigate, Route, Routes, Link } from 'react-router-dom';
 import { Learn } from './Learn';
 import { Ai102Labs } from './components/learn/Ai102Labs';
 import { useCertForge } from './hooks/useCertForge';
-import { CertProvider, useCertContext } from './context/CertContext';
+import { CertProvider } from './context/CertContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { QuestionTypesProvider } from './context/QuestionTypesContext';
 import { AuthPage, RoleBadge } from './components/auth/AuthPage';
@@ -48,7 +48,6 @@ function CertWorkspace({ app }) {
 }
 
 function LibraryRoute({ app, auth }) {
-  const { updateQuestionAtIndex } = useCertContext();
   return (
     <Library
       cert={app.cert}
@@ -57,7 +56,6 @@ function LibraryRoute({ app, auth }) {
       flagged={app.flagged}
       toggleFlag={app.toggleFlag}
       isAdmin={auth.isAdmin}
-      onUpdateQuestion={updateQuestionAtIndex}
     />
   );
 }

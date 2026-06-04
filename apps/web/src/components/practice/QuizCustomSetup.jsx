@@ -1,24 +1,28 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Play } from 'lucide-react';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
-import { isDragDropQuizReady } from '../../lib/dragDropUiFormat';
+import {
+  QUIZ_DOMAIN_NONE,
+  QUIZ_DOMAIN_NONE_LABEL,
+  countQuizByDomain,
+  getQuizIndicesForDomainFilter,
+  isInQuizPool,
+} from '../../lib/quizDomains';
 import { shuffle } from '../../lib/quizUtils';
-
-function isInQuizPool(question) {
-  if (question.quizEligible === false) return false;
-  if (question.choices?.length) return true;
-  return isDragDropQuizReady(question.uiConfig);
-}
+import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
 import { SectionHeader } from '../ui/SectionHeader';
 
 export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
   const { questions, partSizes, partStarts } = cert;
+  const { domains, domainLabelMap } = useCertTaxonomy(cert.id);
+  const domainCounts = useMemo(() => countQuizByDomain(questions, domains), [questions, domains]);
   const sectionPrefix = cert.id === 'ai-102' ? 'D' : cert.id.startsWith('ai-') ? 'T' : 'P';
   const [parts, setParts] = useState(() => partSizes.map((size, index) => (size ? index : null)).filter((index) => index !== null));
   const [questionType, setQuestionType] = useState('all');
   const [source, setSource] = useState('all');
   const [order, setOrder] = useState('random');
   const [count, setCount] = useState('20');
+  const [domainFilter, setDomainFilter] = useState('all');
 
   function togglePart(index) {
     setParts((current) => (current.includes(index) ? current.filter((item) => item !== index) : [...current, index].sort((a, b) => a - b)));
@@ -38,6 +42,11 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
       }
     });
     if (!pool.length) return window.alert('No questions match.');
+    if (domainFilter !== 'all') {
+      const allowed = new Set(getQuizIndicesForDomainFilter(questions, domainFilter));
+      pool = pool.filter((index) => allowed.has(index));
+      if (!pool.length) return window.alert('No questions match the selected domain.');
+    }
     if (source === 'wrong') {
       pool = pool.filter((index) => getWrongIndices(partProgress, partSizes, partStarts).includes(index));
       if (!pool.length) return window.alert('No wrong answers in the selected scope!');
@@ -49,10 +58,16 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
     const ordered = order === 'random' ? shuffle(pool) : [...pool];
     const parsed = count.trim() ? Math.min(Number(count) || ordered.length, ordered.length) : ordered.length;
     const srcLabel = source === 'wrong' ? ' (Wrong)' : source === 'unanswered' ? ' (New)' : '';
+    const domainLabel =
+      domainFilter === 'all'
+        ? ''
+        : domainFilter === QUIZ_DOMAIN_NONE
+          ? ` · ${QUIZ_DOMAIN_NONE_LABEL}`
+          : ` · ${domainLabelMap[domainFilter] ?? domainFilter}`;
     startQuiz({
       mode: 'custom',
       count: parsed,
-      label: `${cert.exam} · ${order === 'random' ? 'Random' : 'Sequential'}${srcLabel} · ${parsed}`,
+      label: `${cert.exam} · ${order === 'random' ? 'Random' : 'Sequential'}${srcLabel}${domainLabel} · ${parsed}`,
       shufflePool: false,
       customIndices: ordered.slice(0, parsed)
     });
@@ -69,6 +84,39 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
           </label>
         ))}
       </div>
+      {domains.length > 0 && (
+        <div>
+          <p className="mb-2 text-xs font-bold uppercase text-muted">Quiz domain</p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              className={`filter-chip ${domainFilter === 'all' ? 'filter-chip-active' : ''}`}
+              onClick={() => setDomainFilter('all')}
+            >
+              All domains ({domainCounts.all})
+            </button>
+            {domains.map((d) => (
+              <button
+                key={d.slug}
+                type="button"
+                className={`filter-chip ${domainFilter === d.slug ? 'filter-chip-active' : ''}`}
+                onClick={() => setDomainFilter(d.slug)}
+              >
+                {d.title} ({domainCounts[d.slug] ?? 0})
+              </button>
+            ))}
+            {(domainCounts[QUIZ_DOMAIN_NONE] ?? 0) > 0 && (
+              <button
+                type="button"
+                className={`filter-chip ${domainFilter === QUIZ_DOMAIN_NONE ? 'filter-chip-active' : ''}`}
+                onClick={() => setDomainFilter(QUIZ_DOMAIN_NONE)}
+              >
+                {QUIZ_DOMAIN_NONE_LABEL} ({domainCounts[QUIZ_DOMAIN_NONE]})
+              </button>
+            )}
+          </div>
+        </div>
+      )}
       <div className="grid gap-4 sm:grid-cols-3">
         <div>
           <p className="mb-2 text-xs font-bold uppercase text-muted">Question type</p>

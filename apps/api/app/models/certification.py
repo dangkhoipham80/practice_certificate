@@ -7,7 +7,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 
 if TYPE_CHECKING:
+    from app.models.certification_domain import CertificationDomain
     from app.models.certification_part import CertificationPart
+    from app.models.certification_topic import CertificationTopic
     from app.models.question import Question
 
 
@@ -33,5 +35,13 @@ class Certification(Base):
     parts: Mapped[list["CertificationPart"]] = relationship(
         back_populates="certification",
         order_by="CertificationPart.sort_order",
+    )
+    domains: Mapped[list["CertificationDomain"]] = relationship(
+        back_populates="certification",
+        order_by="CertificationDomain.sort_order",
+    )
+    topics: Mapped[list["CertificationTopic"]] = relationship(
+        back_populates="certification",
+        order_by="CertificationTopic.topic_number",
     )
     questions: Mapped[list["Question"]] = relationship(back_populates="certification")

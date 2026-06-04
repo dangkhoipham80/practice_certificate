@@ -1,7 +1,14 @@
 import { useMemo, useState } from 'react';
+import { ResizableColumns } from '../../ui/ResizableColumns';
 import { normalizeDragDropUiConfig } from '../../../lib/dragDropUiFormat';
-import { isCodeAnswerArea } from '../../../lib/codeTemplateFormat';
+import {
+  isCodeAnswerArea,
+  normalizeAnswerAreaFormat,
+  resolveCodeTemplate,
+  resolveTextTemplate,
+} from '../../../lib/codeTemplateFormat';
 import { CodeTemplateView } from './CodeTemplateView';
+import { TextTemplateView } from './TextTemplateView';
 
 function zoneWidthClass(zoneId) {
   if (zoneId === 'drop_1') return 'min-w-[10.5rem]';
@@ -61,14 +68,23 @@ function ValueChip({ label, readOnly, isDragging, onDragStart, onDragEnd }) {
   );
 }
 
-export function DragDropQuestion({ uiConfig: rawConfig, readOnly = false, filled, onFilledChange }) {
+export function DragDropQuestion({
+  uiConfig: rawConfig,
+  readOnly = false,
+  answerOnly = false,
+  filled,
+  onFilledChange,
+}) {
   const uiConfig = useMemo(() => normalizeDragDropUiConfig(rawConfig), [rawConfig]);
 
   const draggable_items = uiConfig.draggable_items ?? [];
   const drop_zones = uiConfig.answer_area?.drop_zones ?? uiConfig.drop_zones ?? [];
-  const template = uiConfig.answer_area?.template ?? uiConfig.template ?? '';
-  const isCode = isCodeAnswerArea(uiConfig.answer_area);
-  const language = uiConfig.answer_area?.language ?? 'csharp';
+  const answerArea = uiConfig.answer_area ?? {};
+  const layoutFormat = normalizeAnswerAreaFormat(answerArea.format);
+  const codeTemplate = resolveCodeTemplate(answerArea) || (layoutFormat !== 'text' ? uiConfig.template ?? '' : '');
+  const textTemplate = resolveTextTemplate(answerArea);
+  const isCode = isCodeAnswerArea(answerArea);
+  const language = answerArea.language ?? 'csharp';
 
   const correctByZone = useMemo(() => {
     const map = {};
@@ -140,6 +156,53 @@ export function DragDropQuestion({ uiConfig: rawConfig, readOnly = false, filled
     );
   }
 
+  const renderTemplateBody = () => {
+    const dropProps = ({ zone, zoneId }) => renderDropCell(zone, zoneId);
+    const hasText = Boolean(textTemplate?.trim());
+    const hasCode = Boolean(codeTemplate?.trim());
+
+    if (!hasText && !hasCode) {
+      return (
+        <div className="flex flex-col gap-2">
+          {drop_zones.map((zone) => renderDropCell(zone, zone.id))}
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-3">
+        {hasText && (
+          <TextTemplateView template={textTemplate} zoneById={zoneById} dropCellProps={dropProps} />
+        )}
+        {hasCode && (
+          <CodeTemplateView
+            template={codeTemplate}
+            language={language}
+            zoneById={zoneById}
+            dropCellProps={dropProps}
+          />
+        )}
+      </div>
+    );
+  };
+
+  const answerAreaPanel = (
+    <div className="h-full bg-white p-4 dark:bg-gh-panel">
+      <p className="mb-3 text-sm font-semibold text-ink dark:text-slate-200">
+        {answerOnly ? 'Answer' : 'Answer Area'}
+        {layoutFormat === 'both' && (
+          <span className="ml-2 text-xs font-normal text-muted dark:text-slate-500">(text + code)</span>
+        )}
+        {isCode && layoutFormat !== 'text' && (
+          <span className="ml-2 font-mono text-xs font-normal text-muted dark:text-slate-500">
+            ({language})
+          </span>
+        )}
+      </p>
+      {renderTemplateBody()}
+    </div>
+  );
+
   return (
     <div className="drag-drop-exam space-y-3">
       {uiConfig.instructions?.length > 0 && (
@@ -150,56 +213,41 @@ export function DragDropQuestion({ uiConfig: rawConfig, readOnly = false, filled
         </ul>
       )}
 
-      <div className="grid min-h-[220px] grid-cols-1 gap-0 overflow-hidden rounded-lg border border-line/80 bg-[#f3f3f3] dark:border-gh-border dark:bg-gh-subtle md:grid-cols-2">
-        <div className="border-b border-line/60 p-4 md:border-b-0 md:border-r dark:border-gh-border">
-          <p className="mb-3 text-sm font-semibold text-ink dark:text-slate-200">Values</p>
-          <div className="flex flex-col gap-2.5">
-            {draggable_items.length > 0 ? (
-              draggable_items.map((item) => (
-                <ValueChip
-                  key={item.id}
-                  label={item.label}
-                  readOnly={readOnly}
-                  isDragging={draggingLabel === item.label}
-                  onDragStart={(e) => startDrag(e, item.label)}
-                  onDragEnd={endDrag}
-                />
-              ))
-            ) : (
-              <p className="text-xs text-muted">No values defined.</p>
-            )}
-          </div>
+      {answerOnly ? (
+        <div className="overflow-hidden rounded-lg border border-success-200/80 bg-[#f3f3f3] dark:border-success-500/30 dark:bg-gh-subtle">
+          {answerAreaPanel}
         </div>
-
-        <div className="bg-white p-4 dark:bg-gh-panel">
-          <p className="mb-3 text-sm font-semibold text-ink dark:text-slate-200">
-            Answer Area
-            {isCode && (
-              <span className="ml-2 font-mono text-xs font-normal text-muted dark:text-slate-500">
-                ({language})
-              </span>
-            )}
-          </p>
-          {template && isCode ? (
-            <CodeTemplateView
-              template={template}
-              language={language}
-              zoneById={zoneById}
-              dropCellProps={({ zone, zoneId }) => renderDropCell(zone, zoneId)}
-            />
-          ) : template ? (
-            <div className="overflow-x-auto rounded-md border border-line/50 bg-[#fafafa] p-3 font-mono text-[13px] leading-7 dark:bg-gh-subtle">
-              {template}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-2">
-              {drop_zones.map((zone) => renderDropCell(zone, zone.id))}
-            </div>
-          )}
+      ) : (
+        <div className="overflow-hidden rounded-lg border border-line/80 bg-[#f3f3f3] dark:border-gh-border dark:bg-gh-subtle">
+          <ResizableColumns
+            initialLeftPercent={36}
+            left={
+              <div className="h-full border-r border-line/60 p-4 dark:border-gh-border">
+                <p className="mb-3 text-sm font-semibold text-ink dark:text-slate-200">Values</p>
+                <div className="flex flex-col gap-2.5">
+                  {draggable_items.length > 0 ? (
+                    draggable_items.map((item) => (
+                      <ValueChip
+                        key={item.id}
+                        label={item.label}
+                        readOnly={readOnly}
+                        isDragging={draggingLabel === item.label}
+                        onDragStart={(e) => startDrag(e, item.label)}
+                        onDragEnd={endDrag}
+                      />
+                    ))
+                  ) : (
+                    <p className="text-xs text-muted">No values defined.</p>
+                  )}
+                </div>
+              </div>
+            }
+            right={answerAreaPanel}
+          />
         </div>
-      </div>
+      )}
 
-      {!readOnly && (
+      {!readOnly && !answerOnly && (
         <p className="text-xs text-muted dark:text-slate-500">
           Drag a value into a blank cell. Double-click a cell to clear it. Values can be reused.
         </p>

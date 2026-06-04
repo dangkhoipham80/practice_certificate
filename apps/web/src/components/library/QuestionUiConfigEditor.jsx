@@ -1,8 +1,9 @@
-import { ArrowDown, ArrowUp, Plus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { GripVertical, Plus, Trash2 } from 'lucide-react';
 import { moveDraggableItem } from '../../lib/dragDropUiFormat';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
 import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
-import { handleCodeTextareaKeyDown } from '../../lib/codeTemplateFormat';
+import { AnswerAreaTemplateEditor } from './AnswerAreaTemplateEditor';
 import {
   defaultUiConfig,
   isChoicesType,
@@ -53,36 +54,63 @@ function ListField({ label, items, onChange, placeholder }) {
 }
 
 function DraggableItemsEditor({ items, onChange, onMove }) {
+  const [dragIndex, setDragIndex] = useState(null);
+  const [overIndex, setOverIndex] = useState(null);
+
+  function endDrag() {
+    setDragIndex(null);
+    setOverIndex(null);
+  }
+
+  function handleDrop(toIndex, e) {
+    e.preventDefault();
+    const fromIndex = dragIndex ?? Number(e.dataTransfer.getData('text/plain'));
+    if (Number.isFinite(fromIndex) && fromIndex !== toIndex) {
+      onMove(fromIndex, toIndex);
+    }
+    endDrag();
+  }
+
   return (
     <div>
       <span className="auth-field-label">Values (draggable items)</span>
       <p className="mt-1 text-xs text-muted dark:text-slate-500">
-        Use arrows to change order. IDs update to match position (item_1 = first row).
+        Drag a row by the grip to reorder. IDs update to match position (item_1 = first row).
       </p>
       <div className="mt-2 space-y-2">
         {items.map((item, i) => (
-          <div key={item.id} className="flex flex-wrap items-center gap-2">
+          <div
+            key={item.id}
+            className={[
+              'flex flex-wrap items-center gap-2 rounded-lg border px-2 py-1.5 transition-colors',
+              dragIndex === i ? 'opacity-50' : '',
+              overIndex === i && dragIndex !== i
+                ? 'border-accent-400 bg-accent-50/60 dark:border-accent-500/50 dark:bg-accent-500/10'
+                : 'border-line/50 dark:border-gh-border/60',
+            ].join(' ')}
+            onDragOver={(e) => {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = 'move';
+              setOverIndex(i);
+            }}
+            onDragLeave={() => setOverIndex((current) => (current === i ? null : current))}
+            onDrop={(e) => handleDrop(i, e)}
+          >
             <span className="w-16 shrink-0 font-mono text-xs text-muted">{item.id}</span>
-            <div className="flex shrink-0 flex-col gap-0.5">
-              <button
-                type="button"
-                className="icon-button !h-7 !w-7"
-                aria-label={`Move ${item.id} up`}
-                disabled={i === 0}
-                onClick={() => onMove(i, i - 1)}
-              >
-                <ArrowUp size={14} />
-              </button>
-              <button
-                type="button"
-                className="icon-button !h-7 !w-7"
-                aria-label={`Move ${item.id} down`}
-                disabled={i === items.length - 1}
-                onClick={() => onMove(i, i + 1)}
-              >
-                <ArrowDown size={14} />
-              </button>
-            </div>
+            <span
+              draggable
+              title="Drag to reorder"
+              aria-label={`Drag ${item.id} to reorder`}
+              className="flex h-9 w-8 shrink-0 cursor-grab items-center justify-center rounded-md text-muted active:cursor-grabbing hover:bg-subtle/80 dark:hover:bg-gh-subtle"
+              onDragStart={(e) => {
+                setDragIndex(i);
+                e.dataTransfer.setData('text/plain', String(i));
+                e.dataTransfer.effectAllowed = 'move';
+              }}
+              onDragEnd={endDrag}
+            >
+              <GripVertical size={16} />
+            </span>
             <input
               className="auth-input !pl-4 min-w-0 flex-1"
               value={item.label}
@@ -266,47 +294,11 @@ export function QuestionUiConfigEditor({ questionType, uiConfig, onTypeChange, o
 
       {isDragDropType(types, questionType) && (
         <>
-          <label className="block">
-            <span className="auth-field-label">Code template (use {'{{drop_1}}'}, {'{{drop_2}}'}, …)</span>
-            <p className="mb-1.5 text-xs text-muted dark:text-slate-500">
-              Enter = new line · Tab = indent (saved as tab). Layout is shown exactly as typed.
-            </p>
-            <textarea
-              className="auth-input !pl-4 min-h-[160px] w-full resize-y overflow-x-auto font-mono text-[13px] leading-[1.5] whitespace-pre [tab-size:4]"
-              spellCheck={false}
-              rows={10}
-              value={uiConfig.answer_area?.template ?? uiConfig.template ?? ''}
-              onKeyDown={(e) =>
-                handleCodeTextareaKeyDown(e, (template) => {
-                  onUiConfigChange(
-                    patchDragDrop(uiConfig, {
-                      template,
-                      answer_area: {
-                        ...uiConfig.answer_area,
-                        template,
-                        format: 'code',
-                        language: uiConfig.answer_area?.language ?? 'csharp',
-                      },
-                    })
-                  );
-                })
-              }
-              onChange={(e) => {
-                const template = e.target.value;
-                onUiConfigChange(
-                  patchDragDrop(uiConfig, {
-                    template,
-                    answer_area: {
-                      ...uiConfig.answer_area,
-                      template,
-                      format: 'code',
-                      language: uiConfig.answer_area?.language ?? 'csharp',
-                    },
-                  })
-                );
-              }}
-            />
-          </label>
+          <AnswerAreaTemplateEditor
+            uiConfig={uiConfig}
+            patchDragDrop={patchDragDrop}
+            onUiConfigChange={onUiConfigChange}
+          />
           <DraggableItemsEditor
             items={uiConfig.draggable_items ?? uiConfig.items ?? []}
             onChange={(draggable_items) => onUiConfigChange(patchDragDrop(uiConfig, { draggable_items }))}

@@ -79,7 +79,24 @@ export const authApi = {
   me: () => apiFetch('/auth/me'),
 };
 
+export const taxonomyApi = {
+  get: (certId, { auth = false } = {}) => apiFetch(`/certs/${certId}/taxonomy`, { auth }),
+  upsertDomain: (certId, slug, payload) =>
+    apiFetch(`/certs/${certId}/taxonomy/domains/${encodeURIComponent(slug)}`, {
+      method: 'PUT',
+      body: payload,
+    }),
+};
+
 export const questionsApi = {
+  list: (certId, { auth = false, page, pageSize, quizOnly } = {}) => {
+    const params = new URLSearchParams();
+    if (quizOnly) params.set('quiz_only', 'true');
+    if (page != null) params.set('page', String(page));
+    if (pageSize != null) params.set('pageSize', String(pageSize));
+    const qs = params.toString();
+    return apiFetch(`/certs/${certId}/questions${qs ? `?${qs}` : ''}`, { auth });
+  },
   update: (certId, externalId, payload) =>
     apiFetch(`/certs/${certId}/questions/${externalId}`, { method: 'PATCH', body: payload }),
 };

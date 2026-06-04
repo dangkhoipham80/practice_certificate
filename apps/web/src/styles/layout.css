@@ -48,6 +48,11 @@
     @apply relative z-[1] mx-auto max-w-7xl animate-fade-in px-4 py-6 sm:px-6 sm:py-8;
   }
 
+  /* Library uses full main width (sidebar → right edge) */
+  .page-content:has(.library-page) {
+    @apply mx-0 max-w-none w-full;
+  }
+
   .main-header {
     @apply sticky top-0 z-10 border-b border-line/60 bg-white/75 px-4 py-3.5 backdrop-blur-xl dark:border-gh-border/50 dark:bg-gh-panel/75 sm:px-6;
   }
