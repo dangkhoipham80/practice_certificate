@@ -35,6 +35,11 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = Field(default=60, validation_alias="ACCESS_TOKEN_EXPIRE_MINUTES")
     bootstrap_admin_email: str | None = Field(default=None, validation_alias="BOOTSTRAP_ADMIN_EMAIL")
 
+    seed_users_password: str | None = Field(default=None, validation_alias="SEED_USERS_PASSWORD")
+    seed_admin_email: str | None = Field(default=None, validation_alias="SEED_ADMIN_EMAIL")
+    seed_student_email: str | None = Field(default=None, validation_alias="SEED_STUDENT_EMAIL")
+    seed_teacher_email: str | None = Field(default=None, validation_alias="SEED_TEACHER_EMAIL")
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]

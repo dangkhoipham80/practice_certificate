@@ -9,7 +9,15 @@ import {
   Save
 } from 'lucide-react';
 import { getPartIndex } from '../../lib/progressUtils';
-import { formatTimer, percent, sameAnswer } from '../../lib/quizUtils';
+import {
+  formatQuizCorrect,
+  formatTimer,
+  gradeAnswer,
+  isAnswerComplete,
+  isDragDropQuizQuestion,
+  percent
+} from '../../lib/quizUtils';
+import { DragDropQuestion } from '../library/questionTypes/DragDropQuestion';
 import { QuestionText } from '../shared/QuestionText';
 import { QuestionMap } from './QuestionMap';
 
@@ -23,6 +31,7 @@ export function QuizSession({
   revealCurrent,
   retryCurrent,
   toggleChoice,
+  setDragDropFilled,
   toggleFlag,
   moveQuestion,
   submitQuiz,
@@ -34,10 +43,12 @@ export function QuizSession({
   const questionIndex = session.indices[session.current];
   const selected = session.answers[session.current];
   const checked = session.checked[session.current];
-  const isCorrect = checked && sameAnswer(selected, currentQuestion.correct);
+  const isDragDrop = isDragDropQuizQuestion(currentQuestion);
+  const isCorrect = checked && gradeAnswer(selected, currentQuestion);
   const isFlagged = flagged.includes(questionIndex);
   const progress = percent(session.current + 1, session.indices.length);
   const partIndex = getPartIndex(questionIndex, cert.partStarts);
+  const canCheck = isAnswerComplete(selected, currentQuestion);
 
   return (
     <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
@@ -54,9 +65,15 @@ export function QuizSession({
                   P{String(partIndex + 1).padStart(2, '0')}
                 </span>
                 <span
-                  className={`rounded-full px-2.5 py-0.5 font-bold ${currentQuestion.multiple ? 'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-300' : 'bg-subtle text-muted dark:bg-gh-subtle'}`}
+                  className={`rounded-full px-2.5 py-0.5 font-bold ${
+                    isDragDrop
+                      ? 'bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300'
+                      : currentQuestion.multiple
+                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-300'
+                        : 'bg-subtle text-muted dark:bg-gh-subtle'
+                  }`}
                 >
-                  {currentQuestion.multiple ? 'Multiple' : 'Single'}
+                  {isDragDrop ? 'Drag & drop' : currentQuestion.multiple ? 'Multiple' : 'Single'}
                 </span>
                 <span className="text-muted dark:text-slate-400">Bank Q{questionIndex + 1}</span>
                 <span className="font-mono text-muted dark:text-slate-500">{formatTimer(session.timerSec)}</span>
@@ -82,25 +99,34 @@ export function QuizSession({
               {currentQuestion.warn}
             </div>
           )}
-          <div className="space-y-3">
-            {currentQuestion.choices.map((choice, index) => {
-              const chosen = selected.includes(index);
-              const correct = currentQuestion.correct.includes(index);
-              const stateClass = checked && correct ? 'answer-correct' : checked && chosen && !correct ? 'answer-wrong' : chosen ? 'answer-selected' : '';
-              return (
-                <button
-                  key={choice}
-                  type="button"
-                  className={`answer ${stateClass} ${checked ? 'answer-locked' : ''}`}
-                  onClick={() => toggleChoice(index)}
-                  aria-disabled={checked}
-                >
-                  <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
-                  <span className="leading-6">{choice}</span>
-                </button>
-              );
-            })}
-          </div>
+          {isDragDrop ? (
+            <DragDropQuestion
+              uiConfig={currentQuestion.uiConfig}
+              filled={selected}
+              onFilledChange={setDragDropFilled}
+              readOnly={checked}
+            />
+          ) : (
+            <div className="space-y-3">
+              {currentQuestion.choices.map((choice, index) => {
+                const chosen = selected.includes(index);
+                const correct = currentQuestion.correct.includes(index);
+                const stateClass = checked && correct ? 'answer-correct' : checked && chosen && !correct ? 'answer-wrong' : chosen ? 'answer-selected' : '';
+                return (
+                  <button
+                    key={choice}
+                    type="button"
+                    className={`answer ${stateClass} ${checked ? 'answer-locked' : ''}`}
+                    onClick={() => toggleChoice(index)}
+                    aria-disabled={checked}
+                  >
+                    <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
+                    <span className="leading-6">{choice}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
           {checked && (
             <div
               className={`mt-5 flex items-start gap-3 rounded-xl border p-4 text-sm ${
@@ -111,8 +137,7 @@ export function QuizSession({
             >
               <CheckCircle2 className="mt-0.5 shrink-0" size={17} />
               <span>
-                {isCorrect ? '✓ Correct!' : '✗ Incorrect'} — Answer:{' '}
-                {currentQuestion.correct.map((item) => String.fromCharCode(65 + item)).join(', ')}
+                {isCorrect ? '✓ Correct!' : '✗ Incorrect'} — Answer: {formatQuizCorrect(currentQuestion)}
                 {currentQuestion.explanation && (
                   <span className="mt-2 block text-xs font-normal opacity-90">{currentQuestion.explanation.slice(0, 500)}</span>
                 )}
@@ -126,7 +151,7 @@ export function QuizSession({
             <ChevronLeft size={16} />
             Prev
           </button>
-          <button className="primary-button" onClick={checkCurrent} disabled={!selected.length || checked}>
+          <button className="primary-button" onClick={checkCurrent} disabled={!canCheck || checked}>
             <Check size={16} />
             Check
           </button>

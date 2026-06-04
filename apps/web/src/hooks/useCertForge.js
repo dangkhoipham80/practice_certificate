@@ -3,12 +3,15 @@ import { useAppNavigation } from './useAppNavigation';
 import { useCertContext } from '../context/CertContext';
 import { getQuizQuestions } from '../config/certRegistry';
 import { readJson, removeKey, writeJson } from '../lib/storage';
+import { getDragDropCorrectFilled, isDragDropQuizReady } from '../lib/dragDropUiFormat';
 import {
   applyWeakDelta,
   formatTimer,
   getInProgressQuiz,
+  gradeAnswer,
+  isAnswerComplete,
+  isDragDropQuizQuestion,
   percent,
-  sameAnswer,
   shuffle
 } from '../lib/quizUtils';
 import {
@@ -34,7 +37,15 @@ export function useCertForge() {
   const { questions, partSizes, partStarts, storageKeys } = cert;
   const quizQuestions = useMemo(() => getQuizQuestions(cert), [cert]);
   const quizQuestionIndices = useMemo(
-    () => questions.map((q, index) => (q.quizEligible !== false && q.choices?.length ? index : null)).filter((index) => index !== null),
+    () =>
+      questions
+        .map((q, index) => {
+          if (q.quizEligible === false) return null;
+          if (q.choices?.length) return index;
+          if (isDragDropQuizReady(q.uiConfig)) return index;
+          return null;
+        })
+        .filter((index) => index !== null),
     [questions]
   );
   const quizIndexSet = useMemo(() => new Set(quizQuestionIndices), [quizQuestionIndices]);
@@ -136,7 +147,7 @@ export function useCertForge() {
       label: label ?? `${cert.exam} · ${mode === 'random' ? 'Random' : mode} - ${indices.length}`,
       indices,
       current: 0,
-      answers: indices.map(() => []),
+      answers: indices.map((idx) => (isDragDropQuizQuestion(questions[idx]) ? {} : [])),
       checked: indices.map(() => false),
       finished: false,
       timerSec: 0,
@@ -177,7 +188,7 @@ export function useCertForge() {
   function resolveCurrentAttempt(current) {
     const slot = current.current;
     const questionIndex = current.indices[slot];
-    const ok = sameAnswer(current.answers[slot], questions[questionIndex].correct);
+    const ok = gradeAnswer(current.answers[slot], questions[questionIndex]);
     setWeak((prev) => {
       const next = applyWeakDelta(prev, questionIndex, ok);
       writeJson(storageKeys.weak, next);
@@ -203,9 +214,22 @@ export function useCertForge() {
     });
   }
 
+  function setDragDropFilled(filled) {
+    setSession((current) => {
+      if (!current || current.checked[current.current]) return current;
+      const answers = current.answers.map((answer, i) =>
+        i === current.current ? { ...filled } : Array.isArray(answer) ? [...answer] : { ...answer }
+      );
+      return { ...current, answers };
+    });
+  }
+
   function checkCurrent() {
     setSession((current) => {
-      if (!current || current.checked[current.current] || !current.answers[current.current].length) return current;
+      const question = questions[current.indices[current.current]];
+      if (!current || current.checked[current.current] || !isAnswerComplete(current.answers[current.current], question)) {
+        return current;
+      }
       resolveCurrentAttempt(current);
       const checked = [...current.checked];
       checked[current.current] = true;
@@ -216,10 +240,18 @@ export function useCertForge() {
   function revealCurrent() {
     setSession((current) => {
       if (!current || current.checked[current.current]) return current;
-      resolveCurrentAttempt(current);
+      const slot = current.current;
+      const question = questions[current.indices[slot]];
+      const answers = current.answers.map((answer, i) => {
+        if (i !== slot) return Array.isArray(answer) ? [...answer] : { ...answer };
+        if (isDragDropQuizQuestion(question)) return getDragDropCorrectFilled(question.uiConfig);
+        return [...question.correct];
+      });
+      const next = { ...current, answers };
+      resolveCurrentAttempt(next);
       const checked = [...current.checked];
-      checked[current.current] = true;
-      return { ...current, checked };
+      checked[slot] = true;
+      return { ...next, checked };
     });
   }
 
@@ -228,7 +260,8 @@ export function useCertForge() {
       if (!current || !current.checked[current.current]) return current;
       const answers = current.answers.map((answer) => [...answer]);
       const checked = [...current.checked];
-      answers[current.current] = [];
+      const question = questions[current.indices[current.current]];
+      answers[current.current] = isDragDropQuizQuestion(question) ? {} : [];
       checked[current.current] = false;
       return { ...current, answers, checked };
     });
@@ -265,7 +298,7 @@ export function useCertForge() {
     const wrongSlots = [];
     let correct = 0;
     session.indices.forEach((questionIndex, slot) => {
-      const ok = sameAnswer(session.answers[slot], questions[questionIndex].correct);
+      const ok = gradeAnswer(session.answers[slot], questions[questionIndex]);
       if (ok) correct += 1;
       else wrongSlots.push(slot);
     });
@@ -291,7 +324,7 @@ export function useCertForge() {
     setSession({
       ...session,
       current: 0,
-      answers: session.indices.map(() => []),
+      answers: session.indices.map((idx) => (isDragDropQuizQuestion(questions[idx]) ? {} : [])),
       checked: session.indices.map(() => false),
       finished: false,
       wrongSlots: undefined,
@@ -307,7 +340,7 @@ export function useCertForge() {
       label: `Retry Wrong · ${indices.length}`,
       indices,
       current: 0,
-      answers: indices.map(() => []),
+      answers: indices.map((idx) => (isDragDropQuizQuestion(questions[idx]) ? {} : [])),
       checked: indices.map(() => false),
       finished: false,
       timerSec: 0
@@ -585,6 +618,7 @@ export function useCertForge() {
     revealCurrent,
     retryCurrent,
     toggleChoice,
+    setDragDropFilled,
     moveQuestion,
     submitQuiz,
     retakeQuiz,

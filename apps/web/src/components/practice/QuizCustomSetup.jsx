@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { Play } from 'lucide-react';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
+import { isDragDropQuizReady } from '../../lib/dragDropUiFormat';
 import { shuffle } from '../../lib/quizUtils';
+
+function isInQuizPool(question) {
+  if (question.quizEligible === false) return false;
+  if (question.choices?.length) return true;
+  return isDragDropQuizReady(question.uiConfig);
+}
 import { SectionHeader } from '../ui/SectionHeader';
 
 export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
@@ -24,7 +31,7 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
       for (let i = 0; i < partSizes[partIndex]; i += 1) {
         const questionIndex = start + i;
         const question = questions[questionIndex];
-        if (question.quizEligible === false || !question.choices?.length) continue;
+        if (!isInQuizPool(question)) continue;
         if (questionType === 'multiple' && !question.multiple) continue;
         if (questionType === 'single' && question.multiple) continue;
         pool.push(questionIndex);

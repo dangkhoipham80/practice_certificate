@@ -35,21 +35,22 @@ BOOTSTRAP_ADMIN_EMAIL=you@example.com
 
 The **first** registration with that exact email gets role `admin`. Remove or clear the variable after bootstrap.
 
-### Sample accounts (dev)
+### Dev user seed
 
-After `npm run db:migrate`:
+After `npm run db:migrate`, set in root `.env` (see `.env.example`):
+
+- `SEED_USERS_PASSWORD`
+- `SEED_ADMIN_EMAIL`
+- `SEED_STUDENT_EMAIL`
+- `SEED_TEACHER_EMAIL`
+
+Then:
 
 ```bash
 npm run seed:users
 ```
 
-| Role | Email | Password |
-|------|-------|----------|
-| student | `student@example.com` | `Sample123!` |
-| teacher | `teacher@example.com` | `Sample123!` |
-| admin | `admin@example.com` | `Sample123!` |
-
-Re-running the seed is safe: existing emails are skipped (role is corrected if it changed).
+Creates or updates the three accounts (idempotent). Do not commit real passwords.
 
 ## API (`/api/v1`)
 

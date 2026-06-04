@@ -38,6 +38,7 @@ function rowFromQuestion(certId, question, sortOrder) {
     images: JSON.stringify(question.images ?? []),
     explanation: question.explanation ?? null,
     warn: question.warn ?? null,
+    ui_config: JSON.stringify(question.uiConfig ?? {}),
   };
 }
 
@@ -96,7 +97,7 @@ async function replaceQuestions(client, certId, questions) {
     for (let i = 0; i < chunk.length; i++) {
       const row = rowFromQuestion(certId, chunk[i], offset + i);
       values.push(
-        `($${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}::jsonb, $${paramIndex++}::jsonb, $${paramIndex++}, $${paramIndex++}::jsonb, $${paramIndex++}, $${paramIndex++})`,
+        `($${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}::jsonb, $${paramIndex++}::jsonb, $${paramIndex++}, $${paramIndex++}::jsonb, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}::jsonb)`,
       );
       params.push(
         row.cert_id,
@@ -114,13 +115,14 @@ async function replaceQuestions(client, certId, questions) {
         row.images,
         row.explanation,
         row.warn,
+        row.ui_config,
       );
     }
 
     await client.query(
       `INSERT INTO questions (
         cert_id, external_id, sort_order, topic, domain_id, question_kind, type,
-        quiz_eligible, text, choices, correct, multiple, images, explanation, warn
+        quiz_eligible, text, choices, correct, multiple, images, explanation, warn, ui_config
       ) VALUES ${values.join(', ')}`,
       params,
     );

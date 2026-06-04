@@ -1,5 +1,6 @@
 import { gh300Questions } from '../data/gh300Questions';
 import { ai102Questions, ai102ExamMeta } from '../data/ai102Questions';
+import { isDragDropQuizReady } from '../lib/dragDropUiFormat.js';
 import { partSizes, partStarts, partTitles, storageKeys as gh300StorageKeys, GRID_PAGE_SIZE } from './gh300Exam';
 import { buildExamParts, buildStorageKeys } from './examConfig';
 
@@ -73,7 +74,11 @@ export function isCertReady(cert) {
 }
 
 export function getQuizQuestions(cert) {
-  return cert.questions.filter((q) => q.quizEligible !== false && q.choices?.length);
+  return cert.questions.filter((q) => {
+    if (q.quizEligible === false) return false;
+    if (q.choices?.length) return true;
+    return isDragDropQuizReady(q.uiConfig);
+  });
 }
 
 export function certPath(certId, section = '') {

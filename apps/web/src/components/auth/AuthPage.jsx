@@ -11,6 +11,8 @@ import {
   ShieldCheck,
   Layers3,
   Loader2,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 const ROLE_LABELS = {
@@ -45,6 +47,7 @@ export function AuthPage({ mode }) {
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [dark] = useState(() => localStorage.getItem('certforge-theme') === 'dark');
 
   if (user) {
@@ -187,8 +190,8 @@ export function AuthPage({ mode }) {
                   <div className="auth-field-wrap">
                     <Lock className="auth-field-icon" size={16} />
                     <input
-                      className="auth-input"
-                      type="password"
+                      className="auth-input auth-input-password"
+                      type={showPassword ? 'text' : 'password'}
                       autoComplete={isLogin ? 'current-password' : 'new-password'}
                       required
                       minLength={isLogin ? 1 : 8}
@@ -196,6 +199,15 @@ export function AuthPage({ mode }) {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
+                    <button
+                      type="button"
+                      className="auth-password-toggle"
+                      onClick={() => setShowPassword((v) => !v)}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      aria-pressed={showPassword}
+                    >
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
                   </div>
                   {!isLogin && <p className="auth-hint">Use 8 or more characters for a secure password.</p>}
                 </label>

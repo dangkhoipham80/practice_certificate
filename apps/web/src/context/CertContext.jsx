@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ACTIVE_CERT_KEY, DEFAULT_CERT_ID, getCert, isCertReady } from '../config/certRegistry';
 
@@ -12,6 +12,7 @@ export function CertProvider({ children }) {
     const saved = localStorage.getItem(ACTIVE_CERT_KEY);
     return saved && getCert(saved) ? saved : DEFAULT_CERT_ID;
   });
+  const [editedQuestionsByCert, setEditedQuestionsByCert] = useState({});
 
   useEffect(() => {
     if (!routeCertId) return;
@@ -22,7 +23,23 @@ export function CertProvider({ children }) {
     }
   }, [routeCertId, activeCertId]);
 
-  const activeCert = useMemo(() => getCert(activeCertId), [activeCertId]);
+  const activeCert = useMemo(() => {
+    const base = getCert(activeCertId);
+    const edited = editedQuestionsByCert[activeCertId];
+    if (!edited) return base;
+    return { ...base, questions: edited };
+  }, [activeCertId, editedQuestionsByCert]);
+
+  const updateQuestionAtIndex = useCallback(
+    (certId, index, patch) => {
+      setEditedQuestionsByCert((prev) => {
+        const base = prev[certId] ?? getCert(certId).questions;
+        const next = base.map((q, i) => (i === index ? { ...q, ...patch } : q));
+        return { ...prev, [certId]: next };
+      });
+    },
+    []
+  );
 
   function setActiveCert(certId, options = {}) {
     const cert = getCert(certId);
@@ -49,6 +66,7 @@ export function CertProvider({ children }) {
     setActiveCert,
     openCertWorkspace,
     isCertRoute: location.pathname.startsWith('/c/'),
+    updateQuestionAtIndex,
   };
 
   return <CertContext.Provider value={value}>{children}</CertContext.Provider>;

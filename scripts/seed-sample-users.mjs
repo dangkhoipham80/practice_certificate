@@ -17,7 +17,7 @@ if (!existsSync(python)) {
   process.exit(1);
 }
 
-const result = spawnSync(python, ['-m', 'scripts.seed_sample_users'], {
+const result = spawnSync(python, ['-m', 'scripts.seed_users'], {
   cwd: apiDir,
   stdio: 'inherit',
   env: process.env,

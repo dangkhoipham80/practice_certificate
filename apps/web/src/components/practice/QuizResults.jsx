@@ -1,5 +1,5 @@
 import { Copy, RotateCcw } from 'lucide-react';
-import { formatTimer, percent } from '../../lib/quizUtils';
+import { formatQuizAnswer, formatQuizCorrect, formatTimer, percent } from '../../lib/quizUtils';
 import { QuestionText } from '../shared/QuestionText';
 import { InfoTile } from '../ui/InfoTile';
 
@@ -39,10 +39,8 @@ export function QuizResults({ cert, session, exitQuiz, retryWrongFromSummary, co
           {wrongSlots.slice(0, 60).map((slot) => {
             const questionIndex = session.indices[slot];
             const question = questions[questionIndex];
-            const userAnswer = session.answers[slot].length
-              ? session.answers[slot].map((item) => question.choices[item]).join('; ')
-              : '(No answer)';
-            const correctAnswer = question.correct.map((item) => question.choices[item]).join('; ');
+            const userAnswer = formatQuizAnswer(session.answers[slot], question) || '(No answer)';
+            const correctAnswer = formatQuizCorrect(question);
             return (
               <div className="rounded-xl border border-danger-200/80 bg-danger-50/40 p-4 dark:border-danger-500/30 dark:bg-danger-500/5" key={slot}>
                 <QuestionText text={question.text} images={question.images} className="text-sm font-semibold" />

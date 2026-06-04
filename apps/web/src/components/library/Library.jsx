@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import { ChevronDown, Flag, Search } from 'lucide-react';
+import { ChevronDown, Flag, Pencil, Search } from 'lucide-react';
 import { SectionHeader } from '../ui/SectionHeader';
+import { getUiConfig } from '../../lib/examQuestionParser';
 import { QuestionText } from '../shared/QuestionText';
+import { QuestionInlineEdit } from './QuestionInlineEdit';
+import { QuestionTypesAdmin } from '../admin/QuestionTypesAdmin';
+import { useQuestionTypes } from '../../context/QuestionTypesContext';
+import { QuestionStructuredView } from './QuestionStructuredView';
 
-export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
+export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin, onUpdateQuestion }) {
   const [filter, setFilter] = useState('all');
   const [expanded, setExpanded] = useState(() => new Set());
+  const [editingIndex, setEditingIndex] = useState(null);
+  const { types } = useQuestionTypes();
   const { questions } = cert;
 
   const filtered = questions
@@ -28,6 +35,15 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
     });
   }
 
+  function startEdit(question) {
+    setEditingIndex(question.index);
+    setExpanded((current) => new Set(current).add(question.index));
+  }
+
+  function cancelEdit() {
+    setEditingIndex(null);
+  }
+
   return (
     <section className="space-y-4">
       <SectionHeader
@@ -35,6 +51,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
         title={`Browse ${cert.exam} bank`}
         description={`${filtered.length} matching questions. Showing the first 80 for fast scanning.`}
       />
+      {isAdmin && <QuestionTypesAdmin />}
       <div className="panel sticky top-[88px] z-[5] space-y-4 p-4 shadow-card">
         <div className="flex items-center gap-3 rounded-xl border border-line/70 bg-subtle/50 px-4 py-2.5 dark:border-gh-border dark:bg-gh-subtle/50">
           <Search className="shrink-0 text-accent-500" size={18} />
@@ -63,6 +80,8 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
       <div className="grid gap-3">
         {filtered.slice(0, 80).map((question) => {
           const isOpen = expanded.has(question.index);
+          const isEditing = isAdmin && editingIndex === question.index;
+          const uiConfig = getUiConfig(question);
           const correctLabels = (question.correct ?? []).map((item) => String.fromCharCode(65 + item)).join(', ');
           return (
             <article className="question-row" key={question.index}>
@@ -76,9 +95,27 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
                         Interactive / library only
                       </span>
                     )}
+                    {(question.questionTypeLabel || uiConfig?.type) && (
+                      <span className="mt-1 ml-1 inline-block rounded-full bg-violet-100 px-2 py-0.5 text-[10px] font-bold text-violet-800 dark:bg-violet-500/15 dark:text-violet-200">
+                        {question.questionTypeLabel ??
+                          types.find((t) => t.slug === uiConfig?.type)?.label ??
+                          uiConfig?.type}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="flex shrink-0 gap-1.5">
+                  {isAdmin && (
+                    <button
+                      className={`secondary-button !px-3 !py-1.5 text-xs ${isEditing ? '!border-accent-300 !bg-accent-50 dark:!bg-accent-500/10' : ''}`}
+                      type="button"
+                      onClick={() => (isEditing ? cancelEdit() : startEdit(question))}
+                      title={isEditing ? 'Cancel editing' : 'Edit question'}
+                    >
+                      <Pencil size={14} />
+                      {isEditing ? 'Cancel' : 'Edit'}
+                    </button>
+                  )}
                   <button
                     className={`secondary-button !px-3 !py-1.5 text-xs ${isOpen ? '!border-accent-300 !bg-accent-50 dark:!bg-accent-500/10' : ''}`}
                     type="button"
@@ -101,7 +138,21 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag }) {
                 {question.multiple ? 'Multiple answer' : question.choices?.length ? 'Single answer' : 'Non-MC'}
                 {!isOpen && question.choices?.length ? ' · tap Detail to view choices' : ''}
               </p>
-              {isOpen && question.choices?.length > 0 && (
+              {isEditing && (
+                <QuestionInlineEdit
+                  certId={cert.id}
+                  question={question}
+                  index={question.index}
+                  onCancel={cancelEdit}
+                  onSaved={(idx, patch) => onUpdateQuestion(cert.id, idx, patch)}
+                />
+              )}
+              {isOpen && !isEditing && !question.choices?.length && question.quizEligible === false && (
+                <div className="ml-10 mt-4">
+                  <QuestionStructuredView question={question} readOnly={false} />
+                </div>
+              )}
+              {isOpen && !isEditing && question.choices?.length > 0 && (
                 <div className="ml-10 mt-4 space-y-3">
                   <div className="space-y-2">
                     {question.choices.map((choice, choiceIndex) => {

@@ -2,8 +2,9 @@ import { Navigate, Route, Routes, Link } from 'react-router-dom';
 import { Learn } from './Learn';
 import { Ai102Labs } from './components/learn/Ai102Labs';
 import { useCertForge } from './hooks/useCertForge';
-import { CertProvider } from './context/CertContext';
+import { CertProvider, useCertContext } from './context/CertContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { QuestionTypesProvider } from './context/QuestionTypesContext';
 import { AuthPage, RoleBadge } from './components/auth/AuthPage';
 import { isCertReady } from './config/certRegistry';
 import { Sidebar } from './components/layout/Sidebar';
@@ -46,6 +47,21 @@ function CertWorkspace({ app }) {
       importData={app.importData}
       clearAllData={app.clearAllData}
       syncHint={app.syncHint}
+    />
+  );
+}
+
+function LibraryRoute({ app, auth }) {
+  const { updateQuestionAtIndex } = useCertContext();
+  return (
+    <Library
+      cert={app.cert}
+      search={app.search}
+      setSearch={app.setSearch}
+      flagged={app.flagged}
+      toggleFlag={app.toggleFlag}
+      isAdmin={auth.isAdmin}
+      onUpdateQuestion={updateQuestionAtIndex}
     />
   );
 }
@@ -103,6 +119,7 @@ function AppShell() {
                     revealCurrent={app.revealCurrent}
                     retryCurrent={app.retryCurrent}
                     toggleChoice={app.toggleChoice}
+                    setDragDropFilled={app.setDragDropFilled}
                     toggleFlag={app.toggleFlag}
                     moveQuestion={app.moveQuestion}
                     submitQuiz={app.submitQuiz}
@@ -138,18 +155,7 @@ function AppShell() {
                   />
                 }
               />
-              <Route
-                path="/c/:certId/library"
-                element={
-                  <Library
-                    cert={app.cert}
-                    search={app.search}
-                    setSearch={app.setSearch}
-                    flagged={app.flagged}
-                    toggleFlag={app.toggleFlag}
-                  />
-                }
-              />
+              <Route path="/c/:certId/library" element={<LibraryRoute app={app} auth={auth} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
@@ -172,13 +178,15 @@ function AppShell() {
 export function App() {
   return (
     <AuthProvider>
-      <CertProvider>
-        <Routes>
-          <Route path="/login" element={<AuthPage mode="login" />} />
-          <Route path="/register" element={<AuthPage mode="register" />} />
-          <Route path="/*" element={<AppShell />} />
-        </Routes>
-      </CertProvider>
+      <QuestionTypesProvider>
+        <CertProvider>
+          <Routes>
+            <Route path="/login" element={<AuthPage mode="login" />} />
+            <Route path="/register" element={<AuthPage mode="register" />} />
+            <Route path="/*" element={<AppShell />} />
+          </Routes>
+        </CertProvider>
+      </QuestionTypesProvider>
     </AuthProvider>
   );
 }

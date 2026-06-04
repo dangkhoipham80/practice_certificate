@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { percent, sameAnswer } from '../../lib/quizUtils';
+import { gradeAnswer, isAnswerComplete, percent } from '../../lib/quizUtils';
 
 export function QuestionMap({ cert, session, flagged, setSession }) {
   const { questions, GRID_PAGE_SIZE } = cert;
@@ -35,8 +35,9 @@ export function QuestionMap({ cert, session, flagged, setSession }) {
         {session.indices.slice(start, end).map((questionIndex, offset) => {
           const index = start + offset;
           const done = session.checked[index];
-          const picked = session.answers[index].length > 0;
-          const ok = done && sameAnswer(session.answers[index], questions[questionIndex].correct);
+          const question = questions[questionIndex];
+          const picked = isAnswerComplete(session.answers[index], question);
+          const ok = done && gradeAnswer(session.answers[index], question);
           let state = 'map-idle';
           if (session.current === index) state = 'map-current';
           else if (done) state = ok ? 'map-correct' : 'map-wrong';

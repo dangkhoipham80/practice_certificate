@@ -104,6 +104,14 @@
     @apply w-full rounded-xl border border-line/80 bg-white py-2.5 pl-10 pr-4 text-sm outline-none transition-all duration-200 placeholder:text-muted/60 focus:border-accent-400 focus:ring-2 focus:ring-accent-400/20 dark:border-gh-border dark:bg-gh-subtle dark:placeholder:text-slate-500 dark:focus:border-accent-500;
   }
 
+  .auth-input-password {
+    @apply pr-10;
+  }
+
+  .auth-password-toggle {
+    @apply absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent-400 dark:text-slate-500 dark:hover:text-white;
+  }
+
   .auth-hint {
     @apply mt-1.5 text-xs text-muted dark:text-slate-500;
   }

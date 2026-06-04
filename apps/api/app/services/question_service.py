@@ -2,15 +2,20 @@ from app.models.certification_part import CertificationPart
 from app.models.question import Question
 from app.repositories.certification_repository import CertificationRepository
 from app.repositories.question_repository import QuestionRepository
+from app.repositories.question_type_repository import QuestionTypeRepository
 from app.schemas.certification import (
     CertificationLayoutOut,
     CertificationOut,
     CertificationPartOut,
 )
-from app.schemas.question import QuestionListOut, QuestionOut
+from app.schemas.question import QuestionListOut, QuestionOut, QuestionUpdateIn
 
 
 def question_to_schema(q: Question) -> QuestionOut:
+    qt = q.question_type
+    ui = dict(q.ui_config or {})
+    if qt and not ui.get("type"):
+        ui["type"] = qt.slug
     return QuestionOut(
         topic=q.topic,
         domainId=q.domain_id,
@@ -25,6 +30,10 @@ def question_to_schema(q: Question) -> QuestionOut:
         text=q.text,
         questionKind=q.question_kind,
         warn=q.warn,
+        uiConfig=ui,
+        questionTypeId=q.question_type_id,
+        questionTypeSlug=qt.slug if qt else None,
+        questionTypeLabel=qt.label if qt else None,
     )
 
 
@@ -42,9 +51,11 @@ class QuestionService:
         self,
         cert_repo: CertificationRepository,
         question_repo: QuestionRepository,
+        question_type_repo: QuestionTypeRepository | None = None,
     ) -> None:
         self.cert_repo = cert_repo
         self.question_repo = question_repo
+        self.question_type_repo = question_type_repo or QuestionTypeRepository(question_repo.session)
 
     async def list_certifications(self) -> list[CertificationOut]:
         rows = await self.cert_repo.list_with_counts()
@@ -119,3 +130,52 @@ class QuestionService:
             total=len(questions),
             questions=[question_to_schema(q) for q in questions],
         )
+
+    async def update_question(
+        self,
+        cert_id: str,
+        external_id: int,
+        body: QuestionUpdateIn,
+    ) -> QuestionOut | None:
+        cert = await self.cert_repo.get_by_id(cert_id)
+        if not cert:
+            return None
+
+        question = await self.question_repo.get_by_cert_and_external_id(cert_id, external_id)
+        if not question:
+            return None
+
+        data = body.model_dump(exclude_unset=True)
+        if "choices" in data and data["choices"] is not None:
+            data["choices"] = [c.strip() for c in data["choices"] if c and c.strip()]
+        if "correct" in data and data["correct"] is not None:
+            data["correct"] = sorted(set(data["correct"]))
+
+        choices = data.get("choices", question.choices or [])
+        correct = data.get("correct", question.correct or [])
+        if choices and correct:
+            if any(i < 0 or i >= len(choices) for i in correct):
+                raise ValueError("Correct answer indices are out of range")
+        if "multiple" not in data and "correct" in data:
+            data["multiple"] = len(correct) > 1
+
+        qt = None
+        if "question_type_id" in data and data["question_type_id"] is not None:
+            qt = await self.question_type_repo.get_by_id(data["question_type_id"])
+        elif ui_cfg := data.get("ui_config"):
+            slug = ui_cfg.get("type")
+            if slug:
+                qt = await self.question_type_repo.get_by_slug(slug)
+        if qt:
+            data["question_type_id"] = qt.id
+            data["question_kind"] = qt.legacy_kind
+            data["type"] = qt.legacy_type
+            if ui_cfg := data.get("ui_config"):
+                ui_cfg["type"] = qt.slug
+
+        for key, value in data.items():
+            setattr(question, key, value)
+
+        await self.question_repo.session.flush()
+        await self.question_repo.session.refresh(question)
+        return question_to_schema(question)

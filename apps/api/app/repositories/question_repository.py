@@ -1,5 +1,6 @@
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.models.question import Question
 
@@ -25,6 +26,7 @@ class QuestionRepository:
     ) -> list[Question]:
         stmt = (
             select(Question)
+            .options(selectinload(Question.question_type))
             .where(Question.cert_id == cert_id)
             .order_by(Question.sort_order)
         )
@@ -68,3 +70,12 @@ class QuestionRepository:
                     stats[domain_id]["examTopics"].get(topic, 0) + int(total)
                 )
         return stats
+
+    async def get_by_cert_and_external_id(self, cert_id: str, external_id: int) -> Question | None:
+        stmt = (
+            select(Question)
+            .options(selectinload(Question.question_type))
+            .where(Question.cert_id == cert_id, Question.external_id == external_id)
+        )
+        result = await self.session.execute(stmt)
+        return result.scalar_one_or_none()

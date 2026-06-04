@@ -29,7 +29,24 @@ async def readiness(db: AsyncSession = Depends(get_db)):
     }
     try:
         await db.execute(text("SELECT 1"))
-        return {**payload, "ok": True, "database": "connected"}
+        count = (
+            await db.execute(
+                text("SELECT COUNT(*)::int FROM information_schema.tables WHERE table_name = 'question_types'")
+            )
+        ).scalar_one()
+        if count < 1:
+            return JSONResponse(
+                status_code=503,
+                content={
+                    **payload,
+                    "ok": False,
+                    "database": "connected",
+                    "question_types": "missing",
+                    "hint": "Run: npm run db:migrate",
+                },
+            )
+        types = (await db.execute(text("SELECT COUNT(*)::int FROM question_types"))).scalar_one()
+        return {**payload, "ok": True, "database": "connected", "question_types": types}
     except Exception as exc:
         return JSONResponse(
             status_code=503,

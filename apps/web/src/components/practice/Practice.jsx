@@ -16,6 +16,7 @@ export function Practice({
   revealCurrent,
   retryCurrent,
   toggleChoice,
+  setDragDropFilled,
   toggleFlag,
   moveQuestion,
   submitQuiz,
@@ -75,6 +76,7 @@ export function Practice({
       revealCurrent={revealCurrent}
       retryCurrent={retryCurrent}
       toggleChoice={toggleChoice}
+      setDragDropFilled={setDragDropFilled}
       toggleFlag={toggleFlag}
       moveQuestion={moveQuestion}
       submitQuiz={submitQuiz}

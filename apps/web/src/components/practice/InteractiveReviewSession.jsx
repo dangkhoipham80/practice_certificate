@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight, Flag, Layers3 } from 'lucide-react';
 import { formatTimer, percent } from '../../lib/quizUtils';
 import { QUESTION_KIND_LABELS, resolveQuestionKind } from '../../utils/ai102InteractiveKind';
 import { QuestionText } from '../shared/QuestionText';
+import { QuestionStructuredView } from '../library/QuestionStructuredView';
 import { QuestionMap } from './QuestionMap';
 
 const KIND_BADGE_CLASS = {
@@ -62,6 +63,9 @@ export function InteractiveReviewSession({ cert, session, flagged, toggleFlag, m
             images={currentQuestion.images}
             className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
           />
+          <div className="mb-4">
+            <QuestionStructuredView question={currentQuestion} readOnly={false} />
+          </div>
           {currentQuestion.explanation && (
             <div className="rounded-xl border border-line/80 bg-subtle/60 p-4 dark:border-gh-border dark:bg-gh-subtle/60">
               <p className="text-xs font-bold uppercase text-muted dark:text-slate-400">Explanation / discussion</p>

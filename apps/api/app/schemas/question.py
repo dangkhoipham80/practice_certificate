@@ -15,6 +15,10 @@ class QuestionOut(BaseModel):
     text: str
     question_kind: str = Field(alias="questionKind")
     warn: str | None = None
+    ui_config: dict = Field(default_factory=dict, alias="uiConfig")
+    question_type_id: int | None = Field(None, alias="questionTypeId")
+    question_type_slug: str | None = Field(None, alias="questionTypeSlug")
+    question_type_label: str | None = Field(None, alias="questionTypeLabel")
 
     model_config = {"populate_by_name": True}
 
@@ -23,5 +27,18 @@ class QuestionListOut(BaseModel):
     cert_id: str = Field(alias="certId")
     total: int
     questions: list[QuestionOut]
+
+    model_config = {"populate_by_name": True}
+
+
+class QuestionUpdateIn(BaseModel):
+    text: str | None = Field(None, min_length=1)
+    choices: list[str] | None = None
+    correct: list[int] | None = None
+    multiple: bool | None = None
+    explanation: str | None = None
+    quiz_eligible: bool | None = Field(None, alias="quizEligible")
+    ui_config: dict | None = Field(None, alias="uiConfig")
+    question_type_id: int | None = Field(None, alias="questionTypeId")
 
     model_config = {"populate_by_name": True}

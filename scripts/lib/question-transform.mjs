@@ -1,4 +1,5 @@
 import { classifyInteractiveKind } from '../../apps/web/src/utils/ai102InteractiveKind.js';
+import { parseExamQuestion } from '../../apps/web/src/lib/examQuestionParser.js';
 
 const CHOICE_ORDER = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
@@ -31,10 +32,12 @@ export function transformRawQuestion(raw, classifyDomain) {
   };
 
   if (!raw.isMC || !raw.choices || !raw.answer) {
+    const parsed = parseExamQuestion(text, { explanation, images });
     return {
       ...base,
       text,
-      questionKind: classifyInteractiveKind(text),
+      questionKind: parsed.questionKind ?? classifyInteractiveKind(text),
+      uiConfig: parsed.uiConfig,
       warn: 'Interactive question — review in library only.',
     };
   }

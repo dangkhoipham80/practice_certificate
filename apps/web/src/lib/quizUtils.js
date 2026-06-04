@@ -1,4 +1,10 @@
 import { readJson } from './storage';
+import {
+  dragDropFilledComplete,
+  getDragDropCorrectFilled,
+  gradeDragDropFilled,
+  isDragDropQuizReady,
+} from './dragDropUiFormat.js';
 
 export function shuffle(input) {
   const items = [...input];
@@ -14,6 +20,52 @@ export function sameAnswer(a, b) {
   const left = [...a].sort((x, y) => x - y);
   const right = [...b].sort((x, y) => x - y);
   return left.every((value, index) => value === right[index]);
+}
+
+export function isDragDropQuizQuestion(question) {
+  return (
+    question?.quizEligible !== false &&
+    !(question?.choices?.length > 0) &&
+    isDragDropQuizReady(question?.uiConfig)
+  );
+}
+
+export function isAnswerComplete(answer, question) {
+  if (isDragDropQuizQuestion(question)) {
+    return dragDropFilledComplete(answer, question.uiConfig);
+  }
+  return Array.isArray(answer) && answer.length > 0;
+}
+
+export function gradeAnswer(answer, question) {
+  if (isDragDropQuizQuestion(question)) {
+    return gradeDragDropFilled(answer, question.uiConfig);
+  }
+  return sameAnswer(answer, question.correct ?? []);
+}
+
+export function formatQuizAnswer(answer, question) {
+  if (isDragDropQuizQuestion(question)) {
+    const ui = question.uiConfig ?? {};
+    const zones = ui.answer_area?.drop_zones ?? ui.drop_zones ?? [];
+    return zones
+      .map((z) => `${z.id}: ${answer[z.id] ?? '—'}`)
+      .filter(Boolean)
+      .join(' · ');
+  }
+  const choices = question.choices ?? [];
+  return (answer ?? []).map((i) => choices[i] ?? String.fromCharCode(65 + i)).join('; ');
+}
+
+export function formatQuizCorrect(question) {
+  if (isDragDropQuizQuestion(question)) {
+    const filled = getDragDropCorrectFilled(question.uiConfig);
+    const zones = question.uiConfig?.answer_area?.drop_zones ?? question.uiConfig?.drop_zones ?? [];
+    return zones.map((z) => `${z.id}: ${filled[z.id] ?? '—'}`).join(' · ');
+  }
+  return (question.correct ?? [])
+    .map((item) => String.fromCharCode(65 + item))
+    .join(', ');
 }
 
 export function percent(value, total) {

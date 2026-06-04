@@ -55,11 +55,30 @@ Chi tiết RBAC: [auth.md](auth.md).
   "correct": [3],
   "multiple": false,
   "text": "...",
-  "questionKind": "mc"
+  "questionKind": "mc",
+  "uiConfig": {}
 }
 ```
 
 Field names khớp object FE hiện tại (camelCase).
+
+`uiConfig` holds structured UI blocks (type, items, drop_zones, template, …). See [exam-question-parser-prompt.md](exam-question-parser-prompt.md).
+
+| Method | Path | Auth | Mô tả |
+|--------|------|------|--------|
+| PATCH | `/api/v1/certs/{cert_id}/questions/{external_id}` | admin | Cập nhật câu (gồm `uiConfig`) |
+
+### Question types (DB)
+
+| Method | Path | Auth | Mô tả |
+|--------|------|------|--------|
+| GET | `/api/v1/question-types` | — | Danh sách type đang active |
+| GET | `/api/v1/question-types/manage` | admin | Tất cả types (kể cả inactive) |
+| POST | `/api/v1/question-types` | admin | Tạo type |
+| PATCH | `/api/v1/question-types/{id}` | admin | Sửa type |
+| DELETE | `/api/v1/question-types/{id}` | admin | Deactivate (soft) |
+
+Seed: migration `005_question_types`. Mỗi type có `slug`, `label`, `legacyKind`, `legacyType`, `schema` (JSON editor config).
 
 ## Chạy local
 

@@ -78,3 +78,16 @@ export const authApi = {
   logout: () => apiFetch('/auth/logout', { method: 'POST', auth: false }),
   me: () => apiFetch('/auth/me'),
 };
+
+export const questionsApi = {
+  update: (certId, externalId, payload) =>
+    apiFetch(`/certs/${certId}/questions/${externalId}`, { method: 'PATCH', body: payload }),
+};
+
+export const questionTypesApi = {
+  list: () => apiFetch('/question-types', { auth: false }),
+  listManage: () => apiFetch('/question-types/manage'),
+  create: (payload) => apiFetch('/question-types', { method: 'POST', body: payload }),
+  update: (id, payload) => apiFetch(`/question-types/${id}`, { method: 'PATCH', body: payload }),
+  remove: (id) => apiFetch(`/question-types/${id}`, { method: 'DELETE' }),
+};
