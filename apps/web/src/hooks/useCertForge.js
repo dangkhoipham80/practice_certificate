@@ -19,8 +19,6 @@ import {
   getWrongIndices,
   updatePartProgressFromSession
 } from '../lib/progressUtils';
-import { buildExportPayload, normalizeHistory, parseImportPayload } from '../lib/importExport';
-
 function loadCertState(storageKeys) {
   return {
     history: readJson(storageKeys.history, []),
@@ -59,7 +57,6 @@ export function useCertForge() {
   const [flash, setFlash] = useState(null);
   const [search, setSearch] = useState('');
   const [saveHint, setSaveHint] = useState('');
-  const [syncHint, setSyncHint] = useState(null);
   const [pendingStart, setPendingStart] = useState(null);
 
   useEffect(() => {
@@ -73,11 +70,6 @@ export function useCertForge() {
     setPendingStart(null);
     setSaveHint('');
   }, [activeCertId]);
-
-  function showSyncHint(type, message) {
-    setSyncHint({ type, message });
-    window.setTimeout(() => setSyncHint(null), 4500);
-  }
 
   const hasSavedQuiz = useMemo(
     () => !!getInProgressQuiz(session, storageKeys.savedQuiz),
@@ -105,11 +97,6 @@ export function useCertForge() {
   function saveFlagged(next) {
     setFlagged(next);
     writeJson(storageKeys.flagged, next);
-  }
-
-  function saveWeak(next) {
-    setWeak(next);
-    writeJson(storageKeys.weak, next);
   }
 
   function savePartProgress(next) {
@@ -463,90 +450,6 @@ export function useCertForge() {
     });
   }
 
-  function exportData() {
-    const filename = `certforge-${activeCertId}-progress-${new Date().toISOString().slice(0, 10)}.json`;
-    const payload = buildExportPayload({
-      certId: activeCertId,
-      exam: cert.exam,
-      storageKeys,
-      history,
-      flagged,
-      weak,
-      partProgress,
-      fcKnown: readJson(storageKeys.fcKnown, []),
-      fcUnknown: readJson(storageKeys.fcUnknown, [])
-    });
-    const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    link.click();
-    URL.revokeObjectURL(url);
-    showSyncHint('success', `Export successful — ${filename} has been downloaded.`);
-  }
-
-  function importData(event) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const { format, data, count } = parseImportPayload(reader.result);
-        const imported = [];
-        if (data.history !== undefined) {
-          saveHistory(normalizeHistory(data.history));
-          imported.push('quiz history');
-        }
-        if (data.flagged !== undefined) {
-          saveFlagged(data.flagged);
-          imported.push('flagged');
-        }
-        if (data.weak !== undefined) {
-          saveWeak(data.weak);
-          imported.push('weak areas');
-        }
-        if (data.partProgress !== undefined) {
-          savePartProgress(data.partProgress);
-          imported.push('per-part progress');
-        }
-        if (data.fcKnown !== undefined) {
-          writeJson(storageKeys.fcKnown, data.fcKnown);
-          imported.push('flashcard known');
-        }
-        if (data.fcUnknown !== undefined) {
-          writeJson(storageKeys.fcUnknown, data.fcUnknown);
-          imported.push('flashcard review');
-        }
-        if (data.theme) persistTheme(data.theme === 'dark');
-        if (!imported.length) throw new Error('No supported data found.');
-        const formatLabel = format === 'gh300-pro' ? 'GH-300 Pro' : 'CertForge';
-        showSyncHint('success', `Import successful (${formatLabel}) — ${imported.join(', ')}. ${count} items in file.`);
-      } catch (error) {
-        showSyncHint('error', error?.message === 'Invalid file format.' || error?.message?.includes('JSON') ? 'Invalid file — use a .json file exported from CertForge or GH-300 Pro.' : `Import failed: ${error?.message ?? 'Unknown error'}`);
-      }
-    };
-    reader.onerror = () => showSyncHint('error', 'Could not read the file — try selecting it again.');
-    reader.readAsText(file);
-    event.target.value = '';
-  }
-
-  function clearAllData() {
-    const confirmed = window.confirm(
-      `Clear all ${cert.exam} progress?\n\nThis includes: quiz history, per-part progress, flagged, weak areas, flashcards, and saved in-progress quiz.\n\nThis cannot be undone. Light/dark theme is kept.`
-    );
-    if (!confirmed) return;
-    Object.values(storageKeys).forEach(removeKey);
-    setHistory([]);
-    setFlagged([]);
-    setWeak({});
-    setPartProgress({});
-    setSession(null);
-    setFlash(null);
-    setPendingStart(null);
-    setSaveHint('');
-    showSyncHint('success', `All ${cert.exam} progress data has been cleared.`);
-  }
-
   useEffect(() => {
     if (!session || session.finished) return;
     writeJson(storageKeys.savedQuiz, session);
@@ -604,7 +507,6 @@ export function useCertForge() {
     setSearch,
     partProgress,
     saveHint,
-    syncHint,
     pendingStart,
     setPendingStart,
     hasSavedQuiz,
@@ -634,9 +536,6 @@ export function useCertForge() {
     launchFlash,
     startFlash,
     markFlashKnown,
-    markFlashUnknown,
-    exportData,
-    importData,
-    clearAllData
+    markFlashUnknown
   };
 }

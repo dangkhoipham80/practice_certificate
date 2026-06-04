@@ -43,10 +43,6 @@ function CertWorkspace({ app }) {
       startQuiz={app.requestStartQuiz}
       resumeQuiz={app.resumeQuiz}
       onNavigate={app.navigateTo}
-      exportData={app.exportData}
-      importData={app.importData}
-      clearAllData={app.clearAllData}
-      syncHint={app.syncHint}
     />
   );
 }
@@ -84,10 +80,6 @@ function AppShell() {
             cert={app.cert}
             dark={app.dark}
             persistTheme={app.persistTheme}
-            exportData={app.exportData}
-            importData={app.importData}
-            clearAllData={app.clearAllData}
-            syncHint={app.syncHint}
             user={auth.user}
             authLoading={auth.loading}
             onLogout={auth.logout}

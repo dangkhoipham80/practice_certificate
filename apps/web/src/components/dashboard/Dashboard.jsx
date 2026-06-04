@@ -5,15 +5,12 @@ import {
   BookOpen,
   Brain,
   ClipboardList,
-  Download,
   Flag,
   Layers3,
   Play,
   RotateCcw,
   Search,
-  Sparkles,
-  Trash2,
-  Upload
+  Sparkles
 } from 'lucide-react';
 import { computeBankProgress } from '../../lib/statsUtils';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
@@ -35,11 +32,7 @@ export function Dashboard({
   hasSavedQuiz,
   startQuiz,
   resumeQuiz,
-  onNavigate,
-  exportData,
-  importData,
-  clearAllData,
-  syncHint
+  onNavigate
 }) {
   const [detailPart, setDetailPart] = useState(null);
   const weakCount = Object.keys(weak).length;
@@ -48,19 +41,8 @@ export function Dashboard({
   const bank = computeBankProgress(partProgress, cert.partSizes, cert.questions.length);
   const partLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
 
-  function handleClearData() {
-    clearAllData();
-    setDetailPart(null);
-  }
-
   return (
     <section className="animate-slide-up space-y-6">
-      {syncHint && (
-        <div className={`sync-toast ${syncHint.type === 'success' ? 'sync-toast-success' : 'sync-toast-error'}`} role="status">
-          {syncHint.message}
-        </div>
-      )}
-
       <div className="hero-card">
         <div className="hero-card-accent" />
         <div className="hero-card-accent-2" />
@@ -159,25 +141,6 @@ export function Dashboard({
             <PartDetailPanel cert={cert} partIndex={detailPart} partProgress={partProgress} onClose={() => setDetailPart(null)} />
           </div>
         )}
-      </div>
-
-      <div className="panel p-5 sm:p-6">
-        <SectionHeader kicker="Backup" title="Sync progress across devices" description={`Export JSON for ${cert.exam} or import a progress file.`} />
-        <div className="mt-4 flex flex-wrap gap-3">
-          <button className="primary-button" onClick={exportData}>
-            <Download size={16} />
-            Export progress
-          </button>
-          <label className="secondary-button cursor-pointer">
-            <Upload size={16} />
-            Import progress
-            <input className="hidden" type="file" accept="application/json,.json" onChange={importData} />
-          </label>
-          <button className="danger-button" type="button" onClick={handleClearData}>
-            <Trash2 size={16} />
-            Clear data
-          </button>
-        </div>
       </div>
     </section>
   );
