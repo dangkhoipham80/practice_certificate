@@ -18,6 +18,7 @@ import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
 import { isValidDomainSlug, slugifyDomainTitle } from '../../lib/domainSlug';
 import { formatQuizDomainLabel } from '../../lib/quizDomains';
 import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
+import { ExplanationText } from '../shared/ExplanationText';
 import { QuestionUiConfigEditor } from './QuestionUiConfigEditor';
 import { DragDropQuestion } from './questionTypes/DragDropQuestion';
 
@@ -565,6 +566,14 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onRefres
           value={draft.explanation}
           onChange={(e) => setDraft((d) => ({ ...d, explanation: e.target.value }))}
         />
+        {draft.explanation.trim() && (
+          <div className="mt-3 rounded-xl border border-line/70 bg-white/80 p-3 dark:border-gh-border dark:bg-gh-subtle/60">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted dark:text-slate-400">
+              Preview
+            </p>
+            <ExplanationText className="text-xs text-muted dark:text-slate-400">{draft.explanation}</ExplanationText>
+          </div>
+        )}
       </label>
 
       {error && (

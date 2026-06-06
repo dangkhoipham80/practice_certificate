@@ -75,6 +75,26 @@ const markdownComponents = {
     </blockquote>
   ),
   hr: () => <hr className="border-line/70 dark:border-gh-border" />,
+  table: ({ children }) => (
+    <div className="my-2 overflow-x-auto">
+      <table className="w-full min-w-[280px] border-collapse text-left text-[13px]">{children}</table>
+    </div>
+  ),
+  thead: ({ children }) => (
+    <thead className="border-b border-line/80 bg-subtle/60 dark:border-gh-border dark:bg-gh-subtle/60">{children}</thead>
+  ),
+  tbody: ({ children }) => <tbody className="divide-y divide-line/50 dark:divide-gh-border">{children}</tbody>,
+  tr: ({ children }) => <tr>{children}</tr>,
+  th: ({ children, style }) => (
+    <th className="px-3 py-2 font-semibold text-ink dark:text-slate-100" style={style}>
+      {children}
+    </th>
+  ),
+  td: ({ children, style }) => (
+    <td className="px-3 py-2 align-top text-ink dark:text-slate-200" style={style}>
+      {children}
+    </td>
+  ),
   a: ({ href, children }) => (
     <a
       href={href}

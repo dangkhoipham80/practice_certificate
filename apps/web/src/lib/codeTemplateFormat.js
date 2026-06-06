@@ -38,6 +38,25 @@ export function handleCodeTextareaKeyDown(e, onValueChange) {
   });
 }
 
+/** Split template into text blocks and {{drop_n}} placeholders (multi-line safe). */
+export function splitTemplateSegments(template) {
+  const segments = [];
+  const text = preserveCodeTemplate(template);
+  const re = new RegExp(DROP_TOKEN_RE.source, 'g');
+  let last = 0;
+  let match;
+  while ((match = re.exec(text))) {
+    if (match.index > last) {
+      segments.push({ kind: 'text', value: text.slice(last, match.index) });
+    }
+    segments.push({ kind: 'drop', id: `drop_${match[1]}` });
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) segments.push({ kind: 'text', value: text.slice(last) });
+  if (!segments.length) segments.push({ kind: 'text', value: text });
+  return segments;
+}
+
 /** Split one line into text + drop segments (line content unchanged). */
 export function splitLineSegments(line) {
   const segments = [];
