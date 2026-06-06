@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ChevronDown, Flag, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { AlertTriangle, ChevronDown, Flag, Pencil, Plus, Search, Trash2 } from 'lucide-react';
 import { questionsApi } from '../../api/client';
 import { SectionHeader } from '../ui/SectionHeader';
 import { ConfirmDialog } from '../ui/ConfirmDialog';
@@ -29,6 +29,7 @@ const EMPTY_QUESTION = {
   domainId: null,
   topic: null,
   images: [],
+  warn: null,
   uiConfig: {},
 };
 
@@ -94,9 +95,12 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
           if (filter === 'single' && question.multiple) return false;
           if (filter === 'quiz' && question.quizEligible === false) return false;
           if (filter === 'interactive' && question.quizEligible !== false) return false;
+          if (filter === 'warning' && !question.warn?.trim()) return false;
           return (
             !search.trim() ||
-            `${question.text} ${(question.choices ?? []).join(' ')}`.toLowerCase().includes(search.toLowerCase())
+            `${question.text} ${(question.choices ?? []).join(' ')} ${question.warn ?? ''}`
+              .toLowerCase()
+              .includes(search.toLowerCase())
           );
         }),
     [questions, filter, flagged, search]
@@ -339,7 +343,8 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
             ['multi', 'Multi-answer'],
             ['single', 'Single-answer'],
             ['quiz', 'Quiz MC'],
-            ['interactive', 'Interactive']
+            ['interactive', 'Interactive'],
+            ['warning', 'Warnings'],
           ].map(([id, label]) => (
             <button
               key={id}
@@ -433,6 +438,15 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                           uiConfig?.type}
                       </span>
                     )}
+                    {question.warn?.trim() && (
+                      <span
+                        className="mt-1 ml-1 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:bg-amber-500/15 dark:text-amber-200"
+                        title={question.warn}
+                      >
+                        <AlertTriangle size={11} />
+                        Warning
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="flex shrink-0 gap-1.5">
@@ -485,6 +499,15 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                 {isDragDrop && isOpen ? ' · correct placement shown below' : ''}
                 {isHotArea && isOpen ? ' · correct options filled in the code' : ''}
               </p>
+              {question.warn?.trim() && (isOpen || isEditing) && (
+                <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-xs text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-100 sm:ml-10">
+                  <AlertTriangle size={15} className="mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-semibold">Warning</p>
+                    <p className="mt-0.5 leading-relaxed">{question.warn}</p>
+                  </div>
+                </div>
+              )}
               {showStructuredPractice && (
                 <div className="mt-4 w-full border-t border-line/50 pt-4 dark:border-gh-border/60">
                   <QuestionStructuredView question={question} readOnly={false} />

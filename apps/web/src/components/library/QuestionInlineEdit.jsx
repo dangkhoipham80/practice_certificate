@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ListChecks, Loader2, Plus, RefreshCw, Sparkles, Trash2, X } from 'lucide-react';
+import { AlertTriangle, ListChecks, Loader2, Plus, RefreshCw, Sparkles, Trash2, X } from 'lucide-react';
 import { questionsApi, taxonomyApi } from '../../api/client';
 import { useCertContext } from '../../context/CertContext';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
@@ -169,6 +169,10 @@ export function QuestionInlineEdit({
       if (getCorrectMode(types, draft.questionType) === 'single' && correct.length > 1) {
         return 'Single choice allows only one correct answer.';
       }
+    }
+
+    if (draft.warn != null && !draft.warn.trim()) {
+      return 'Enter a warning note explaining why this question is flagged, or uncheck Mark as warning.';
     }
 
     if (draft.quizEligible && isDragDropType(types, draft.questionType)) {
@@ -613,6 +617,42 @@ export function QuestionInlineEdit({
           </button>
         </div>
       )}
+
+      <div className="rounded-xl border border-amber-200/80 bg-amber-50/40 p-4 dark:border-amber-500/25 dark:bg-amber-500/5">
+        <label className="flex cursor-pointer items-start gap-2.5">
+          <input
+            type="checkbox"
+            className="mt-0.5 h-4 w-4 shrink-0 accent-amber-600"
+            checked={draft.warn != null}
+            onChange={(e) =>
+              setDraft((d) => ({
+                ...d,
+                warn: e.target.checked ? (d.warn?.trim() ? d.warn : '') : null,
+              }))
+            }
+          />
+          <span>
+            <span className="flex items-center gap-1.5 text-sm font-semibold text-amber-900 dark:text-amber-200">
+              <AlertTriangle size={15} />
+              Mark as warning
+            </span>
+            <span className="mt-0.5 block text-xs text-amber-800/80 dark:text-amber-200/70">
+              Shown in library and during quiz practice. Add a note explaining why.
+            </span>
+          </span>
+        </label>
+        {draft.warn != null && (
+          <label className="mt-3 block">
+            <span className="auth-field-label text-amber-900 dark:text-amber-200">Warning note</span>
+            <textarea
+              className="auth-input !pl-4 mt-1 min-h-[72px] w-full resize-y border-amber-200/80 focus:border-amber-400 focus:ring-amber-400/20 dark:border-amber-500/30"
+              value={draft.warn}
+              placeholder="e.g. Answer key disputed, typo in stem, image outdated, needs SME review…"
+              onChange={(e) => setDraft((d) => ({ ...d, warn: e.target.value }))}
+            />
+          </label>
+        )}
+      </div>
 
       <label className="block">
         <span className="auth-field-label">Explanation (optional)</span>
