@@ -10,6 +10,7 @@ import {
   getCorrectMode,
   isChoicesType,
   isDragDropType,
+  isHotAreaType,
   resolveUiType,
   syncAnswerArea,
 } from '../../lib/questionUiTypes';
@@ -18,9 +19,11 @@ import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
 import { isValidDomainSlug, slugifyDomainTitle } from '../../lib/domainSlug';
 import { formatQuizDomainLabel } from '../../lib/quizDomains';
 import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
+import { normalizeHotAreaUiConfig } from '../../lib/hotAreaUiFormat';
 import { ExplanationText } from '../shared/ExplanationText';
 import { QuestionUiConfigEditor } from './QuestionUiConfigEditor';
 import { DragDropQuestion } from './questionTypes/DragDropQuestion';
+import { HotAreaQuestion } from './questionTypes/HotAreaQuestion';
 
 function buildDraft(question, types) {
   const uiConfig = { ...getUiConfig(question), ...(question.uiConfig ?? {}) };
@@ -169,7 +172,7 @@ export function QuestionInlineEdit({
     }
 
     if (draft.quizEligible && isDragDropType(types, draft.questionType)) {
-      const ui = syncAnswerArea(draft.uiConfig);
+      const ui = syncAnswerArea(draft.uiConfig, types, draft.questionType);
       const zones = ui.answer_area?.drop_zones ?? [];
       const items = ui.draggable_items ?? [];
       if (!zones.length) return 'Add at least one drop zone in the answer area.';
@@ -178,7 +181,21 @@ export function QuestionInlineEdit({
           return `Pick the correct value for ${zone.id} from the Values list (e.g. item_1 → drop_1).`;
         }
       }
-    } else if (draft.quizEligible && !isDragDropType(types, draft.questionType)) {
+    } else if (draft.quizEligible && isHotAreaType(types, draft.questionType)) {
+      const ui = syncAnswerArea(draft.uiConfig, types, draft.questionType);
+      const hotspots = ui.answer_area?.hotspots ?? [];
+      if (!hotspots.length) return 'Add at least one hotspot in the answer area.';
+      for (const zone of hotspots) {
+        if (!zone.options?.length) return `Add dropdown options for ${zone.id}.`;
+        if (!zone.correct_option_id || !zone.options.some((opt) => opt.id === zone.correct_option_id)) {
+          return `Mark the correct dropdown option for ${zone.id}.`;
+        }
+      }
+    } else if (
+      draft.quizEligible &&
+      !isDragDropType(types, draft.questionType) &&
+      !isHotAreaType(types, draft.questionType)
+    ) {
       if (!choices.length) return 'Add at least one quiz answer choice.';
       if (!correct.length) return 'Mark at least one correct choice for the quiz.';
     }
@@ -238,7 +255,9 @@ export function QuestionInlineEdit({
   }
 
   const isDragDrop = isDragDropType(types, draft.questionType);
-  const showChoices = isChoicesType(types, draft.questionType) || (draft.quizEligible && !isDragDrop);
+  const isHotArea = isHotAreaType(types, draft.questionType);
+  const isStructured = isDragDrop || isHotArea;
+  const showChoices = isChoicesType(types, draft.questionType) || (draft.quizEligible && !isStructured);
 
   function handleNewDomainTitleChange(value) {
     setNewDomainTitle(value);
@@ -299,7 +318,7 @@ export function QuestionInlineEdit({
     setDraft((d) => {
       const next = !d.quizEligible;
       const needsMcChoices =
-        next && !isChoicesType(types, d.questionType) && !isDragDropType(types, d.questionType) && !d.choices.length;
+        next && !isChoicesType(types, d.questionType) && !isStructured && !d.choices.length;
       return {
         ...d,
         quizEligible: next,
@@ -356,7 +375,7 @@ export function QuestionInlineEdit({
         </div>
       </div>
 
-      {!isDragDrop && (
+      {!isStructured && (
         <QuestionUiConfigEditor
           questionType={draft.questionType}
           uiConfig={draft.uiConfig}
@@ -379,7 +398,24 @@ export function QuestionInlineEdit({
         <>
           <div className="w-full">
             <DragDropQuestion
-              uiConfig={normalizeDragDropUiConfig(syncAnswerArea(draft.uiConfig))}
+              uiConfig={normalizeDragDropUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
+              readOnly={false}
+            />
+          </div>
+          <QuestionUiConfigEditor
+            questionType={draft.questionType}
+            uiConfig={draft.uiConfig}
+            onTypeChange={handleTypeChange}
+            onUiConfigChange={(uiConfig) => setDraft((d) => ({ ...d, uiConfig }))}
+          />
+        </>
+      )}
+
+      {isHotArea && (
+        <>
+          <div className="w-full">
+            <HotAreaQuestion
+              uiConfig={normalizeHotAreaUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
               readOnly={false}
             />
           </div>
@@ -519,7 +555,13 @@ export function QuestionInlineEdit({
             Quiz uses drag-and-drop scoring, not multiple choice.
           </p>
         )}
-        {!isChoicesType(types, draft.questionType) && !isDragDrop && draft.quizEligible && (
+        {isHotArea && draft.quizEligible && (
+          <p className="w-full text-xs text-muted dark:text-slate-500">
+            In Answer area — add dropdown options per hotspot and mark the correct option for each blank.
+            Quiz uses hotspot scoring, not multiple choice.
+          </p>
+        )}
+        {!isChoicesType(types, draft.questionType) && !isStructured && draft.quizEligible && (
           <p className="w-full text-xs text-muted dark:text-slate-500">
             Add answer choices below for scored quiz.
           </p>

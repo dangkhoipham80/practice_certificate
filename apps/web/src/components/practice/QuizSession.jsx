@@ -17,9 +17,11 @@ import {
   gradeAnswer,
   isAnswerComplete,
   isDragDropQuizQuestion,
+  isHotAreaQuizQuestion,
   percent
 } from '../../lib/quizUtils';
 import { DragDropQuestion } from '../library/questionTypes/DragDropQuestion';
+import { HotAreaQuestion } from '../library/questionTypes/HotAreaQuestion';
 import { QuestionText } from '../shared/QuestionText';
 import { QuestionMap } from './QuestionMap';
 
@@ -47,6 +49,7 @@ export function QuizSession({
   const selected = session.answers[session.current];
   const checked = session.checked[session.current];
   const isDragDrop = isDragDropQuizQuestion(currentQuestion);
+  const isHotArea = isHotAreaQuizQuestion(currentQuestion);
   const isCorrect = checked && gradeAnswer(selected, currentQuestion);
   const isFlagged = flagged.includes(questionIndex);
   const progress = percent(session.current + 1, session.indices.length);
@@ -71,12 +74,14 @@ export function QuizSession({
                   className={`rounded-full px-2.5 py-0.5 font-bold ${
                     isDragDrop
                       ? 'bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300'
-                      : currentQuestion.multiple
-                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-300'
-                        : 'bg-subtle text-muted dark:bg-gh-subtle'
+                      : isHotArea
+                        ? 'bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300'
+                        : currentQuestion.multiple
+                          ? 'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-300'
+                          : 'bg-subtle text-muted dark:bg-gh-subtle'
                   }`}
                 >
-                  {isDragDrop ? 'Drag & drop' : currentQuestion.multiple ? 'Multiple' : 'Single'}
+                  {isDragDrop ? 'Drag & drop' : isHotArea ? 'Hotspot' : currentQuestion.multiple ? 'Multiple' : 'Single'}
                 </span>
                 <span className="text-muted dark:text-slate-400">Bank Q{questionIndex + 1}</span>
                 <span className="font-mono text-muted dark:text-slate-500">{formatTimer(session.timerSec)}</span>
@@ -104,6 +109,13 @@ export function QuizSession({
           )}
           {isDragDrop ? (
             <DragDropQuestion
+              uiConfig={currentQuestion.uiConfig}
+              filled={selected}
+              onFilledChange={setDragDropFilled}
+              readOnly={checked}
+            />
+          ) : isHotArea ? (
+            <HotAreaQuestion
               uiConfig={currentQuestion.uiConfig}
               filled={selected}
               onFilledChange={setDragDropFilled}

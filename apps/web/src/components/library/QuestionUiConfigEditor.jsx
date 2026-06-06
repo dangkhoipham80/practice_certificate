@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { GripVertical, Plus, Trash2 } from 'lucide-react';
 import { moveDraggableItem } from '../../lib/dragDropUiFormat';
+import { normalizeHotAreaUiConfig } from '../../lib/hotAreaUiFormat';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
 import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
 import { AnswerAreaTemplateEditor } from './AnswerAreaTemplateEditor';
@@ -229,6 +230,155 @@ function patchDragDrop(uiConfig, partial) {
   return normalizeDragDropUiConfig({ ...uiConfig, ...partial });
 }
 
+function patchHotArea(uiConfig, partial) {
+  return normalizeHotAreaUiConfig({ ...uiConfig, ...partial });
+}
+
+function HotspotsEditor({ hotspots, onChange }) {
+  return (
+    <div>
+      <span className="auth-field-label">Answer area — hotspots (dropdown options per blank)</span>
+      <div className="mt-2 space-y-4">
+        {hotspots.map((zone, zoneIndex) => (
+          <div
+            key={zone.id}
+            className="rounded-xl border border-line/70 bg-white/60 p-3 dark:border-gh-border dark:bg-gh-subtle/40"
+          >
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+              <span className="font-mono text-xs font-semibold text-muted">{zone.id}</span>
+              <input
+                className="auth-input !pl-3 min-w-0 flex-1 text-xs"
+                value={zone.placeholder ?? ''}
+                placeholder="Placeholder label"
+                onChange={(e) => {
+                  const next = hotspots.map((row, j) =>
+                    j === zoneIndex ? { ...row, placeholder: e.target.value } : row,
+                  );
+                  onChange(next);
+                }}
+              />
+              <button
+                type="button"
+                className="icon-button h-9 w-9 shrink-0"
+                aria-label="Remove hotspot"
+                onClick={() => onChange(hotspots.filter((_, j) => j !== zoneIndex))}
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
+            <div className="space-y-2">
+              {(zone.options ?? []).map((opt, optIndex) => (
+                <div key={opt.id} className="flex flex-wrap items-center gap-2">
+                  <input
+                    type="radio"
+                    name={`correct-${zone.id}`}
+                    className="h-4 w-4 shrink-0 accent-accent-500"
+                    checked={zone.correct_option_id === opt.id}
+                    title="Mark as correct"
+                    onChange={() => {
+                      const next = hotspots.map((row, j) =>
+                        j === zoneIndex
+                          ? {
+                              ...row,
+                              correct_option_id: opt.id,
+                              correct_answer: opt.label,
+                            }
+                          : row,
+                      );
+                      onChange(next);
+                    }}
+                  />
+                  <span className="w-14 shrink-0 font-mono text-[10px] text-muted">{opt.id}</span>
+                  <input
+                    className="auth-input !pl-3 min-w-0 flex-1 text-sm font-mono"
+                    value={opt.label}
+                    placeholder="Option label"
+                    onChange={(e) => {
+                      const label = e.target.value;
+                      const nextOptions = (zone.options ?? []).map((row, k) =>
+                        k === optIndex ? { ...row, label } : row,
+                      );
+                      const next = hotspots.map((row, j) => {
+                        if (j !== zoneIndex) return row;
+                        const updated = { ...row, options: nextOptions };
+                        if (row.correct_option_id === opt.id) {
+                          updated.correct_answer = label;
+                        }
+                        return updated;
+                      });
+                      onChange(next);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="icon-button h-9 w-9 shrink-0"
+                    aria-label="Remove option"
+                    onClick={() => {
+                      const nextOptions = (zone.options ?? []).filter((_, k) => k !== optIndex);
+                      const next = hotspots.map((row, j) => {
+                        if (j !== zoneIndex) return row;
+                        const cleared =
+                          row.correct_option_id === opt.id
+                            ? { correct_option_id: null, correct_answer: null }
+                            : {};
+                        return { ...row, ...cleared, options: nextOptions };
+                      });
+                      onChange(next);
+                    }}
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="secondary-button mt-2 !py-1.5 text-xs"
+              onClick={() => {
+                const options = zone.options ?? [];
+                const next = hotspots.map((row, j) =>
+                  j === zoneIndex
+                    ? {
+                        ...row,
+                        options: [...options, { id: nextId('opt', options), label: '' }],
+                      }
+                    : row,
+                );
+                onChange(next);
+              }}
+            >
+              <Plus size={14} />
+              Add option
+            </button>
+          </div>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="secondary-button mt-2 !py-1.5 text-xs"
+        onClick={() =>
+          onChange([
+            ...hotspots,
+            {
+              id: `drop_${hotspots.length + 1}`,
+              placeholder: `Hotspot ${hotspots.length + 1}`,
+              options: [
+                { id: 'opt_1', label: '' },
+                { id: 'opt_2', label: '' },
+              ],
+              correct_option_id: null,
+              correct_answer: null,
+            },
+          ])
+        }
+      >
+        <Plus size={14} />
+        Add hotspot
+      </button>
+    </div>
+  );
+}
+
 export function QuestionUiConfigEditor({ questionType, uiConfig, onTypeChange, onUiConfigChange }) {
   const { types, loading } = useQuestionTypes();
   const typeRow = types.find((t) => t.slug === questionType);
@@ -331,14 +481,24 @@ export function QuestionUiConfigEditor({ questionType, uiConfig, onTypeChange, o
       )}
 
       {isHotAreaType(types, questionType) && (
-        <ListField
-          label="Hotspots (labels)"
-          items={(uiConfig.hotspots ?? []).map((h) => (typeof h === 'string' ? h : h.label ?? ''))}
-          placeholder="Hotspot label"
-          onChange={(labels) =>
-            patch({ hotspots: labels.filter(Boolean).map((label, i) => ({ id: `hot_${i + 1}`, label })) })
-          }
-        />
+        <>
+          <AnswerAreaTemplateEditor
+            uiConfig={uiConfig}
+            patchUiConfig={patchHotArea}
+            onUiConfigChange={onUiConfigChange}
+          />
+          <HotspotsEditor
+            hotspots={uiConfig.answer_area?.hotspots ?? uiConfig.hotspots ?? []}
+            onChange={(hotspots) =>
+              onUiConfigChange(
+                patchHotArea(uiConfig, {
+                  hotspots,
+                  answer_area: { ...uiConfig.answer_area, hotspots },
+                }),
+              )
+            }
+          />
+        </>
       )}
 
       {isFillBlankType(types, questionType) && (

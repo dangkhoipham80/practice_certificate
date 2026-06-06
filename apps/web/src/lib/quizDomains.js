@@ -1,4 +1,5 @@
 import { isDragDropQuizReady } from './dragDropUiFormat';
+import { isHotAreaQuizReady } from './hotAreaUiFormat';
 
 /** Sentinel for quiz questions with no domain assigned. */
 export const QUIZ_DOMAIN_NONE = '__none__';
@@ -13,7 +14,7 @@ export function formatQuizDomainLabel(domainId, labelMap = {}) {
 export function isInQuizPool(question) {
   if (question.quizEligible === false) return false;
   if (question.choices?.length) return true;
-  return isDragDropQuizReady(question.uiConfig);
+  return isDragDropQuizReady(question.uiConfig) || isHotAreaQuizReady(question.uiConfig);
 }
 
 export function getQuizIndicesForDomainFilter(questions, domainFilter) {

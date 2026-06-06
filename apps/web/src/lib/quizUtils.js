@@ -5,6 +5,12 @@ import {
   gradeDragDropFilled,
   isDragDropQuizReady,
 } from './dragDropUiFormat.js';
+import {
+  getHotAreaCorrectFilled,
+  gradeHotAreaFilled,
+  hotAreaFilledComplete,
+  isHotAreaQuizReady,
+} from './hotAreaUiFormat.js';
 
 export function shuffle(input) {
   const items = [...input];
@@ -30,9 +36,24 @@ export function isDragDropQuizQuestion(question) {
   );
 }
 
+export function isHotAreaQuizQuestion(question) {
+  return (
+    question?.quizEligible !== false &&
+    !(question?.choices?.length > 0) &&
+    isHotAreaQuizReady(question?.uiConfig)
+  );
+}
+
+export function isInteractiveQuizQuestion(question) {
+  return isDragDropQuizQuestion(question) || isHotAreaQuizQuestion(question);
+}
+
 export function isAnswerComplete(answer, question) {
   if (isDragDropQuizQuestion(question)) {
     return dragDropFilledComplete(answer, question.uiConfig);
+  }
+  if (isHotAreaQuizQuestion(question)) {
+    return hotAreaFilledComplete(answer, question.uiConfig);
   }
   return Array.isArray(answer) && answer.length > 0;
 }
@@ -40,6 +61,9 @@ export function isAnswerComplete(answer, question) {
 export function gradeAnswer(answer, question) {
   if (isDragDropQuizQuestion(question)) {
     return gradeDragDropFilled(answer, question.uiConfig);
+  }
+  if (isHotAreaQuizQuestion(question)) {
+    return gradeHotAreaFilled(answer, question.uiConfig);
   }
   return sameAnswer(answer, question.correct ?? []);
 }
@@ -53,6 +77,13 @@ export function formatQuizAnswer(answer, question) {
       .filter(Boolean)
       .join(' · ');
   }
+  if (isHotAreaQuizQuestion(question)) {
+    const zones = question.uiConfig?.answer_area?.hotspots ?? question.uiConfig?.hotspots ?? [];
+    return zones
+      .map((z) => `${z.id}: ${answer[z.id] ?? '—'}`)
+      .filter(Boolean)
+      .join(' · ');
+  }
   const choices = question.choices ?? [];
   return (answer ?? []).map((i) => choices[i] ?? String.fromCharCode(65 + i)).join('; ');
 }
@@ -61,6 +92,11 @@ export function formatQuizCorrect(question) {
   if (isDragDropQuizQuestion(question)) {
     const filled = getDragDropCorrectFilled(question.uiConfig);
     const zones = question.uiConfig?.answer_area?.drop_zones ?? question.uiConfig?.drop_zones ?? [];
+    return zones.map((z) => `${z.id}: ${filled[z.id] ?? '—'}`).join(' · ');
+  }
+  if (isHotAreaQuizQuestion(question)) {
+    const filled = getHotAreaCorrectFilled(question.uiConfig);
+    const zones = question.uiConfig?.answer_area?.hotspots ?? question.uiConfig?.hotspots ?? [];
     return zones.map((z) => `${z.id}: ${filled[z.id] ?? '—'}`).join(' · ');
   }
   return (question.correct ?? [])

@@ -1,10 +1,12 @@
 import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
+import { normalizeHotAreaUiConfig } from '../../lib/hotAreaUiFormat';
 import { getUiConfig } from '../../lib/examQuestionParser';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
-import { isDragDropType } from '../../lib/questionUiTypes';
+import { isDragDropType, isHotAreaType } from '../../lib/questionUiTypes';
 import { DragDropQuestion } from './questionTypes/DragDropQuestion';
+import { HotAreaQuestion } from './questionTypes/HotAreaQuestion';
 
-export function QuestionStructuredView({ question, readOnly = true, answerOnly = false }) {
+export function QuestionStructuredView({ question, readOnly = true, answerOnly = false, filled, onFilledChange }) {
   const { types } = useQuestionTypes();
   const uiConfig = getUiConfig(question);
   if (!uiConfig?.type) return null;
@@ -15,6 +17,20 @@ export function QuestionStructuredView({ question, readOnly = true, answerOnly =
         uiConfig={normalizeDragDropUiConfig(uiConfig)}
         readOnly={readOnly || answerOnly}
         answerOnly={answerOnly}
+        filled={filled}
+        onFilledChange={onFilledChange}
+      />
+    );
+  }
+
+  if (isHotAreaType(types, uiConfig.type)) {
+    return (
+      <HotAreaQuestion
+        uiConfig={normalizeHotAreaUiConfig(uiConfig)}
+        readOnly={readOnly || answerOnly}
+        answerOnly={answerOnly}
+        filled={filled}
+        onFilledChange={onFilledChange}
       />
     );
   }

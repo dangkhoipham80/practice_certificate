@@ -5,7 +5,7 @@ import { questionsApi } from '../../api/client';
 import { SectionHeader } from '../ui/SectionHeader';
 import { ConfirmDialog } from '../ui/ConfirmDialog';
 import { getUiConfig } from '../../lib/examQuestionParser';
-import { isDragDropType } from '../../lib/questionUiTypes';
+import { isDragDropType, isHotAreaType } from '../../lib/questionUiTypes';
 import { formatQuizCorrect } from '../../lib/quizUtils';
 import { apiQuestionToLocal, getQuestionExternalId } from '../../lib/questionUtils';
 import { ExplanationText } from '../shared/ExplanationText';
@@ -393,12 +393,14 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
           const isEditing = isAdmin && editingIndex === question.index;
           const uiConfig = getUiConfig(question);
           const isDragDrop = isDragDropType(types, uiConfig?.type);
-          const showDragDropPractice = !isEditing && isDragDrop && !isOpen;
-          const showDragDropAnswer = !isEditing && isDragDrop && isOpen;
+          const isHotArea = isHotAreaType(types, uiConfig?.type);
+          const isStructured = isDragDrop || isHotArea;
+          const showStructuredPractice = !isEditing && isStructured && !isOpen;
+          const showStructuredAnswer = !isEditing && isStructured && isOpen;
           const showStructuredInteractive =
-            isOpen && !isEditing && !isDragDrop && !question.choices?.length && question.quizEligible === false;
+            isOpen && !isEditing && !isStructured && !question.choices?.length && question.quizEligible === false;
           const correctLabels = (question.correct ?? []).map((item) => String.fromCharCode(65 + item)).join(', ');
-          const dragDropAnswerSummary = isDragDrop ? formatQuizCorrect({ ...question, uiConfig }) : '';
+          const structuredAnswerSummary = isStructured ? formatQuizCorrect({ ...question, uiConfig }) : '';
           return (
             <article
               className="question-row"
@@ -411,7 +413,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                   <div className="min-w-0 flex-1">
                     <QuestionText
                       text={question.text}
-                      images={isDragDrop || isOpen ? question.images : []}
+                      images={isStructured || isOpen ? question.images : []}
                       className="text-sm font-semibold"
                     />
                     {question.quizEligible === false && (
@@ -462,7 +464,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                     type="button"
                     onClick={() => toggleDetail(question.index)}
                   >
-                    {isDragDrop ? (isOpen ? 'Hide answer' : 'Answer') : isOpen ? 'Hide' : 'Detail'}
+                    {isStructured ? (isOpen ? 'Hide answer' : 'Answer') : isOpen ? 'Hide' : 'Detail'}
                     <ChevronDown size={14} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
                   <button
@@ -477,20 +479,22 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
               </div>
               <p className="text-xs text-muted dark:text-slate-400 sm:pl-10">
                 {question.multiple ? 'Multiple answer' : question.choices?.length ? 'Single answer' : 'Non-MC'}
-                {!isOpen && question.choices?.length && !isDragDrop ? ' · tap Detail to view choices' : ''}
+                {!isOpen && question.choices?.length && !isStructured ? ' · tap Detail to view choices' : ''}
                 {isDragDrop && !isOpen ? ' · drag values into blanks, then tap Answer' : ''}
+                {isHotArea && !isOpen ? ' · select options in the code, then tap Answer' : ''}
                 {isDragDrop && isOpen ? ' · correct placement shown below' : ''}
+                {isHotArea && isOpen ? ' · correct options filled in the code' : ''}
               </p>
-              {showDragDropPractice && (
+              {showStructuredPractice && (
                 <div className="mt-4 w-full border-t border-line/50 pt-4 dark:border-gh-border/60">
                   <QuestionStructuredView question={question} readOnly={false} />
                 </div>
               )}
-              {showDragDropAnswer && (
+              {showStructuredAnswer && (
                 <div className="mt-4 w-full space-y-3 border-t border-line/50 pt-4 dark:border-gh-border/60">
-                  {dragDropAnswerSummary && (
+                  {!isHotArea && structuredAnswerSummary && (
                     <p className="rounded-xl border border-success-200 bg-success-50 px-3 py-2 text-xs font-semibold text-success-800 dark:border-success-500/30 dark:bg-success-500/10 dark:text-success-200">
-                      Correct: {dragDropAnswerSummary}
+                      Correct: {structuredAnswerSummary}
                     </p>
                   )}
                   <QuestionStructuredView question={question} readOnly answerOnly />
@@ -515,7 +519,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                   onRefresh={refreshLibraryQuestions}
                 />
               )}
-              {isOpen && !isEditing && question.choices?.length > 0 && !isDragDrop && (
+              {isOpen && !isEditing && question.choices?.length > 0 && !isStructured && (
                 <div className="mt-4 w-full space-y-3 border-t border-line/50 pt-4 dark:border-gh-border/60 sm:pl-10">
                   <div className="space-y-2">
                     {question.choices.map((choice, choiceIndex) => {

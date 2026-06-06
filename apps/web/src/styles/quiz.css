@@ -105,4 +105,17 @@
   .question-number {
     @apply inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-lg bg-accent-50 px-2 text-xs font-extrabold text-accent-700 dark:bg-accent-500/15 dark:text-accent-300;
   }
+
+  /* Keep hotspot dropdowns inline inside <pre><code> (avoid block layout from form resets). */
+  pre code .hot-area-inline-select,
+  .text-answer-area .hot-area-inline-select {
+    display: inline-block;
+    max-width: none;
+    vertical-align: baseline;
+    margin: 0 0.125rem;
+    padding-right: 1.75rem;
+    background-position: right 0.4rem center;
+    background-size: 0.65rem;
+    field-sizing: content;
+  }
 }

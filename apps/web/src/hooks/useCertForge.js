@@ -8,6 +8,7 @@ import { computeDayStreak } from '../lib/statsUtils';
 import { getQuizQuestions } from '../config/certRegistry';
 import { readJson, removeKey, writeJson } from '../lib/storage';
 import { getDragDropCorrectFilled, isDragDropQuizReady } from '../lib/dragDropUiFormat';
+import { getHotAreaCorrectFilled, isHotAreaQuizReady } from '../lib/hotAreaUiFormat';
 import {
   applyWeakDelta,
   formatTimer,
@@ -15,6 +16,8 @@ import {
   gradeAnswer,
   isAnswerComplete,
   isDragDropQuizQuestion,
+  isHotAreaQuizQuestion,
+  isInteractiveQuizQuestion,
   percent,
   shuffle
 } from '../lib/quizUtils';
@@ -47,6 +50,7 @@ export function useCertForge() {
           if (q.quizEligible === false) return null;
           if (q.choices?.length) return index;
           if (isDragDropQuizReady(q.uiConfig)) return index;
+          if (isHotAreaQuizReady(q.uiConfig)) return index;
           return null;
         })
         .filter((index) => index !== null),
@@ -174,7 +178,7 @@ export function useCertForge() {
       label: label ?? `${cert.exam} · ${mode === 'random' ? 'Random' : mode} - ${indices.length}`,
       indices,
       current: 0,
-      answers: indices.map((idx) => (isDragDropQuizQuestion(questions[idx]) ? {} : [])),
+      answers: indices.map((idx) => (isInteractiveQuizQuestion(questions[idx]) ? {} : [])),
       checked: indices.map(() => false),
       finished: false,
       timerSec: 0,
@@ -272,6 +276,7 @@ export function useCertForge() {
       const answers = current.answers.map((answer, i) => {
         if (i !== slot) return Array.isArray(answer) ? [...answer] : { ...answer };
         if (isDragDropQuizQuestion(question)) return getDragDropCorrectFilled(question.uiConfig);
+        if (isHotAreaQuizQuestion(question)) return getHotAreaCorrectFilled(question.uiConfig);
         return [...question.correct];
       });
       const next = { ...current, answers };
@@ -288,7 +293,7 @@ export function useCertForge() {
       const answers = current.answers.map((answer) => [...answer]);
       const checked = [...current.checked];
       const question = questions[current.indices[current.current]];
-      answers[current.current] = isDragDropQuizQuestion(question) ? {} : [];
+      answers[current.current] = isInteractiveQuizQuestion(question) ? {} : [];
       checked[current.current] = false;
       return { ...current, answers, checked };
     });
@@ -367,7 +372,7 @@ export function useCertForge() {
     setSession({
       ...session,
       current: 0,
-      answers: session.indices.map((idx) => (isDragDropQuizQuestion(questions[idx]) ? {} : [])),
+      answers: session.indices.map((idx) => (isInteractiveQuizQuestion(questions[idx]) ? {} : [])),
       checked: session.indices.map(() => false),
       finished: false,
       wrongSlots: undefined,
@@ -383,7 +388,7 @@ export function useCertForge() {
       label: `Retry Wrong · ${indices.length}`,
       indices,
       current: 0,
-      answers: indices.map((idx) => (isDragDropQuizQuestion(questions[idx]) ? {} : [])),
+      answers: indices.map((idx) => (isInteractiveQuizQuestion(questions[idx]) ? {} : [])),
       checked: indices.map(() => false),
       finished: false,
       timerSec: 0

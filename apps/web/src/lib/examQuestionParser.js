@@ -1,4 +1,5 @@
 import { buildDragDropUiConfig } from './dragDropUiFormat.js';
+import { buildHotAreaUiConfig } from './hotAreaUiFormat.js';
 
 /**
  * Rule-based exam question parser: classifies type and extracts UI blocks.
@@ -192,19 +193,19 @@ function buildMcConfig({ stem, instructions, choices, correct, multiple, images,
 }
 
 function buildHotAreaConfig({ title, stem, instructions, images, explanation }) {
-  const questionText = stem.join('\n');
-  return {
-    type: 'hot_area',
+  const boxes = parseExplanationBoxes(explanation);
+  const snippet = snippetWithBlanks(extractCodeSnippet(explanation), boxes);
+  const values = inferValuesFromExplanation(explanation, boxes);
+  return buildHotAreaUiConfig({
     title,
-    question: questionText,
-    question_text: questionText,
+    questionText: stem.join('\n'),
     instructions,
-    instruction_text: instructions.join('\n'),
+    explanation,
+    snippet,
+    boxes,
+    valueLabels: values,
     images,
-    explanation: explanation || undefined,
-    status: 'active',
-    hotspots: [],
-  };
+  });
 }
 
 function buildCaseStudyConfig({ title, stem, instructions, images, explanation }) {

@@ -17,6 +17,28 @@ export function templateToLines(template) {
   return preserveCodeTemplate(template).split('\n');
 }
 
+/** Join lines that were wrongly broken after {{drop_n}} (e.g. "(AudioStream...)" on the next line). */
+export function templateToDisplayLines(template) {
+  const lines = templateToLines(template);
+  const merged = [];
+  for (const line of lines) {
+    if (!line.trim()) {
+      merged.push('');
+      continue;
+    }
+    let prevIdx = merged.length - 1;
+    while (prevIdx >= 0 && !merged[prevIdx].trim()) prevIdx -= 1;
+    const prev = prevIdx >= 0 ? merged[prevIdx] : null;
+    if (prev != null && /\{\{drop_\d+\}\}\s*$/.test(prev) && /^\s*[\(\[\{\.]/.test(line)) {
+      while (merged.length > prevIdx + 1) merged.pop();
+      merged[prevIdx] = prev + line.replace(/^\s+/, '');
+    } else {
+      merged.push(line);
+    }
+  }
+  return merged;
+}
+
 /** Insert Tab (or any text) at the textarea caret without leaving the field. */
 export function insertInTextarea(textarea, insert) {
   const start = textarea.selectionStart;

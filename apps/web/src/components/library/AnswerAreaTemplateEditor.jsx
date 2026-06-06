@@ -5,7 +5,7 @@ import {
   normalizeAnswerAreaFormat,
 } from '../../lib/codeTemplateFormat';
 
-function patchAnswerArea(uiConfig, patchDragDrop, partial) {
+function patchAnswerArea(uiConfig, patchUiConfig, partial) {
   const prev = uiConfig.answer_area ?? {};
   const format = normalizeAnswerAreaFormat(partial.format ?? prev.format ?? 'code');
   const answer_area = { ...prev, ...partial, format };
@@ -14,13 +14,13 @@ function patchAnswerArea(uiConfig, patchDragDrop, partial) {
     const text = answer_area.text_template ?? answer_area.template ?? uiConfig.template ?? '';
     answer_area.text_template = text;
     answer_area.template = text;
-    return patchDragDrop(uiConfig, { template: text, answer_area });
+    return patchUiConfig(uiConfig, { template: text, answer_area });
   }
 
   if (format === 'both') {
     answer_area.template = answer_area.template ?? '';
     answer_area.text_template = answer_area.text_template ?? '';
-    return patchDragDrop(uiConfig, {
+    return patchUiConfig(uiConfig, {
       template: answer_area.template,
       answer_area,
     });
@@ -28,13 +28,14 @@ function patchAnswerArea(uiConfig, patchDragDrop, partial) {
 
   answer_area.template = answer_area.template ?? uiConfig.template ?? '';
   answer_area.text_template = answer_area.text_template ?? '';
-  return patchDragDrop(uiConfig, { template: answer_area.template, answer_area });
+  return patchUiConfig(uiConfig, { template: answer_area.template, answer_area });
 }
 
 const templateHint =
-  'Use {{drop_1}}, {{drop_2}}, … for blanks. Enter = new line · Tab = indent in code (saved as tab).';
+  'Use {{drop_1}}, {{drop_2}}, … for dropdown blanks. Enter = new line · Tab = indent in code (saved as tab).';
 
-export function AnswerAreaTemplateEditor({ uiConfig, patchDragDrop, onUiConfigChange }) {
+export function AnswerAreaTemplateEditor({ uiConfig, patchDragDrop, patchUiConfig, onUiConfigChange }) {
+  const patch = patchUiConfig ?? patchDragDrop;
   const answer_area = uiConfig.answer_area ?? {};
   const format = normalizeAnswerAreaFormat(answer_area.format ?? 'code');
   const language = answer_area.language ?? 'csharp';
@@ -43,7 +44,7 @@ export function AnswerAreaTemplateEditor({ uiConfig, patchDragDrop, onUiConfigCh
     format === 'code' ? '' : (answer_area.text_template ?? (format === 'text' ? uiConfig.template : '') ?? '');
 
   function update(partial) {
-    onUiConfigChange(patchAnswerArea(uiConfig, patchDragDrop, partial));
+    onUiConfigChange(patchAnswerArea(uiConfig, patch, partial));
   }
 
   return (

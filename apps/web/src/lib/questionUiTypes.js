@@ -1,6 +1,7 @@
 /** Helpers driven by question types loaded from the API (see QuestionTypesContext). */
 
 import { isDragDropQuizReady, normalizeDragDropUiConfig } from './dragDropUiFormat.js';
+import { normalizeHotAreaUiConfig } from './hotAreaUiFormat.js';
 
 export function findQuestionType(types, slug) {
   return types.find((t) => t.slug === slug);
@@ -81,7 +82,11 @@ export function nextId(prefix, existing) {
   return id;
 }
 
-export function syncAnswerArea(uiConfig) {
+export function syncAnswerArea(uiConfig, types = [], slug) {
+  const typeSlug = slug ?? uiConfig.type;
+  if (types.length && isHotAreaType(types, typeSlug)) {
+    return normalizeHotAreaUiConfig(uiConfig);
+  }
   if (
     uiConfig.draggable_items?.length ||
     uiConfig.answer_area?.drop_zones?.length ||
@@ -113,14 +118,18 @@ export function buildSavePayload(draft, types, baseQuestion = {}) {
   const slug = draft.questionType;
   const typeRow = findQuestionType(types, slug);
   const images = [...(draft.images ?? draft.uiConfig?.images ?? baseQuestion.images ?? [])].filter(Boolean);
-  let uiConfig = syncAnswerArea({
-    ...draft.uiConfig,
-    type: slug,
-    question_text: draft.text.trim(),
-    question: draft.text.trim(),
-    explanation: draft.explanation.trim() || undefined,
-    images,
-  });
+  let uiConfig = syncAnswerArea(
+    {
+      ...draft.uiConfig,
+      type: slug,
+      question_text: draft.text.trim(),
+      question: draft.text.trim(),
+      explanation: draft.explanation.trim() || undefined,
+      images,
+    },
+    types,
+    slug,
+  );
 
   const choices = draft.choices.map((c) => c.trim()).filter(Boolean);
   const correct = draft.correct.filter((i) => i < choices.length);
@@ -163,6 +172,10 @@ export function buildSavePayload(draft, types, baseQuestion = {}) {
     payload.correct = correct;
     payload.multiple = getCorrectMode(types, slug) === 'multiple' || correct.length > 1;
   } else if (isDragDropType(types, slug)) {
+    payload.choices = [];
+    payload.correct = [];
+    payload.multiple = false;
+  } else if (isHotAreaType(types, slug)) {
     payload.choices = [];
     payload.correct = [];
     payload.multiple = false;
