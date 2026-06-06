@@ -8,6 +8,8 @@ import {
   RotateCcw,
   Save
 } from 'lucide-react';
+import { useExamSections } from '../../hooks/useExamSections';
+import { getSectionBadgeLabel } from '../../lib/examSections';
 import { getPartIndex } from '../../lib/progressUtils';
 import {
   formatQuizCorrect,
@@ -40,6 +42,7 @@ export function QuizSession({
   reviewFlaggedInSession,
   setSession
 }) {
+  const { sections } = useExamSections(cert);
   const questionIndex = session.indices[session.current];
   const selected = session.answers[session.current];
   const checked = session.checked[session.current];
@@ -47,7 +50,7 @@ export function QuizSession({
   const isCorrect = checked && gradeAnswer(selected, currentQuestion);
   const isFlagged = flagged.includes(questionIndex);
   const progress = percent(session.current + 1, session.indices.length);
-  const partIndex = getPartIndex(questionIndex, cert.partStarts);
+  const partIndex = getPartIndex(questionIndex, sections);
   const canCheck = isAnswerComplete(selected, currentQuestion);
 
   return (
@@ -62,7 +65,7 @@ export function QuizSession({
               </h2>
               <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                 <span className="rounded-full bg-accent-50 px-2.5 py-0.5 font-bold text-accent-700 dark:bg-accent-500/15 dark:text-accent-300">
-                  P{String(partIndex + 1).padStart(2, '0')}
+                  {getSectionBadgeLabel(cert, partIndex)}
                 </span>
                 <span
                   className={`rounded-full px-2.5 py-0.5 font-bold ${

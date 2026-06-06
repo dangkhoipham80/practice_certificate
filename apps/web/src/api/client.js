@@ -108,3 +108,12 @@ export const questionTypesApi = {
   update: (id, payload) => apiFetch(`/question-types/${id}`, { method: 'PATCH', body: payload }),
   remove: (id) => apiFetch(`/question-types/${id}`, { method: 'DELETE' }),
 };
+
+export const progressApi = {
+  recordSession: (payload) => apiFetch('/progress/sessions', { method: 'POST', body: payload }),
+  getHistory: (certId, { limit = 80 } = {}) =>
+    apiFetch(`/progress/sessions?certId=${encodeURIComponent(certId)}&limit=${limit}`),
+  getStreak: (certId) => apiFetch(`/progress/streak?certId=${encodeURIComponent(certId)}`),
+  getStreaks: () => apiFetch('/progress/streaks'),
+  import: (payload) => apiFetch('/progress/import', { method: 'POST', body: payload }),
+};

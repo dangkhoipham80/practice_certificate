@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, Flag, Layers3 } from 'lucide-react';
 import { formatTimer, percent } from '../../lib/quizUtils';
 import { QUESTION_KIND_LABELS, resolveQuestionKind } from '../../utils/ai102InteractiveKind';
+import { ExplanationText } from '../shared/ExplanationText';
 import { QuestionText } from '../shared/QuestionText';
 import { QuestionStructuredView } from '../library/QuestionStructuredView';
 import { QuestionMap } from './QuestionMap';
@@ -69,9 +70,9 @@ export function InteractiveReviewSession({ cert, session, flagged, toggleFlag, m
           {currentQuestion.explanation && (
             <div className="rounded-xl border border-line/80 bg-subtle/60 p-4 dark:border-gh-border dark:bg-gh-subtle/60">
               <p className="text-xs font-bold uppercase text-muted dark:text-slate-400">Explanation / discussion</p>
-              <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-ink dark:text-slate-200">
+              <ExplanationText className="mt-2 text-sm text-ink dark:text-slate-200">
                 {currentQuestion.explanation}
-              </p>
+              </ExplanationText>
             </div>
           )}
         </div>

@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Play } from 'lucide-react';
+import { useExamSections } from '../../hooks/useExamSections';
+import { getSectionBadgeLabel } from '../../lib/examSections';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
 import {
   QUIZ_DOMAIN_NONE,
@@ -9,15 +11,15 @@ import {
   isInQuizPool,
 } from '../../lib/quizDomains';
 import { shuffle } from '../../lib/quizUtils';
-import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
 import { SectionHeader } from '../ui/SectionHeader';
 
 export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
-  const { questions, partSizes, partStarts } = cert;
-  const { domains, domainLabelMap } = useCertTaxonomy(cert.id);
+  const { questions } = cert;
+  const { sections, domains, domainLabelMap } = useExamSections(cert);
   const domainCounts = useMemo(() => countQuizByDomain(questions, domains), [questions, domains]);
-  const sectionPrefix = cert.id === 'ai-102' ? 'D' : cert.id.startsWith('ai-') ? 'T' : 'P';
-  const [parts, setParts] = useState(() => partSizes.map((size, index) => (size ? index : null)).filter((index) => index !== null));
+  const [parts, setParts] = useState(() =>
+    sections.map((section, index) => (section.questionIndices.length ? index : null)).filter((index) => index !== null)
+  );
   const [questionType, setQuestionType] = useState('all');
   const [source, setSource] = useState('all');
   const [order, setOrder] = useState('random');
@@ -30,10 +32,8 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
 
   function launchCustomFixed() {
     let pool = [];
-    parts.forEach((partIndex) => {
-      const start = partStarts[partIndex];
-      for (let i = 0; i < partSizes[partIndex]; i += 1) {
-        const questionIndex = start + i;
+    parts.forEach((sectionIndex) => {
+      for (const questionIndex of sections[sectionIndex].questionIndices) {
         const question = questions[questionIndex];
         if (!isInQuizPool(question)) continue;
         if (questionType === 'multiple' && !question.multiple) continue;
@@ -48,11 +48,11 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
       if (!pool.length) return window.alert('No questions match the selected domain.');
     }
     if (source === 'wrong') {
-      pool = pool.filter((index) => getWrongIndices(partProgress, partSizes, partStarts).includes(index));
+      pool = pool.filter((index) => getWrongIndices(partProgress, sections).includes(index));
       if (!pool.length) return window.alert('No wrong answers in the selected scope!');
     }
     if (source === 'unanswered') {
-      pool = pool.filter((index) => getUnansweredIndices(partProgress, partSizes, partStarts).includes(index));
+      pool = pool.filter((index) => getUnansweredIndices(partProgress, sections).includes(index));
       if (!pool.length) return window.alert('All questions in the selected scope have been answered!');
     }
     const ordered = order === 'random' ? shuffle(pool) : [...pool];
@@ -69,7 +69,7 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
       count: parsed,
       label: `${cert.exam} · ${order === 'random' ? 'Random' : 'Sequential'}${srcLabel}${domainLabel} · ${parsed}`,
       shufflePool: false,
-      customIndices: ordered.slice(0, parsed)
+      customIndices: ordered.slice(0, parsed),
     });
   }
 
@@ -77,10 +77,19 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
     <div className="panel space-y-4 p-5">
       <SectionHeader kicker="Custom quiz" title="Build your session" description="Filter by section, question type, and wrong/unanswered pools." />
       <div className="flex flex-wrap gap-2">
-        {partSizes.map((size, index) => (
-          <label className={`filter-chip ${size ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'} ${parts.includes(index) ? 'filter-chip-active' : ''}`} key={index}>
-            <input className="hidden" type="checkbox" checked={parts.includes(index)} disabled={!size} onChange={() => togglePart(index)} />
-            {sectionPrefix}{String(index + 1).padStart(2, '0')} ({size})
+        {sections.map((section, index) => (
+          <label
+            className={`filter-chip ${section.questionIndices.length ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'} ${parts.includes(index) ? 'filter-chip-active' : ''}`}
+            key={section.key}
+          >
+            <input
+              className="hidden"
+              type="checkbox"
+              checked={parts.includes(index)}
+              disabled={!section.questionIndices.length}
+              onChange={() => togglePart(index)}
+            />
+            {getSectionBadgeLabel(cert, index)} ({section.questionIndices.length})
           </label>
         ))}
       </div>
@@ -124,7 +133,7 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
             {[
               ['all', 'All'],
               ['single', 'Single'],
-              ['multiple', 'Multiple']
+              ['multiple', 'Multiple'],
             ].map(([id, label]) => (
               <button key={id} className={`filter-chip ${questionType === id ? 'filter-chip-active' : ''}`} onClick={() => setQuestionType(id)} type="button">
                 {label}
@@ -138,7 +147,7 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
             {[
               ['all', 'All'],
               ['wrong', 'Wrong only'],
-              ['unanswered', 'Unanswered']
+              ['unanswered', 'Unanswered'],
             ].map(([id, label]) => (
               <button key={id} className={`filter-chip ${source === id ? 'filter-chip-active' : ''}`} onClick={() => setSource(id)} type="button">
                 {label}
@@ -151,7 +160,7 @@ export function QuizCustomSetup({ cert, startQuiz, partProgress }) {
           <div className="flex flex-wrap gap-2">
             {[
               ['random', 'Random'],
-              ['seq', 'Sequential']
+              ['seq', 'Sequential'],
             ].map(([id, label]) => (
               <button key={id} className={`filter-chip ${order === id ? 'filter-chip-active' : ''}`} onClick={() => setOrder(id)} type="button">
                 {label}

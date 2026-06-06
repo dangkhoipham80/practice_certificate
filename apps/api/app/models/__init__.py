@@ -6,6 +6,7 @@ from app.models.question import Question
 from app.models.question_type import QuestionType
 from app.models.quiz_session import QuizSession
 from app.models.user import User, UserRole
+from app.models.user_daily_activity import UserDailyActivity
 
 __all__ = [
     "Certification",
@@ -16,5 +17,6 @@ __all__ = [
     "QuestionType",
     "QuizSession",
     "User",
+    "UserDailyActivity",
     "UserRole",
 ]

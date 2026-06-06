@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ListChecks, Loader2, Plus, Sparkles, Trash2, X } from 'lucide-react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ListChecks, Loader2, Plus, RefreshCw, Sparkles, Trash2, X } from 'lucide-react';
 import { questionsApi, taxonomyApi } from '../../api/client';
 import { useCertContext } from '../../context/CertContext';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
@@ -47,7 +47,7 @@ function buildDraft(question, types) {
   };
 }
 
-export function QuestionInlineEdit({ certId, question, index, onCancel }) {
+export function QuestionInlineEdit({ certId, question, index, onCancel, onRefresh }) {
   const { reloadCertQuestions, questionsSource } = useCertContext();
   const { types, loading: typesLoading } = useQuestionTypes();
   const { domains, domainLabelMap, loading: taxonomyLoading, addDomain } = useCertTaxonomy(certId);
@@ -58,6 +58,15 @@ export function QuestionInlineEdit({ certId, question, index, onCancel }) {
   const [newDomainTitle, setNewDomainTitle] = useState('');
   const [newDomainSlug, setNewDomainSlug] = useState('');
   const [creatingDomain, setCreatingDomain] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const explanationRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const el = explanationRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  }, [draft.explanation, index, types.length]);
 
   useEffect(() => {
     if (types.length) {
@@ -191,11 +200,25 @@ export function QuestionInlineEdit({ certId, question, index, onCancel }) {
     setSaving(true);
     try {
       await persistQuestionToDb(draft);
-      onCancel();
+      if (onRefresh) await onRefresh();
     } catch (err) {
       setError(err.message || 'Failed to save question.');
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleRefresh() {
+    if (!onRefresh) return;
+    setRefreshing(true);
+    setError('');
+    try {
+      await onRefresh();
+      document.getElementById(`question-edit-${index}`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    } catch (err) {
+      setError(err.message || 'Failed to refresh question.');
+    } finally {
+      setRefreshing(false);
     }
   }
 
@@ -298,10 +321,24 @@ export function QuestionInlineEdit({ certId, question, index, onCancel }) {
           Editing question {index + 1}
           {questionsSource === 'api' ? ' · saved to database' : ''}
         </p>
-        <button type="button" className="secondary-button !py-1.5 text-xs" onClick={autoParse}>
-          <Sparkles size={14} />
-          Auto-parse from text
-        </button>
+        <div className="flex flex-wrap gap-2">
+          {onRefresh && (
+            <button
+              type="button"
+              className="secondary-button !py-1.5 text-xs"
+              onClick={handleRefresh}
+              disabled={refreshing || saving}
+              title="Reload from database (discards unsaved changes)"
+            >
+              <RefreshCw size={14} className={refreshing ? 'animate-spin' : ''} />
+              {refreshing ? 'Refreshing…' : 'Refresh'}
+            </button>
+          )}
+          <button type="button" className="secondary-button !py-1.5 text-xs" onClick={autoParse} disabled={refreshing || saving}>
+            <Sparkles size={14} />
+            Auto-parse from text
+          </button>
+        </div>
       </div>
 
       {!isDragDrop && (
@@ -523,7 +560,8 @@ export function QuestionInlineEdit({ certId, question, index, onCancel }) {
       <label className="block">
         <span className="auth-field-label">Explanation (optional)</span>
         <textarea
-          className="auth-input !pl-4 min-h-[80px] resize-y"
+          ref={explanationRef}
+          className="auth-input !pl-4 min-h-[200px] resize-none overflow-hidden"
           value={draft.explanation}
           onChange={(e) => setDraft((d) => ({ ...d, explanation: e.target.value }))}
         />
@@ -536,7 +574,7 @@ export function QuestionInlineEdit({ certId, question, index, onCancel }) {
       )}
 
       <div className="flex flex-wrap gap-2">
-        <button className="primary-button" type="submit" disabled={saving}>
+        <button className="primary-button" type="submit" disabled={saving || refreshing}>
           {saving ? (
             <>
               <Loader2 size={16} className="animate-spin" />
@@ -546,7 +584,7 @@ export function QuestionInlineEdit({ certId, question, index, onCancel }) {
             'Save'
           )}
         </button>
-        <button className="ghost-button" type="button" onClick={onCancel} disabled={saving}>
+        <button className="ghost-button" type="button" onClick={onCancel} disabled={saving || refreshing}>
           Cancel
         </button>
       </div>

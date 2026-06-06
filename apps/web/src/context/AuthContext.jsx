@@ -1,5 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { authApi, getAccessToken, setAccessToken } from '../api/client';
+import { authApi, getAccessToken, progressApi, setAccessToken } from '../api/client';
+import { syncLocalProgressToServer } from '../lib/progressSync';
+import { getBurnStreak } from '../lib/streakUtils';
 
 const AuthContext = createContext(null);
 
@@ -18,6 +20,8 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [streaks, setStreaks] = useState({});
+  const [loginBurnPulse, setLoginBurnPulse] = useState(false);
 
   const clearError = useCallback(() => setError(null), []);
 
@@ -28,10 +32,20 @@ export function AuthProvider({ children }) {
     setError(null);
   }, []);
 
+  const refreshStreaks = useCallback(async () => {
+    try {
+      const res = await progressApi.getStreaks();
+      setStreaks(res.streaks ?? {});
+    } catch {
+      setStreaks({});
+    }
+  }, []);
+
   const refreshUser = useCallback(async () => {
     const token = getAccessToken();
     if (!token) {
       setUser(null);
+      setStreaks({});
       setLoading(false);
       return;
     }
@@ -39,13 +53,15 @@ export function AuthProvider({ children }) {
       const me = await authApi.me();
       setUser(normalizeUser(me));
       setError(null);
+      await refreshStreaks();
     } catch {
       setAccessToken(null);
       setUser(null);
+      setStreaks({});
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [refreshStreaks]);
 
   useEffect(() => {
     refreshUser();
@@ -56,9 +72,12 @@ export function AuthProvider({ children }) {
       clearError();
       const data = await authApi.login({ email, password });
       applyAuth(data);
+      await syncLocalProgressToServer();
+      await refreshStreaks();
+      setLoginBurnPulse(true);
       return normalizeUser(data.user);
     },
-    [applyAuth, clearError]
+    [applyAuth, clearError, refreshStreaks]
   );
 
   const register = useCallback(
@@ -70,9 +89,12 @@ export function AuthProvider({ children }) {
         displayName: displayName || undefined,
       });
       applyAuth(data);
+      await syncLocalProgressToServer();
+      await refreshStreaks();
+      setLoginBurnPulse(true);
       return normalizeUser(data.user);
     },
-    [applyAuth, clearError]
+    [applyAuth, clearError, refreshStreaks]
   );
 
   const logout = useCallback(async () => {
@@ -83,8 +105,12 @@ export function AuthProvider({ children }) {
     }
     setAccessToken(null);
     setUser(null);
+    setStreaks({});
+    setLoginBurnPulse(false);
     setError(null);
   }, []);
+
+  const clearLoginBurnPulse = useCallback(() => setLoginBurnPulse(false), []);
 
   const runAuthAction = useCallback(
     async (action) => {
@@ -99,11 +125,18 @@ export function AuthProvider({ children }) {
     [clearError]
   );
 
+  const burnStreak = useMemo(() => getBurnStreak(streaks), [streaks]);
+
   const value = useMemo(
     () => ({
       user,
       loading,
       error,
+      streaks,
+      burnStreak,
+      loginBurnPulse,
+      clearLoginBurnPulse,
+      refreshStreaks,
       isAuthenticated: Boolean(user),
       login: (payload) => runAuthAction(() => login(payload)),
       register: (payload) => runAuthAction(() => register(payload)),
@@ -113,7 +146,21 @@ export function AuthProvider({ children }) {
       isAdmin: user?.role === 'admin',
       isTeacher: user?.role === 'teacher' || user?.role === 'admin',
     }),
-    [user, loading, error, login, register, logout, clearError, runAuthAction]
+    [
+      user,
+      loading,
+      error,
+      streaks,
+      burnStreak,
+      loginBurnPulse,
+      clearLoginBurnPulse,
+      refreshStreaks,
+      login,
+      register,
+      logout,
+      clearError,
+      runAuthAction,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

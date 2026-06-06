@@ -1,11 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ChevronDown, Flag, Pencil, Search } from 'lucide-react';
 import { questionsApi } from '../../api/client';
 import { SectionHeader } from '../ui/SectionHeader';
 import { getUiConfig } from '../../lib/examQuestionParser';
 import { isDragDropType } from '../../lib/questionUiTypes';
 import { formatQuizCorrect } from '../../lib/quizUtils';
-import { apiQuestionToLocal } from '../../lib/questionUtils';
+import { apiQuestionToLocal, getQuestionExternalId } from '../../lib/questionUtils';
+import { ExplanationText } from '../shared/ExplanationText';
 import { QuestionText } from '../shared/QuestionText';
 import { QuestionInlineEdit } from './QuestionInlineEdit';
 import { QuestionTypesAdmin } from '../admin/QuestionTypesAdmin';
@@ -17,17 +19,52 @@ import { formatQuizDomainLabel, isInQuizPool } from '../../lib/quizDomains';
 
 const PAGE_SIZE = 20;
 
+function readInitialLibraryPage(searchParams) {
+  const page = Number(searchParams.get('page'));
+  return Number.isFinite(page) && page > 0 ? page : 1;
+}
+
+function findQuestionIndexByExternalId(questions, externalId) {
+  return questions.findIndex((question, index) => getQuestionExternalId(question, index) === externalId);
+}
+
 export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin }) {
-  const { questionsSource, questionsLoading } = useCertContext();
+  const { questionsSource, questionsLoading, reloadCertQuestions } = useCertContext();
   const { domainLabelMap } = useCertTaxonomy(cert.id);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState('all');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(() => readInitialLibraryPage(searchParams));
   const [expanded, setExpanded] = useState(() => new Set());
   const [editingIndex, setEditingIndex] = useState(null);
   const [apiPage, setApiPage] = useState(null);
   const [apiPageLoading, setApiPageLoading] = useState(false);
+  const [editRestored, setEditRestored] = useState(false);
+  const skipFilterPageResetRef = useRef(true);
   const { types } = useQuestionTypes();
   const { questions } = cert;
+
+  const updateLibraryParams = useCallback(
+    (updates) => {
+      setSearchParams(
+        (current) => {
+          const next = new URLSearchParams(current);
+          if (updates.editQuestionId != null) {
+            next.set('edit', String(updates.editQuestionId));
+          } else if ('editQuestionId' in updates) {
+            next.delete('edit');
+          }
+          if (updates.page != null && updates.page > 1) {
+            next.set('page', String(updates.page));
+          } else if ('page' in updates) {
+            next.delete('page');
+          }
+          return next;
+        },
+        { replace: true },
+      );
+    },
+    [setSearchParams],
+  );
 
   const useApiPagination = questionsSource === 'api' && filter === 'all' && !search.trim();
 
@@ -70,7 +107,88 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
 
   useEffect(() => {
     setPage(1);
-  }, [filter, search, cert.id]);
+    setEditingIndex(null);
+    setEditRestored(false);
+    updateLibraryParams({ editQuestionId: null, page: 1 });
+  }, [cert.id, updateLibraryParams]);
+
+  useEffect(() => {
+    if (skipFilterPageResetRef.current) {
+      skipFilterPageResetRef.current = false;
+      return;
+    }
+    setPage(1);
+    setEditingIndex(null);
+    updateLibraryParams({ editQuestionId: null, page: 1 });
+  }, [filter, search, updateLibraryParams]);
+
+  useEffect(() => {
+    if (questionsLoading || editRestored || !isAdmin) return;
+
+    const editQuestionId = Number(searchParams.get('edit'));
+    if (!Number.isFinite(editQuestionId)) {
+      setEditRestored(true);
+      return;
+    }
+
+    const index = findQuestionIndexByExternalId(questions, editQuestionId);
+    if (index < 0) {
+      setEditRestored(true);
+      return;
+    }
+
+    const pageFromUrl = readInitialLibraryPage(searchParams);
+    let targetPage = pageFromUrl;
+    if (useApiPagination) {
+      targetPage = pageFromUrl > 1 ? pageFromUrl : Math.floor(index / PAGE_SIZE) + 1;
+    } else {
+      const posInFiltered = filtered.findIndex((question) => question.index === index);
+      if (posInFiltered < 0) {
+        setEditRestored(true);
+        return;
+      }
+      targetPage = pageFromUrl > 1 ? pageFromUrl : Math.floor(posInFiltered / PAGE_SIZE) + 1;
+    }
+
+    if (page !== targetPage) {
+      setPage(targetPage);
+      return;
+    }
+
+    if (useApiPagination && (apiPageLoading || apiPage?.page !== targetPage)) {
+      return;
+    }
+
+    setEditingIndex(index);
+    setExpanded((current) => new Set(current).add(index));
+    setEditRestored(true);
+
+    const scrollTimer = window.setTimeout(() => {
+      document.getElementById(`question-edit-${index}`)?.scrollIntoView({ block: 'nearest' });
+    }, 150);
+    return () => window.clearTimeout(scrollTimer);
+  }, [
+    questionsLoading,
+    editRestored,
+    isAdmin,
+    searchParams,
+    questions,
+    filtered,
+    useApiPagination,
+    page,
+    apiPageLoading,
+    apiPage,
+  ]);
+
+  useEffect(() => {
+    if (editingIndex == null || !isAdmin) return;
+    const question = questions[editingIndex];
+    if (!question) return;
+    updateLibraryParams({
+      editQuestionId: getQuestionExternalId(question, editingIndex),
+      page,
+    });
+  }, [editingIndex, page, isAdmin, questions, updateLibraryParams]);
 
   useEffect(() => {
     if (!useApiPagination) {
@@ -111,11 +229,24 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
   function startEdit(question) {
     setEditingIndex(question.index);
     setExpanded((current) => new Set(current).add(question.index));
+    updateLibraryParams({
+      editQuestionId: getQuestionExternalId(question, question.index),
+      page,
+    });
   }
 
   function cancelEdit() {
     setEditingIndex(null);
+    updateLibraryParams({ editQuestionId: null, page });
   }
+
+  const refreshLibraryQuestions = useCallback(async () => {
+    await reloadCertQuestions(cert.id);
+    if (useApiPagination) {
+      const data = await questionsApi.list(cert.id, { auth: false, page, pageSize: PAGE_SIZE });
+      setApiPage(data);
+    }
+  }, [reloadCertQuestions, cert.id, useApiPagination, page]);
 
   return (
     <section className="library-page space-y-4">
@@ -177,7 +308,11 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
           const correctLabels = (question.correct ?? []).map((item) => String.fromCharCode(65 + item)).join(', ');
           const dragDropAnswerSummary = isDragDrop ? formatQuizCorrect({ ...question, uiConfig }) : '';
           return (
-            <article className="question-row" key={question.index}>
+            <article
+              className="question-row"
+              key={question.index}
+              id={isEditing ? `question-edit-${question.index}` : undefined}
+            >
               <div className="mb-3 flex items-start justify-between gap-3">
                 <div className="flex min-w-0 flex-1 gap-3">
                   <span className="question-number">{question.index + 1}</span>
@@ -256,9 +391,9 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                   )}
                   <QuestionStructuredView question={question} readOnly answerOnly />
                   {question.explanation && (
-                    <p className="rounded-xl border border-line/70 bg-subtle/50 px-3 py-2 text-xs leading-6 text-muted dark:border-gh-border dark:bg-gh-subtle/50 dark:text-slate-400">
-                      {question.explanation.slice(0, 800)}
-                    </p>
+                    <div className="rounded-xl border border-line/70 bg-subtle/50 px-3 py-2 text-xs text-muted dark:border-gh-border dark:bg-gh-subtle/50 dark:text-slate-400">
+                      <ExplanationText>{question.explanation}</ExplanationText>
+                    </div>
                   )}
                 </div>
               )}
@@ -273,6 +408,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                   question={question}
                   index={question.index}
                   onCancel={cancelEdit}
+                  onRefresh={refreshLibraryQuestions}
                 />
               )}
               {isOpen && !isEditing && question.choices?.length > 0 && !isDragDrop && (
@@ -302,9 +438,9 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                     </p>
                   )}
                   {question.explanation && (
-                    <p className="rounded-xl border border-line/70 bg-subtle/50 px-3 py-2 text-xs leading-6 text-muted dark:border-gh-border dark:bg-gh-subtle/50 dark:text-slate-400">
-                      {question.explanation.slice(0, 800)}
-                    </p>
+                    <div className="rounded-xl border border-line/70 bg-subtle/50 px-3 py-2 text-xs text-muted dark:border-gh-border dark:bg-gh-subtle/50 dark:text-slate-400">
+                      <ExplanationText>{question.explanation}</ExplanationText>
+                    </div>
                   )}
                 </div>
               )}

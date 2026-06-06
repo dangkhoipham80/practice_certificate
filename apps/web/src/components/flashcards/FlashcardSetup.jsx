@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Flag, Play } from 'lucide-react';
+import { useExamSections } from '../../hooks/useExamSections';
+import { getSectionBadgeLabel } from '../../lib/examSections';
 import { SectionHeader } from '../ui/SectionHeader';
 
 export function FlashcardSetup({ cert, launchFlash, flagged, weak, fcKnown, fcUnknown }) {
-  const { partSizes } = cert;
-  const sectionPrefix = cert.id.startsWith('ai-') ? 'T' : 'P';
-  const [parts, setParts] = useState(() => partSizes.map((_, index) => index));
+  const { sections } = useExamSections(cert);
+  const [parts, setParts] = useState(() => sections.map((_, index) => index));
   const [source, setSource] = useState('all');
   const [order, setOrder] = useState('random');
   const [count, setCount] = useState(0);
@@ -25,9 +26,14 @@ export function FlashcardSetup({ cert, launchFlash, flagged, weak, fcKnown, fcUn
         <div>
           <p className="mb-2 text-xs font-bold uppercase text-muted">Sections</p>
           <div className="flex flex-wrap gap-2">
-            {partSizes.map((size, index) => (
-              <button key={index} type="button" className={`filter-chip ${parts.includes(index) ? 'filter-chip-active' : ''}`} onClick={() => togglePart(index)}>
-                {sectionPrefix}{String(index + 1).padStart(2, '0')} ({size})
+            {sections.map((section, index) => (
+              <button
+                key={section.key}
+                type="button"
+                className={`filter-chip ${parts.includes(index) ? 'filter-chip-active' : ''}`}
+                onClick={() => togglePart(index)}
+              >
+                {getSectionBadgeLabel(cert, index)} ({section.questionIndices.length})
               </button>
             ))}
           </div>
@@ -39,7 +45,7 @@ export function FlashcardSetup({ cert, launchFlash, flagged, weak, fcKnown, fcUn
               {[
                 ['all', 'All'],
                 ['weak', 'Weak only'],
-                ['unknown', 'Previously unknown']
+                ['unknown', 'Previously unknown'],
               ].map(([id, label]) => (
                 <button key={id} type="button" className={`filter-chip ${source === id ? 'filter-chip-active' : ''}`} onClick={() => setSource(id)}>
                   {label}
@@ -52,7 +58,7 @@ export function FlashcardSetup({ cert, launchFlash, flagged, weak, fcKnown, fcUn
             <div className="flex flex-wrap gap-2">
               {[
                 ['random', 'Random'],
-                ['seq', 'Sequential']
+                ['seq', 'Sequential'],
               ].map(([id, label]) => (
                 <button key={id} type="button" className={`filter-chip ${order === id ? 'filter-chip-active' : ''}`} onClick={() => setOrder(id)}>
                   {label}

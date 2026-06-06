@@ -10,6 +10,7 @@
 @import './modal.css';
 @import './learn.css';
 @import './auth.css';
+@import './streak.css';
 
 @tailwind base;
 @tailwind components;

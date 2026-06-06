@@ -1,11 +1,13 @@
 import { X } from 'lucide-react';
+import { getSectionBadgeLabel } from '../../lib/examSections';
 import { computePartStats } from '../../lib/statsUtils';
 
-export function PartDetailPanel({ cert, partIndex, partProgress, onClose }) {
+export function PartDetailPanel({ cert, sections, partIndex, partProgress, onClose }) {
   if (partIndex === null) return null;
-  const { partTitles, partSizes } = cert;
-  const sectionLabel = cert.id.startsWith('ai-') ? 'Topic' : 'Part';
-  const stats = computePartStats(partIndex, partProgress, partSizes);
+  const section = sections[partIndex];
+  if (!section) return null;
+  const sectionLabel = cert.id === 'ai-102' ? 'Domain' : cert.id.startsWith('ai-') ? 'Topic' : 'Part';
+  const stats = computePartStats(partIndex, partProgress, sections);
   const rows = partProgress[partIndex];
 
   return (
@@ -14,7 +16,7 @@ export function PartDetailPanel({ cert, partIndex, partProgress, onClose }) {
         <div>
           <p className="section-kicker">{sectionLabel} detail</p>
           <h3 className="text-lg font-extrabold">
-            {sectionLabel} {String(partIndex + 1).padStart(2, '0')} — {partTitles[partIndex]}
+            {getSectionBadgeLabel(cert, partIndex)} — {section.title}
           </h3>
         </div>
         <button className="icon-button" onClick={onClose} type="button" aria-label="Close part detail">

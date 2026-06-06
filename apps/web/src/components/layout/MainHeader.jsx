@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { LogIn, LogOut, Moon, Search, Sun } from 'lucide-react';
 import { pathFromRouteId } from '../../config/routes';
 import { RoleBadge } from '../auth/AuthPage';
+import { BurnStreakBadge } from '../streak/BurnStreakBadge';
 
 export function MainHeader({
   pageTitle,
@@ -10,6 +11,7 @@ export function MainHeader({
   persistTheme,
   user,
   authLoading,
+  burnStreak,
   onLogout,
 }) {
   const libraryPath = pathFromRouteId('library', cert.id);
@@ -37,6 +39,9 @@ export function MainHeader({
           <kbd>/</kbd>
         </NavLink>
         <div className="flex items-center gap-2">
+          {!authLoading && user && (
+            <BurnStreakBadge streak={burnStreak ?? 0} compact className="sm:order-none" />
+          )}
           {!authLoading &&
             (user ? (
               <div className="hidden items-center gap-2 sm:flex">

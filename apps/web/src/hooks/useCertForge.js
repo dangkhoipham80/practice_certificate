@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppNavigation } from './useAppNavigation';
 import { useCertContext } from '../context/CertContext';
+import { useAuth } from '../context/AuthContext';
+import { useExamSections } from './useExamSections';
+import { progressApi } from '../api/client';
+import { computeDayStreak } from '../lib/statsUtils';
 import { getQuizQuestions } from '../config/certRegistry';
 import { readJson, removeKey, writeJson } from '../lib/storage';
 import { getDragDropCorrectFilled, isDragDropQuizReady } from '../lib/dragDropUiFormat';
@@ -31,8 +35,10 @@ function loadCertState(storageKeys) {
 export function useCertForge() {
   const { route, navigateTo, certId } = useAppNavigation();
   const { activeCert, activeCertId } = useCertContext();
+  const { isAuthenticated, refreshStreaks } = useAuth();
   const cert = activeCert;
-  const { questions, partSizes, partStarts, storageKeys } = cert;
+  const { questions, storageKeys } = cert;
+  const { sections } = useExamSections(cert);
   const quizQuestions = useMemo(() => getQuizQuestions(cert), [cert]);
   const quizQuestionIndices = useMemo(
     () =>
@@ -58,6 +64,7 @@ export function useCertForge() {
   const [search, setSearch] = useState('');
   const [saveHint, setSaveHint] = useState('');
   const [pendingStart, setPendingStart] = useState(null);
+  const [serverStreak, setServerStreak] = useState(null);
 
   useEffect(() => {
     const next = loadCertState(storageKeys);
@@ -69,7 +76,34 @@ export function useCertForge() {
     setFlash(null);
     setPendingStart(null);
     setSaveHint('');
+    setServerStreak(null);
   }, [activeCertId]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setServerStreak(null);
+      return undefined;
+    }
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const [historyRes, streakRes] = await Promise.all([
+          progressApi.getHistory(cert.id),
+          progressApi.getStreak(cert.id),
+        ]);
+        if (cancelled) return;
+        saveHistory(historyRes.history ?? []);
+        setServerStreak(streakRes.streak ?? 0);
+      } catch {
+        if (!cancelled) setServerStreak(null);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isAuthenticated, cert.id]);
 
   const hasSavedQuiz = useMemo(
     () => !!getInProgressQuiz(session, storageKeys.savedQuiz),
@@ -83,6 +117,11 @@ export function useCertForge() {
     const best = history.reduce((top, row) => Math.max(top, row.score), 0);
     return { attempts, avg, answered, best };
   }, [history]);
+
+  const dayStreak = useMemo(() => {
+    if (isAuthenticated && serverStreak != null) return serverStreak;
+    return computeDayStreak(history);
+  }, [isAuthenticated, serverStreak, history]);
 
   function persistTheme(nextDark) {
     setDark(nextDark);
@@ -106,13 +145,14 @@ export function useCertForge() {
 
   function createPool(mode, partIndex = null) {
     if (partIndex !== null) {
-      const start = partStarts[partIndex];
-      return Array.from({ length: partSizes[partIndex] }, (_, index) => start + index).filter((index) => quizIndexSet.has(index));
+      const section = sections[partIndex];
+      if (!section) return [];
+      return section.questionIndices.filter((index) => quizIndexSet.has(index));
     }
     if (mode === 'flagged') return flagged.filter((index) => quizIndexSet.has(index));
     if (mode === 'weak') return Object.keys(weak).map(Number).filter((index) => quizIndexSet.has(index));
-    if (mode === 'wrong') return getWrongIndices(partProgress, partSizes, partStarts).filter((index) => quizIndexSet.has(index));
-    if (mode === 'unanswered') return getUnansweredIndices(partProgress, partSizes, partStarts).filter((index) => quizIndexSet.has(index));
+    if (mode === 'wrong') return getWrongIndices(partProgress, sections).filter((index) => quizIndexSet.has(index));
+    if (mode === 'unanswered') return getUnansweredIndices(partProgress, sections).filter((index) => quizIndexSet.has(index));
     if (mode === 'multi') return [...quizIndexSet].filter((index) => questions[index].multiple);
     return [...quizIndexSet];
   }
@@ -289,18 +329,34 @@ export function useCertForge() {
       if (ok) correct += 1;
       else wrongSlots.push(slot);
     });
-    savePartProgress(updatePartProgressFromSession(partProgress, session, questions, partStarts, partSizes));
-    saveHistory([
-      ...history,
-      {
-        id: crypto.randomUUID(),
-        label: session.label,
-        total: session.indices.length,
-        correct,
-        score: percent(correct, session.indices.length),
-        date: new Date().toISOString()
-      }
-    ].slice(-80));
+    savePartProgress(updatePartProgressFromSession(partProgress, session, questions, sections));
+    const entry = {
+      id: crypto.randomUUID(),
+      label: session.label,
+      total: session.indices.length,
+      correct,
+      score: percent(correct, session.indices.length),
+      date: new Date().toISOString(),
+    };
+    saveHistory([...history, entry].slice(-80));
+    if (isAuthenticated) {
+      progressApi
+        .recordSession({
+          certId: cert.id,
+          mode: session.mode ?? 'practice',
+          label: entry.label,
+          total: entry.total,
+          correct: entry.correct,
+          score: entry.score,
+          clientId: entry.id,
+          completedAt: entry.date,
+        })
+        .then((res) => {
+          setServerStreak(res.streak ?? 0);
+          refreshStreaks();
+        })
+        .catch(() => {});
+    }
     removeKey(storageKeys.savedQuiz);
     setSaveHint('');
     setSession({ ...session, finished: true, wrongSlots });
@@ -384,12 +440,11 @@ export function useCertForge() {
     saveFlagged(next);
   }
 
-  function launchFlash({ mode = 'all', count = 0, parts = partSizes.map((_, index) => index), source = 'all', order = 'random', label } = {}) {
+  function launchFlash({ mode = 'all', count = 0, parts = sections.map((_, index) => index), source = 'all', order = 'random', label } = {}) {
     const fcUnknown = readJson(storageKeys.fcUnknown, []);
     let pool = [];
-    parts.forEach((partIndex) => {
-      const start = partStarts[partIndex];
-      for (let i = 0; i < partSizes[partIndex]; i += 1) pool.push(start + i);
+    parts.forEach((sectionIndex) => {
+      pool.push(...sections[sectionIndex].questionIndices);
     });
     pool = pool.filter((index) => quizIndexSet.has(index));
 
@@ -511,6 +566,7 @@ export function useCertForge() {
     setPendingStart,
     hasSavedQuiz,
     stats,
+    dayStreak,
     currentQuestion,
     pageTitle,
     requestStartQuiz,

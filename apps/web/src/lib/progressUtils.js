@@ -1,49 +1,49 @@
+import { getSectionIndexForQuestion } from './examSections';
 import { sameAnswer } from './quizUtils';
 
-export function getPartIndex(questionIndex, partStarts) {
-  for (let part = partStarts.length - 1; part >= 0; part -= 1) {
-    if (questionIndex >= partStarts[part]) return part;
-  }
-  return 0;
+export function getPartIndex(questionIndex, sections) {
+  return getSectionIndexForQuestion(questionIndex, sections)?.sectionIndex ?? 0;
 }
 
-export function getWrongIndices(partProgress, partSizes, partStarts) {
+export function getWrongIndices(partProgress, sections) {
   const wrong = [];
-  partSizes.forEach((size, partIndex) => {
-    const rows = partProgress[partIndex];
+  sections.forEach((section, sectionIndex) => {
+    const rows = partProgress[sectionIndex];
     if (!rows) return;
     rows.forEach((value, localIndex) => {
-      if (value === 'wrong') wrong.push(partStarts[partIndex] + localIndex);
+      if (value === 'wrong') wrong.push(section.questionIndices[localIndex]);
     });
   });
   return wrong;
 }
 
-export function getUnansweredIndices(partProgress, partSizes, partStarts) {
+export function getUnansweredIndices(partProgress, sections) {
   const unanswered = [];
-  partSizes.forEach((size, partIndex) => {
-    const rows = partProgress[partIndex];
+  sections.forEach((section, sectionIndex) => {
+    const rows = partProgress[sectionIndex];
     if (!rows) {
-      for (let i = 0; i < size; i += 1) unanswered.push(partStarts[partIndex] + i);
+      unanswered.push(...section.questionIndices);
       return;
     }
     rows.forEach((value, localIndex) => {
-      if (value === null || value === undefined) unanswered.push(partStarts[partIndex] + localIndex);
+      if (value === null || value === undefined) unanswered.push(section.questionIndices[localIndex]);
     });
   });
   return unanswered;
 }
 
-export function updatePartProgressFromSession(partProgress, session, questions, partStarts, partSizes) {
+export function updatePartProgressFromSession(partProgress, session, questions, sections) {
   const next = { ...partProgress };
   session.indices.forEach((questionIndex, slot) => {
     if (!session.answers[slot].length) return;
-    const partIndex = getPartIndex(questionIndex, partStarts);
-    const localIndex = questionIndex - partStarts[partIndex];
-    if (!next[partIndex]) next[partIndex] = new Array(partSizes[partIndex]).fill(null);
+    const mapping = getSectionIndexForQuestion(questionIndex, sections);
+    if (!mapping) return;
+    const { sectionIndex, localIndex } = mapping;
+    const size = sections[sectionIndex].questionIndices.length;
+    if (!next[sectionIndex]) next[sectionIndex] = new Array(size).fill(null);
     const ok = sameAnswer(session.answers[slot], questions[questionIndex].correct);
-    next[partIndex] = [...next[partIndex]];
-    next[partIndex][localIndex] = ok ? 'correct' : 'wrong';
+    next[sectionIndex] = [...next[sectionIndex]];
+    next[sectionIndex][localIndex] = ok ? 'correct' : 'wrong';
   });
   return next;
 }

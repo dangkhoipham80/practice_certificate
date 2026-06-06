@@ -5,6 +5,7 @@ import { getQuizQuestions } from '../../config/certRegistry';
 import { pathFromRouteId } from '../../config/routes';
 import { getDomainLabel } from '../../utils/ai102DomainClassifier';
 import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
+import { useExamSections } from '../../hooks/useExamSections';
 import {
   QUIZ_DOMAIN_NONE,
   QUIZ_DOMAIN_NONE_LABEL,
@@ -29,6 +30,7 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
   const domainFilter = searchParams.get('domain');
   const quizCount = getQuizQuestions(cert).length;
   const sectionLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
+  const { sections } = useExamSections(cert);
   const { domains, domainLabelMap } = useCertTaxonomy(cert.id);
 
   const domainQuizCount = useMemo(() => {
@@ -203,7 +205,7 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
       </div>
       <div>
         <SectionHeader kicker={`Exam ${sectionLabel}`} title="Focused practice" description="Sequential section runs — progress tracked per question." />
-        <PartGrid cert={cert} startQuiz={startQuiz} partProgress={partProgress} />
+        <PartGrid cert={cert} sections={sections} startQuiz={startQuiz} partProgress={partProgress} />
       </div>
     </section>
   );

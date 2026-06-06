@@ -1,9 +1,10 @@
 import { BarChart3, CalendarDays, ClipboardList, Flame, Target } from 'lucide-react';
 import { computeDayStreak } from '../../lib/statsUtils';
+import { BurnStreakBadge } from '../streak/BurnStreakBadge';
 import { SectionHeader } from '../ui/SectionHeader';
 
-export function StatisticsDashboard({ history, stats, cert }) {
-  const streak = computeDayStreak(history);
+export function StatisticsDashboard({ history, stats, cert, streak: streakOverride }) {
+  const streak = streakOverride ?? computeDayStreak(history);
   const recent = history.slice(-10);
   const trend = recent.length ? recent : [];
 
@@ -14,7 +15,14 @@ export function StatisticsDashboard({ history, stats, cert }) {
       <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatTile label="Quizzes taken" value={stats.attempts} tone="accent" icon={ClipboardList} />
         <StatTile label="Avg score" value={`${stats.avg}%`} tone="success" icon={Target} />
-        <StatTile label="Day streak" value={streak} tone="purple" icon={Flame} />
+        {streak > 0 ? (
+          <div className="stat-tile stat-tile-purple flex flex-col items-center justify-center gap-2 ring-1 ring-orange-300/60 dark:ring-orange-500/30">
+            <BurnStreakBadge streak={streak} />
+            <div className="text-[10px] font-semibold opacity-80">Day streak</div>
+          </div>
+        ) : (
+          <StatTile label="Day streak" value={streak} tone="purple" icon={Flame} />
+        )}
         <StatTile label="Questions answered" value={stats.answered} tone="warning" icon={BarChart3} />
       </div>
 

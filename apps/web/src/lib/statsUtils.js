@@ -10,9 +10,9 @@ export function computeDayStreak(history) {
   return streak;
 }
 
-export function computePartStats(partIndex, partProgress, partSizes) {
-  const size = partSizes[partIndex];
-  const rows = partProgress[partIndex];
+export function computePartStats(sectionIndex, partProgress, sections) {
+  const size = sections[sectionIndex]?.questionIndices.length ?? 0;
+  const rows = partProgress[sectionIndex];
   if (!rows) {
     return { size, correct: 0, wrong: 0, unanswered: size, attempted: 0, pct: 0, hasProgress: false };
   }
@@ -27,15 +27,15 @@ export function computePartStats(partIndex, partProgress, partSizes) {
     unanswered,
     attempted,
     pct: size ? Math.round((correct / size) * 100) : 0,
-    hasProgress: true
+    hasProgress: true,
   };
 }
 
-export function computeBankProgress(partProgress, partSizes, totalQuestions) {
+export function computeBankProgress(partProgress, sections, totalQuestions) {
   let correct = 0;
   let wrong = 0;
-  partSizes.forEach((size, partIndex) => {
-    const rows = partProgress[partIndex];
+  sections.forEach((section, sectionIndex) => {
+    const rows = partProgress[sectionIndex];
     if (!rows) return;
     rows.forEach((value) => {
       if (value === 'correct') correct += 1;
@@ -49,6 +49,6 @@ export function computeBankProgress(partProgress, partSizes, totalQuestions) {
   return { total: totalQuestions, correct, wrong, attempted, unanswered, pct, masteryPct };
 }
 
-export function getQuestionGlobalIndex(partIndex, localIndex, partStarts) {
-  return partStarts[partIndex] + localIndex;
+export function getQuestionGlobalIndex(sectionIndex, localIndex, sections) {
+  return sections[sectionIndex].questionIndices[localIndex];
 }

@@ -9,6 +9,7 @@ import { AuthPage, RoleBadge } from './components/auth/AuthPage';
 import { isCertReady } from './config/certRegistry';
 import { Sidebar } from './components/layout/Sidebar';
 import { MainHeader } from './components/layout/MainHeader';
+import { LoginBurnToast } from './components/streak/LoginBurnToast';
 import { ResumeQuizDialog } from './components/layout/ResumeQuizDialog';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { Home } from './components/home/Home';
@@ -36,6 +37,7 @@ function CertWorkspace({ app }) {
       quizQuestions={app.quizQuestions}
       stats={app.stats}
       history={app.history}
+      streak={app.dayStreak}
       flagged={app.flagged}
       weak={app.weak}
       partProgress={app.partProgress}
@@ -80,8 +82,17 @@ function AppShell() {
             persistTheme={app.persistTheme}
             user={auth.user}
             authLoading={auth.loading}
+            burnStreak={auth.burnStreak}
             onLogout={auth.logout}
           />
+
+          {auth.loginBurnPulse && auth.user && (
+            <LoginBurnToast
+              streaks={auth.streaks}
+              burnStreak={auth.burnStreak}
+              onDismiss={auth.clearLoginBurnPulse}
+            />
+          )}
 
           <div className="page-content">
             <Routes>

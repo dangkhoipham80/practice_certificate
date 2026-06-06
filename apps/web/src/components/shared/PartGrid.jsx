@@ -1,14 +1,15 @@
 import { ArrowRight } from 'lucide-react';
+import { getSectionBadgeLabel } from '../../lib/examSections';
 import { computePartStats } from '../../lib/statsUtils';
 
-export function PartGrid({ cert, startQuiz, partProgress = {}, compact = false, onShowDetail }) {
-  const { partSizes, partTitles } = cert;
+export function PartGrid({ cert, sections, startQuiz, partProgress = {}, compact = false, onShowDetail }) {
   const sectionLabel = cert.id === 'ai-102' ? 'Domain' : cert.id.startsWith('ai-') ? 'Topic' : 'Part';
 
   return (
     <div className={compact ? 'panel divide-y divide-line overflow-hidden dark:divide-gh-border' : 'grid gap-3 md:grid-cols-2 xl:grid-cols-4'}>
-      {partSizes.map((size, index) => {
-        const stats = computePartStats(index, partProgress, partSizes);
+      {sections.map((section, index) => {
+        const size = section.questionIndices.length;
+        const stats = computePartStats(index, partProgress, sections);
         const isEmpty = size === 0;
         const countText = isEmpty
           ? 'No questions in current bank'
@@ -16,7 +17,7 @@ export function PartGrid({ cert, startQuiz, partProgress = {}, compact = false, 
         return (
           <div
             className={compact ? '' : `panel group overflow-hidden p-0 transition ${isEmpty ? 'opacity-60' : 'hover:-translate-y-0.5 hover:border-accent-300 hover:shadow-soft dark:hover:border-accent-500/60'}`}
-            key={`${partTitles[index]}-${index}`}
+            key={section.key}
           >
             <button
               className={compact ? `part-row w-full ${isEmpty ? 'cursor-not-allowed' : ''}` : `w-full p-4 text-left ${isEmpty ? 'cursor-not-allowed' : ''}`}
@@ -26,7 +27,7 @@ export function PartGrid({ cert, startQuiz, partProgress = {}, compact = false, 
                   partIndex: index,
                   count: 'all',
                   label: `${sectionLabel} ${String(index + 1).padStart(2, '0')} · ${size}`,
-                  shufflePool: false
+                  shufflePool: false,
                 })
               }
             >
@@ -34,7 +35,7 @@ export function PartGrid({ cert, startQuiz, partProgress = {}, compact = false, 
                 <>
                   <span className="part-number">{index + 1}</span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate font-bold">{partTitles[index]}</span>
+                    <span className="block truncate font-bold">{section.title}</span>
                     <span className="text-xs text-muted dark:text-slate-400">
                       {countText}
                     </span>
@@ -52,12 +53,14 @@ export function PartGrid({ cert, startQuiz, partProgress = {}, compact = false, 
               ) : (
                 <>
                   <div className="mb-3 flex items-center justify-between">
-                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted dark:text-slate-400">{sectionLabel} {index + 1}</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted dark:text-slate-400">
+                      {getSectionBadgeLabel(cert, index)}
+                    </p>
                     <span className="rounded-md bg-subtle px-2 py-1 text-xs font-semibold text-muted dark:bg-gh-subtle dark:text-slate-400">
                       {stats.hasProgress ? `${stats.pct}%` : size}
                     </span>
                   </div>
-                  <h3 className="font-bold group-hover:text-accent-600 dark:group-hover:text-accent-300">{partTitles[index]}</h3>
+                  <h3 className="font-bold group-hover:text-accent-600 dark:group-hover:text-accent-300">{section.title}</h3>
                   <p className="mt-2 text-sm text-muted dark:text-slate-400">{isEmpty ? 'No questions in current bank' : `${size} questions`}</p>
                   {stats.hasProgress && (
                     <div className="progress-bar mt-3 h-1.5">

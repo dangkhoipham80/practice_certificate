@@ -12,6 +12,7 @@ import {
   Search,
   Sparkles
 } from 'lucide-react';
+import { useExamSections } from '../../hooks/useExamSections';
 import { computeBankProgress } from '../../lib/statsUtils';
 import { getUnansweredIndices, getWrongIndices } from '../../lib/progressUtils';
 import { ActionButton } from '../ui/ActionButton';
@@ -26,6 +27,7 @@ export function Dashboard({
   quizQuestions,
   stats,
   history,
+  streak,
   flagged,
   weak,
   partProgress,
@@ -35,10 +37,11 @@ export function Dashboard({
   onNavigate
 }) {
   const [detailPart, setDetailPart] = useState(null);
+  const { sections } = useExamSections(cert);
   const weakCount = Object.keys(weak).length;
-  const wrongCount = getWrongIndices(partProgress, cert.partSizes, cert.partStarts).length;
-  const newCount = getUnansweredIndices(partProgress, cert.partSizes, cert.partStarts).length;
-  const bank = computeBankProgress(partProgress, cert.partSizes, cert.questions.length);
+  const wrongCount = getWrongIndices(partProgress, sections).length;
+  const newCount = getUnansweredIndices(partProgress, sections).length;
+  const bank = computeBankProgress(partProgress, sections, cert.questions.length);
   const partLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
 
   return (
@@ -108,7 +111,7 @@ export function Dashboard({
 
       <div className="panel p-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
-          <SectionHeader kicker="Question bank" title="Overall completion" description={`Per-question progress across all ${cert.partTitles.length} exam ${partLabel}.`} />
+          <SectionHeader kicker="Question bank" title="Overall completion" description={`Per-question progress across all ${sections.length} exam ${partLabel}.`} />
           <span className="text-2xl font-extrabold tabular-nums text-accent-600 dark:text-accent-300">{bank.masteryPct}%</span>
         </div>
         <div className="progress-bar h-2.5">
@@ -122,7 +125,7 @@ export function Dashboard({
         </div>
       </div>
 
-      <StatisticsDashboard history={history} stats={stats} cert={cert} />
+      <StatisticsDashboard history={history} stats={stats} cert={cert} streak={streak} />
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <Metric label="Best score" value={`${stats.best}%`} icon={Sparkles} variant="success" />
@@ -134,11 +137,11 @@ export function Dashboard({
       <div>
         <SectionHeader kicker={`Exam ${partLabel}`} title={`Practice by ${partLabel.slice(0, -1)}`} description="Progress bar per section — open details to see each question status." />
         <div className="mt-4">
-          <PartGrid cert={cert} startQuiz={startQuiz} partProgress={partProgress} onShowDetail={setDetailPart} />
+          <PartGrid cert={cert} sections={sections} startQuiz={startQuiz} partProgress={partProgress} onShowDetail={setDetailPart} />
         </div>
         {detailPart !== null && (
           <div className="mt-4">
-            <PartDetailPanel cert={cert} partIndex={detailPart} partProgress={partProgress} onClose={() => setDetailPart(null)} />
+            <PartDetailPanel cert={cert} sections={sections} partIndex={detailPart} partProgress={partProgress} onClose={() => setDetailPart(null)} />
           </div>
         )}
       </div>
