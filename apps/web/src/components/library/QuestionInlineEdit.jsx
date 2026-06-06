@@ -340,7 +340,7 @@ export function QuestionInlineEdit({
 
   return (
     <form
-      className="mt-4 w-full space-y-4 rounded-2xl border border-accent-200/80 bg-accent-50/40 p-4 dark:border-accent-500/30 dark:bg-accent-500/5 sm:p-5"
+      className="mt-4 w-full min-w-0 max-w-full space-y-4 rounded-2xl border border-accent-200/80 bg-accent-50/40 p-4 dark:border-accent-500/30 dark:bg-accent-500/5 sm:p-5"
       onSubmit={handleSave}
     >
       {questionsSource !== 'api' && (
@@ -396,7 +396,7 @@ export function QuestionInlineEdit({
 
       {isDragDrop && (
         <>
-          <div className="w-full">
+          <div className="w-full min-w-0 max-w-full overflow-x-auto">
             <DragDropQuestion
               uiConfig={normalizeDragDropUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
               readOnly={false}
@@ -413,7 +413,7 @@ export function QuestionInlineEdit({
 
       {isHotArea && (
         <>
-          <div className="w-full">
+          <div className="w-full min-w-0 max-w-full overflow-x-auto">
             <HotAreaQuestion
               uiConfig={normalizeHotAreaUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
               readOnly={false}
@@ -623,7 +623,7 @@ export function QuestionInlineEdit({
           onChange={(e) => setDraft((d) => ({ ...d, explanation: e.target.value }))}
         />
         {draft.explanation.trim() && (
-          <div className="mt-3 rounded-xl border border-line/70 bg-white/80 p-3 dark:border-gh-border dark:bg-gh-subtle/60">
+          <div className="mt-3 min-w-0 max-w-full overflow-x-auto rounded-xl border border-line/70 bg-white/80 p-3 dark:border-gh-border dark:bg-gh-subtle/60">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted dark:text-slate-400">
               Preview
             </p>

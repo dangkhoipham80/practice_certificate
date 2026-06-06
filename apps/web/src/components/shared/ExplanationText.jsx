@@ -98,7 +98,7 @@ const markdownComponents = {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="font-medium text-accent-600 underline decoration-accent-400/50 underline-offset-2 hover:text-accent-700 dark:text-accent-300 dark:hover:text-accent-200"
+      className="break-all font-medium text-accent-600 underline decoration-accent-400/50 underline-offset-2 hover:text-accent-700 dark:text-accent-300 dark:hover:text-accent-200"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -125,7 +125,7 @@ export function ExplanationText({ children, className = '' }) {
   if (!markdown.trim()) return null;
 
   return (
-    <div className={`explanation-markdown space-y-3 ${className}`}>
+    <div className={`explanation-markdown min-w-0 max-w-full space-y-3 break-words ${className}`}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
         {markdown}
       </ReactMarkdown>

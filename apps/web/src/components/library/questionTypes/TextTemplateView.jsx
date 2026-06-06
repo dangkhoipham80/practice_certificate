@@ -35,7 +35,7 @@ function InlineDropTemplateView({ template, zoneById, dropCellProps, staticBlank
     : dropCellProps;
 
   return (
-    <div className="text-answer-area w-full overflow-x-auto overflow-y-visible rounded-md border border-line/50 bg-[#fafafa] dark:border-gh-border dark:bg-gh-subtle">
+    <div className="text-answer-area max-w-full min-w-0 overflow-x-auto overflow-y-visible rounded-md border border-line/50 bg-[#fafafa] dark:border-gh-border dark:bg-gh-subtle">
       <pre className="m-0 min-w-0 p-3 font-mono text-[13px] leading-[1.6] whitespace-pre text-ink dark:text-slate-200">
         <code>
           {lines.map((line, lineIndex) => (

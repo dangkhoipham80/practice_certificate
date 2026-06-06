@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { normalizeHotAreaUiConfig } from '../../../lib/hotAreaUiFormat';
 import {
   isCodeAnswerArea,
@@ -9,51 +9,63 @@ import {
 import { CodeTemplateView } from './CodeTemplateView';
 import { TextTemplateView } from './TextTemplateView';
 
-function longestOptionChars(options = [], value = '') {
+function longestOptionLabel(options = [], value = '') {
   const labels = options.map((opt) => opt.label ?? '').filter(Boolean);
-  return Math.max(value.length, ...labels.map((l) => l.length), 12);
-}
-
-/** Native <select> ignores ch reliably; size from monospace char count + arrow padding. */
-function zoneSelectStyle(value, options = []) {
-  const len = longestOptionChars(options, value ?? '');
-  const px = Math.ceil(len * 8.4 + 36);
-  return { width: `${px}px`, minWidth: `${px}px` };
+  if (value) labels.push(value);
+  return labels.reduce((longest, label) => (label.length > longest.length ? label : longest), '') || '\u00A0';
 }
 
 function DropdownCell({ zone, value, readOnly, isCorrect, onChange }) {
   const options = zone.options ?? [];
   const empty = !value;
+  const measureText = longestOptionLabel(options, value ?? '');
+  const measureRef = useRef(null);
+  const [selectWidth, setSelectWidth] = useState(120);
+
+  useLayoutEffect(() => {
+    const el = measureRef.current;
+    if (!el) return;
+    setSelectWidth(Math.ceil(el.offsetWidth) + 40);
+  }, [measureText]);
 
   return (
-    <select
-      value={value ?? ''}
-      disabled={readOnly}
-      onChange={(e) => onChange?.(e.target.value || null)}
-      style={zoneSelectStyle(value, options)}
-      className={[
-        'hot-area-inline-select mx-0.5 inline-block cursor-pointer rounded-[1px] border bg-white pl-1.5 pr-7 py-0',
-        'font-mono text-[13px] font-normal leading-[1.35rem] text-[#003966]',
-        'align-baseline focus:border-[#0078d4] focus:outline-none focus:ring-1 focus:ring-[#0078d4]',
-        'dark:border-gh-border dark:bg-[#1e1e1e] dark:text-sky-100',
-        empty ? 'border-[#ababab] text-muted dark:text-slate-500' : 'border-[#ababab]',
-        readOnly && isCorrect
-          ? 'border-success-600 bg-success-50 text-success-900 dark:border-success-400 dark:bg-success-500/20 dark:text-success-100'
-          : '',
-        readOnly && !empty && !isCorrect
-          ? 'border-danger-400 bg-danger-50 text-danger-900 dark:border-danger-400/60 dark:bg-danger-500/15 dark:text-danger-100'
-          : '',
-        readOnly ? 'cursor-default opacity-100' : 'hover:border-[#0078d4]',
-      ].join(' ')}
-      aria-label={zone.placeholder ?? zone.id}
-    >
-      <option value="">&nbsp;</option>
-      {options.map((opt) => (
-        <option key={opt.id} value={opt.label}>
-          {opt.label}
-        </option>
-      ))}
-    </select>
+    <span className="relative inline-block align-baseline">
+      <span
+        ref={measureRef}
+        aria-hidden
+        className="pointer-events-none invisible absolute left-0 top-0 whitespace-pre px-1.5 font-mono text-[13px]"
+      >
+        {measureText}
+      </span>
+      <select
+        value={value ?? ''}
+        disabled={readOnly}
+        onChange={(e) => onChange?.(e.target.value || null)}
+        style={{ width: selectWidth, minWidth: selectWidth }}
+        className={[
+          'hot-area-inline-select mx-0.5 inline-block cursor-pointer rounded-[1px] border bg-white pl-1.5 pr-7 py-0',
+          'font-mono text-[13px] font-normal leading-[1.35rem] text-[#003966]',
+          'align-baseline focus:border-[#0078d4] focus:outline-none focus:ring-1 focus:ring-[#0078d4]',
+          'dark:border-gh-border dark:bg-[#1e1e1e] dark:text-sky-100',
+          empty ? 'border-[#ababab] text-muted dark:text-slate-500' : 'border-[#ababab]',
+          readOnly && isCorrect
+            ? 'border-success-600 bg-success-50 text-success-900 dark:border-success-400 dark:bg-success-500/20 dark:text-success-100'
+            : '',
+          readOnly && !empty && !isCorrect
+            ? 'border-danger-400 bg-danger-50 text-danger-900 dark:border-danger-400/60 dark:bg-danger-500/15 dark:text-danger-100'
+            : '',
+          readOnly ? 'cursor-default opacity-100' : 'hover:border-[#0078d4]',
+        ].join(' ')}
+        aria-label={zone.placeholder ?? zone.id}
+      >
+        <option value="">&nbsp;</option>
+        {options.map((opt) => (
+          <option key={opt.id} value={opt.label}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+    </span>
   );
 }
 
@@ -163,7 +175,7 @@ export function HotAreaQuestion({
   };
 
   return (
-    <div className="hot-area-exam w-full space-y-3">
+    <div className="hot-area-exam w-full min-w-0 max-w-full space-y-3">
       {uiConfig.instructions?.length > 0 && (
         <ul className="list-disc space-y-1 pl-5 text-xs text-muted dark:text-slate-400">
           {uiConfig.instructions.map((line) => (
@@ -174,13 +186,13 @@ export function HotAreaQuestion({
 
       <div
         className={[
-          'w-full overflow-visible rounded-lg border bg-[#f3f3f3] dark:bg-gh-subtle',
+          'w-full min-w-0 max-w-full overflow-x-auto rounded-lg border bg-[#f3f3f3] dark:bg-gh-subtle',
           answerOnly
             ? 'border-success-200/80 dark:border-success-500/30'
             : 'border-line/80 dark:border-gh-border',
         ].join(' ')}
       >
-        <div className="w-full bg-white p-4 dark:bg-gh-panel">
+        <div className="min-w-0 bg-white p-4 dark:bg-gh-panel">
           <p className="mb-3 text-sm font-semibold text-ink dark:text-slate-200">
             Answer Area
             {layoutFormat === 'both' && (

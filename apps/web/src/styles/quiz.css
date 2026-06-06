@@ -99,7 +99,7 @@
   }
 
   .question-row {
-    @apply rounded-2xl border border-line/70 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-200 hover:shadow-card dark:border-gh-border/70 dark:bg-gh-panel dark:hover:border-accent-500/40;
+    @apply min-w-0 max-w-full rounded-2xl border border-line/70 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-200 hover:shadow-card dark:border-gh-border/70 dark:bg-gh-panel dark:hover:border-accent-500/40;
   }
 
   .question-number {
@@ -110,12 +110,20 @@
   pre code .hot-area-inline-select,
   .text-answer-area .hot-area-inline-select {
     display: inline-block;
-    max-width: none;
     vertical-align: baseline;
     margin: 0 0.125rem;
     padding-right: 1.75rem;
     background-position: right 0.4rem center;
     background-size: 0.65rem;
+    text-overflow: clip;
     field-sizing: content;
+  }
+
+  .explanation-markdown {
+    @apply min-w-0 max-w-full break-words;
+  }
+
+  .explanation-markdown a {
+    overflow-wrap: anywhere;
   }
 }

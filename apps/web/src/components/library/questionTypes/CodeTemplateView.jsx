@@ -56,8 +56,8 @@ export function CodeTemplateView({
   return (
     <div
       className={[
-        'code-answer-area rounded-md border border-line/50 bg-[#fafafa] dark:border-gh-border dark:bg-[#1e1e1e]',
-        noScroll ? 'w-full overflow-x-auto overflow-y-visible' : 'overflow-auto',
+        'code-answer-area max-w-full min-w-0 rounded-md border border-line/50 bg-[#fafafa] dark:border-gh-border dark:bg-[#1e1e1e]',
+        noScroll ? 'overflow-x-auto overflow-y-visible' : 'overflow-auto',
       ].join(' ')}
     >
       <pre className="m-0 min-w-0 p-3 font-mono text-[13px] leading-[1.6] whitespace-pre [tab-size:4]">
