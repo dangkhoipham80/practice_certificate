@@ -94,3 +94,33 @@ class QuestionRepository:
         )
         result = await self.session.execute(stmt)
         return result.scalar_one_or_none()
+
+    async def max_external_id(self, cert_id: str) -> int:
+        stmt = select(func.coalesce(func.max(Question.external_id), 0)).where(Question.cert_id == cert_id)
+        result = await self.session.execute(stmt)
+        return int(result.scalar_one() or 0)
+
+    async def max_sort_order(self, cert_id: str) -> int:
+        stmt = select(func.coalesce(func.max(Question.sort_order), -1)).where(Question.cert_id == cert_id)
+        result = await self.session.execute(stmt)
+        return int(result.scalar_one() or -1)
+
+    async def create(self, question: Question) -> Question:
+        self.session.add(question)
+        await self.session.flush()
+        await self.session.refresh(question)
+        stmt = (
+            select(Question)
+            .options(selectinload(Question.question_type))
+            .where(Question.id == question.id)
+        )
+        result = await self.session.execute(stmt)
+        return result.scalar_one()
+
+    async def delete_by_cert_and_external_id(self, cert_id: str, external_id: int) -> bool:
+        question = await self.get_by_cert_and_external_id(cert_id, external_id)
+        if not question:
+            return False
+        await self.session.delete(question)
+        await self.session.flush()
+        return True

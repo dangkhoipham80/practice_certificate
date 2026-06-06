@@ -48,7 +48,15 @@ function buildDraft(question, types) {
   };
 }
 
-export function QuestionInlineEdit({ certId, question, index, onCancel, onRefresh }) {
+export function QuestionInlineEdit({
+  certId,
+  question,
+  index,
+  onCancel,
+  onRefresh,
+  mode = 'edit',
+  onCreated,
+}) {
   const { reloadCertQuestions, questionsSource } = useCertContext();
   const { types, loading: typesLoading } = useQuestionTypes();
   const { domains, domainLabelMap, loading: taxonomyLoading, addDomain } = useCertTaxonomy(certId);
@@ -183,8 +191,13 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onRefres
         'Questions are loaded from the bundled copy. Start the API, run migrate:questions, then reload — edits only persist in PostgreSQL.',
       );
     }
-    const externalId = getQuestionExternalId(question, index);
     const payload = buildSavePayload(draftState, types, question);
+    if (mode === 'create') {
+      const created = await questionsApi.create(certId, payload);
+      await reloadCertQuestions(certId);
+      return created;
+    }
+    const externalId = getQuestionExternalId(question, index);
     await questionsApi.update(certId, externalId, payload);
     await reloadCertQuestions(certId);
   }
@@ -200,8 +213,9 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onRefres
 
     setSaving(true);
     try {
-      await persistQuestionToDb(draft);
+      const created = await persistQuestionToDb(draft);
       if (onRefresh) await onRefresh();
+      if (mode === 'create' && onCreated) onCreated(created);
     } catch (err) {
       setError(err.message || 'Failed to save question.');
     } finally {
@@ -271,7 +285,7 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onRefres
       setShowNewDomain(false);
       setNewDomainTitle('');
       setNewDomainSlug('');
-      if (questionsSource === 'api') {
+      if (questionsSource === 'api' && mode !== 'create') {
         await persistQuestionToDb(nextDraft);
       }
     } catch (err) {
@@ -319,7 +333,7 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onRefres
 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs font-bold uppercase tracking-wide text-accent-700 dark:text-accent-300">
-          Editing question {index + 1}
+          {mode === 'create' ? 'New question' : `Editing question ${index + 1}`}
           {questionsSource === 'api' ? ' · saved to database' : ''}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -589,6 +603,8 @@ export function QuestionInlineEdit({ certId, question, index, onCancel, onRefres
               <Loader2 size={16} className="animate-spin" />
               Saving…
             </>
+          ) : mode === 'create' ? (
+            'Create question'
           ) : (
             'Save'
           )}

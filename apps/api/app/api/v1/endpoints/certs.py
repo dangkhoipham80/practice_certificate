@@ -9,7 +9,7 @@ from app.repositories.question_repository import QuestionRepository
 from app.repositories.question_type_repository import QuestionTypeRepository
 from app.repositories.taxonomy_repository import TaxonomyRepository
 from app.schemas.certification import CertificationLayoutOut, CertificationOut
-from app.schemas.question import QuestionListOut, QuestionOut, QuestionUpdateIn
+from app.schemas.question import QuestionCreateIn, QuestionListOut, QuestionOut, QuestionUpdateIn
 from app.services.question_service import QuestionService
 
 router = APIRouter(prefix="/certs", tags=["certifications"])
@@ -71,6 +71,22 @@ async def get_cert_questions(
     return result
 
 
+@router.post("/{cert_id}/questions", response_model=QuestionOut, status_code=status.HTTP_201_CREATED)
+async def create_cert_question(
+    cert_id: str,
+    body: QuestionCreateIn,
+    _admin: User = Depends(require_roles(UserRole.admin)),
+    service: QuestionService = Depends(get_question_service),
+) -> QuestionOut:
+    try:
+        created = await service.create_question(cert_id, body)
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+    if not created:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Certification '{cert_id}' not found")
+    return created
+
+
 @router.patch("/{cert_id}/questions/{external_id}", response_model=QuestionOut)
 async def update_cert_question(
     cert_id: str,
@@ -89,3 +105,18 @@ async def update_cert_question(
             detail=f"Question {external_id} not found for certification '{cert_id}'",
         )
     return updated
+
+
+@router.delete("/{cert_id}/questions/{external_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_cert_question(
+    cert_id: str,
+    external_id: int,
+    _admin: User = Depends(require_roles(UserRole.admin)),
+    service: QuestionService = Depends(get_question_service),
+) -> None:
+    deleted = await service.delete_question(cert_id, external_id)
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Question {external_id} not found for certification '{cert_id}'",
+        )

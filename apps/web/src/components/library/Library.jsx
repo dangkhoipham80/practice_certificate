@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ChevronDown, Flag, Pencil, Search } from 'lucide-react';
+import { ChevronDown, Flag, Pencil, Plus, Search, Trash2 } from 'lucide-react';
 import { questionsApi } from '../../api/client';
 import { SectionHeader } from '../ui/SectionHeader';
+import { ConfirmDialog } from '../ui/ConfirmDialog';
 import { getUiConfig } from '../../lib/examQuestionParser';
 import { isDragDropType } from '../../lib/questionUiTypes';
 import { formatQuizCorrect } from '../../lib/quizUtils';
@@ -18,6 +19,18 @@ import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
 import { formatQuizDomainLabel, isInQuizPool } from '../../lib/quizDomains';
 
 const PAGE_SIZE = 20;
+
+const EMPTY_QUESTION = {
+  text: '',
+  choices: [],
+  correct: [],
+  explanation: '',
+  quizEligible: false,
+  domainId: null,
+  topic: null,
+  images: [],
+  uiConfig: {},
+};
 
 function readInitialLibraryPage(searchParams) {
   const page = Number(searchParams.get('page'));
@@ -39,6 +52,9 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
   const [apiPage, setApiPage] = useState(null);
   const [apiPageLoading, setApiPageLoading] = useState(false);
   const [editRestored, setEditRestored] = useState(false);
+  const [creatingNew, setCreatingNew] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleting, setDeleting] = useState(false);
   const skipFilterPageResetRef = useRef(true);
   const { types } = useQuestionTypes();
   const { questions } = cert;
@@ -227,6 +243,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
   }
 
   function startEdit(question) {
+    setCreatingNew(false);
     setEditingIndex(question.index);
     setExpanded((current) => new Set(current).add(question.index));
     updateLibraryParams({
@@ -240,13 +257,55 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
     updateLibraryParams({ editQuestionId: null, page });
   }
 
-  const refreshLibraryQuestions = useCallback(async () => {
-    await reloadCertQuestions(cert.id);
-    if (useApiPagination) {
-      const data = await questionsApi.list(cert.id, { auth: false, page, pageSize: PAGE_SIZE });
-      setApiPage(data);
+  function startCreate() {
+    setEditingIndex(null);
+    setCreatingNew(true);
+    updateLibraryParams({ editQuestionId: null, page });
+  }
+
+  function cancelCreate() {
+    setCreatingNew(false);
+  }
+
+  function handleQuestionCreated(created) {
+    setCreatingNew(false);
+    setEditRestored(false);
+    updateLibraryParams({ editQuestionId: created.questionId });
+  }
+
+  const refreshLibraryQuestions = useCallback(
+    async (pageOverride) => {
+      const targetPage = pageOverride ?? page;
+      await reloadCertQuestions(cert.id);
+      if (useApiPagination) {
+        const data = await questionsApi.list(cert.id, { auth: false, page: targetPage, pageSize: PAGE_SIZE });
+        setApiPage(data);
+        if (!data.questions?.length && targetPage > 1) {
+          setPage(targetPage - 1);
+        }
+      }
+    },
+    [reloadCertQuestions, cert.id, useApiPagination, page],
+  );
+
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      const externalId = getQuestionExternalId(deleteTarget.question, deleteTarget.index);
+      await questionsApi.remove(cert.id, externalId);
+      if (editingIndex === deleteTarget.index) {
+        setEditingIndex(null);
+        updateLibraryParams({ editQuestionId: null, page });
+      }
+      await refreshLibraryQuestions();
+      setDeleteTarget(null);
+    } catch (err) {
+      window.alert(err.message || 'Failed to delete question.');
+    } finally {
+      setDeleting(false);
     }
-  }, [reloadCertQuestions, cert.id, useApiPagination, page]);
+  }
 
   return (
     <section className="library-page space-y-4">
@@ -272,7 +331,8 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
             placeholder="Search questions, choices, or concepts"
           />
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap gap-2">
           {[
             ['all', 'All'],
             ['flagged', `Flagged (${flagged.length})`],
@@ -293,9 +353,41 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
               {label}
             </button>
           ))}
+          </div>
+          {isAdmin && (
+            <button
+              className="primary-button !py-1.5 text-xs"
+              type="button"
+              onClick={startCreate}
+              disabled={creatingNew || questionsSource !== 'api'}
+              title={questionsSource !== 'api' ? 'Requires database-backed question bank' : 'Add a new question'}
+            >
+              <Plus size={14} />
+              Add question
+            </button>
+          )}
         </div>
       </div>
       <div className="grid gap-3">
+        {isAdmin && creatingNew && (
+          <article className="question-row" id="question-create">
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <div className="flex min-w-0 flex-1 gap-3">
+                <span className="question-number">+</span>
+                <p className="text-sm font-semibold text-ink dark:text-slate-200">New question</p>
+              </div>
+            </div>
+            <QuestionInlineEdit
+              certId={cert.id}
+              question={EMPTY_QUESTION}
+              index={questions.length}
+              mode="create"
+              onCancel={cancelCreate}
+              onRefresh={refreshLibraryQuestions}
+              onCreated={handleQuestionCreated}
+            />
+          </article>
+        )}
         {pageItems.map((question) => {
           const isOpen = expanded.has(question.index);
           const isEditing = isAdmin && editingIndex === question.index;
@@ -343,15 +435,27 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                 </div>
                 <div className="flex shrink-0 gap-1.5">
                   {isAdmin && (
-                    <button
-                      className={`secondary-button !px-3 !py-1.5 text-xs ${isEditing ? '!border-accent-300 !bg-accent-50 dark:!bg-accent-500/10' : ''}`}
-                      type="button"
-                      onClick={() => (isEditing ? cancelEdit() : startEdit(question))}
-                      title={isEditing ? 'Cancel editing' : 'Edit question'}
-                    >
-                      <Pencil size={14} />
-                      {isEditing ? 'Cancel' : 'Edit'}
-                    </button>
+                    <>
+                      <button
+                        className={`secondary-button !px-3 !py-1.5 text-xs ${isEditing ? '!border-accent-300 !bg-accent-50 dark:!bg-accent-500/10' : ''}`}
+                        type="button"
+                        onClick={() => (isEditing ? cancelEdit() : startEdit(question))}
+                        title={isEditing ? 'Cancel editing' : 'Edit question'}
+                        disabled={creatingNew}
+                      >
+                        <Pencil size={14} />
+                        {isEditing ? 'Cancel' : 'Edit'}
+                      </button>
+                      <button
+                        className="icon-button h-9 w-9 text-danger-600 dark:text-danger-300"
+                        type="button"
+                        onClick={() => setDeleteTarget({ question, index: question.index })}
+                        title="Delete question"
+                        disabled={creatingNew || questionsSource !== 'api'}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </>
                   )}
                   <button
                     className={`secondary-button !px-3 !py-1.5 text-xs ${isOpen ? '!border-accent-300 !bg-accent-50 dark:!bg-accent-500/10' : ''}`}
@@ -477,6 +581,16 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
             Next
           </button>
         </div>
+      )}
+      {deleteTarget && (
+        <ConfirmDialog
+          title="Delete question?"
+          message={`Remove question ${deleteTarget.index + 1}? This cannot be undone.`}
+          confirmLabel="Delete"
+          onConfirm={confirmDelete}
+          onCancel={() => setDeleteTarget(null)}
+          loading={deleting}
+        />
       )}
     </section>
   );

@@ -97,8 +97,12 @@ export const questionsApi = {
     const qs = params.toString();
     return apiFetch(`/certs/${certId}/questions${qs ? `?${qs}` : ''}`, { auth });
   },
+  create: (certId, payload) =>
+    apiFetch(`/certs/${certId}/questions`, { method: 'POST', body: payload }),
   update: (certId, externalId, payload) =>
     apiFetch(`/certs/${certId}/questions/${externalId}`, { method: 'PATCH', body: payload }),
+  remove: (certId, externalId) =>
+    apiFetch(`/certs/${certId}/questions/${externalId}`, { method: 'DELETE' }),
 };
 
 export const questionTypesApi = {

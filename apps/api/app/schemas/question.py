@@ -34,6 +34,23 @@ class QuestionListOut(BaseModel):
     model_config = {"populate_by_name": True}
 
 
+class QuestionCreateIn(BaseModel):
+    text: str = Field(..., min_length=1)
+    choices: list[str] | None = None
+    correct: list[int] | None = None
+    multiple: bool | None = None
+    explanation: str | None = None
+    quiz_eligible: bool | None = Field(None, alias="quizEligible")
+    domain_id: str | None = Field(None, alias="domainId")
+    topic: str | None = None
+    images: list[str] | None = None
+    warn: str | None = None
+    ui_config: dict | None = Field(None, alias="uiConfig")
+    question_type_id: int | None = Field(None, alias="questionTypeId")
+
+    model_config = {"populate_by_name": True}
+
+
 class QuestionUpdateIn(BaseModel):
     text: str | None = Field(None, min_length=1)
     choices: list[str] | None = None
