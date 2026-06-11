@@ -418,7 +418,7 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                 <div className="flex min-w-0 flex-1 gap-3">
                   <span className="question-number">{question.index + 1}</span>
                   <div className="min-w-0 flex-1">
-                    {isInlineDropdown && !isEditing ? (
+                    {isInlineDropdown ? (
                       <InlineDropdownQuestion
                         text={question.text}
                         images={question.images}

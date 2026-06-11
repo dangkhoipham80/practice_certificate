@@ -1,6 +1,7 @@
 import { Copy, RotateCcw } from 'lucide-react';
 import { formatQuizAnswer, formatQuizCorrect, formatTimer, percent } from '../../lib/quizUtils';
 import { QuestionText } from '../shared/QuestionText';
+import { InlineDropdownQuestion } from '../library/questionTypes/InlineDropdownQuestion';
 import { InfoTile } from '../ui/InfoTile';
 
 export function QuizResults({ cert, session, exitQuiz, retryWrongFromSummary, copyQuizResults, retakeQuiz }) {
@@ -43,7 +44,18 @@ export function QuizResults({ cert, session, exitQuiz, retryWrongFromSummary, co
             const correctAnswer = formatQuizCorrect(question);
             return (
               <div className="rounded-xl border border-danger-200/80 bg-danger-50/40 p-4 dark:border-danger-500/30 dark:bg-danger-500/5" key={slot}>
-                <QuestionText text={question.text} images={question.images} className="text-sm font-semibold" />
+                {question.uiConfig?.type === 'dropdown' ? (
+                  <InlineDropdownQuestion
+                    text={question.text}
+                    images={question.images}
+                    uiConfig={question.uiConfig}
+                    answerOnly
+                    readOnly
+                    className="text-sm font-semibold"
+                  />
+                ) : (
+                  <QuestionText text={question.text} images={question.images} className="text-sm font-semibold" />
+                )}
                 <p className="mt-2 text-xs text-danger-700 dark:text-danger-200">Your answer: {userAnswer}</p>
                 <p className="mt-1 text-xs text-success-700 dark:text-success-200">Correct: {correctAnswer}</p>
               </div>

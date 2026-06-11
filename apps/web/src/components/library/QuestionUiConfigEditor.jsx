@@ -235,10 +235,12 @@ function patchHotArea(uiConfig, partial) {
   return normalizeHotAreaUiConfig({ ...uiConfig, ...partial });
 }
 
-function HotspotsEditor({ hotspots, onChange }) {
+function HotspotsEditor({ hotspots, onChange, inlineDropdown = false }) {
   return (
     <div>
-      <span className="auth-field-label">Answer area — hotspots (dropdown options per blank)</span>
+      <span className="auth-field-label">
+        {inlineDropdown ? 'Dropdown tokens and options' : 'Answer area — hotspots (dropdown options per blank)'}
+      </span>
       <div className="mt-2 space-y-4">
         {hotspots.map((zone, zoneIndex) => (
           <div
@@ -250,7 +252,7 @@ function HotspotsEditor({ hotspots, onChange }) {
               <input
                 className="auth-input !pl-3 min-w-0 flex-1 text-xs"
                 value={zone.placeholder ?? ''}
-                placeholder="Placeholder label"
+                placeholder={inlineDropdown ? 'Token label' : 'Placeholder label'}
                 onChange={(e) => {
                   const next = hotspots.map((row, j) =>
                     j === zoneIndex ? { ...row, placeholder: e.target.value } : row,
@@ -261,7 +263,7 @@ function HotspotsEditor({ hotspots, onChange }) {
               <button
                 type="button"
                 className="icon-button h-9 w-9 shrink-0"
-                aria-label="Remove hotspot"
+                aria-label={inlineDropdown ? 'Remove dropdown token' : 'Remove hotspot'}
                 onClick={() => onChange(hotspots.filter((_, j) => j !== zoneIndex))}
               >
                 <Trash2 size={16} />
@@ -362,7 +364,7 @@ function HotspotsEditor({ hotspots, onChange }) {
             ...hotspots,
             {
               id: `drop_${hotspots.length + 1}`,
-              placeholder: `Hotspot ${hotspots.length + 1}`,
+              placeholder: inlineDropdown ? `Dropdown ${hotspots.length + 1}` : `Hotspot ${hotspots.length + 1}`,
               options: [
                 { id: 'opt_1', label: '' },
                 { id: 'opt_2', label: '' },
@@ -374,7 +376,7 @@ function HotspotsEditor({ hotspots, onChange }) {
         }
       >
         <Plus size={14} />
-        Add hotspot
+        {inlineDropdown ? 'Add dropdown token' : 'Add hotspot'}
       </button>
     </div>
   );
@@ -497,6 +499,7 @@ export function QuestionUiConfigEditor({ questionType, uiConfig, onTypeChange, o
           )}
           <HotspotsEditor
             hotspots={uiConfig.answer_area?.hotspots ?? uiConfig.hotspots ?? []}
+            inlineDropdown={isInlineDropdownType(types, questionType)}
             onChange={(hotspots) =>
               onUiConfigChange(
                 patchHotArea(uiConfig, {

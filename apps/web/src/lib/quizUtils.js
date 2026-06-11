@@ -79,6 +79,9 @@ export function formatQuizAnswer(answer, question) {
   }
   if (isHotAreaQuizQuestion(question)) {
     const zones = question.uiConfig?.answer_area?.hotspots ?? question.uiConfig?.hotspots ?? [];
+    if (question.uiConfig?.type === 'dropdown') {
+      return zones.map((z) => answer[z.id] ?? '—').join(' · ');
+    }
     return zones
       .map((z) => `${z.id}: ${answer[z.id] ?? '—'}`)
       .filter(Boolean)
@@ -97,6 +100,9 @@ export function formatQuizCorrect(question) {
   if (isHotAreaQuizQuestion(question)) {
     const filled = getHotAreaCorrectFilled(question.uiConfig);
     const zones = question.uiConfig?.answer_area?.hotspots ?? question.uiConfig?.hotspots ?? [];
+    if (question.uiConfig?.type === 'dropdown') {
+      return zones.map((z) => filled[z.id] ?? '—').join(' · ');
+    }
     return zones.map((z) => `${z.id}: ${filled[z.id] ?? '—'}`).join(' · ');
   }
   return (question.correct ?? [])

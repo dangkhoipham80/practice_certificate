@@ -190,11 +190,21 @@ export function QuestionInlineEdit({
     } else if (draft.quizEligible && isHotAreaType(types, draft.questionType)) {
       const ui = syncAnswerArea(draft.uiConfig, types, draft.questionType);
       const hotspots = ui.answer_area?.hotspots ?? [];
-      if (!hotspots.length) return 'Add at least one hotspot in the answer area.';
+      if (!hotspots.length) {
+        return isInlineDropdownType(types, draft.questionType)
+          ? 'Add at least one dropdown token.'
+          : 'Add at least one hotspot in the answer area.';
+      }
       for (const zone of hotspots) {
         if (!zone.options?.length) return `Add dropdown options for ${zone.id}.`;
         if (!zone.correct_option_id || !zone.options.some((opt) => opt.id === zone.correct_option_id)) {
           return `Mark the correct dropdown option for ${zone.id}.`;
+        }
+        if (
+          isInlineDropdownType(types, draft.questionType) &&
+          !draft.text.includes(`{{${zone.id}}}`)
+        ) {
+          return `Add {{${zone.id}}} to Question text.`;
         }
       }
     } else if (
@@ -573,8 +583,9 @@ export function QuestionInlineEdit({
         )}
         {isHotArea && draft.quizEligible && (
           <p className="w-full text-xs text-muted dark:text-slate-500">
-            In Answer area — add dropdown options per hotspot and mark the correct option for each blank.
-            Quiz uses hotspot scoring, not multiple choice.
+            {isInlineDropdown
+              ? 'Add {{drop_n}} tokens directly to Question text, then configure and mark the correct option for each token.'
+              : 'In Answer area — add dropdown options per hotspot and mark the correct option for each blank. Quiz uses hotspot scoring, not multiple choice.'}
           </p>
         )}
         {!isChoicesType(types, draft.questionType) && !isStructured && draft.quizEligible && (
