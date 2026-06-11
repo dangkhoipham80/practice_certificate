@@ -11,6 +11,7 @@ import {
   isDragDropType,
   isFillBlankType,
   isHotAreaType,
+  isInlineDropdownType,
   nextId,
 } from '../../lib/questionUiTypes';
 
@@ -482,11 +483,18 @@ export function QuestionUiConfigEditor({ questionType, uiConfig, onTypeChange, o
 
       {isHotAreaType(types, questionType) && (
         <>
-          <AnswerAreaTemplateEditor
-            uiConfig={uiConfig}
-            patchUiConfig={patchHotArea}
-            onUiConfigChange={onUiConfigChange}
-          />
+          {isInlineDropdownType(types, questionType) ? (
+            <p className="rounded-lg border border-violet-200/70 bg-white/60 px-3 py-2 text-xs text-muted dark:border-violet-500/25 dark:bg-gh-subtle/40 dark:text-slate-400">
+              Put <code>{'{{drop_1}}'}</code>, <code>{'{{drop_2}}'}</code>, ... directly in Question text.
+              Each token uses the hotspot with the same ID below.
+            </p>
+          ) : (
+            <AnswerAreaTemplateEditor
+              uiConfig={uiConfig}
+              patchUiConfig={patchHotArea}
+              onUiConfigChange={onUiConfigChange}
+            />
+          )}
           <HotspotsEditor
             hotspots={uiConfig.answer_area?.hotspots ?? uiConfig.hotspots ?? []}
             onChange={(hotspots) =>

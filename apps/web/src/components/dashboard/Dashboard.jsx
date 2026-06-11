@@ -42,7 +42,7 @@ export function Dashboard({
   const wrongCount = getWrongIndices(partProgress, sections).length;
   const newCount = getUnansweredIndices(partProgress, sections).length;
   const bank = computeBankProgress(partProgress, sections, cert.questions.length);
-  const partLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
+  const partLabel = `${cert.sectionLabel || 'part'}s`;
 
   return (
     <section className="animate-slide-up space-y-6">

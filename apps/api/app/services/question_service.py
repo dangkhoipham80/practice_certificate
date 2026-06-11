@@ -74,6 +74,14 @@ class QuestionService:
                 status=cert.status,
                 questionCount=total,
                 quizEligibleCount=quiz_eligible,
+                gridPageSize=cert.grid_page_size,
+                sectionMode=cert.section_mode,
+                sectionLabel=cert.section_label,
+                sectionBadgePrefix=cert.section_badge_prefix,
+                learnEnabled=cert.learn_enabled,
+                labsEnabled=cert.labs_enabled,
+                learnContentType=cert.learn_content_type,
+                labsContentType=cert.labs_content_type,
             )
             for cert, total, quiz_eligible in rows
         ]

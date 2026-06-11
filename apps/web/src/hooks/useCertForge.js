@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useExamSections } from './useExamSections';
 import { progressApi } from '../api/client';
 import { computeDayStreak } from '../lib/statsUtils';
-import { getQuizQuestions } from '../config/certRegistry';
+import { getQuizQuestions } from '../lib/certRuntime';
 import { readJson, removeKey, writeJson } from '../lib/storage';
 import { getDragDropCorrectFilled, isDragDropQuizReady } from '../lib/dragDropUiFormat';
 import { getHotAreaCorrectFilled, isHotAreaQuizReady } from '../lib/hotAreaUiFormat';

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Brain, ClipboardList, Flag, Layers3, MousePointerClick, Move, Play, RotateCcw, Search, Terminal } from 'lucide-react';
-import { getQuizQuestions } from '../../config/certRegistry';
+import { getQuizQuestions } from '../../lib/certRuntime';
 import { pathFromRouteId } from '../../config/routes';
 import { getDomainLabel } from '../../utils/ai102DomainClassifier';
 import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
@@ -29,7 +29,7 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
   const [searchParams] = useSearchParams();
   const domainFilter = searchParams.get('domain');
   const quizCount = getQuizQuestions(cert).length;
-  const sectionLabel = cert.id === 'ai-102' ? 'domains' : cert.id.startsWith('ai-') ? 'topics' : 'parts';
+  const sectionLabel = `${cert.sectionLabel || 'part'}s`;
   const { sections } = useExamSections(cert);
   const { domains, domainLabelMap } = useCertTaxonomy(cert.id);
 
@@ -41,9 +41,13 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
   const domainCounts = useMemo(() => countQuizByDomain(cert.questions, domains), [cert.questions, domains]);
 
   const questionKindStats = useMemo(() => {
-    if (cert.id !== 'ai-102') return null;
     return getQuestionKindStats(cert.questions);
   }, [cert]);
+  const interactiveCount =
+    questionKindStats.hotspot +
+    questionKindStats['drag-drop'] +
+    questionKindStats.simulation +
+    questionKindStats.other;
 
   function startInteractiveReview(kind) {
     const indices =
@@ -103,12 +107,12 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
         </div>
       )}
 
-      {cert.id === 'ai-102' && questionKindStats && (
+      {interactiveCount > 0 && (
         <div className="panel p-5">
           <SectionHeader
             kicker="Question bank"
             title="Phân loại câu hỏi"
-            description={`${cert.questions.length} câu tổng — ${quizCount} MC tự chấm (quiz pool) và ${questionKindStats.hotspot + questionKindStats['drag-drop'] + questionKindStats.simulation + questionKindStats.other} interactive chỉ ôn tập.`}
+            description={`${cert.questions.length} câu tổng — ${quizCount} MC tự chấm (quiz pool) và ${interactiveCount} interactive chỉ ôn tập.`}
           />
           <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
             <InfoTile label="Quiz pool (MC)" value={questionKindStats.mc} />
@@ -152,10 +156,7 @@ export function PracticeSetup({ cert, startQuiz, partProgress }) {
           <div className="mt-3 flex flex-wrap gap-2">
             {domains.map((domain) => {
               const count = domainCounts[domain.slug] ?? 0;
-              const shortTitle =
-                cert.id === 'ai-102'
-                  ? domain.title.replace('Implement ', '').replace('Plan and manage an Azure AI solution', 'Plan & manage')
-                  : domain.title;
+              const shortTitle = domain.title;
               return count ? (
                 <Link
                   key={domain.slug}

@@ -1,9 +1,5 @@
 import { QUIZ_DOMAIN_NONE, QUIZ_DOMAIN_NONE_LABEL } from './quizDomains';
 
-export function usesDomainSections(certId) {
-  return certId === 'ai-102';
-}
-
 export function buildStaticExamSections(cert) {
   const { partSizes, partStarts, partTitles } = cert;
   return partSizes.map((size, index) => ({
@@ -47,7 +43,7 @@ export function buildDomainExamSections(cert, domains = []) {
 
 /** Exam sections for progress grids and part-based quiz pools. */
 export function buildExamSections(cert, domains = []) {
-  if (usesDomainSections(cert.id) && domains.length) {
+  if (cert.sectionMode === 'domains' && domains.length) {
     return buildDomainExamSections(cert, domains);
   }
   return buildStaticExamSections(cert);
@@ -66,7 +62,5 @@ export function getSectionIndexForQuestion(questionIndex, sections) {
 }
 
 export function getSectionBadgeLabel(cert, sectionIndex) {
-  if (cert.id === 'ai-102') return `D${String(sectionIndex + 1).padStart(2, '0')}`;
-  if (cert.id.startsWith('ai-')) return `T${String(sectionIndex + 1).padStart(2, '0')}`;
-  return `P${String(sectionIndex + 1).padStart(2, '0')}`;
+  return `${cert.sectionBadgePrefix || 'P'}${String(sectionIndex + 1).padStart(2, '0')}`;
 }

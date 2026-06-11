@@ -1,29 +1,26 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { taxonomyApi } from '../api/client';
-import { getFallbackTaxonomyDomains } from '../lib/certTaxonomyFallback';
 import { buildDomainLabelMap } from '../lib/domainLabels';
 
-function mergeTaxonomyDomains(certId, apiDomains = []) {
-  const bySlug = new Map(getFallbackTaxonomyDomains(certId).map((d) => [d.slug, d]));
-  for (const d of apiDomains) bySlug.set(d.slug, d);
-  return [...bySlug.values()].sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+function sortDomains(domains = []) {
+  return [...domains].sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
 }
 
 export function useCertTaxonomy(certId) {
-  const [domains, setDomains] = useState(() => getFallbackTaxonomyDomains(certId));
+  const [domains, setDomains] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [source, setSource] = useState('fallback');
+  const [source, setSource] = useState('api');
 
   const refreshTaxonomy = useCallback(async () => {
     setLoading(true);
     try {
       const data = await taxonomyApi.get(certId, { auth: false });
       const apiDomains = data?.domains ?? [];
-      setDomains(mergeTaxonomyDomains(certId, apiDomains));
-      setSource(apiDomains.length ? 'api' : 'fallback');
+      setDomains(sortDomains(apiDomains));
+      setSource('api');
     } catch {
-      setDomains(getFallbackTaxonomyDomains(certId));
-      setSource('fallback');
+      setDomains([]);
+      setSource('error');
     } finally {
       setLoading(false);
     }
@@ -37,13 +34,13 @@ export function useCertTaxonomy(certId) {
       .then((data) => {
         if (cancelled) return;
         const apiDomains = data?.domains ?? [];
-        setDomains(mergeTaxonomyDomains(certId, apiDomains));
-        setSource(apiDomains.length ? 'api' : 'fallback');
+        setDomains(sortDomains(apiDomains));
+        setSource('api');
       })
       .catch(() => {
         if (!cancelled) {
-          setDomains(getFallbackTaxonomyDomains(certId));
-          setSource('fallback');
+          setDomains([]);
+          setSource('error');
         }
       })
       .finally(() => {

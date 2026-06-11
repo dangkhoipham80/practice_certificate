@@ -3,7 +3,7 @@ import { getSectionBadgeLabel } from '../../lib/examSections';
 import { computePartStats } from '../../lib/statsUtils';
 
 export function PartGrid({ cert, sections, startQuiz, partProgress = {}, compact = false, onShowDetail }) {
-  const sectionLabel = cert.id === 'ai-102' ? 'Domain' : cert.id.startsWith('ai-') ? 'Topic' : 'Part';
+  const sectionLabel = cert.sectionLabel || 'part';
 
   return (
     <div className={compact ? 'panel divide-y divide-line overflow-hidden dark:divide-gh-border' : 'grid gap-3 md:grid-cols-2 xl:grid-cols-4'}>

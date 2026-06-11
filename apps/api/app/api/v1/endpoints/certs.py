@@ -8,7 +8,12 @@ from app.repositories.certification_repository import CertificationRepository
 from app.repositories.question_repository import QuestionRepository
 from app.repositories.question_type_repository import QuestionTypeRepository
 from app.repositories.taxonomy_repository import TaxonomyRepository
-from app.schemas.certification import CertificationLayoutOut, CertificationOut
+from app.schemas.certification import (
+    CertificationCreateIn,
+    CertificationLayoutOut,
+    CertificationOut,
+    CertificationUpdateIn,
+)
 from app.schemas.question import QuestionCreateIn, QuestionListOut, QuestionOut, QuestionUpdateIn
 from app.services.question_service import QuestionService
 
@@ -27,6 +32,70 @@ def get_question_service(db: AsyncSession = Depends(get_db)) -> QuestionService:
 @router.get("", response_model=list[CertificationOut])
 async def list_certs(service: QuestionService = Depends(get_question_service)) -> list[CertificationOut]:
     return await service.list_certifications()
+
+
+def cert_to_out(cert, *, question_count: int = 0, quiz_eligible_count: int = 0) -> CertificationOut:
+    return CertificationOut(
+        id=cert.id,
+        examCode=cert.exam_code,
+        name=cert.name,
+        provider=cert.provider,
+        level=cert.level,
+        description=cert.description,
+        status=cert.status,
+        questionCount=question_count,
+        quizEligibleCount=quiz_eligible_count,
+        gridPageSize=cert.grid_page_size,
+        sectionMode=cert.section_mode,
+        sectionLabel=cert.section_label,
+        sectionBadgePrefix=cert.section_badge_prefix,
+        learnEnabled=cert.learn_enabled,
+        labsEnabled=cert.labs_enabled,
+        learnContentType=cert.learn_content_type,
+        labsContentType=cert.labs_content_type,
+    )
+
+
+@router.post("", response_model=CertificationOut, status_code=status.HTTP_201_CREATED)
+async def create_cert(
+    body: CertificationCreateIn,
+    _admin: User = Depends(require_roles(UserRole.admin)),
+    db: AsyncSession = Depends(get_db),
+) -> CertificationOut:
+    repo = CertificationRepository(db)
+    if await repo.get_by_id(body.id):
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Certification ID already exists")
+    cert = await repo.create(**body.model_dump(by_alias=False))
+    return cert_to_out(cert)
+
+
+@router.patch("/{cert_id}", response_model=CertificationOut)
+async def update_cert(
+    cert_id: str,
+    body: CertificationUpdateIn,
+    _admin: User = Depends(require_roles(UserRole.admin)),
+    db: AsyncSession = Depends(get_db),
+) -> CertificationOut:
+    repo = CertificationRepository(db)
+    cert = await repo.get_by_id(cert_id)
+    if not cert:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Certification not found")
+    cert = await repo.update(cert, **body.model_dump(exclude_unset=True, by_alias=False))
+    total, quiz_eligible = await QuestionRepository(db).count_by_cert(cert_id)
+    return cert_to_out(cert, question_count=total, quiz_eligible_count=quiz_eligible)
+
+
+@router.delete("/{cert_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_cert(
+    cert_id: str,
+    _admin: User = Depends(require_roles(UserRole.admin)),
+    db: AsyncSession = Depends(get_db),
+) -> None:
+    repo = CertificationRepository(db)
+    cert = await repo.get_by_id(cert_id)
+    if not cert:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Certification not found")
+    await repo.delete(cert)
 
 
 @router.get("/{cert_id}/layout", response_model=CertificationLayoutOut)

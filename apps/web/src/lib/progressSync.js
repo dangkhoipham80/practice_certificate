@@ -1,11 +1,17 @@
-import { progressApi } from '../api/client';
-import { CERT_REGISTRY } from '../config/certRegistry';
+import { certsApi, progressApi } from '../api/client';
+import { buildStorageKeys } from '../config/examConfig';
 import { readJson } from './storage';
 
 export async function syncLocalProgressToServer() {
   const results = [];
-  for (const cert of Object.values(CERT_REGISTRY)) {
-    const history = readJson(cert.storageKeys.history, []);
+  let certifications = [];
+  try {
+    certifications = await certsApi.list();
+  } catch {
+    return results;
+  }
+  for (const cert of certifications) {
+    const history = readJson(buildStorageKeys(cert.id).history, []);
     if (!history.length) continue;
     try {
       const res = await progressApi.import({

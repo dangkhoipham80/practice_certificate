@@ -6,7 +6,7 @@ import { CertProvider } from './context/CertContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { QuestionTypesProvider } from './context/QuestionTypesContext';
 import { AuthPage, RoleBadge } from './components/auth/AuthPage';
-import { isCertReady } from './config/certRegistry';
+import { isCertReady } from './lib/certRuntime';
 import { Sidebar } from './components/layout/Sidebar';
 import { MainHeader } from './components/layout/MainHeader';
 import { LoginBurnToast } from './components/streak/LoginBurnToast';
@@ -98,7 +98,7 @@ function AppShell() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/catalog" element={<Catalog startQuiz={app.requestStartQuiz} />} />
-              <Route path="/practice" element={<Navigate to="/c/gh-300/practice" replace />} />
+              <Route path="/practice" element={<Navigate to={`/c/${app.cert.id}/practice`} replace />} />
               <Route
                 path="/c/:certId"
                 element={
@@ -139,7 +139,11 @@ function AppShell() {
               <Route path="/c/:certId/learn" element={<Learn cert={app.cert} startQuiz={app.startQuiz} />} />
               <Route
                 path="/c/:certId/labs"
-                element={app.cert.features.labs ? <Ai102Labs cert={app.cert} /> : <Navigate to={`/c/${app.cert.id}`} replace />}
+                element={
+                  app.cert.features.labs && app.cert.labsContentType === 'ai102-labs'
+                    ? <Ai102Labs cert={app.cert} />
+                    : <Navigate to={`/c/${app.cert.id}`} replace />
+                }
               />
               <Route
                 path="/c/:certId/flashcards"

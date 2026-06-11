@@ -11,9 +11,9 @@
 
 ## AI-102
 
-Nguồn runtime: `apps/web/src/data/ai102Questions.js` (+ `ai102ExamMeta`).
+Nguồn pipeline: `apps/web/src/data/ai102Questions.js` (+ `ai102ExamMeta`).
 
-Để sửa câu hỏi AI-102: chỉnh `ai102Questions.js` (hoặc tái tạo từ backup JSON nếu có), rồi `npm run migrate:questions`.
+Để sửa câu hỏi AI-102: chỉnh `ai102Questions.js` (hoặc tái tạo từ backup JSON nếu có), rồi `npm run migrate:questions`. Runtime đọc question bank từ PostgreSQL qua API.
 
 ## GH-300
 
@@ -23,8 +23,9 @@ Nguồn runtime: `apps/web/src/data/ai102Questions.js` (+ `ai102ExamMeta`).
 
 1. Thêm entry vào `EXAM_SOURCES` (folder JSON hoặc module JS).
 2. Nếu cần bundle FE: thêm vào `JS_OUTPUTS` trong `build-exam-questions.mjs`.
-3. Đăng ký cert trong `apps/web/src/config/certRegistry.js`.
-4. `npm run db:migrate` (nếu đổi schema) + `npm run migrate:questions`.
+3. Tạo certification bằng tài khoản admin trong **Cert catalog**, hoặc gọi `POST /api/v1/certs`.
+4. Nạp taxonomy, parts và questions vào PostgreSQL. Frontend đọc catalog, layout và question bank qua API; không cần đăng ký cert trong source code.
+5. `npm run db:migrate` (nếu đổi schema) + `npm run migrate:questions`.
 
 ## Không commit
 

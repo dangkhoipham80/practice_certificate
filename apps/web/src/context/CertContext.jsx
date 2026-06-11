@@ -1,68 +1,168 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACTIVE_CERT_KEY, DEFAULT_CERT_ID, getCert, isCertReady } from '../config/certRegistry';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { certsApi } from '../api/client';
+import { buildStorageKeys } from '../config/examConfig';
+import { certIdFromPath } from '../config/routes';
 import { fetchCertQuestions } from '../lib/certQuestions';
 
 const CertContext = createContext(null);
+const ACTIVE_CERT_KEY = 'certforge-active-cert';
+
+function normalizeCertification(cert) {
+  return {
+    id: cert.id,
+    name: cert.name.trim(),
+    exam: cert.examCode,
+    provider: cert.provider,
+    level: cert.level,
+    description: cert.description,
+    status: cert.status,
+    questionCount: cert.questionCount,
+    quizEligibleCount: cert.quizEligibleCount,
+    GRID_PAGE_SIZE: cert.gridPageSize,
+    sectionMode: cert.sectionMode,
+    sectionLabel: cert.sectionLabel,
+    sectionBadgePrefix: cert.sectionBadgePrefix,
+    features: {
+      learn: cert.learnEnabled,
+      labs: cert.labsEnabled,
+    },
+    learnContentType: cert.learnContentType,
+    labsContentType: cert.labsContentType,
+    storageKeys: buildStorageKeys(cert.id),
+  };
+}
+
+function loadingCertification(certId = '') {
+  return {
+    id: certId,
+    name: '',
+    exam: 'Loading',
+    provider: '',
+    level: '',
+    description: '',
+    status: 'Loading',
+    questionCount: 0,
+    quizEligibleCount: 0,
+    questions: [],
+    partSizes: [],
+    partStarts: [],
+    partTitles: [],
+    topics: [],
+    domains: [],
+    GRID_PAGE_SIZE: 50,
+    sectionMode: 'parts',
+    sectionLabel: 'part',
+    sectionBadgePrefix: 'P',
+    features: { learn: false, labs: false },
+    learnContentType: 'none',
+    labsContentType: 'none',
+    storageKeys: buildStorageKeys(certId || 'loading'),
+  };
+}
 
 export function CertProvider({ children }) {
-  const { certId: routeCertId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const [activeCertId, setActiveCertIdState] = useState(() => {
-    const saved = localStorage.getItem(ACTIVE_CERT_KEY);
-    return saved && getCert(saved) ? saved : DEFAULT_CERT_ID;
-  });
-  /** Per-cert question banks loaded from API (overrides bundled JS when set). */
+  const routeCertId = certIdFromPath(location.pathname);
+  const [activeCertId, setActiveCertIdState] = useState(
+    () => routeCertId || localStorage.getItem(ACTIVE_CERT_KEY) || ''
+  );
+  const [certifications, setCertifications] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(true);
+  const [catalogError, setCatalogError] = useState('');
   const [questionsByCert, setQuestionsByCert] = useState({});
+  const [layoutByCert, setLayoutByCert] = useState({});
   const [questionsSourceByCert, setQuestionsSourceByCert] = useState({});
   const [questionsLoadingCertId, setQuestionsLoadingCertId] = useState(null);
 
-  useEffect(() => {
-    if (!routeCertId) return;
-    const cert = getCert(routeCertId);
-    if (cert.id !== activeCertId) {
-      setActiveCertIdState(cert.id);
-      localStorage.setItem(ACTIVE_CERT_KEY, cert.id);
+  const refreshCertifications = useCallback(async () => {
+    setCatalogLoading(true);
+    setCatalogError('');
+    try {
+      const rows = await certsApi.list();
+      const normalized = (rows ?? []).map(normalizeCertification);
+      setCertifications(normalized);
+      setActiveCertIdState((current) => {
+        const requested = certIdFromPath(location.pathname);
+        const next =
+          (requested && normalized.some((cert) => cert.id === requested) && requested) ||
+          (current && normalized.some((cert) => cert.id === current) && current) ||
+          normalized[0]?.id ||
+          '';
+        if (next) localStorage.setItem(ACTIVE_CERT_KEY, next);
+        return next;
+      });
+      return normalized;
+    } catch (error) {
+      setCatalogError(error.message || 'Could not load certifications');
+      return [];
+    } finally {
+      setCatalogLoading(false);
     }
-  }, [routeCertId, activeCertId]);
+  }, [location.pathname]);
 
-  const loadQuestions = useCallback(async (certId) => {
+  useEffect(() => {
+    refreshCertifications();
+  }, [refreshCertifications]);
+
+  useEffect(() => {
+    if (!routeCertId || !certifications.some((cert) => cert.id === routeCertId)) return;
+    setActiveCertIdState(routeCertId);
+    localStorage.setItem(ACTIVE_CERT_KEY, routeCertId);
+  }, [routeCertId, certifications]);
+
+  const loadWorkspace = useCallback(async (certId) => {
+    if (!certId) return;
     setQuestionsLoadingCertId(certId);
     try {
-      const { questions, source } = await fetchCertQuestions(certId);
-      setQuestionsByCert((prev) => ({ ...prev, [certId]: questions }));
-      setQuestionsSourceByCert((prev) => ({ ...prev, [certId]: source }));
+      const [layout, questionData] = await Promise.all([
+        certsApi.layout(certId),
+        fetchCertQuestions(certId),
+      ]);
+      setLayoutByCert((prev) => ({ ...prev, [certId]: layout }));
+      setQuestionsByCert((prev) => ({ ...prev, [certId]: questionData.questions }));
+      setQuestionsSourceByCert((prev) => ({ ...prev, [certId]: questionData.source }));
+    } catch {
+      setQuestionsByCert((prev) => ({ ...prev, [certId]: [] }));
+      setQuestionsSourceByCert((prev) => ({ ...prev, [certId]: 'error' }));
     } finally {
       setQuestionsLoadingCertId((current) => (current === certId ? null : current));
     }
   }, []);
 
   useEffect(() => {
-    loadQuestions(activeCertId);
-  }, [activeCertId, loadQuestions]);
+    if (activeCertId && certifications.some((cert) => cert.id === activeCertId)) {
+      loadWorkspace(activeCertId);
+    }
+  }, [activeCertId, certifications, loadWorkspace]);
 
   const activeCert = useMemo(() => {
-    const base = getCert(activeCertId);
-    const questions = questionsByCert[activeCertId] ?? base.questions;
-    return { ...base, questions };
-  }, [activeCertId, questionsByCert]);
+    const base = certifications.find((cert) => cert.id === activeCertId);
+    if (!base) return loadingCertification(activeCertId);
+    const layout = layoutByCert[activeCertId] ?? {};
+    return {
+      ...base,
+      questions: questionsByCert[activeCertId] ?? [],
+      partSizes: layout.partSizes ?? [],
+      partStarts: layout.partStarts ?? [],
+      partTitles: layout.partTitles ?? [],
+      topics: layout.topics ?? [],
+      domains: layout.domains ?? [],
+      GRID_PAGE_SIZE: layout.gridPageSize ?? base.GRID_PAGE_SIZE,
+    };
+  }, [activeCertId, certifications, layoutByCert, questionsByCert]);
 
   function setActiveCert(certId, options = {}) {
-    const cert = getCert(certId);
-    if (!isCertReady(cert) && options.requireReady) return false;
-    setActiveCertIdState(cert.id);
-    localStorage.setItem(ACTIVE_CERT_KEY, cert.id);
-    if (options.navigateTo) {
-      navigate(options.navigateTo);
-    }
+    if (!certifications.some((cert) => cert.id === certId)) return false;
+    setActiveCertIdState(certId);
+    localStorage.setItem(ACTIVE_CERT_KEY, certId);
+    if (options.navigateTo) navigate(options.navigateTo);
     return true;
   }
 
   function openCertWorkspace(certId) {
-    const cert = getCert(certId);
-    if (!isCertReady(cert)) return false;
-    setActiveCert(certId);
+    if (!setActiveCert(certId)) return false;
     navigate(`/c/${certId}`);
     return true;
   }
@@ -70,12 +170,16 @@ export function CertProvider({ children }) {
   const value = {
     activeCertId,
     activeCert,
+    certifications,
+    catalogLoading,
+    catalogError,
+    refreshCertifications,
     setActiveCert,
     openCertWorkspace,
     isCertRoute: location.pathname.startsWith('/c/'),
-    reloadCertQuestions: loadQuestions,
+    reloadCertQuestions: loadWorkspace,
     questionsLoading: questionsLoadingCertId === activeCertId,
-    questionsSource: questionsSourceByCert[activeCertId] ?? 'bundle',
+    questionsSource: questionsSourceByCert[activeCertId] ?? 'api',
   };
 
   return <CertContext.Provider value={value}>{children}</CertContext.Provider>;

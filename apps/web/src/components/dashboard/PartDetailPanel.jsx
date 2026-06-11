@@ -6,7 +6,7 @@ export function PartDetailPanel({ cert, sections, partIndex, partProgress, onClo
   if (partIndex === null) return null;
   const section = sections[partIndex];
   if (!section) return null;
-  const sectionLabel = cert.id === 'ai-102' ? 'Domain' : cert.id.startsWith('ai-') ? 'Topic' : 'Part';
+  const sectionLabel = cert.sectionLabel || 'part';
   const stats = computePartStats(partIndex, partProgress, sections);
   const rows = partProgress[partIndex];
 

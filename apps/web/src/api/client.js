@@ -88,6 +88,14 @@ export const taxonomyApi = {
     }),
 };
 
+export const certsApi = {
+  list: () => apiFetch('/certs', { auth: false }),
+  layout: (certId) => apiFetch(`/certs/${certId}/layout`, { auth: false }),
+  create: (payload) => apiFetch('/certs', { method: 'POST', body: payload }),
+  update: (certId, payload) => apiFetch(`/certs/${certId}`, { method: 'PATCH', body: payload }),
+  remove: (certId) => apiFetch(`/certs/${certId}`, { method: 'DELETE' }),
+};
+
 export const questionsApi = {
   list: (certId, { auth = false, page, pageSize, quizOnly } = {}) => {
     const params = new URLSearchParams();

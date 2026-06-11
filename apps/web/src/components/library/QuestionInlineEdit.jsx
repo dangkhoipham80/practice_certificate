@@ -11,6 +11,7 @@ import {
   isChoicesType,
   isDragDropType,
   isHotAreaType,
+  isInlineDropdownType,
   resolveUiType,
   syncAnswerArea,
 } from '../../lib/questionUiTypes';
@@ -24,6 +25,7 @@ import { ExplanationText } from '../shared/ExplanationText';
 import { QuestionUiConfigEditor } from './QuestionUiConfigEditor';
 import { DragDropQuestion } from './questionTypes/DragDropQuestion';
 import { HotAreaQuestion } from './questionTypes/HotAreaQuestion';
+import { InlineDropdownQuestion } from './questionTypes/InlineDropdownQuestion';
 
 function buildDraft(question, types) {
   const uiConfig = { ...getUiConfig(question), ...(question.uiConfig ?? {}) };
@@ -260,6 +262,7 @@ export function QuestionInlineEdit({
 
   const isDragDrop = isDragDropType(types, draft.questionType);
   const isHotArea = isHotAreaType(types, draft.questionType);
+  const isInlineDropdown = isInlineDropdownType(types, draft.questionType);
   const isStructured = isDragDrop || isHotArea;
   const showChoices = isChoicesType(types, draft.questionType) || (draft.quizEligible && !isStructured);
 
@@ -418,10 +421,19 @@ export function QuestionInlineEdit({
       {isHotArea && (
         <>
           <div className="w-full min-w-0 max-w-full overflow-x-auto">
-            <HotAreaQuestion
-              uiConfig={normalizeHotAreaUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
-              readOnly={false}
-            />
+            {isInlineDropdown ? (
+              <InlineDropdownQuestion
+                text={draft.text}
+                uiConfig={normalizeHotAreaUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
+                readOnly={false}
+                className="rounded-xl border border-line/70 bg-white/70 p-4 text-sm font-semibold dark:border-gh-border dark:bg-gh-subtle/40"
+              />
+            ) : (
+              <HotAreaQuestion
+                uiConfig={normalizeHotAreaUiConfig(syncAnswerArea(draft.uiConfig, types, draft.questionType))}
+                readOnly={false}
+              />
+            )}
           </div>
           <QuestionUiConfigEditor
             questionType={draft.questionType}

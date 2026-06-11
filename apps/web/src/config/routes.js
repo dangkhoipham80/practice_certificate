@@ -10,11 +10,7 @@ export const APP_ROUTES = [
   { id: 'library', path: '/c/:certId/library', title: 'Question library' },
 ];
 
-const LEGACY_PATHS = {
-  '/practice': { routeId: 'practice', certId: 'gh-300' },
-};
-
-export function pathFromRouteId(routeId, certId = 'gh-300') {
+export function pathFromRouteId(routeId, certId = '') {
   const route = APP_ROUTES.find((item) => item.id === routeId);
   if (!route) return '/';
   if (route.path.includes(':certId')) {
@@ -41,8 +37,6 @@ export function routeIdFromPath(pathname) {
 }
 
 export function certIdFromPath(pathname) {
-  const legacy = LEGACY_PATHS[pathname];
-  if (legacy) return legacy.certId;
   const certMatch = pathname.match(/^\/c\/([^/]+)/);
   return certMatch?.[1] ?? null;
 }

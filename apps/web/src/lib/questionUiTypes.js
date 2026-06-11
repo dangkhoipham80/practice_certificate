@@ -23,6 +23,10 @@ export function isHotAreaType(types, slug) {
   return getEditorKind(types, slug) === 'hot_area';
 }
 
+export function isInlineDropdownType(_types, slug) {
+  return slug === 'dropdown';
+}
+
 export function isFillBlankType(types, slug) {
   return getEditorKind(types, slug) === 'fill_blank';
 }

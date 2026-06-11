@@ -31,6 +31,24 @@ class CertificationRepository:
     async def get_by_id(self, cert_id: str) -> Certification | None:
         return await self.session.get(Certification, cert_id)
 
+    async def create(self, **fields) -> Certification:
+        row = Certification(**fields)
+        self.session.add(row)
+        await self.session.flush()
+        await self.session.refresh(row)
+        return row
+
+    async def update(self, row: Certification, **fields) -> Certification:
+        for key, value in fields.items():
+            setattr(row, key, value)
+        await self.session.flush()
+        await self.session.refresh(row)
+        return row
+
+    async def delete(self, row: Certification) -> None:
+        await self.session.delete(row)
+        await self.session.flush()
+
     async def get_with_parts(self, cert_id: str) -> Certification | None:
         stmt = (
             select(Certification)

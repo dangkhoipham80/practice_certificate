@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { Flame, X } from 'lucide-react';
-import { CERT_REGISTRY } from '../../config/certRegistry';
+import { useCertContext } from '../../context/CertContext';
 import { getActiveStreakCerts } from '../../lib/streakUtils';
 
 export function LoginBurnToast({ streaks, burnStreak, onDismiss }) {
+  const { certifications } = useCertContext();
   useEffect(() => {
     const timer = setTimeout(onDismiss, burnStreak > 0 ? 5200 : 4000);
     return () => clearTimeout(timer);
@@ -25,7 +26,7 @@ export function LoginBurnToast({ streaks, burnStreak, onDismiss }) {
               </p>
               <p className="mt-0.5 text-xs text-muted dark:text-slate-400">
                 {activeCerts.map(([certId, count]) => {
-                  const cert = CERT_REGISTRY[certId];
+                  const cert = certifications.find((item) => item.id === certId);
                   const label = cert?.exam ?? certId;
                   return `${label}: ${count}`;
                 }).join(' · ')}

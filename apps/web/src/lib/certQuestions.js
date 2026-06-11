@@ -1,16 +1,11 @@
 import { questionsApi } from '../api/client';
-import { getCert } from '../config/certRegistry';
 import { apiQuestionToLocal } from './questionUtils';
 
-/** Questions for a cert: API (PostgreSQL) when available, else bundled JS bank. */
+/** Questions for a cert, loaded from PostgreSQL through the API. */
 export async function fetchCertQuestions(certId) {
-  try {
-    const data = await questionsApi.list(certId, { auth: false });
-    if (data?.questions?.length) {
-      return { questions: data.questions.map(apiQuestionToLocal), source: 'api' };
-    }
-  } catch {
-    /* API down or cert not migrated — use bundle */
-  }
-  return { questions: getCert(certId).questions, source: 'bundle' };
+  const data = await questionsApi.list(certId, { auth: false });
+  return {
+    questions: (data?.questions ?? []).map(apiQuestionToLocal),
+    source: 'api',
+  };
 }

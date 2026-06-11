@@ -22,6 +22,7 @@ import {
 } from '../../lib/quizUtils';
 import { DragDropQuestion } from '../library/questionTypes/DragDropQuestion';
 import { HotAreaQuestion } from '../library/questionTypes/HotAreaQuestion';
+import { InlineDropdownQuestion } from '../library/questionTypes/InlineDropdownQuestion';
 import { QuestionText } from '../shared/QuestionText';
 import { QuestionMap } from './QuestionMap';
 
@@ -50,6 +51,7 @@ export function QuizSession({
   const checked = session.checked[session.current];
   const isDragDrop = isDragDropQuizQuestion(currentQuestion);
   const isHotArea = isHotAreaQuizQuestion(currentQuestion);
+  const isInlineDropdown = isHotArea && currentQuestion.uiConfig?.type === 'dropdown';
   const isCorrect = checked && gradeAnswer(selected, currentQuestion);
   const isFlagged = flagged.includes(questionIndex);
   const progress = percent(session.current + 1, session.indices.length);
@@ -81,7 +83,7 @@ export function QuizSession({
                           : 'bg-subtle text-muted dark:bg-gh-subtle'
                   }`}
                 >
-                  {isDragDrop ? 'Drag & drop' : isHotArea ? 'Hotspot' : currentQuestion.multiple ? 'Multiple' : 'Single'}
+                  {isDragDrop ? 'Drag & drop' : isInlineDropdown ? 'Dropdown' : isHotArea ? 'Hotspot' : currentQuestion.multiple ? 'Multiple' : 'Single'}
                 </span>
                 <span className="text-muted dark:text-slate-400">Bank Q{questionIndex + 1}</span>
                 <span className="font-mono text-muted dark:text-slate-500">{formatTimer(session.timerSec)}</span>
@@ -97,11 +99,23 @@ export function QuizSession({
         </div>
 
         <div className="px-5 py-5 sm:px-6">
-          <QuestionText
-            text={currentQuestion.text}
-            images={currentQuestion.images}
-            className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
-          />
+          {isInlineDropdown ? (
+            <InlineDropdownQuestion
+              text={currentQuestion.text}
+              images={currentQuestion.images}
+              uiConfig={currentQuestion.uiConfig}
+              filled={selected}
+              onFilledChange={setDragDropFilled}
+              readOnly={checked}
+              className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
+            />
+          ) : (
+            <QuestionText
+              text={currentQuestion.text}
+              images={currentQuestion.images}
+              className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
+            />
+          )}
           {currentQuestion.warn && (
             <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs font-medium text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
               {currentQuestion.warn}
@@ -114,7 +128,7 @@ export function QuizSession({
               onFilledChange={setDragDropFilled}
               readOnly={checked}
             />
-          ) : isHotArea ? (
+          ) : isHotArea && !isInlineDropdown ? (
             <HotAreaQuestion
               uiConfig={currentQuestion.uiConfig}
               filled={selected}

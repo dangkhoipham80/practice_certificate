@@ -2,9 +2,10 @@ import { normalizeDragDropUiConfig } from '../../lib/dragDropUiFormat';
 import { normalizeHotAreaUiConfig } from '../../lib/hotAreaUiFormat';
 import { getUiConfig } from '../../lib/examQuestionParser';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
-import { isDragDropType, isHotAreaType } from '../../lib/questionUiTypes';
+import { isDragDropType, isHotAreaType, isInlineDropdownType } from '../../lib/questionUiTypes';
 import { DragDropQuestion } from './questionTypes/DragDropQuestion';
 import { HotAreaQuestion } from './questionTypes/HotAreaQuestion';
+import { InlineDropdownQuestion } from './questionTypes/InlineDropdownQuestion';
 
 export function QuestionStructuredView({ question, readOnly = true, answerOnly = false, filled, onFilledChange }) {
   const { types } = useQuestionTypes();
@@ -24,6 +25,19 @@ export function QuestionStructuredView({ question, readOnly = true, answerOnly =
   }
 
   if (isHotAreaType(types, uiConfig.type)) {
+    if (isInlineDropdownType(types, uiConfig.type)) {
+      return (
+        <InlineDropdownQuestion
+          text={question.text}
+          images={question.images}
+          uiConfig={normalizeHotAreaUiConfig(uiConfig)}
+          readOnly={readOnly || answerOnly}
+          answerOnly={answerOnly}
+          filled={filled}
+          onFilledChange={onFilledChange}
+        />
+      );
+    }
     return (
       <HotAreaQuestion
         uiConfig={normalizeHotAreaUiConfig(uiConfig)}

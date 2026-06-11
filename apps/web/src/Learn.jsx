@@ -79,11 +79,11 @@ function toggleKbCard(trigger) {
 }
 
 export function Learn({ cert, startQuiz }) {
-  if (cert?.id === 'ai-102') {
+  if (cert?.learnContentType === 'ai102-guide') {
     return <Ai102Learn cert={cert} startQuiz={startQuiz} />;
   }
 
-  if (!cert?.features?.learn) {
+  if (!cert?.features?.learn || cert.learnContentType === 'none') {
     return (
       <section className="panel empty-state p-10 text-center animate-slide-up">
         <p className="text-lg font-bold">{cert.exam} knowledge base</p>
@@ -94,7 +94,11 @@ export function Learn({ cert, startQuiz }) {
     );
   }
 
-  return <LegacyKnowledgeBase />;
+  if (cert.learnContentType === 'legacy-knowledge-base') {
+    return <LegacyKnowledgeBase />;
+  }
+
+  return null;
 }
 
 function LegacyKnowledgeBase() {

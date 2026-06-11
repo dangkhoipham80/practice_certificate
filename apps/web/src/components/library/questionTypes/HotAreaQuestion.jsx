@@ -15,7 +15,7 @@ function longestOptionLabel(options = [], value = '') {
   return labels.reduce((longest, label) => (label.length > longest.length ? label : longest), '') || '\u00A0';
 }
 
-function DropdownCell({ zone, value, readOnly, isCorrect, onChange }) {
+export function DropdownCell({ zone, value, readOnly, isCorrect, onChange }) {
   const options = zone.options ?? [];
   const empty = !value;
   const measureText = longestOptionLabel(options, value ?? '');

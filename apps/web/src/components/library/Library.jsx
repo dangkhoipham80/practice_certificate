@@ -5,7 +5,7 @@ import { questionsApi } from '../../api/client';
 import { SectionHeader } from '../ui/SectionHeader';
 import { ConfirmDialog } from '../ui/ConfirmDialog';
 import { getUiConfig } from '../../lib/examQuestionParser';
-import { isDragDropType, isHotAreaType } from '../../lib/questionUiTypes';
+import { isDragDropType, isHotAreaType, isInlineDropdownType } from '../../lib/questionUiTypes';
 import { formatQuizCorrect } from '../../lib/quizUtils';
 import { apiQuestionToLocal, getQuestionExternalId } from '../../lib/questionUtils';
 import { ExplanationText } from '../shared/ExplanationText';
@@ -14,6 +14,7 @@ import { QuestionInlineEdit } from './QuestionInlineEdit';
 import { QuestionTypesAdmin } from '../admin/QuestionTypesAdmin';
 import { useQuestionTypes } from '../../context/QuestionTypesContext';
 import { QuestionStructuredView } from './QuestionStructuredView';
+import { InlineDropdownQuestion } from './questionTypes/InlineDropdownQuestion';
 import { useCertContext } from '../../context/CertContext';
 import { useCertTaxonomy } from '../../hooks/useCertTaxonomy';
 import { formatQuizDomainLabel, isInQuizPool } from '../../lib/quizDomains';
@@ -399,9 +400,10 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
           const uiConfig = getUiConfig(question);
           const isDragDrop = isDragDropType(types, uiConfig?.type);
           const isHotArea = isHotAreaType(types, uiConfig?.type);
+          const isInlineDropdown = isInlineDropdownType(types, uiConfig?.type);
           const isStructured = isDragDrop || isHotArea;
-          const showStructuredPractice = !isEditing && isStructured && !isOpen;
-          const showStructuredAnswer = !isEditing && isStructured && isOpen;
+          const showStructuredPractice = !isEditing && isStructured && !isInlineDropdown && !isOpen;
+          const showStructuredAnswer = !isEditing && isStructured && !isInlineDropdown && isOpen;
           const showStructuredInteractive =
             isOpen && !isEditing && !isStructured && !question.choices?.length && question.quizEligible === false;
           const correctLabels = (question.correct ?? []).map((item) => String.fromCharCode(65 + item)).join(', ');
@@ -416,11 +418,22 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                 <div className="flex min-w-0 flex-1 gap-3">
                   <span className="question-number">{question.index + 1}</span>
                   <div className="min-w-0 flex-1">
-                    <QuestionText
-                      text={question.text}
-                      images={isStructured || isOpen ? question.images : []}
-                      className="text-sm font-semibold"
-                    />
+                    {isInlineDropdown && !isEditing ? (
+                      <InlineDropdownQuestion
+                        text={question.text}
+                        images={question.images}
+                        uiConfig={uiConfig}
+                        readOnly={isOpen}
+                        answerOnly={isOpen}
+                        className="text-sm font-semibold"
+                      />
+                    ) : (
+                      <QuestionText
+                        text={question.text}
+                        images={isStructured || isOpen ? question.images : []}
+                        className="text-sm font-semibold"
+                      />
+                    )}
                     {question.quizEligible === false && (
                       <span className="mt-1 inline-block rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:bg-amber-500/15 dark:text-amber-200">
                         Interactive / library only
@@ -495,9 +508,11 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                 {question.multiple ? 'Multiple answer' : question.choices?.length ? 'Single answer' : 'Non-MC'}
                 {!isOpen && question.choices?.length && !isStructured ? ' · tap Detail to view choices' : ''}
                 {isDragDrop && !isOpen ? ' · drag values into blanks, then tap Answer' : ''}
-                {isHotArea && !isOpen ? ' · select options in the code, then tap Answer' : ''}
+                {isHotArea && !isInlineDropdown && !isOpen ? ' · select options in the code, then tap Answer' : ''}
+                {isInlineDropdown && !isOpen ? ' · select an option in each dropdown, then tap Answer' : ''}
                 {isDragDrop && isOpen ? ' · correct placement shown below' : ''}
-                {isHotArea && isOpen ? ' · correct options filled in the code' : ''}
+                {isHotArea && !isInlineDropdown && isOpen ? ' · correct options filled in the code' : ''}
+                {isInlineDropdown && isOpen ? ' · correct options filled in the sentence' : ''}
               </p>
               {question.warn?.trim() && (isOpen || isEditing) && (
                 <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-xs text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-100 sm:ml-10">
@@ -526,6 +541,13 @@ export function Library({ cert, search, setSearch, flagged, toggleFlag, isAdmin 
                       <ExplanationText>{question.explanation}</ExplanationText>
                     </div>
                   )}
+                </div>
+              )}
+              {isInlineDropdown && isOpen && !isEditing && question.explanation && (
+                <div className="mt-4 w-full border-t border-line/50 pt-4 dark:border-gh-border/60">
+                  <div className="rounded-xl border border-line/70 bg-subtle/50 px-3 py-2 text-xs text-muted dark:border-gh-border dark:bg-gh-subtle/50 dark:text-slate-400">
+                    <ExplanationText>{question.explanation}</ExplanationText>
+                  </div>
                 </div>
               )}
               {showStructuredInteractive && (

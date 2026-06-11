@@ -4,6 +4,7 @@ import { QUESTION_KIND_LABELS, resolveQuestionKind } from '../../utils/ai102Inte
 import { ExplanationText } from '../shared/ExplanationText';
 import { QuestionText } from '../shared/QuestionText';
 import { QuestionStructuredView } from '../library/QuestionStructuredView';
+import { InlineDropdownQuestion } from '../library/questionTypes/InlineDropdownQuestion';
 import { QuestionMap } from './QuestionMap';
 
 const KIND_BADGE_CLASS = {
@@ -19,6 +20,7 @@ export function InteractiveReviewSession({ cert, session, flagged, toggleFlag, m
   const kind = resolveQuestionKind(currentQuestion);
   const isFlagged = flagged.includes(questionIndex);
   const progress = percent(session.current + 1, session.indices.length);
+  const isInlineDropdown = currentQuestion.uiConfig?.type === 'dropdown';
 
   return (
     <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
@@ -59,14 +61,25 @@ export function InteractiveReviewSession({ cert, session, flagged, toggleFlag, m
               Interactive question — không tự chấm được. Xem đề, hình và giải thích (nếu có) để ôn trước khi thi.
             </span>
           </div>
-          <QuestionText
-            text={currentQuestion.text}
-            images={currentQuestion.images}
-            className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
-          />
-          <div className="mb-4">
-            <QuestionStructuredView question={currentQuestion} readOnly={false} />
-          </div>
+          {isInlineDropdown ? (
+            <InlineDropdownQuestion
+              text={currentQuestion.text}
+              images={currentQuestion.images}
+              uiConfig={currentQuestion.uiConfig}
+              className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
+            />
+          ) : (
+            <>
+              <QuestionText
+                text={currentQuestion.text}
+                images={currentQuestion.images}
+                className="mb-4 max-w-4xl text-lg font-semibold text-ink dark:text-slate-100 sm:text-xl"
+              />
+              <div className="mb-4">
+                <QuestionStructuredView question={currentQuestion} readOnly={false} />
+              </div>
+            </>
+          )}
           {currentQuestion.explanation && (
             <div className="rounded-xl border border-line/80 bg-subtle/60 p-4 dark:border-gh-border dark:bg-gh-subtle/60">
               <p className="text-xs font-bold uppercase text-muted dark:text-slate-400">Explanation / discussion</p>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Award, BarChart3, BookOpen, Brain, ClipboardList, FlaskConical, GraduationCap, Layers3, Play } from 'lucide-react';
 import { pathFromRouteId } from '../../config/routes';
-import { isCertReady } from '../../config/certRegistry';
+import { isCertReady } from '../../lib/certRuntime';
 import { useCertContext } from '../../context/CertContext';
 import { NavButton } from '../ui/NavButton';
 
